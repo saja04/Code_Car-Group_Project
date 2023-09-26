@@ -1,6 +1,8 @@
+import style from "./contact.module.css";
+
 function Contact() {
   return (
-    <div>
+    <div className={style.container}>
       <h1>soy el contacto</h1>
     </div>
   );

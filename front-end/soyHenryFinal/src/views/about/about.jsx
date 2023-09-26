@@ -1,6 +1,8 @@
+import style from "./about.module.css";
+
 function About() {
   return (
-    <div>
+    <div className={style.container}>
       <h1>soy el nosotros</h1>
     </div>
   );
