@@ -8,11 +8,13 @@ function carCard({ vehicle, showButton }) {
         <h2>
           {vehicle.marca} {vehicle.modelo}
         </h2>
+        <img src={vehicle.imagen} />
         <p>Color: {vehicle.color}</p>
         <p>Año: {vehicle.año}</p>
         <p>Motor: {vehicle.motor}</p>
         <p>Precio: ${vehicle.precio}</p>
         <button type="submit">Agregar al carrito</button>
+        <button>Detalle</button>
       </div>
     </div>
   );
