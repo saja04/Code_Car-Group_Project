@@ -1,0 +1,175 @@
+{
+    "vehicles": [
+      {
+        "id": 1,
+        "marca": "Toyota",
+        "modelo": "Corolla",
+        "color": "Rojo",
+        "año": 2022,
+        "motor": "2.0L",
+        "precio": 25000
+      },
+      {
+        "id": 2,
+        "marca": "Honda",
+        "modelo": "Civic",
+        "color": "Azul",
+        "año": 2023,
+        "motor": "1.8L",
+        "precio": 22000
+      },
+      {
+        "id": 3,
+        "marca": "Ford",
+        "modelo": "Focus",
+        "color": "Gris",
+        "año": 2022,
+        "motor": "1.5L",
+        "precio": 20000
+      },
+      {
+        "id": 4,
+        "marca": "Chevrolet",
+        "modelo": "Cruze",
+        "color": "Negro",
+        "año": 2023,
+        "motor": "1.6L",
+        "precio": 23000
+      },
+      {
+        "id": 5,
+        "marca": "Nissan",
+        "modelo": "Altima",
+        "color": "Plateado",
+        "año": 2022,
+        "motor": "2.5L",
+        "precio": 24000
+      },
+      {
+        "id": 6,
+        "marca": "Volkswagen",
+        "modelo": "Golf",
+        "color": "Blanco",
+        "año": 2023,
+        "motor": "1.4L",
+        "precio": 21000
+      },
+      {
+        "id": 7,
+        "marca": "Mazda",
+        "modelo": "Mazda3",
+        "color": "Azul",
+        "año": 2022,
+        "motor": "2.0L",
+        "precio": 23500
+      },
+      {
+        "id": 8,
+        "marca": "Subaru",
+        "modelo": "Outback",
+        "color": "Verde",
+        "año": 2023,
+        "motor": "2.4L",
+        "precio": 27000
+      },
+      {
+        "id": 9,
+        "marca": "Kia",
+        "modelo": "Sportage",
+        "color": "Gris",
+        "año": 2022,
+        "motor": "2.0L",
+        "precio": 21500
+      },
+      {
+        "id": 10,
+        "marca": "Hyundai",
+        "modelo": "Elantra",
+        "color": "Rojo",
+        "año": 2023,
+        "motor": "1.6L",
+        "precio": 19500
+      },
+      {
+        "id": 11,
+        "marca": "BMW",
+        "modelo": "X3",
+        "color": "Negro",
+        "año": 2022,
+        "motor": "2.0L",
+        "precio": 38000
+      },
+      {
+        "id": 12,
+        "marca": "Mercedes-Benz",
+        "modelo": "C-Class",
+        "color": "Plata",
+        "año": 2023,
+        "motor": "1.8L",
+        "precio": 42000
+      },
+      {
+        "id": 13,
+        "marca": "Audi",
+        "modelo": "A4",
+        "color": "Azul",
+        "año": 2022,
+        "motor": "2.0L",
+        "precio": 39000
+      },
+      {
+        "id": 14,
+        "marca": "Lexus",
+        "modelo": "RX",
+        "color": "Blanco",
+        "año": 2023,
+        "motor": "3.5L",
+        "precio": 45000
+      },
+      {
+        "id": 15,
+        "marca": "Ford",
+        "modelo": "Mustang",
+        "color": "Rojo",
+        "año": 2022,
+        "motor": "5.0L",
+        "precio": 50000
+      },
+      {
+        "id": 16,
+        "marca": "Chevrolet",
+        "modelo": "Tahoe",
+        "color": "Negro",
+        "año": 2023,
+        "motor": "6.2L",
+        "precio": 65000
+      },
+      {
+        "id": 17,
+        "marca": "GMC",
+        "modelo": "Sierra",
+        "color": "Gris",
+        "año": 2022,
+        "motor": "5.3L",
+        "precio": 55000
+      },
+      {
+        "id": 18,
+        "marca": "Ram",
+        "modelo": "1500",
+        "color": "Blanco",
+        "año": 2023,
+        "motor": "5.7L",
+        "precio": 58000
+      },
+      {
+        "id": 19,
+        "marca": "Jeep",
+        "modelo": "Wrangler",
+        "color": "Verde",
+        "año": 2022,
+        "motor": "3.6L",
+        "precio": 46000
+      }
+    ]
+  }
