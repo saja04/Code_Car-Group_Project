@@ -1,18 +1,18 @@
 import React from "react";
 import CarCard from "../card/carCard";
 import { shuffleArray } from "../../../utils/utils";
-import carCardStyles from "./carCards.module.css";
+import carCardStyles from "./bestCarCards.module.css";
 
-function CarCards({ vehicles }) {
+function BestCarCards({ vehicles }) {
   const shuffledVehicles = shuffleArray(vehicles);
 
-  const remainingVehicles = shuffledVehicles.slice(4);
+  const selectedVehicles = shuffledVehicles.slice(0, 4);
 
   return (
     <div className={carCardStyles.carCards}>
-      <h2>Lista Completa de Vehículos:</h2>
-      <div className={carCardStyles.allVehicles}>
-        {remainingVehicles.map((vehicle) => (
+      <h2>Los mejores Vehículos:</h2>
+      <div className={carCardStyles.bestVehicles}>
+        {selectedVehicles.map((vehicle) => (
           <CarCard key={vehicle.id} vehicle={vehicle} />
         ))}
       </div>
@@ -20,4 +20,4 @@ function CarCards({ vehicles }) {
   );
 }
 
-export default CarCards;
+export default BestCarCards;
