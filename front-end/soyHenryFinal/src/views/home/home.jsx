@@ -1,7 +1,12 @@
+import React from 'react';
+import CarCards from '../../components/cards/carCards'; 
+import vehiclesData from "../../../utils/utils.json"
+
 function Home() {
   return (
-    <div>
-      <h1>soy el home</h1>
+    <div className="home">
+      <h1>Soy el Home</h1>
+      <CarCards vehicles={vehiclesData.vehicles} />
     </div>
   );
 }

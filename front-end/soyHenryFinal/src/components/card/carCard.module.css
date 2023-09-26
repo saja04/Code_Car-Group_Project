@@ -1,0 +1,30 @@
+.carCard {
+    border: 1px solid;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 5px;
+    width: 200px;
+  }
+  
+  .carCard h2 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+  }
+  
+  .carCard p {
+    margin: 5px 0;
+    font-size: 1rem;
+  }
+
+  .carCard button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+  }
+  
+  .carCard button:hover {
+    background-color: #0056b3;
+  }
+  
