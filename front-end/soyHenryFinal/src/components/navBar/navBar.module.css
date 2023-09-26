@@ -1,0 +1,21 @@
+.container {
+  display: flex;
+  justify-content: center;
+
+  color: #1e2d5f;
+  gap: 20px;
+  text-decoration: none;
+}
+
+.links {
+  text-decoration: none;
+  color: #1e2d5f;
+  font-size: 20px;
+  transition: color 0.3s, transform 0.3s;
+  margin: 10px;
+}
+
+.links:hover {
+  color: red;
+  transform: scale(1.1);
+}

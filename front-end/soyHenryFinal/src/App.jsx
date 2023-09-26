@@ -7,6 +7,9 @@ import NavBar from "./components/navBar/navBar";
 
 // views
 import Home from "./views/home/home.jsx";
+import Shop from "./views/shop/shop";
+import Contact from "./views/contact/contact";
+import About from "./views/about/about";
 
 function MainApp() {
   return (
@@ -15,6 +18,9 @@ function MainApp() {
         <NavBar />
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/tienda" element={<Shop />} />
+          <Route path="/contacto" element={<Contact />} />
+          <Route path="/nosotros" element={<About />} />
         </Routes>
       </div>
     </BrowserRouter>
