@@ -1,18 +1,20 @@
 import React from "react";
 import carCardStyles from "./carCard.module.css";
 
-function carCard({ vehicle, showButton }) {
+function CarCard({ vehicle, showPricesInUSD }) {
   return (
     <div className={carCardStyles.carCard}>
       <div className="carCard">
         <h2>
           {vehicle.marca} {vehicle.modelo}
         </h2>
-        <img src={vehicle.imagen} />
+        <img src={vehicle.imagen} alt={`${vehicle.marca} ${vehicle.modelo}`} />
         <p>Color: {vehicle.color}</p>
         <p>Año: {vehicle.año}</p>
-        <p>Motor: {vehicle.motor}</p>
-        <p>Precio: ${vehicle.precio}</p>
+        <p>Motor: {vehicle.tipo_de_motor}</p>
+        <p>
+          Precio: ${showPricesInUSD ? vehicle.precio_usd : vehicle.precio_ars}
+        </p>
         <button type="submit">Agregar al carrito</button>
         <button>Detalle</button>
       </div>
@@ -20,4 +22,4 @@ function carCard({ vehicle, showButton }) {
   );
 }
 
-export default carCard;
+export default CarCard;
