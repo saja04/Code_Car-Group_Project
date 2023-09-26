@@ -4,6 +4,7 @@ import "./App.css";
 
 //components
 import NavBar from "./components/navBar/navBar";
+import Footer from "./components/footer/footer";
 
 // views
 import Home from "./views/home/home.jsx";
@@ -22,6 +23,7 @@ function MainApp() {
           <Route path="/contacto" element={<Contact />} />
           <Route path="/nosotros" element={<About />} />
         </Routes>
+        <Footer />
       </div>
     </BrowserRouter>
   );
