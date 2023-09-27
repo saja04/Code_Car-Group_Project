@@ -7,9 +7,8 @@ function CarCards({ vehicles }) {
 
   return (
     <div className={carCardStyles.carCards}>
-      <h2>Lista Completa de Vehículos:</h2>
       <button onClick={() => setShowPricesInUSD(!showPricesInUSD)}>
-        Mostrar en {showPricesInUSD ? "Pesos" : "Dólares"}
+        Mostrar en {showPricesInUSD ? "ARS" : "USD"}
       </button>
       <div className={carCardStyles.allVehicles}>
         {vehicles.map((vehicle) => (

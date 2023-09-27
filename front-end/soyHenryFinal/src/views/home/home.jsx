@@ -1,6 +1,7 @@
 import BestCarCards from "../../components/bestCards/bestCarCards";
 import SearchBar from "../../components/searchBar/searchBar";
 import vehiclesData from "../../../utils/utils.json";
+
 import style from "./home.module.css";
 import React from "react";
 

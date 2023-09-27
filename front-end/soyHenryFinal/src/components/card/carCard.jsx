@@ -13,7 +13,9 @@ function CarCard({ vehicle, showPricesInUSD }) {
         <p>Año: {vehicle.año}</p>
         <p>Motor: {vehicle.tipo_de_motor}</p>
         <p>
-          Precio: ${showPricesInUSD ? vehicle.precio_usd : vehicle.precio_ars}
+          {showPricesInUSD
+            ? `USD$${vehicle.precio_usd}`
+            : `ARS$${vehicle.precio_ars}`}
         </p>
         <button type="submit">Agregar al carrito</button>
         <button>Detalle</button>
