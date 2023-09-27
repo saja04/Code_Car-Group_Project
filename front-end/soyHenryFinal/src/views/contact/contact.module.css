@@ -21,7 +21,6 @@ label {
 .container1 input[type="text"],
 .container1 input[type="email"],
 textarea {
-  
   width: 100%;
   padding: 10px;
   margin-bottom: 10px;
@@ -42,4 +41,8 @@ textarea {
 
 .container1 input[type="submit"]:hover {
   background-color: #0056b3;
+}
+
+.container1 textarea {
+  resize: none;
 }
