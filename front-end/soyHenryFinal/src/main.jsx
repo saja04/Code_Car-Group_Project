@@ -13,11 +13,3 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     </Provider>
   </React.StrictMode>
 );
-
-{
-  /* <Provider store={store}>
-<App />
-</Provider> */
-}
-/* import store from "./redux/store";
-import { Provider } from "react-redux"; */

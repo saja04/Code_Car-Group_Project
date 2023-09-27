@@ -1,0 +1,66 @@
+.container {
+  display: flex;
+  height: 160px;
+  width: 100%;
+
+  background-color: burlywood;
+}
+
+.desc,
+.navFooter,
+.cont,
+.redes {
+  margin-top: 34px;
+}
+
+.desc {
+  display: flex;
+  text-align: justify;
+
+  margin-left: 8px;
+
+  width: 32%;
+}
+
+.navFooter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  margin-left: 34px;
+
+  width: 22%;
+}
+
+.links {
+  text-decoration: none;
+  color: #1e2d5f;
+  transition: color 0.3s, transform 0.3s;
+}
+
+.links:hover {
+  color: red;
+  transform: scale(1.1);
+}
+
+.redes {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  width: 22%;
+}
+
+.socials {
+  display: flex;
+  gap: 6px;
+}
+
+.cont {
+  display: flex;
+  flex-direction: column;
+
+  margin-left: 24px;
+
+  width: 22%;
+}
