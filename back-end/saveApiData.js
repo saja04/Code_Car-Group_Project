@@ -18,11 +18,12 @@ const saveApiData = async (req, res) => {
           car_precio_ars: car.precio_ars,
           car_kilometraje: car.kilometraje,
           car_condicion: car.condicion,
-          car_imagen: car.imagen
+          car_imagen: car.imagen,
         },
       });
     });
-    console.log(await Car.findAll());
+    const allCars = await Car.findAll();
+    res.status(200).json(allCars);
   } catch (error) {
     res.send(error.message);
   }
