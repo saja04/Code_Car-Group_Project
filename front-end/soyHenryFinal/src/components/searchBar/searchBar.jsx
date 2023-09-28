@@ -4,7 +4,6 @@ function SearchBar() {
   return (
     <div className={style.container}>
       <input placeholder="Buscar..." type="text" />
-      <button>Buscar</button>
     </div>
   );
 }

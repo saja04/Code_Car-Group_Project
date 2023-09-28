@@ -1,15 +1,19 @@
 import React, { useState } from "react";
 import CarCard from "../card/carCard";
 import carCardStyles from "./carCards.module.css";
+import PriceToggle from "../../components/priceToggle/priceToggle";
 
 function CarCards({ vehicles }) {
   const [showPricesInUSD, setShowPricesInUSD] = useState(true);
 
+  const togglePrices = () => {
+    setShowPricesInUSD(!showPricesInUSD);
+  };
+
   return (
     <div className={carCardStyles.carCards}>
-      <button onClick={() => setShowPricesInUSD(!showPricesInUSD)}>
-        Mostrar en {showPricesInUSD ? "ARS" : "USD"}
-      </button>
+      <PriceToggle showPricesInUSD={showPricesInUSD} onToggle={togglePrices} />
+
       <div className={carCardStyles.allVehicles}>
         {vehicles.map((vehicle) => (
           <CarCard

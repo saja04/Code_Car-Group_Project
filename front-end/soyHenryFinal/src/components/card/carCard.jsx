@@ -1,10 +1,11 @@
 import React from "react";
 import carCardStyles from "./carCard.module.css";
+import { Link } from "react-router-dom";
 
 function CarCard({ vehicle, showPricesInUSD }) {
   return (
-    <div className={carCardStyles.carCard}>
-      <div className="carCard">
+    <div className={carCardStyles.conteiner}>
+      <div className={carCardStyles.carCard}>
         <h2>
           {vehicle.marca} {vehicle.modelo}
         </h2>
@@ -17,8 +18,12 @@ function CarCard({ vehicle, showPricesInUSD }) {
             ? `USD$${vehicle.precio_usd}`
             : `ARS$${vehicle.precio_ars}`}
         </p>
-        <button type="submit">Agregar al carrito</button>
-        <button>Detalle</button>
+        <div>
+          <button type="submit">Agregar al carrito</button>
+          <Link to={`/detail/${vehicle.id}`}>
+            <button>Detalle</button>
+          </Link>
+        </div>
       </div>
     </div>
   );

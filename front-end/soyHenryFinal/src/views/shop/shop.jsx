@@ -7,7 +7,6 @@ import Filter from "../../components/filter/filter";
 function Shop() {
   return (
     <div className={style.container}>
-      <SearchBar />
       <div className={style.content}>
         <div className={style.filters}>
           <Filter />

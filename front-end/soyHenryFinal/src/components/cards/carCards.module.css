@@ -1,13 +1,5 @@
-
-  
-  .bestVehicles {
-    display: flex;
-    flex-wrap: wrap; 
-    justify-content: space-between; 
-  }
-  
-  .allVehicles{
-    display: flex;
-    flex-wrap: wrap; 
-    justify-content: space-between; 
-  }
+.allVehicles {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}

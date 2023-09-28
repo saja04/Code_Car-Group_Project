@@ -2,13 +2,13 @@ import React, { useState, useEffect } from "react";
 import CarCard from "../card/carCard";
 import { shuffleArray } from "../../../utils/utils";
 import carCardStyles from "./bestCarCards.module.css";
+import PriceToggle from "../priceToggle/priceToggle";
 
 function BestCarCards({ vehicles }) {
   const [showPricesInUSD, setShowPricesInUSD] = useState(true);
   const [shuffledVehicles, setShuffledVehicles] = useState([]);
 
   useEffect(() => {
-
     if (shuffledVehicles.length === 0) {
       setShuffledVehicles(shuffleArray(vehicles));
     }
@@ -20,10 +20,7 @@ function BestCarCards({ vehicles }) {
 
   return (
     <div className={carCardStyles.carCards}>
-      <h2>Los mejores Vehículos:</h2>
-      <button onClick={togglePrices}>
-        Mostrar en {showPricesInUSD ? "Pesos" : "Dólares"}
-      </button>
+      <h2>Nuestros mejores Vehículos</h2>
       <div className={carCardStyles.bestVehicles}>
         {shuffledVehicles.slice(0, 4).map((vehicle) => (
           <CarCard
@@ -33,9 +30,9 @@ function BestCarCards({ vehicles }) {
           />
         ))}
       </div>
+      <PriceToggle showPricesInUSD={showPricesInUSD} onToggle={togglePrices} />
     </div>
   );
 }
 
 export default BestCarCards;
-

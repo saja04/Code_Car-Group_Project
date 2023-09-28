@@ -1,5 +1,11 @@
 .container {
   display: flex;
-  justify-content: center;
   gap: 10px;
+}
+
+.container input {
+  width: 400px;
+  height: 40px;
+  border-radius: 10px;
+  border-style: solid;
 }

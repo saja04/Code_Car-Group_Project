@@ -1,34 +1,41 @@
-.carCard {
+.conteiner {
   border: 1px solid;
   padding: 10px;
   margin: 10px;
   border-radius: 5px;
-  width: 250px;
+  width: 320px;
 }
 
-.carCard h2 {
+.carCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.conteiner h2 {
   font-size: 1.5rem;
   margin-bottom: 10px;
 }
 
-.carCard img {
-  height: 190px;
-  width: 190px;
+.conteiner img {
+  height: 220px;
+  width: 310px;
 }
 
-.carCard p {
-  margin: 5px 0;
+.conteiner p {
+  margin: 2px 0;
   font-size: 1rem;
 }
 
-.carCard button {
+.conteiner button {
   background-color: #007bff;
   color: white;
   border: none;
+  margin: 0px 4px;
   padding: 5px 10px;
   cursor: pointer;
 }
 
-.carCard button:hover {
+.conteiner button:hover {
   background-color: #0056b3;
 }

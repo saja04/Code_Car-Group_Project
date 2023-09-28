@@ -2,10 +2,9 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+  margin: 12px;
 }
 
-.allVehicles {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
+.carCards h2 {
+  margin: 16px;
 }
