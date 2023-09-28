@@ -20,7 +20,8 @@ function BestCarCards({ vehicles }) {
 
   return (
     <div className={carCardStyles.carCards}>
-      <h2>Nuestros mejores Vehículos</h2>
+      <h2>Los mejores Vehículos:</h2>
+      <PriceToggle showPricesInUSD={showPricesInUSD} onToggle={togglePrices} />
       <div className={carCardStyles.bestVehicles}>
         {shuffledVehicles.slice(0, 4).map((vehicle) => (
           <CarCard

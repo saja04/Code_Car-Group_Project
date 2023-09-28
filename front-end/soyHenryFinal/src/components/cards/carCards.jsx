@@ -13,7 +13,6 @@ function CarCards({ vehicles }) {
   return (
     <div className={carCardStyles.carCards}>
       <PriceToggle showPricesInUSD={showPricesInUSD} onToggle={togglePrices} />
-
       <div className={carCardStyles.allVehicles}>
         {vehicles.map((vehicle) => (
           <CarCard
