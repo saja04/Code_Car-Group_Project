@@ -1,14 +1,13 @@
-const express = require('express');
-const cookieParser = require('cookie-parser');
-const bodyParser = require('body-parser');
-const morgan = require('morgan');
-const router = require('./src/Routes/router')
-const {conn} = require('./src/db');
-const saveApiData = require('./saveApiData');
+const express = require("express");
+const cookieParser = require("cookie-parser");
+const bodyParser = require("body-parser");
+const morgan = require("morgan");
+const router = require("./src/Routes/router");
+const { conn } = require("./src/db");
+const saveApiData = require("./saveApiData");
 
 const server = express();
-server.name = 'server';
-
+server.name = "server";
 
 server.use(bodyParser.urlencoded({ extended: true, limit: "50mb" }));
 server.use(bodyParser.json({ limit: "50mb" }));
@@ -25,18 +24,17 @@ server.use((req, res, next) => {
   next();
 });
 
-server.use('/', router)
-server.get('/', async(req, res) => {
-  console.log(await saveApiData());
-    res.status(200).send('server running')
-})
+server.use("/", router);
+server.get("/", async (req, res) => {
+  res.status(200).send("server running");
+});
 
-conn.sync({ force: true }).then( async() => {
-    console.log('db connected');
-    await saveApiData()
-    server.listen(3001, () => {
-        console.log('listening on port 3001');
-    })
-})
+conn.sync({ force: true }).then(async () => {
+  console.log("db connected");
+  await saveApiData();
+  server.listen(3001, () => {
+    console.log("listening on port 3001");
+  });
+});
 
 module.exports = server;
