@@ -2,7 +2,7 @@ const axios = require("axios");
 const { Car } = require("./src/db");
 const api = require("./API");
 
-const saveApiData = async (req, res) => {
+const saveApiData = async () => {
   try {
     const search = api.map(async (car) => {
       let carInDB = await Car.findOrCreate({
