@@ -26,7 +26,8 @@ server.use((req, res, next) => {
 });
 
 server.use('/', router)
-server.get('/', (req, res) => {
+server.get('/', async(req, res) => {
+  console.log(await saveApiData());
     res.status(200).send('server running')
 })
 
