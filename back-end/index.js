@@ -35,7 +35,6 @@ conn.sync({ force: true }).then( async() => {
     await saveApiData()
     server.listen(3001, () => {
         console.log('listening on port 3001');
-        console.log(conn.models);
     })
 })
 
