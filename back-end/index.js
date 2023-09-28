@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const router = require('./src/Routes/router')
 const {conn} = require('./src/db');
+const saveApiData = require('./saveApiData');
 
 const server = express();
 server.name = 'server';
@@ -31,6 +32,7 @@ server.get('/', (req, res) => {
 
 conn.sync({ force: true }).then( async() => {
     console.log('db connected');
+    await saveApiData()
     server.listen(3001, () => {
         console.log('listening on port 3001');
         console.log(conn.models);

@@ -7,37 +7,49 @@ module.exports = (sequelize) => {
       primaryKey: true,
       autoIncrement: true,
     },
-    car_name: {
-      type: DataTypes.STRING,
+    car_modelo: {
+      type: DataTypes.STRING(255),
       allowNull: false,
     },
-    car_price: {
-      type: DataTypes.DECIMAL(10, 2),
+    car_marca: {
+      type: DataTypes.STRING(255),
       allowNull: false,
     },
-    car_type: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    car_year: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-    },
-    car_model: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    car_brand: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    car_condition: {
-      type: DataTypes.STRING,
+    car_año: {
+      type: DataTypes.FLOAT,
       allowNull: false,
     },
     car_color: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING(255),
       allowNull: false,
     },
+    car_tipo_de_motor: {
+      type: DataTypes.STRING(255),
+      allowNull: false,
+    },
+    car_tipo_de_auto: {
+      type: DataTypes.STRING(255),
+      allowNull: false,
+    },
+    car_precio_usd: {
+      type: DataTypes.FLOAT,
+      allowNull: false,
+    },
+    car_precio_ars: {
+      type: DataTypes.FLOAT,
+      allowNull: false,
+    },
+    car_kilometraje: {
+      type: DataTypes.FLOAT,
+      allowNull:false
+    },
+    car_condicion: {
+      type: DataTypes.STRING(255),
+      allowNull:false
+    },
+    car_imagen: {
+      type: DataTypes.STRING(20000),
+      allowNull:false
+    }
   });
 };
