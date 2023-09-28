@@ -3,6 +3,13 @@ const { Sequelize } = require("sequelize");
 const fs = require("fs");
 const path = require("path");
 const { DB_USER, DB_PASSWORD, DB_HOST, DB_URL } = process.env;
+const AdminModel = require("./Models/AdminModel");
+const CarModel = require("./Models/AdminModel");
+const CarCategoryModel = require("./Models/CarCategoryModel");
+const UserModel = require("./Models/UserModel");
+const UserAddressModel = require("./Models/UserAdressModel");
+const UserFavsModel = require("./Models/UserFavsModel");
+const UserOrderModel = require("./Models/UserOrderModel");
 
 const sequelize = new Sequelize(`${DB_URL}`, {
   dialectOptions: {
@@ -12,19 +19,27 @@ const sequelize = new Sequelize(`${DB_URL}`, {
     },
   },
   logging: false,
-  native:false,
+  native: false,
 });
+
+// AdminModel(sequelize);
+// CarModel(sequelize);
+// CarCategoryModel(sequelize);
+// UserModel(sequelize);
+// UserAddressModel(sequelize);
+// UserFavsModel(sequelize);
+// UserOrderModel(sequelize);
 const basename = path.basename(__filename);
 
 const modelDefiners = [];
 
-fs.readdirSync(path.join(__dirname, "/models"))
+fs.readdirSync(path.join(__dirname, "/Models"))
   .filter(
     (file) =>
       file.indexOf(".") !== 0 && file !== basename && file.slice(-3) === ".js"
   )
   .forEach((file) => {
-    modelDefiners.push(require(path.join(__dirname, "/models", file)));
+    modelDefiners.push(require(path.join(__dirname, "/Models", file)));
   });
 
 modelDefiners.forEach((model) => model(sequelize));

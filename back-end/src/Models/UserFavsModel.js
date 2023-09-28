@@ -9,6 +9,3 @@ module.exports = (sequelize) => {
     },
   });
 };
-
-  // UserFavs.belongsTo(User, { foreignKey: 'client_id' }); // Relación con User
-  // UserFavs.belongsTo(Car, { foreignKey: 'car_id' }); // Relación con Car
