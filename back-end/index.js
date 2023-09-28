@@ -2,8 +2,8 @@ const express = require("express");
 const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
 const morgan = require("morgan");
-const router = require("./src/Routes/router");
-const { conn } = require("./src/db");
+const router = require("./src/Routes/index.routes.js");
+const { conn } = require("./src/db.js");
 const saveApiData = require("./saveApiData");
 
 const server = express();
@@ -25,6 +25,7 @@ server.use((req, res, next) => {
 });
 
 server.use("/", router);
+
 server.get("/", async (req, res) => {
   res.status(200).send("server running");
 });
