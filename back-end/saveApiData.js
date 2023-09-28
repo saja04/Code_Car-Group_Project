@@ -23,9 +23,12 @@ const saveApiData = async (req, res) => {
       });
     });
     const allCars = await Car.findAll();
-    res.status(200).json(allCars);
+    if(allCars.length > 10){
+      console.log('autos cargados a db correctamente');
+    }
   } catch (error) {
-    res.send(error.message);
+    // res.send(error);
+    console.log(error.message);
   }
 };
 
