@@ -1,11 +1,13 @@
-import React from "react";
+import React, { isValidElement } from "react";
 import priceToggleStyles from "./priceToggle.module.css";
 
 function PriceToggle({ showPricesInUSD, onToggle }) {
   return (
-    <button className={priceToggleStyles.priceToggle} onClick={onToggle}>
-      Mostrar en {showPricesInUSD ? "Pesos" : "Dólares"}
-    </button>
+    <div className={priceToggleStyles.container}>
+      <button className={priceToggleStyles.priceToggle} onClick={onToggle}>
+        {showPricesInUSD ? "ARS" : "USD"}
+      </button>
+    </div>
   );
 }
 

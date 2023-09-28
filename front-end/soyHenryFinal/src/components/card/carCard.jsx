@@ -17,11 +17,13 @@ function CarCard({ vehicle, showPricesInUSD }) {
           {showPricesInUSD
             ? `USD$${vehicle.precio_usd}`
             : `ARS$${vehicle.precio_ars}`}
-        </p>
-        <button type="submit">Agregar al carrito</button>
-        <Link to={`/detail/${vehicle.id}`}>
-          <button>Detalle</button>
-        </Link>
+        </p>{" "}
+        <div>
+          <button type="submit">Agregar al carrito</button>
+          <Link to={`/detail/${vehicle.id}`}>
+            <button>Detalle</button>
+          </Link>
+        </div>
       </div>
     </div>
   );
