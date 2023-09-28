@@ -26,9 +26,9 @@ server.use((req, res, next) => {
 });
 
 server.use('/', router)
-// server.get('/', (req, res) => {
-//     res.status(200).send('server running')
-// })
+server.get('/', (req, res) => {
+    res.status(200).send('server running')
+})
 
 conn.sync({ force: true }).then( async() => {
     console.log('db connected');
