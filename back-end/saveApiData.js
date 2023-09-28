@@ -23,8 +23,8 @@ const saveApiData = async () => {
       });
     });
     const allCars = await Car.findAll();
-    if(allCars.length > 10){
-      console.log('autos cargados a db correctamente');
+    if (allCars.length > 10) {
+      console.log("autos cargados a db correctamente");
     }
   } catch (error) {
     // res.send(error);
