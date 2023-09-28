@@ -22,6 +22,6 @@ const User = sequelize.define('User', {
   }
 });
 
-User.hasMany(UserAddress, { foreignKey: 'user_id' }); // Una relación de uno a muchos con UserAddress
+// User.hasMany(UserAddress, { foreignKey: 'user_id' }); // Una relación de uno a muchos con UserAddress
 
 module.exports = User;

@@ -9,7 +9,7 @@ const UserFavs = sequelize.define('UserFavs', {
   },
 });
 
-UserFavs.belongsTo(User, { foreignKey: 'client_id' }); // Relación con User
-UserFavs.belongsTo(Car, { foreignKey: 'car_id' }); // Relación con Car
+// UserFavs.belongsTo(User, { foreignKey: 'client_id' }); // Relación con User
+// UserFavs.belongsTo(Car, { foreignKey: 'car_id' }); // Relación con Car
 
 module.exports = UserFavs;
