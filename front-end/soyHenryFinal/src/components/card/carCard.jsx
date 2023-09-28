@@ -30,3 +30,4 @@ function CarCard({ vehicle, showPricesInUSD }) {
 }
 
 export default CarCard;
+
