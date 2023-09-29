@@ -12,6 +12,7 @@ import Shop from "./views/shop/shop";
 import Contact from "./views/contact/contact";
 import About from "./views/about/about";
 import CarDetailPage from "./views/detail/detailCar";
+import PostNewCar from "./views/postNewCar/postNewCar";
 
 function MainApp() {
   return (
@@ -24,7 +25,7 @@ function MainApp() {
           <Route path="/contacto" element={<Contact />} />
           <Route path="/nosotros" element={<About />} />
           <Route path="/detail/:id" element={<CarDetailPage />} />
-
+          <Route path="/post" element={<PostNewCar />} />
         </Routes>
         <Footer />
       </div>

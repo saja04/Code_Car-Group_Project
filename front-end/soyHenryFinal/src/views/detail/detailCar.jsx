@@ -32,7 +32,7 @@ function CarDetailPage() {
 
   return (
     <div className={carDetailPageStyles.container}>
-      <h2 className={carDetailPageStyles.heading}>Detalles del Vehículo ID: {id}</h2>
+      
       <div className={carDetailPageStyles.flexContainer}>
         <div className={carDetailPageStyles.imageContainer}>
           <img
@@ -44,8 +44,7 @@ function CarDetailPage() {
         </div>
         <div className={carDetailPageStyles.detailsContainer}>
           <PriceToggle showPricesInUSD={showPricesInUSD} onToggle={togglePrices} />
-          <p>Marca: {vehicle.marca}</p>
-          <p>Modelo: {vehicle.modelo}</p>
+          <p>{vehicle.marca} {vehicle.modelo}</p>
           <p>Color: {vehicle.color}</p>
           <p>Año: {vehicle.año}</p>
           <p>Motor: {vehicle.tipo_de_motor}</p>
