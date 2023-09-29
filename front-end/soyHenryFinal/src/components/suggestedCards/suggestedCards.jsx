@@ -9,10 +9,10 @@ function SuggestedCards({ vehicles, showPricesInUSD }) {
   const [shuffledVehicles, setShuffledVehicles] = useState([]);
 
   useEffect(() => {
-    if (shuffledVehicles.length === 0) {
+    if (Array.isArray(vehicles) && vehicles.length > 0) {
       setShuffledVehicles(shuffleArray(vehicles));
     }
-  }, [shuffledVehicles, vehicles]);
+  }, [vehicles]);
 
   const vehiclesToShow = shuffledVehicles.slice(0, 8);
 
@@ -23,7 +23,7 @@ function SuggestedCards({ vehicles, showPricesInUSD }) {
         showArrows={true}
         showStatus={false}
         showIndicators={false}
-        infiniteLoop={true}
+        infiniteLoop={false}
         centerMode={true}
         centerSlidePercentage={33.33}
         useKeyboardArrows={true}
@@ -46,3 +46,4 @@ function SuggestedCards({ vehicles, showPricesInUSD }) {
 }
 
 export default SuggestedCards;
+

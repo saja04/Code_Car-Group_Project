@@ -1,14 +1,23 @@
-let initialState = { hola: [] };
+import { GET_VEHICLES, ADD_VEHICLE } from './types';
 
-const rootReducer = (state = initialState, action) => {
+const initialState = {
+  vehicles: [], 
+};
+
+export const vehicleReducer = (state = initialState, action) => {
   switch (action.type) {
-    case "GET_ALL_COUNTRIES":
+    case GET_VEHICLES:
+      
       return {
         ...state,
+        vehicles: action.payload,
+      };
+    case ADD_VEHICLE:
+      return {
+        ...state,
+        vehicles: [...state.vehicles, action.payload],
       };
     default:
       return state;
   }
 };
-
-export default rootReducer;

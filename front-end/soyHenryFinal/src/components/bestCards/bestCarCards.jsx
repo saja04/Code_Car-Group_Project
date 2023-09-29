@@ -9,10 +9,12 @@ function BestCarCards({ vehicles }) {
   const [shuffledVehicles, setShuffledVehicles] = useState([]);
 
   useEffect(() => {
-    if (shuffledVehicles.length === 0) {
+    if (Array.isArray(vehicles) && vehicles.length > 0) {
       setShuffledVehicles(shuffleArray(vehicles));
+      
     }
-  }, [shuffledVehicles, vehicles]);
+  }, [vehicles]);
+  
 
   const togglePrices = () => {
     setShowPricesInUSD(!showPricesInUSD);
@@ -22,7 +24,7 @@ function BestCarCards({ vehicles }) {
     <div className={carCardStyles.carCards}>
       <h2>Nuestros mejores Vehículos</h2>
       <div className={carCardStyles.bestVehicles}>
-        {shuffledVehicles.slice(0, 4).map((vehicle) => (
+        {shuffledVehicles.slice(0, 3).map((vehicle) => (
           <CarCard
             key={vehicle.id}
             vehicle={vehicle}
@@ -36,3 +38,5 @@ function BestCarCards({ vehicles }) {
 }
 
 export default BestCarCards;
+
+
