@@ -1,16 +1,15 @@
+const { Car } = require('../db');
 
-const { Car } = require('../db')
-
-const getCars = async(req, res) => {
+const getCars = async (req, res) => {
     try {
         const response = await Car.findAll();
-        res.status(201).json(response)
-
-
+        res.status(201).json(response);
     } catch (error) {
         console.log(error);
-        res.status(401).send(error.message)
+        res.status(401).send(error.message);
     }
-}
+};
 
-module.exports = getCars;
+module.exports = {
+    getCars,
+};

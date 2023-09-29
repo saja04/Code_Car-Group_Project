@@ -1,5 +1,4 @@
-const express = require("express");
-const { Car } = require("../db");
+const { Car } = require('../db');
 
 const postCars = async (req, res) => {
   try {
@@ -34,13 +33,15 @@ const postCars = async (req, res) => {
     });
 
     res.status(201).json({
-      status: "car creado correctamente!",
+      status: "Auto creado correctamente!",
       auto: newCar,
     });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: "Error en el servidor" });
+    res.status(500).json({ mensaje: "Error en el servidor" });
   }
 };
 
-module.exports = postCars;
+module.exports = {
+  postCars,
+};
