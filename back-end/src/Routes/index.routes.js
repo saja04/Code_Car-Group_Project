@@ -1,12 +1,14 @@
 const { Router } = require("express");
-const postCars = require("../Controllers/postCars");
-const getCars = require("../Controllers/getCars");
+const {postCarsHandler} = require("../Handlers/postCarshandler");
+const {getCarsHandler} = require("../Handlers/getCarshandler");
+const {deleteCarsHandler} = require("../Handlers/deleteCarshandler")
 
 const router = Router();
 
 //ROUTES CARS
-router.post("/cars", postCars);
-router.get('/cars', getCars)
+router.post("/cars", postCarsHandler);
+router.get('/cars', getCarsHandler)
+router.get('/cars/delete', deleteCarsHandler)
 
 //ROUTES USER
 

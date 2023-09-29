@@ -19,5 +19,5 @@ const deleteCar = async (req, res) => {
 };
 
 module.exports = {
-	deleteCar,
+    deleteCar,
 };
