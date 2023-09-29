@@ -34,7 +34,7 @@ const getCarsByName = async (req, res) => {
             car.dataValues.car_modelo[1] +
             car.dataValues.car_modelo[2] ===
             searchString
-        ) {
+        ) { //HOLA
           console.log(car.dataValues);
           findedCars.push(car.dataValues);
         } else if (
