@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import style from "./shop.module.css";
 import Filter from "../../components/filter/filter";
 import Pagination from "../../components/pagination/pagination";
-import axios from "axios"; // Importa Axios
-import CarCards from "../../components/cards/carCards"; // Importa CarCards
+import axios from "axios";
+import CarCards from "../../components/cards/carCards";
 
 function Shop() {
   const [vehicles, setVehicles] = useState([]);
@@ -24,10 +24,10 @@ function Shop() {
   useEffect(() => {
     async function fetchVehicles() {
       try {
-        const response = await axios.get('https://codecar.onrender.com/cars');
-        setVehicles(response.data); 
+        const response = await axios.get("https://codecar.onrender.com/cars");
+        setVehicles(response.data);
       } catch (error) {
-        console.error('Error fetching vehicles:', error);
+        console.error("Error fetching vehicles:", error);
       }
     }
     fetchVehicles();
@@ -40,16 +40,15 @@ function Shop() {
           <Filter />
         </div>
         <div className={style.cards}>
-          {/* Renderiza el componente CarCards aquí */}
           <CarCards vehicles={paginatedVehicles} />
+          <div className={style.pagination}>
+            <Pagination
+              vehiclesPerPage={vehiclesPerPage}
+              totalVehicles={Array.isArray(vehicles) ? vehicles.length : 0}
+              paginate={paginate}
+            />
+          </div>
         </div>
-      </div>
-      <div className={style.pagination}>
-        <Pagination
-          vehiclesPerPage={vehiclesPerPage}
-          totalVehicles={Array.isArray(vehicles) ? vehicles.length : 0}
-          paginate={paginate}
-        />
       </div>
     </div>
   );
