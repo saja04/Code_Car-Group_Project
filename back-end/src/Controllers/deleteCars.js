@@ -1,23 +1,16 @@
-const { Car } = require('../db');
+const { Car } = require("../db");
 
-const deleteCar = async (req, res) => {
-    const carId = parseInt(req.params.id);
+const deleteCar = async (carId) => {
+  
+  const car = await Car.findByPk(carId);
 
-    try {
-        const car = await Car.findByPk(carId);
-
-        if (car) {
-            await car.destroy();
-            res.json({ message: 'Coche eliminado exitosamente' });
-        } else {
-            res.status(404).json({ message: 'Coche no encontrado' });
-        }
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ message: 'Error interno del servidor' });
-    }
+  if (car) {
+    await car.destroy();
+    return {message: `eliminaste el coche con id ${carId} exitosamente!`}
+  } else {
+    return {message: `el coche con id ${carId} no se encuentra o no puede ser borrado, verifica el id`}
+  }
 };
 
-module.exports = {
-    deleteCar,
-};
+module.exports = deleteCar;
+

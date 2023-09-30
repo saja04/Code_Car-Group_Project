@@ -1,8 +1,6 @@
 const { Car } = require("../db");
 
-const getCarsByName = async (req, res) => {
-  try {
-    const { modelo } = req.query;
+const getCarsByName = async (modelo) => {
     if (modelo) {
       let slicedString = "";
       const allCars = await Car.findAll();
@@ -44,18 +42,11 @@ const getCarsByName = async (req, res) => {
         }
       });
       if (!findedCars[0]) {
-        res.status(401).json({ msg: "Auto no encontrado" });
+        return ({ error: "Auto no encontrado" });
       } else if (findedCars[0]) {
-        res.status(201).json({ msg: "Auto/s encontrado/s", autos: findedCars });
+        return {msg: 'autos encontrados!', findedCars}
       }
-    } else {
-      res.status(402).json({ msg: "Por favor, ingrese un modelo" });
     }
-  } catch (error) {
-    res.send(error);
-  }
 };
 
-module.exports = {
-  getCarsByName,
-};
+module.exports = getCarsByName;
