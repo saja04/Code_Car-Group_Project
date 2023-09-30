@@ -1,14 +1,13 @@
-const { getCars } = require('../Controllers/getCars');
+const  getCars  = require('../Controllers/getCars');
 
 const getCarsHandler = async (req, res) => {
     try {
-        await getCars(req, res);
+        const response = await getCars();
+        return res.status(201).json(response);
     } catch (error) {
         console.error(error);
-        res.status(500).json({ mensaje: 'Error interno del servidor' });
+        res.status(403).json({ mensaje: 'no se han podido traer los cars, verifica la db y servidor' });
     }
 };
 
-module.exports = {
-    getCarsHandler,
-};
+module.exports = getCarsHandler;
