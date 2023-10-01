@@ -1,7 +1,6 @@
 const { Car } = require('../db')
 
 const filterCarByCondition = async(condicion) => {
-    console.log(condicion);
     const allCars = await Car.findAll()
     if(condicion === 'Usado'){
         const filteredCarsUsado = allCars.map((car) => {
