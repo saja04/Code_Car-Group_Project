@@ -27,7 +27,7 @@ const postCarsHandler = async (req, res) => {
     !car_kilometraje ||
     !car_condicion ||
     !car_imagen){
-      return res.status(410).json({msg: 'por favor, completa todos los campos requeridos, verifica los nombres de las propiedades'})
+      return res.status(412).json({msg: 'por favor, completa todos los campos requeridos, verifica los nombres de las propiedades'})
     }
   const carData = {
     car_id,
@@ -45,10 +45,10 @@ const postCarsHandler = async (req, res) => {
   };
   try {
     const response = await postCars(carData);
-    return res.status(220).json(response)
+    return res.status(212).json(response)
   } catch (error) {
     console.error(error);
-    res.status(500).json({ mensaje: "Error interno del servidor" });
+    res.status(413).json({ mensaje: "Error interno del servidor" });
   }
 };
 
