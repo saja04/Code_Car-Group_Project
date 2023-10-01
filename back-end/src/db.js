@@ -21,14 +21,6 @@ const sequelize = new Sequelize(`${DB_URL}`, {
   logging: false,
   native: false,
 });
-
-// AdminModel(sequelize);
-// CarModel(sequelize);
-// CarCategoryModel(sequelize);
-// UserModel(sequelize);
-// UserAddressModel(sequelize);
-// UserFavsModel(sequelize);
-// UserOrderModel(sequelize);
 const basename = path.basename(__filename);
 
 const modelDefiners = [];
