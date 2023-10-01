@@ -24,7 +24,7 @@ function BestCarCards({ vehicles }) {
     <div className={carCardStyles.carCards}>
       <h2>Nuestros mejores Vehículos</h2>
       <div className={carCardStyles.bestVehicles}>
-        {shuffledVehicles.slice(0, 3).map((vehicle) => (
+        {shuffledVehicles.slice(0, 4).map((vehicle) => (
           <CarCard
             key={vehicle.id}
             vehicle={vehicle}
