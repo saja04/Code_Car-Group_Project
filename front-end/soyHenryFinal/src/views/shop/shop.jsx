@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from "react";
-import { connect } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { getCars } from "../../redux/actions";
 
 import style from "./shop.module.css";
 import Filter from "../../components/filter/filter";
 import Pagination from "../../components/pagination/pagination";
 import CarCards from "../../components/cards/carCards";
-import { getCars } from "../../redux/actions";
 
-function Shop({ allCars, getCars }) {
+function Shop() {
+  const dispatch = useDispatch();
+  const allCars = useSelector((state) => state.allCars);
+
   const [vehicles, setVehicles] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const vehiclesPerPage = 6;
@@ -24,12 +27,12 @@ function Shop({ allCars, getCars }) {
   };
 
   useEffect(() => {
-    getCars();
-    setVehicles(allCars);
-  }, []);
+    dispatch(getCars());
+  }, [dispatch]);
+
   useEffect(() => {
     setVehicles(allCars);
-  }, [allCars])
+  }, [allCars]);
 
   return (
     <div className={style.container}>
@@ -52,18 +55,4 @@ function Shop({ allCars, getCars }) {
   );
 }
 
-const mapStateToProps = (state) => {
-  return {
-    allCars: state.allCars,
-  };
-};
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    getCars: () => dispatch(getCars()),
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Shop);
-
-
+export default Shop;

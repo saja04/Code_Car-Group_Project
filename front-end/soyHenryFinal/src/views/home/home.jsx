@@ -3,7 +3,7 @@ import BestCarCards from "../../components/bestCards/bestCarCards";
 import SuggestedCards from "../../components/suggestedCards/suggestedCards";
 import Questions from "../../components/questions/questions";
 import style from "./home.module.css";
-import axios from "axios"; 
+import axios from "axios";
 
 function Home() {
   const [vehicles, setVehicles] = useState([]);
@@ -11,10 +11,10 @@ function Home() {
   useEffect(() => {
     async function fetchData() {
       try {
-        const response = await axios.get('https://codecar.onrender.com/cars'); 
+        const response = await axios.post("https://codecar.onrender.com/cars");
         setVehicles(response.data);
       } catch (error) {
-        console.error('Error fetching data:', error);
+        console.error("Error fetching data:", error);
       }
     }
     fetchData();
@@ -30,4 +30,3 @@ function Home() {
 }
 
 export default Home;
-
