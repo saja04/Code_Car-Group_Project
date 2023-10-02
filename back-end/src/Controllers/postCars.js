@@ -2,7 +2,6 @@ const { Car } = require('../db');
 
 const postCars = async (carData) => {
     const {
-      car_id,
       car_modelo,
       car_marca,
       car_año,
@@ -17,7 +16,6 @@ const postCars = async (carData) => {
     } = carData;
 
     const newCar = await Car.create({
-      car_id,
       car_modelo,
       car_marca,
       car_año,
