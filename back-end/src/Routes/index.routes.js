@@ -13,7 +13,7 @@ const router = Router();
 //ROUTES CARS
 router.post("/cars", postCarsHandler);
 router.get("/cars", getCarsHandler);
-router.get("/cars/delete/:id", deleteCarsHandler);
+router.get("/carsDelete/:id", deleteCarsHandler);
 router.get("/carsName/", getCarsByNameHandler);
 router.get('/cars/:id', getCarsByIdHandler);
 //filtros
