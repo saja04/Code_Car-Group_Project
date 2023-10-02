@@ -66,7 +66,7 @@ export const getCarByName = (modelo) => {
 
     return dispatch({
       type: GET_CAR_BY_NAME,
-      payload: data,
+      payload: data.car,
     })
 
 
