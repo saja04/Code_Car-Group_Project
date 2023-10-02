@@ -11,7 +11,7 @@ function Home() {
   useEffect(() => {
     async function fetchData() {
       try {
-        const response = await axios.get('https://codecar.onrender.com/cars'); 
+        const response = await axios.post('https://codecar.onrender.com/cars'); 
         setVehicles(response.data);
       } catch (error) {
         console.error('Error fetching data:', error);

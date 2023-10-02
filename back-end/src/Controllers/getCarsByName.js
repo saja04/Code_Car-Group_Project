@@ -44,7 +44,7 @@ const getCarsByName = async (modelo) => {
       if (!findedCars[0]) {
         return ({ error: "Auto no encontrado" });
       } else if (findedCars[0]) {
-        return {msg: 'autos encontrados!', findedCars}
+        return {msg: 'autos encontrados!', car: findedCars}
       }
     }
 };
