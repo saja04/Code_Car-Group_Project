@@ -3,7 +3,7 @@ import { GET_FILTERS } from "./actions";
 
 const initialState = {
   allCars: [],
-  singleCar: null
+  singleCar: null,
 };
 
 const rootReducer = (state = initialState, action) => {
