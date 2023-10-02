@@ -40,7 +40,7 @@ module.exports = (sequelize) => {
       allowNull: false,
     },
     car_kilometraje: {
-      type: DataTypes.FLOAT,
+      type: DataTypes.STRING,
       allowNull:false
     },
     car_condicion: {
