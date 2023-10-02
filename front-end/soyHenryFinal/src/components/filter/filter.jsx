@@ -29,30 +29,20 @@ function Filter({getFilters}) {
 
   const handleMarcaChange = async(event) => {
     const { value } = event.target;
-    console.log(event);
-    // if (marcasSeleccionadas.includes(value)) {
-    //   setMarcasSeleccionadas(
-    //     marcasSeleccionadas.filter((marca) => marca !== value)
-    //   );
-    // } else {
-    //   setMarcasSeleccionadas([...marcasSeleccionadas, value]);
-    // }
-    
-    if(marcasSeleccionadas.includes(value)) return;
-    else if(!marcasSeleccionadas.includes(value)){
-      setMarcasSeleccionadas(value)
-      await getFilters({"filter": {"car_marca": value}})
-    }
+    setMarcasSeleccionadas(value);
+
+    if(añosSeleccionados[0]){
+      await getFilters({"filter": {"car_marca":value, "car_año": añosSeleccionados[0]}})
+    } else await getFilters({"filter": {"car_marca":value}})
     
   };
 
-  const handleAñoChange = (event) => {
+  const handleAñoChange = async(event) => {
     const { value } = event.target;
-    if (añosSeleccionados.includes(value)) {
-      setAñosSeleccionados(añosSeleccionados.filter((año) => año !== value));
-    } else {
-      setAñosSeleccionados([...añosSeleccionados, value]);
-    }
+    setAñosSeleccionados(value)
+    if(marcasSeleccionadas[0]){
+      await getFilters({"filter": {"car_marca":marcasSeleccionadas[0], "car_año": añosSeleccionados[0]}})
+    } else await getFilters({"filter": {"car_año":añosSeleccionados[0]}})
   };
 
   const handleTipoChange = (event) => {
