@@ -9,11 +9,12 @@
 }
 
 .filters {
-  width: 10%;
+  width: 16%;
   margin: auto;
-  margin-top: 60px;
+  margin-top: 20px;
+  border: solid gray 1px;
 }
 
 .cards {
-  width: 80%;
+  width: 74%;
 }
