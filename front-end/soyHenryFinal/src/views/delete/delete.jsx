@@ -7,7 +7,7 @@ import CardsAdmin from "../../components/cardsAdmin/cardsAdmin";
 function Delete() {
   const [vehicles, setVehicles] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const vehiclesPerPage = 8;
+  const vehiclesPerPage = 16;
 
   const paginatedVehicles = Array.isArray(vehicles)
     ? vehicles.slice(
@@ -32,9 +32,23 @@ function Delete() {
     fetchVehicles();
   }, []);
 
-  const handleDelete = (carId) => {
-   
+  const handleDelete = async (carId) => {
+    try {
+      await axios.delete(`https://codecar.onrender.com/cars/delete/${carId}`);
+  
+      setVehicles((prevVehicles) =>
+        prevVehicles.filter((vehicle) => vehicle.car_id !== carId)
+      );
+  
+      alert("Automóvil borrado satisfactoriamente.");
+    } catch (error) {
+      console.error("Error al eliminar el vehículo:", error);
+  
+      alert("No se pudo eliminar el automóvil. Inténtelo de nuevo.");
+    }
   };
+  
+  
 
   return (
     <div className={style.container}>

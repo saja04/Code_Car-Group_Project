@@ -3,7 +3,7 @@ import carCardStyles from "../cards/carCards.module.css"
 import CarCardAdmin from "../cardCardAdmin/cardCardAdmin"
 
 
-function CardsAdmin({ vehicles }) {
+function CardsAdmin({ vehicles, onDelete }) {
 
   return (
     <div className={carCardStyles.carCards}>
@@ -11,9 +11,9 @@ function CardsAdmin({ vehicles }) {
       <div className={carCardStyles.allVehicles}>
         {vehicles.map((vehicle) => (
           <CarCardAdmin
-            key={vehicle.id}
+            key={vehicle.car_id}
             vehicle={vehicle}
-
+            onDelete={onDelete} 
           />
         ))}
       </div>
