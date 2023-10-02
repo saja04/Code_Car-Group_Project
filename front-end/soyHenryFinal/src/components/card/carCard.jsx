@@ -3,8 +3,7 @@ import carCardStyles from "./carCard.module.css";
 import { Link } from "react-router-dom";
 
 function CarCard({ vehicle, showPricesInUSD }) {
-  console.log('Datos del vehículo:', vehicle);
-  console.log('Mostrar precios en USD:', showPricesInUSD);
+
   return (
     <div className={carCardStyles.conteiner}>
       <div className={carCardStyles.carCard}>

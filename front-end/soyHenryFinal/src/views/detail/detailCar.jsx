@@ -7,7 +7,7 @@ import axios from "axios";
 
 function CarDetailPage() {
   const { id } = useParams();
-  const [car, setCar] = useState(null); // Cambié el nombre de la variable a 'car' para reflejar mejor la estructura del JSON
+  const [car, setCar] = useState(null); 
   const [isLightboxOpen, setIsLightboxOpen] = useState(false);
   const [lightboxImageUrl, setLightboxImageUrl] = useState("");
   const [showPricesInUSD, setShowPricesInUSD] = useState(true);
@@ -16,7 +16,7 @@ function CarDetailPage() {
     axios
       .get(`https://codecar.onrender.com/cars/${id}`)
       .then((response) => {
-        // Establece el automóvil en el estado utilizando la clave 'car' en el JSON
+       
         setCar(response.data.car);
       })
       .catch((error) => {
