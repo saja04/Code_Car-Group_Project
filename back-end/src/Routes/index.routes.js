@@ -15,7 +15,7 @@ router.get("/cars", getCarsHandler);
 router.get("/cars/delete/:id", deleteCarsHandler);
 router.get("/carsName/", getCarsByNameHandler);
 //filtros
-router.get("/carsFilter/", filterCarByConditionHandler);
+router.get("/carsCondicion/", filterCarByConditionHandler);
 router.get("/carsTipo/", filterCarByTypeHandler);
 router.get('/carsOrder/', orderCarsByPriceHandler)
 
