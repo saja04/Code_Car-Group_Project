@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import vehicles from "../../../utils/utils.json";
 import style from "./filter.module.css";
 import { getFilters } from "../../redux/actions";
-import {connect} from 'react-redux'
+import { connect } from "react-redux";
 
-function Filter({getFilters}) {
+function Filter({ getFilters }) {
   const marcasUnicas = [
     ...new Set(vehicles.vehicles.map((vehicle) => vehicle.marca)),
   ];
@@ -27,26 +27,29 @@ function Filter({getFilters}) {
   const [condicionSeleccionados, setCondicionSeleccionados] = useState([]);
   const [filtroPrecio, setFiltroPrecio] = useState(null);
 
-  const handleMarcaChange = async(event) => {
+  const handleMarcaChange = async (event) => {
     const { value } = event.target;
     await setMarcasSeleccionadas(value);
 
-    if(añosSeleccionados[0]){
+    if (añosSeleccionados[0]) {
       console.log(value);
       console.log(añosSeleccionados);
-      await getFilters({"filter": {"car_marca":value, "car_año": añosSeleccionados}})
-    } else await getFilters({"filter": {"car_marca":value}})
-    
+      await getFilters({
+        filter: { car_marca: value, car_año: añosSeleccionados },
+      });
+    } else await getFilters({ filter: { car_marca: value } });
   };
 
-  const handleAñoChange = async(event) => {
+  const handleAñoChange = async (event) => {
     const { value } = event.target;
-    await setAñosSeleccionados(value)
+    await setAñosSeleccionados(value);
 
     console.log(marcasSeleccionadas);
-    if(marcasSeleccionadas){
-      await getFilters({"filter": {"car_marca":marcasSeleccionadas, "car_año": value}})
-    } else await getFilters({"filter": {"car_año":value}})
+    if (marcasSeleccionadas[0]) {
+      await getFilters({
+        filter: { car_marca: marcasSeleccionadas, car_año: value },
+      });
+    } else await getFilters({ filter: { car_año: value } });
   };
 
   const handleTipoChange = (event) => {
@@ -71,9 +74,65 @@ function Filter({getFilters}) {
     }
   };
 
-  const handlePrecioChange = (event) => {
+  const handlePrecioChange = async (event) => {
     const { value } = event.target;
-    setFiltroPrecio(value === filtroPrecio ? null : value);
+    await setFiltroPrecio(value);
+
+    if(marcasSeleccionadas[0] && añosSeleccionados[0]){
+      if (value === "mayor") {
+        await getFilters({
+          filter: { car_año: añosSeleccionados,
+            car_marca: marcasSeleccionadas },
+          order: { value: "car_precio_usd", sequence: "DESC" },
+        });
+      } else if (value === "menor") {
+        await getFilters({
+          filter: {car_año: añosSeleccionados,
+          car_marca: marcasSeleccionadas},
+          order: { value: "car_precio_usd", sequence: "ASC" },
+        });
+        
+    }
+  }
+
+    else if (marcasSeleccionadas[0]) {
+      if (value === "mayor") {
+        await getFilters({
+          filter: { car_marca: marcasSeleccionadas },
+          order: { value: "car_precio_usd", sequence: "DESC" },
+        });
+      } else if (value === "menor") {
+        await getFilters({
+          filter: {car_marca: marcasSeleccionadas},
+          order: { value: "car_precio_usd", sequence: "ASC" },
+        });
+      }
+    } 
+    else if(añosSeleccionados[0]){
+      if (value === "mayor") {
+        await getFilters({
+          filter: { car_año: añosSeleccionados },
+          order: { value: "car_precio_usd", sequence: "DESC" },
+        });
+      } else if (value === "menor") {
+        await getFilters({
+          filter: {car_año: añosSeleccionados},
+          order: { value: "car_precio_usd", sequence: "ASC" },
+        });
+      }
+    }
+    
+    else {
+      if (value === "mayor") {
+        await getFilters({
+          order: { value: "car_precio_usd", sequence: "DESC" },
+        });
+      } else if (value === "menor") {
+        await getFilters({
+          order: { value: "car_precio_usd", sequence: "ASC" },
+        });
+      }
+    }
   };
 
   return (
@@ -180,8 +239,8 @@ function Filter({getFilters}) {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    getFilters: (filters) => dispatch(getFilters(filters))
-  }
-}
+    getFilters: (filters) => dispatch(getFilters(filters)),
+  };
+};
 
-export default connect(null, mapDispatchToProps)(Filter)
+export default connect(null, mapDispatchToProps)(Filter);
