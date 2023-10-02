@@ -2,7 +2,7 @@ const getCars = require("../Controllers/getCars");
 
 const getCarsHandler = async (req, res) => {
   try {
-    const response = await getCars();
+    const response = await getCars(req);
     return res.status(201).json(response);
   } catch (error) {
     console.error(error);
