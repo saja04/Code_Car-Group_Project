@@ -5,6 +5,7 @@ const deleteCarsHandler = require("../Handlers/deleteCarsHandler");
 const getCarsByNameHandler = require("../Handlers/getCarsByNameHandler");
 const filterCarByConditionHandler = require("../Handlers/filterCarByConditionHandler");
 const orderCarsByPriceHandler = require("../Handlers/orderCarsByPriceHandler");
+const filterCarByTypeHandler = require("../Handlers/filterCarByTypeHandler");
 
 const router = Router();
 
@@ -15,6 +16,7 @@ router.get("/cars/delete/:id", deleteCarsHandler);
 router.get("/carsName/", getCarsByNameHandler);
 //filtros
 router.get("/carsFilter/", filterCarByConditionHandler);
+router.get("/carsTipo/", filterCarByTypeHandler);
 router.get('/carsOrder/', orderCarsByPriceHandler)
 
 //ROUTES USER
