@@ -1,5 +1,5 @@
 import React from "react";
-import carCardStyles from "../cardsAdmin/cardsAdmin.module.css";
+import carCardStyles from "./cardCardAdmin.module.css";
 
 function CarCardAdmin({ vehicle, onDelete }) {
   

@@ -1,42 +1,5 @@
-.conteiner {
-    border: 1px solid;
-    padding: 10px;
-    margin: 10px;
-    border-radius: 5px;
-    width: 320px;
-  }
-  
-  .carCard {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .conteiner h2 {
-    font-size: 1.5rem;
-    margin-bottom: 10px;
-  }
-  
-  .conteiner img {
-    height: 220px;
-    width: 310px;
-  }
-  
-  .conteiner p {
-    margin: 2px 0;
-    font-size: 1rem;
-  }
-  
-  .conteiner button {
-    background-color: #007bff;
-    color: white;
-    border: none;
-    margin: 0px 4px;
-    padding: 5px 10px;
-    cursor: pointer;
-  }
-  
-  .conteiner button:hover {
-    background-color: #0056b3;
-  }
-  
+.allVehicles {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}

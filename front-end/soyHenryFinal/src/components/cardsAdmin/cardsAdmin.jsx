@@ -1,7 +1,6 @@
 import React from "react";
-import carCardStyles from "../cards/carCards.module.css"
+import carCardStyles from "./cardsAdmin.module.css"
 import CarCardAdmin from "../cardCardAdmin/cardCardAdmin"
-
 
 function CardsAdmin({ vehicles, onDelete }) {
 
