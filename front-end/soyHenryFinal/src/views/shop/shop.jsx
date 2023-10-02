@@ -26,7 +26,10 @@ function Shop({ allCars, getCars }) {
   useEffect(() => {
     getCars();
     setVehicles(allCars);
-  }, [allCars]);
+  }, []);
+  useEffect(() => {
+    setVehicles(allCars);
+  }, [allCars])
 
   return (
     <div className={style.container}>

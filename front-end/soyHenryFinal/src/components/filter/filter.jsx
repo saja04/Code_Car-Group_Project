@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import vehicles from "../../../utils/utils.json";
 import style from "./filter.module.css";
+import { getFilters } from "../../redux/actions";
+import {connect} from 'react-redux'
 
-function Filter() {
+function Filter({getFilters}) {
   const marcasUnicas = [
     ...new Set(vehicles.vehicles.map((vehicle) => vehicle.marca)),
   ];
@@ -25,15 +27,23 @@ function Filter() {
   const [condicionSeleccionados, setCondicionSeleccionados] = useState([]);
   const [filtroPrecio, setFiltroPrecio] = useState(null);
 
-  const handleMarcaChange = (event) => {
+  const handleMarcaChange = async(event) => {
     const { value } = event.target;
-    if (marcasSeleccionadas.includes(value)) {
-      setMarcasSeleccionadas(
-        marcasSeleccionadas.filter((marca) => marca !== value)
-      );
-    } else {
-      setMarcasSeleccionadas([...marcasSeleccionadas, value]);
+    console.log(event);
+    // if (marcasSeleccionadas.includes(value)) {
+    //   setMarcasSeleccionadas(
+    //     marcasSeleccionadas.filter((marca) => marca !== value)
+    //   );
+    // } else {
+    //   setMarcasSeleccionadas([...marcasSeleccionadas, value]);
+    // }
+    
+    if(marcasSeleccionadas.includes(value)) return;
+    else if(!marcasSeleccionadas.includes(value)){
+      setMarcasSeleccionadas(value)
+      await getFilters({"filter": {"car_marca": value}})
     }
+    
   };
 
   const handleAñoChange = (event) => {
@@ -174,4 +184,10 @@ function Filter() {
   );
 }
 
-export default Filter;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getFilters: (filters) => dispatch(getFilters(filters))
+  }
+}
+
+export default connect(null, mapDispatchToProps)(Filter)

@@ -76,7 +76,7 @@ function PostNewCar() {
         car_imagen: formData.imagen,
       };
 
-      await axios.post("https://codecar.onrender.com/cars", carData);
+      await axios.post("https://codecar.onrender.com/carsPost", carData);
       alert("¡Se ha creado un vehículo exitosamente!");
 
       window.location.reload();

@@ -1,7 +1,9 @@
-import { GET_CARS } from "./actions";
+import { GET_CARS, GET_CAR_BY_ID } from "./actions";
+import { GET_FILTERS } from "./actions";
 
 const initialState = {
   allCars: [],
+  singleCar: null
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -11,6 +13,16 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         allCars: action.payload,
       };
+      case GET_FILTERS:
+        return{
+          ...state,
+          allCars: action.payload,
+        };
+        case GET_CAR_BY_ID:
+          return{
+            ...state,
+            singleCar: action.payload,
+          }
     default:
       return state;
   }

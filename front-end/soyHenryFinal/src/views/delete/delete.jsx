@@ -3,8 +3,10 @@ import style from "../delete/delete.module.css";
 import Pagination from "../../components/pagination/pagination";
 import axios from "axios";
 import CardsAdmin from "../../components/cardsAdmin/cardsAdmin";
+import { connect } from "react-redux";
+import { getCars } from "../../redux/actions";
 
-function Delete() {
+function Delete({allCars, getCars}) {
   const [vehicles, setVehicles] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const vehiclesPerPage = 16;
@@ -21,15 +23,17 @@ function Delete() {
   };
 
   useEffect(() => {
-    async function fetchVehicles() {
-      try {
-        const response = await axios.get("https://codecar.onrender.com/cars");
-        setVehicles(response.data);
-      } catch (error) {
-        console.error("Error fetching vehicles:", error);
-      }
-    }
-    fetchVehicles();
+    // async function fetchVehicles() {
+    //   try {
+    //     const response = await axios.get("https://codecar.onrender.com/cars");
+    //     setVehicles(response.data);
+    //   } catch (error) {
+    //     console.error("Error fetching vehicles:", error);
+    //   }
+    // }
+    // fetchVehicles();
+    getCars()
+    setVehicles(allCars)
   }, []);
 
   const handleDelete = async (carId) => {
@@ -43,7 +47,6 @@ function Delete() {
       alert("Automóvil borrado satisfactoriamente.");
     } catch (error) {
       console.error("Error al eliminar el vehículo:", error);
-  
       alert("No se pudo eliminar el automóvil. Inténtelo de nuevo.");
     }
   };
@@ -71,4 +74,15 @@ function Delete() {
   );
 }
 
-export default Delete;
+const mapStateToProps = (state) => {
+  return {
+    allCars: state.allCars,
+  };
+};
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getCars: () => dispatch(getCars()),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Delete);
