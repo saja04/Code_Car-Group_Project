@@ -60,7 +60,9 @@ export const deleteCar = (id) => {
 export const getCarByName = (modelo) => {
   return async(dispatch) => {
     const response = await axios(`https://codecar.onrender.com/carsName/?modelo=${modelo}`);
-    const data = response.data.car
+    const data = response.data
+    if(data.error) return alert('auto no encontrado! intenta cambiar la busqueda')
+    else
 
     return dispatch({
       type: GET_CAR_BY_NAME,
