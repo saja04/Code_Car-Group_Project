@@ -29,20 +29,24 @@ function Filter({getFilters}) {
 
   const handleMarcaChange = async(event) => {
     const { value } = event.target;
-    setMarcasSeleccionadas(value);
+    await setMarcasSeleccionadas(value);
 
     if(añosSeleccionados[0]){
-      await getFilters({"filter": {"car_marca":value, "car_año": añosSeleccionados[0]}})
+      console.log(value);
+      console.log(añosSeleccionados);
+      await getFilters({"filter": {"car_marca":value, "car_año": añosSeleccionados}})
     } else await getFilters({"filter": {"car_marca":value}})
     
   };
 
   const handleAñoChange = async(event) => {
     const { value } = event.target;
-    setAñosSeleccionados(value)
-    if(marcasSeleccionadas[0]){
-      await getFilters({"filter": {"car_marca":marcasSeleccionadas[0], "car_año": añosSeleccionados[0]}})
-    } else await getFilters({"filter": {"car_año":añosSeleccionados[0]}})
+    await setAñosSeleccionados(value)
+
+    console.log(marcasSeleccionadas);
+    if(marcasSeleccionadas){
+      await getFilters({"filter": {"car_marca":marcasSeleccionadas, "car_año": value}})
+    } else await getFilters({"filter": {"car_año":value}})
   };
 
   const handleTipoChange = (event) => {
