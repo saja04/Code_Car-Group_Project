@@ -2,7 +2,6 @@ const postCars = require("../Controllers/postCars");
 
 const postCarsHandler = async (req, res) => {
   const {
-    car_id,
     car_modelo,
     car_marca,
     car_año,
@@ -15,7 +14,7 @@ const postCarsHandler = async (req, res) => {
     car_condicion,
     car_imagen,
   } = req.body;
-  if(!car_id ||
+  if(
     !car_modelo ||
     !car_marca ||
     !car_año ||
@@ -30,7 +29,6 @@ const postCarsHandler = async (req, res) => {
       return res.status(412).json({msg: 'por favor, completa todos los campos requeridos, verifica los nombres de las propiedades'})
     }
   const carData = {
-    car_id,
     car_modelo,
     car_marca,
     car_año,

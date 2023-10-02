@@ -7,7 +7,6 @@ const saveApiData = async () => {
     const search = api.map(async (car) => {
       let carInDB = await Car.findOrCreate({
         where: {
-          car_id: car.id,
           car_modelo: car.modelo,
           car_marca: car.marca,
           car_año: car.año,
