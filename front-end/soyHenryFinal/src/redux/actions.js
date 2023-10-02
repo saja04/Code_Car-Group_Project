@@ -1,17 +1,45 @@
-import { GET_VEHICLES } from "./types";
 import axios from "axios";
 
-export const getVehicles = () => {
-  return async (dispatch) => {
-    try {
-      const response = await axios("https://codecar.onrender.com/cars");
+export const GET_CARS = "GET_CARS";
+export const GET_FILTERS = "GET_FILTERS";
+export const GET_CAR_BY_ID = "GET_CAR_BY_ID";
 
-      return dispatch({
-        type: GET_VEHICLES,
-        payload: response.data,
-      });
-    } catch (error) {
-      console.error("Error al obtener vehículos:", error);
-    }
+export const getCars = () => {
+  return async (dispatch) => {
+    const response = await axios.post("https://codecar.onrender.com/cars");
+    const data = response.data;
+
+    return dispatch({
+      type: GET_CARS,
+      payload: data,
+    });
+  };
+};
+
+export const getFilters = (filters) => {
+  return async (dispatch) => {
+    const response = await axios.post(
+      "https://codecar.onrender.com/cars",
+      filters
+    );
+    const data = response.data;
+    console.log(data);
+    return dispatch({
+      type: GET_FILTERS,
+      payload: data,
+    });
+  };
+};
+
+export const getCarById = (id) => {
+  return async (dispatch) => {
+    const response = await axios(`https://codecar.onrender.com/cars/${id}`);
+    const data = response.data;
+    console.log(data);
+
+    return dispatch({
+      type: GET_CAR_BY_ID,
+      payload: data.car,
+    });
   };
 };

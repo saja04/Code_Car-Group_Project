@@ -1,23 +1,31 @@
-import { GET_VEHICLES, ADD_VEHICLE } from "./types";
+import { GET_CARS, GET_CAR_BY_ID } from "./actions";
+import { GET_FILTERS } from "./actions";
 
 const initialState = {
-  vehicles: [],
+  allCars: [],
+  singleCar: null,
 };
 
-export const vehicleReducer = (state = initialState, action) => {
+const rootReducer = (state = initialState, action) => {
   switch (action.type) {
-    case GET_VEHICLES:
+    case GET_CARS:
       return {
         ...state,
-        vehicles: action.payload,
+        allCars: action.payload,
       };
-
-    case ADD_VEHICLE:
+    case GET_FILTERS:
       return {
         ...state,
-        vehicles: [...state.vehicles, action.payload],
+        allCars: action.payload,
+      };
+    case GET_CAR_BY_ID:
+      return {
+        ...state,
+        singleCar: action.payload,
       };
     default:
       return state;
   }
 };
+
+export default rootReducer;

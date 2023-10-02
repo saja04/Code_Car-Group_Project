@@ -1,16 +1,21 @@
 const { Router } = require("express");
-const {postCarsHandler} = require("../Handlers/postCarshandler");
-const {getCarsHandler} = require("../Handlers/getCarshandler");
-const {deleteCarsHandler} = require("../Handlers/deleteCarshandler")
-const {getCarsByNameHandler} = require("../Handlers/getCarsByNameHandler")
+const postCarsHandler = require("../Handlers/postCarsHandler");
+const getCarsHandler = require("../Handlers/getCarsHandler");
+const deleteCarsHandler = require("../Handlers/deleteCarsHandler");
+const getCarsByNameHandler = require("../Handlers/getCarsByNameHandler");
+const getCarsByIdHandler = require("../Handlers/getCarsByIdHandler");
 
 const router = Router();
 
 //ROUTES CARS
-router.post("/cars", postCarsHandler);
-router.get('/cars', getCarsHandler)
-router.get('/cars/delete/:id', deleteCarsHandler)
-router.get("/carsName/", getCarsByNameHandler)
+router.post("/carsPost", postCarsHandler);
+router.post("/cars", getCarsHandler);
+// router.get('carsFilters', getCarsHandler)
+router.get("/carsDelete/:id", deleteCarsHandler);
+router.get("/carsName/", getCarsByNameHandler);
+router.get('/cars/:id', getCarsByIdHandler);
+//filtros
+
 
 //ROUTES USER
 

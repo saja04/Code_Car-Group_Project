@@ -1,15 +1,20 @@
-const { Car } = require('../db');
+const { Car } = require("../db");
+const sequelize = require("sequelize");
 
-const getCars = async (req, res) => {
-    try {
-        const response = await Car.findAll();
-        res.status(201).json(response);
-    } catch (error) {
-        console.log(error);
-        res.status(401).send(error.message);
-    }
+const getCars = async (req) => {
+  const { filter, order, pagination } = req.body;
+  const query = {};
+  if (pagination) {
+    query.offset = pagination.offset;
+    query.limit = pagination.limit;
+  }
+  if (order) {
+    query.order = [[sequelize.literal(order.value), order.sequence]];
+  }
+  if (filter) query.where = filter;
+  console.log(query);
+
+  return await Car.findAll(query);
 };
 
-module.exports = {
-    getCars,
-};
+module.exports = getCars;

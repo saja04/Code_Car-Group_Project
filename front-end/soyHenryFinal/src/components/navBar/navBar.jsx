@@ -5,6 +5,7 @@ import PriceToggle from "../../components/priceToggle/priceToggle";
 import style from "./navBar.module.css";
 import logo from "../../img/logo.png";
 import SearchBar from "../searchBar/searchBar";
+import DashboardButton from "../dashboardButton/dahsboardButton";
 
 function NavBar() {
   const [showPricesInUSD, setShowPricesInUSD] = useState(true);
@@ -37,6 +38,7 @@ function NavBar() {
           showPricesInUSD={showPricesInUSD}
           onToggle={togglePrices}
         />
+        <DashboardButton />
       </div>
     </div>
   );
