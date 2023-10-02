@@ -57,7 +57,7 @@ function CarDetailPage() {
           <p>Color: {singleCar.car_color}</p>
           <p>Año: {singleCar.car_año}</p>
           <p>Motor: {singleCar.car_tipo_de_motor}</p>
-          <p>{vehicle.car_condicion}</p>
+          <p>{singleCar.car_condicion}</p>
           <p>
             {showPricesInUSD
               ? `USD$${singleCar.car_precio_usd}`
