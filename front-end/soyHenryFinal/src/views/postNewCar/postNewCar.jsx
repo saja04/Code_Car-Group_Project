@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import carStyles from "./PostNewCar.module.css";
 import axios from "axios";
 
-
 function PostNewCar() {
   const [formData, setFormData] = useState({
     marca: "Chevrolet",
@@ -18,6 +17,12 @@ function PostNewCar() {
     imagen: "",
   });
 
+  const [errors, setErrors] = useState({
+    precio_usd: "",
+    precio_ars: "",
+    kilometraje: "",
+  });
+
   const coloresBasicos = [
     "Blanco",
     "Negro",
@@ -30,42 +35,74 @@ function PostNewCar() {
     "Marrón",
   ];
 
-
   const handleInputChange = (e) => {
     const { name, value } = e.target;
+
+    if (["precio_usd", "precio_ars", "kilometraje"].includes(name)) {
+      if (!/^\d*$/.test(value)) {
+        setErrors({
+          ...errors,
+          [name]: "Solo se permiten números",
+        });
+      } else {
+        setErrors({
+          ...errors,
+          [name]: "",
+        });
+      }
+    }
+
     setFormData({
       ...formData,
       [name]: value,
     });
   };
 
-
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
+      const carData = {
+        car_marca: formData.marca,
+        car_modelo: formData.modelo,
+        car_año: formData.año,
+        car_color: formData.color,
+        car_tipo_de_motor: formData.tipo_de_motor,
+        car_tipo_de_auto: formData.tipo_de_auto,
+        car_precio_usd: formData.precio_usd,
+        car_precio_ars: formData.precio_ars,
+        car_kilometraje: formData.kilometraje,
+        car_condicion: formData.condicion,
+        car_imagen: formData.imagen,
+      };
 
-      await axios.post('https://codecar.onrender.com/cars', formData);
+      await axios.post("https://codecar.onrender.com/cars", carData);
+      alert("¡Se ha creado un vehículo exitosamente!");
 
-    } catch (error) {
-      console.error('Error al agregar el vehículo:', error);
+      window.location.reload();
+
+    }catch (error) {
+      console.error("Error al agregar el vehículo:", error);
+      alert("Hubo un error al agregar el vehículo. Por favor, inténtalo de nuevo.");
     }
   };
 
   return (
     <div className={carStyles.postNewCarContainer}>
-      <h2 className={carStyles.postNewCarH2}>Agregar un Nuevo Vehículo</h2>
-      <form onSubmit={handleSubmit}>
-        <div className={carStyles.postNewCarFormGroup}>
-          <label className={carStyles.postNewCarLabel} htmlFor="marca">Marca:</label>
-          <select
-            id="marca"
-            name="marca"
-            className={carStyles.postNewCarSelect}
-            value={formData.marca}
-            onChange={handleInputChange}
-            required
-          >
+    <h2 className={carStyles.postNewCarH2}>Agregar un Nuevo Vehículo</h2>
+    <form onSubmit={handleSubmit}>
+      <div className={carStyles.postNewCarFormGroup}>
+        <label className={carStyles.postNewCarLabel} htmlFor="marca">
+          Marca:
+        </label>
+        <select
+          id="marca"
+          name="marca"
+          className={carStyles.postNewCarSelect}
+          value={formData.marca}
+          onChange={handleInputChange}
+          required
+        >
             <option value="Chevrolet">Chevrolet</option>
             <option value="Ford">Ford</option>
             <option value="Volkswagen">Volkswagen</option>
@@ -75,7 +112,9 @@ function PostNewCar() {
           </select>
         </div>
         <div className={carStyles.postNewCarFormGroup}>
-          <label className={carStyles.postNewCarLabel} htmlFor="modelo">Modelo:</label>
+          <label className={carStyles.postNewCarLabel} htmlFor="modelo">
+            Modelo:
+          </label>
           <input
             type="text"
             id="modelo"
@@ -87,7 +126,9 @@ function PostNewCar() {
           />
         </div>
         <div className={carStyles.postNewCarFormGroup}>
-          <label className={carStyles.postNewCarLabel} htmlFor="año">Año:</label>
+          <label className={carStyles.postNewCarLabel} htmlFor="año">
+            Año:
+          </label>
           <select
             id="año"
             name="año"
@@ -104,7 +145,9 @@ function PostNewCar() {
           </select>
         </div>
         <div className={carStyles.postNewCarFormGroup}>
-          <label className={carStyles.postNewCarLabel} htmlFor="color">Color:</label>
+          <label className={carStyles.postNewCarLabel} htmlFor="color">
+            Color:
+          </label>
           <select
             id="color"
             name="color"
@@ -125,9 +168,10 @@ function PostNewCar() {
           </select>
         </div>
 
-
         <div className={carStyles.postNewCarFormGroup}>
-          <label className={carStyles.postNewCarLabel} htmlFor="tipo_de_motor">Tipo de Motor:</label>
+          <label className={carStyles.postNewCarLabel} htmlFor="tipo_de_motor">
+            Tipo de Motor:
+          </label>
           <select
             id="tipo_de_motor"
             name="tipo_de_motor"
@@ -141,7 +185,9 @@ function PostNewCar() {
           </select>
         </div>
         <div className={carStyles.postNewCarFormGroup}>
-          <label className={carStyles.postNewCarLabel} htmlFor="tipo_de_auto">Tipo de Auto:</label>
+          <label className={carStyles.postNewCarLabel} htmlFor="tipo_de_auto">
+            Tipo de Auto:
+          </label>
           <select
             id="tipo_de_auto"
             name="tipo_de_auto"
@@ -157,7 +203,9 @@ function PostNewCar() {
           </select>
         </div>
         <div className={carStyles.postNewCarFormGroup}>
-          <label className={carStyles.postNewCarLabel} htmlFor="precio_usd">Precio en USD:</label>
+          <label className={carStyles.postNewCarLabel} htmlFor="precio_usd">
+            Precio en USD:
+          </label>
           <input
             type="text"
             id="precio_usd"
@@ -167,9 +215,14 @@ function PostNewCar() {
             onChange={handleInputChange}
             required
           />
+          {errors.precio_usd && (
+            <div className={carStyles.error}>{errors.precio_usd}</div>
+          )}
         </div>
         <div className={carStyles.postNewCarFormGroup}>
-          <label className={carStyles.postNewCarLabel} htmlFor="precio_ars">Precio en ARS:</label>
+          <label className={carStyles.postNewCarLabel} htmlFor="precio_ars">
+            Precio en ARS:
+          </label>
           <input
             type="text"
             id="precio_ars"
@@ -179,9 +232,14 @@ function PostNewCar() {
             onChange={handleInputChange}
             required
           />
+          {errors.precio_ars && (
+            <div className={carStyles.error}>{errors.precio_ars}</div>
+          )}
         </div>
         <div className={carStyles.postNewCarFormGroup}>
-          <label className={carStyles.postNewCarLabel} htmlFor="kilometraje">Kilometraje:</label>
+          <label className={carStyles.postNewCarLabel} htmlFor="kilometraje">
+            Kilometraje:
+          </label>
           <input
             type="text"
             id="kilometraje"
@@ -191,9 +249,14 @@ function PostNewCar() {
             onChange={handleInputChange}
             required
           />
+          {errors.kilometraje && (
+            <div className={carStyles.error}>{errors.kilometraje}</div>
+          )}
         </div>
         <div className={carStyles.postNewCarFormGroup}>
-          <label className={carStyles.postNewCarLabel} htmlFor="condicion">Condición:</label>
+          <label className={carStyles.postNewCarLabel} htmlFor="condicion">
+            Condición:
+          </label>
           <select
             id="condicion"
             name="condicion"
@@ -207,7 +270,9 @@ function PostNewCar() {
           </select>
         </div>
         <div className={carStyles.postNewCarFormGroup}>
-          <label className={carStyles.postNewCarLabel} htmlFor="imagen">URL de la Imagen:</label>
+          <label className={carStyles.postNewCarLabel} htmlFor="imagen">
+            URL de la Imagen:
+          </label>
           <input
             type="text"
             id="imagen"
@@ -219,7 +284,9 @@ function PostNewCar() {
           />
         </div>
         <div className={carStyles.postNewCarFormGroup}>
-          <button type="submit" className={carStyles.postNewCarButton}>Agregar Vehículo</button>
+          <button type="submit" className={carStyles.postNewCarButton}>
+            Agregar Vehículo
+          </button>
         </div>
       </form>
     </div>

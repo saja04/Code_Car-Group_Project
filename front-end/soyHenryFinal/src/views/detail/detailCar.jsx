@@ -1,21 +1,28 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import vehicleData from "../../../utils/utils.json";
 import carDetailPageStyles from "./detailCar.module.css";
 import Lightbox from "../../components/lightbox/lightbox";
 import PriceToggle from "../../components/priceToggle/priceToggle";
+import axios from "axios";
 
 function CarDetailPage() {
   const { id } = useParams();
-  const vehicle = vehicleData.vehicles.find((v) => v.id === parseInt(id, 10));
-
+  const [car, setCar] = useState(null); // Cambié el nombre de la variable a 'car' para reflejar mejor la estructura del JSON
   const [isLightboxOpen, setIsLightboxOpen] = useState(false);
   const [lightboxImageUrl, setLightboxImageUrl] = useState("");
   const [showPricesInUSD, setShowPricesInUSD] = useState(true);
 
-  if (!vehicle) {
-    return <div>No se encontró el vehículo con ID {id}</div>;
-  }
+  useEffect(() => {
+    axios
+      .get(`https://codecar.onrender.com/cars/${id}`)
+      .then((response) => {
+        // Establece el automóvil en el estado utilizando la clave 'car' en el JSON
+        setCar(response.data.car);
+      })
+      .catch((error) => {
+        console.error("Error al obtener los detalles del automóvil:", error);
+      });
+  }, [id]);
 
   const openLightbox = (imageUrl) => {
     setLightboxImageUrl(imageUrl);
@@ -30,28 +37,31 @@ function CarDetailPage() {
     setShowPricesInUSD(!showPricesInUSD);
   };
 
+  if (!car) {
+    return <div>Cargando...</div>;
+  }
+
   return (
     <div className={carDetailPageStyles.container}>
-      
       <div className={carDetailPageStyles.flexContainer}>
         <div className={carDetailPageStyles.imageContainer}>
           <img
-            src={vehicle.imagen}
-            alt={`${vehicle.marca} ${vehicle.modelo}`}
+            src={car.car_imagen}
+            alt={`${car.car_marca} ${car.car_modelo}`}
             className={carDetailPageStyles.image}
-            onClick={() => openLightbox(vehicle.imagen)}
+            onClick={() => openLightbox(car.car_imagen)}
           />
         </div>
         <div className={carDetailPageStyles.detailsContainer}>
           <PriceToggle showPricesInUSD={showPricesInUSD} onToggle={togglePrices} />
-          <p>{vehicle.marca} {vehicle.modelo}</p>
-          <p>Color: {vehicle.color}</p>
-          <p>Año: {vehicle.año}</p>
-          <p>Motor: {vehicle.tipo_de_motor}</p>
+          <p>{car.car_marca} {car.car_modelo}</p>
+          <p>Color: {car.car_color}</p>
+          <p>Año: {car.car_año}</p>
+          <p>Motor: {car.car_tipo_de_motor}</p>
           <p>
             {showPricesInUSD
-              ? `USD$${vehicle.precio_usd}`
-              : `ARS$${vehicle.precio_ars}`}
+              ? `USD$${car.car_precio_usd}`
+              : `ARS$${car.car_precio_ars}`}
           </p>
           <button className={carDetailPageStyles.addToCart}>Agregar al Carrito</button>
           <button className={carDetailPageStyles.buyNow}>Comprar Ahora</button>
@@ -65,4 +75,3 @@ function CarDetailPage() {
 }
 
 export default CarDetailPage;
-
