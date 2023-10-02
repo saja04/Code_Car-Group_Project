@@ -1,19 +1,17 @@
-import { GET_VEHICLES } from './types';
+import { GET_VEHICLES } from "./types";
+import axios from "axios";
 
 export const getVehicles = () => {
   return async (dispatch) => {
     try {
-      const response = await fetch('https://codecar.onrender.com/cars');
-      const data = await response.json();
+      const response = await axios("https://codecar.onrender.com/cars");
 
-    
-
-      dispatch({
+      return dispatch({
         type: GET_VEHICLES,
-        payload: data,
+        payload: response.data,
       });
     } catch (error) {
-      console.error('Error al obtener vehículos:', error);
+      console.error("Error al obtener vehículos:", error);
     }
   };
 };
