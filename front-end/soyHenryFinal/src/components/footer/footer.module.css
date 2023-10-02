@@ -1,0 +1,43 @@
+.container {
+  height: 300px;
+  width: 100%;
+
+  color: whitesmoke;
+  background-color: #1a1a1a;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr; /* Divide el espacio en 3 columnas iguales */
+  justify-content: center;
+}
+
+.navFooter,
+.cont,
+.modelos {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.navLinks,
+.contContent,
+.modelosContent {
+  display: flex;
+  flex-direction: column;
+}
+
+.links {
+  text-decoration: none;
+  color: whitesmoke;
+
+  transition: color 0.3s, transform 0.3s;
+}
+
+.links:hover {
+  color: white;
+  transform: scale(1.1);
+}
+
+.cont {
+  display: flex;
+  flex-direction: column;
+}

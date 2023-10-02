@@ -1,0 +1,10 @@
+.bestVehicles {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: 12px;
+}
+
+.carCards h2 {
+  margin: 16px;
+}
