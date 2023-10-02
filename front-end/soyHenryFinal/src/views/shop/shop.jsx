@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
+import { connect } from "react-redux";
+
 import style from "./shop.module.css";
 import Filter from "../../components/filter/filter";
 import Pagination from "../../components/pagination/pagination";
-import axios from "axios";
 import CarCards from "../../components/cards/carCards";
+import { getCars } from "../../redux/actions";
 
-function Shop() {
+function Shop({ allCars, getCars }) {
   const [vehicles, setVehicles] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const vehiclesPerPage = 6;
@@ -22,16 +24,9 @@ function Shop() {
   };
 
   useEffect(() => {
-    async function fetchVehicles() {
-      try {
-        const response = await axios.get("https://codecar.onrender.com/cars");
-        setVehicles(response.data);
-      } catch (error) {
-        console.error("Error fetching vehicles:", error);
-      }
-    }
-    fetchVehicles();
-  }, []);
+    getCars();
+    setVehicles(allCars);
+  }, [allCars]);
 
   return (
     <div className={style.container}>
@@ -54,4 +49,16 @@ function Shop() {
   );
 }
 
-export default Shop;
+const mapStateToProps = (state) => {
+  return {
+    allCars: state.allCars,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getCars: () => dispatch(getCars()),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Shop);
