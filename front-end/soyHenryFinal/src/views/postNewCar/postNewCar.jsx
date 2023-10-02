@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import carStyles from "./PostNewCar.module.css";
-import axios from "axios"; 
+import axios from "axios";
 
 
 function PostNewCar() {
@@ -8,7 +8,7 @@ function PostNewCar() {
     marca: "Chevrolet",
     modelo: "",
     año: "",
-    color: "",
+    color: "Blanco",
     tipo_de_motor: "Nafta",
     tipo_de_auto: "Sedán",
     precio_usd: "",
@@ -18,6 +18,19 @@ function PostNewCar() {
     imagen: "",
   });
 
+  const coloresBasicos = [
+    "Blanco",
+    "Negro",
+    "Rojo",
+    "Azul",
+    "Amarillo",
+    "Verde",
+    "Naranja",
+    "Gris",
+    "Marrón",
+  ];
+
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData({
@@ -26,12 +39,12 @@ function PostNewCar() {
     });
   };
 
- 
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-     
+
       await axios.post('https://codecar.onrender.com/cars', formData);
 
     } catch (error) {
@@ -92,16 +105,27 @@ function PostNewCar() {
         </div>
         <div className={carStyles.postNewCarFormGroup}>
           <label className={carStyles.postNewCarLabel} htmlFor="color">Color:</label>
-          <input
-            type="text"
+          <select
             id="color"
             name="color"
-            className={carStyles.postNewCarInput}
+            className={carStyles.postNewCarSelect}
             value={formData.color}
             onChange={handleInputChange}
             required
-          />
+          >
+            <option value="" disabled>
+              Selecciona un color
+            </option>
+
+            {coloresBasicos.map((color) => (
+              <option key={color} value={color}>
+                {color}
+              </option>
+            ))}
+          </select>
         </div>
+
+
         <div className={carStyles.postNewCarFormGroup}>
           <label className={carStyles.postNewCarLabel} htmlFor="tipo_de_motor">Tipo de Motor:</label>
           <select
