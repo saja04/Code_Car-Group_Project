@@ -10,12 +10,14 @@ const router = Router();
 //ROUTES CARS
 router.post("/carsPost", postCarsHandler);
 router.post("/cars", getCarsHandler);
-// router.get('carsFilters', getCarsHandler)
 router.get("/carsDelete/:id", deleteCarsHandler);
 router.get("/carsName/", getCarsByNameHandler);
 router.get('/cars/:id', getCarsByIdHandler);
-//filtros
 
+//ROUTES AUTH0
+router.get('/',(req, res) =>{
+    res.send(req.oidc.isAuthenticated() ? 'Logged in' : 'Logged out')
+})
 
 //ROUTES USER
 

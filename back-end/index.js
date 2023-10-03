@@ -5,6 +5,8 @@ const morgan = require("morgan");
 const router = require("./src/Routes/index.routes.js");
 const { conn } = require("./src/db.js");
 const saveApiData = require("./saveApiData");
+const { auth } = require('express-openid-connect');
+const authConfig = require('./src/Auth0/auth.js')
 
 const server = express();
 server.name = "server";
@@ -25,6 +27,7 @@ server.use((req, res, next) => {
 });
 
 server.use("/", router);
+server.use(auth(authConfig))
 
 server.get("/", async (req, res) => {
   res.status(200).send("server running");
