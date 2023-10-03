@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import carStyles from "./PostNewCar.module.css";
+import carStyles from "./postNewCar.module.css";
 import axios from "axios";
 
 function PostNewCar() {
