@@ -15,6 +15,8 @@ import CarDetailPage from "./views/detail/detailCar";
 import PostNewCar from "./views/postNewCar/postNewCar";
 import Dashboard from "./views/dashboard/dashboard";
 import Delete from "./views/delete/delete";
+import Register from "./views/register/register";
+import Login from "./views/login/login";
 
 function MainApp() {
   return (
@@ -30,6 +32,8 @@ function MainApp() {
           <Route path="/post" element={<PostNewCar />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/delete" element={<Delete />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/login" element={<Login />} />
         </Routes>
         <Footer />
       </div>
