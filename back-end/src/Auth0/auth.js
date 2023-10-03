@@ -8,7 +8,7 @@ const config = {
   secret: SECRET,
   baseURL: 'https://codecar.onrender.com',
   clientID: 'rrRqAiM1AYESjGA1UvXV3loPDqdgY695',
-  issuerBaseURL: 'https://dev-fl1dkagbtwtxnd7y.us.auth0.com'
+  issuerBaseURL: 'http://localhost:5173/'
 };
 
 module.exports = config;
