@@ -1,23 +1,17 @@
-const getCarsByName = require("../Controllers/getCarsByName");
-
+const getCarsByName = require('../Controllers/getCarsByName')
 const getCarsByNameHandler = async (req, res) => {
   try {
-    const { modelo } = req.query;
-    if (!modelo) {
-      res.status(418).json({ msg: "ingresa un modelo" });
-    } else if (modelo.length < 2) {
-      res.status(419).json({ msg: "ingresa al menos dos caracteres" });
+    const { input } = req.query;
+    const result = await getCarsByName(input);
+
+    if (result.error) {
+      return res.status(404).json(result);
     }
-    const response = await getCarsByName(modelo);
-    if (response.error) {
-      res.status(422).json(response);
-    } else return res.status(218).json(response);
+
+    return res.status(200).json(result);
   } catch (error) {
-    console.error(error);
-    res.status(420).json({
-      mensaje:
-        "no se ha podido enviar el auto, revisa el servidor y su controlador",
-    });
+    console.error('Error en el controlador de búsqueda de autos:', error);
+    return res.status(500).json({ error: 'Error interno del servidor' });
   }
 };
 
