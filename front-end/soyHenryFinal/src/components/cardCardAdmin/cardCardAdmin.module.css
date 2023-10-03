@@ -1,0 +1,32 @@
+.conteiner {
+    border: 1px solid;
+    padding: 15px;
+    margin: 15px;
+    border-radius: 5px;
+    width: 320px;
+  }
+  
+  .carCard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .conteiner p {
+    margin: 2px 0;
+    font-size: 1rem;
+  }
+  
+  .conteiner button {
+    background-color: red;
+    color: white;
+    border: none;
+    margin: 0px 4px;
+    padding: 5px 10px;
+    cursor: pointer;
+  }
+  
+  .conteiner button:hover {
+    background-color: #880808;
+  }
+  

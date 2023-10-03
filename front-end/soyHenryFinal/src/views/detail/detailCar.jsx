@@ -1,21 +1,22 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import vehicleData from "../../../utils/utils.json";
+import { useSelector, useDispatch } from "react-redux";
 import carDetailPageStyles from "./detailCar.module.css";
 import Lightbox from "../../components/lightbox/lightbox";
 import PriceToggle from "../../components/priceToggle/priceToggle";
+import { getCarById } from "../../redux/actions";
 
 function CarDetailPage() {
   const { id } = useParams();
-  const vehicle = vehicleData.vehicles.find((v) => v.id === parseInt(id, 10));
-
+  const dispatch = useDispatch();
+  const singleCar = useSelector((state) => state.singleCar);
   const [isLightboxOpen, setIsLightboxOpen] = useState(false);
   const [lightboxImageUrl, setLightboxImageUrl] = useState("");
   const [showPricesInUSD, setShowPricesInUSD] = useState(true);
 
-  if (!vehicle) {
-    return <div>No se encontró el vehículo con ID {id}</div>;
-  }
+  useEffect(() => {
+    dispatch(getCarById(id));
+  }, [dispatch, id]);
 
   const openLightbox = (imageUrl) => {
     setLightboxImageUrl(imageUrl);
@@ -30,31 +31,41 @@ function CarDetailPage() {
     setShowPricesInUSD(!showPricesInUSD);
   };
 
+  if (!singleCar) {
+    return <div>Cargando...</div>;
+  }
+
   return (
     <div className={carDetailPageStyles.container}>
-      <h2 className={carDetailPageStyles.heading}>Detalles del Vehículo ID: {id}</h2>
       <div className={carDetailPageStyles.flexContainer}>
         <div className={carDetailPageStyles.imageContainer}>
           <img
-            src={vehicle.imagen}
-            alt={`${vehicle.marca} ${vehicle.modelo}`}
+            src={singleCar.car_imagen}
+            alt={`${singleCar.car_marca} ${singleCar.car_modelo}`}
             className={carDetailPageStyles.image}
-            onClick={() => openLightbox(vehicle.imagen)}
+            onClick={() => openLightbox(singleCar.car_imagen)}
           />
         </div>
         <div className={carDetailPageStyles.detailsContainer}>
-          <PriceToggle showPricesInUSD={showPricesInUSD} onToggle={togglePrices} />
-          <p>Marca: {vehicle.marca}</p>
-          <p>Modelo: {vehicle.modelo}</p>
-          <p>Color: {vehicle.color}</p>
-          <p>Año: {vehicle.año}</p>
-          <p>Motor: {vehicle.tipo_de_motor}</p>
+          <PriceToggle
+            showPricesInUSD={showPricesInUSD}
+            onToggle={togglePrices}
+          />
+          <p>
+            {singleCar.car_marca} {singleCar.car_modelo}
+          </p>
+          <p>Color: {singleCar.car_color}</p>
+          <p>Año: {singleCar.car_año}</p>
+          <p>Motor: {singleCar.car_tipo_de_motor}</p>
+          <p>{vehicle.car_condicion}</p>
           <p>
             {showPricesInUSD
-              ? `USD$${vehicle.precio_usd}`
-              : `ARS$${vehicle.precio_ars}`}
+              ? `USD$${singleCar.car_precio_usd}`
+              : `ARS$${singleCar.car_precio_ars}`}
           </p>
-          <button className={carDetailPageStyles.addToCart}>Agregar al Carrito</button>
+          <button className={carDetailPageStyles.addToCart}>
+            Agregar al Carrito
+          </button>
           <button className={carDetailPageStyles.buyNow}>Comprar Ahora</button>
         </div>
       </div>
@@ -66,4 +77,3 @@ function CarDetailPage() {
 }
 
 export default CarDetailPage;
-

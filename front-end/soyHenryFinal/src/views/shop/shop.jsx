@@ -1,10 +1,39 @@
-import SearchBar from "../../components/searchBar/searchBar";
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getCars } from "../../redux/actions";
+
 import style from "./shop.module.css";
-import CarCards from "../../components/cards/carCards";
-import vehiclesData from "../../../utils/utils.json";
 import Filter from "../../components/filter/filter";
+import Pagination from "../../components/pagination/pagination";
+import CarCards from "../../components/cards/carCards";
 
 function Shop() {
+  const dispatch = useDispatch();
+  const allCars = useSelector((state) => state.allCars);
+
+  const [vehicles, setVehicles] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const vehiclesPerPage = 6;
+
+  const paginatedVehicles = Array.isArray(vehicles)
+    ? vehicles.slice(
+        (currentPage - 1) * vehiclesPerPage,
+        currentPage * vehiclesPerPage
+      )
+    : [];
+
+  const paginate = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
+
+  useEffect(() => {
+    dispatch(getCars());
+  }, [dispatch]);
+
+  useEffect(() => {
+    setVehicles(allCars);
+  }, [allCars]);
+
   return (
     <div className={style.container}>
       <div className={style.content}>
@@ -12,7 +41,14 @@ function Shop() {
           <Filter />
         </div>
         <div className={style.cards}>
-          <CarCards vehicles={vehiclesData.vehicles} />
+          <CarCards vehicles={paginatedVehicles} />
+          <div className={style.pagination}>
+            <Pagination
+              vehiclesPerPage={vehiclesPerPage}
+              totalVehicles={Array.isArray(vehicles) ? vehicles.length : 0}
+              paginate={paginate}
+            />
+          </div>
         </div>
       </div>
     </div>
