@@ -12,12 +12,15 @@ router.post("/carsPost", postCarsHandler);
 router.post("/cars", getCarsHandler);
 router.get("/carsDelete/:id", deleteCarsHandler);
 router.get("/carsName/", getCarsByNameHandler);
-router.get('/cars/:id', getCarsByIdHandler);
+router.get("/cars/:id", getCarsByIdHandler);
 
 //ROUTES AUTH0
-router.get('/',(req, res) =>{
-    res.send(req.oidc.isAuthenticated() ? 'Logged in' : 'Logged out')
-})
+router.get("/", (req, res) => {
+  res.send(req.oidc.isAuthenticated() ? "Logged in" : "Logged out");
+});
+router.get("/auth0Problem", (req, res) => {
+  res.json({ msg: "error en autenticacion" });
+});
 
 //ROUTES USER
 
