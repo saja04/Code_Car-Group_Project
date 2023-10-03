@@ -4,6 +4,7 @@ const getCarsHandler = require("../Handlers/getCarsHandler");
 const deleteCarsHandler = require("../Handlers/deleteCarsHandler");
 const getCarsByNameHandler = require("../Handlers/getCarsByNameHandler");
 const getCarsByIdHandler = require("../Handlers/getCarsByIdHandler");
+const authHandler = require('../Handlers/auth0Handler')
 
 const router = Router();
 
@@ -21,6 +22,7 @@ router.get("/", (req, res) => {
 router.get("/auth0Problem", (req, res) => {
   res.json({ msg: "error en autenticacion" });
 });
+router.post("/auth0/login", authHandler)
 
 //ROUTES USER
 
