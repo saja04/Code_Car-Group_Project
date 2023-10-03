@@ -22,7 +22,6 @@ function Home() {
 
   return (
     <div className={style.container}>
-      <h1>Test</h1>
       <BestCarCards vehicles={vehicles} />
       <Questions />
       <SuggestedCards vehicles={vehicles} />
