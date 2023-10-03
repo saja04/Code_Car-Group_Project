@@ -8,7 +8,7 @@ export const GET_CAR_BY_NAME = "GET_CAR_BY_NAME"
 
 export const getCars = () => {
   return async (dispatch) => {
-    const response = await axios.post("https://codecar.onrender.com/cars");
+    const response = await axios.post("https://codecar.onrender.com/cars", {'order': {'value':'car_marca','sequence': 'ASC'}});
     const data = response.data;
 
     return dispatch({
@@ -66,7 +66,7 @@ export const getCarByName = (modelo) => {
 
     return dispatch({
       type: GET_CAR_BY_NAME,
-      payload: data,
+      payload: data.car,
     })
 
 

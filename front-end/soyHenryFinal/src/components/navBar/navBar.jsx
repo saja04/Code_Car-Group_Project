@@ -6,6 +6,7 @@ import style from "./navBar.module.css";
 import logo from "../../img/logo.png";
 import SearchBar from "../searchBar/searchBar";
 import DashboardButton from "../dashboardButton/dahsboardButton";
+import LoginLinks from "../loginLinks/loginLinks";
 
 function NavBar() {
   const [showPricesInUSD, setShowPricesInUSD] = useState(true);
@@ -39,6 +40,7 @@ function NavBar() {
           onToggle={togglePrices}
         />
         <DashboardButton />
+        <LoginLinks />
       </div>
     </div>
   );

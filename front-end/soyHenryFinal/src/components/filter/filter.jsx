@@ -78,24 +78,25 @@ function Filter({ getFilters }) {
     const { value } = event.target;
     await setFiltroPrecio(value);
 
-    if(marcasSeleccionadas[0] && añosSeleccionados[0]){
+    if (marcasSeleccionadas[0] && añosSeleccionados[0]) {
       if (value === "mayor") {
         await getFilters({
-          filter: { car_año: añosSeleccionados,
-            car_marca: marcasSeleccionadas },
+          filter: {
+            car_año: añosSeleccionados,
+            car_marca: marcasSeleccionadas,
+          },
           order: { value: "car_precio_usd", sequence: "DESC" },
         });
       } else if (value === "menor") {
         await getFilters({
-          filter: {car_año: añosSeleccionados,
-          car_marca: marcasSeleccionadas},
+          filter: {
+            car_año: añosSeleccionados,
+            car_marca: marcasSeleccionadas,
+          },
           order: { value: "car_precio_usd", sequence: "ASC" },
         });
-        
-    }
-  }
-
-    else if (marcasSeleccionadas[0]) {
+      }
+    } else if (marcasSeleccionadas[0]) {
       if (value === "mayor") {
         await getFilters({
           filter: { car_marca: marcasSeleccionadas },
@@ -103,12 +104,11 @@ function Filter({ getFilters }) {
         });
       } else if (value === "menor") {
         await getFilters({
-          filter: {car_marca: marcasSeleccionadas},
+          filter: { car_marca: marcasSeleccionadas },
           order: { value: "car_precio_usd", sequence: "ASC" },
         });
       }
-    } 
-    else if(añosSeleccionados[0]){
+    } else if (añosSeleccionados[0]) {
       if (value === "mayor") {
         await getFilters({
           filter: { car_año: añosSeleccionados },
@@ -116,13 +116,11 @@ function Filter({ getFilters }) {
         });
       } else if (value === "menor") {
         await getFilters({
-          filter: {car_año: añosSeleccionados},
+          filter: { car_año: añosSeleccionados },
           order: { value: "car_precio_usd", sequence: "ASC" },
         });
       }
-    }
-    
-    else {
+    } else {
       if (value === "mayor") {
         await getFilters({
           order: { value: "car_precio_usd", sequence: "DESC" },
@@ -173,7 +171,7 @@ function Filter({ getFilters }) {
           </div>
         </div>
 
-{/*          <div className={style.tipo}>
+        {/* <div className={style.tipo}>
           <h3>Tipo</h3>
           <div className={style.checkTipo}>
             {tiposUnicos.map((tipo) => (
@@ -188,9 +186,9 @@ function Filter({ getFilters }) {
               </label>
             ))}
           </div>
-        </div>
+        </div> */}
 
-        <div className={style.condicion}>
+        {/* <div className={style.condicion}>
           <h3>Condición</h3>
           <div className={style.checkCondicion}>
             {condicionUnicos.map((condicion) => (
@@ -205,7 +203,7 @@ function Filter({ getFilters }) {
               </label>
             ))}
           </div>
-        </div>  */}
+        </div> */}
 
         <div className={style.precio}>
           <h3>Precio</h3>
