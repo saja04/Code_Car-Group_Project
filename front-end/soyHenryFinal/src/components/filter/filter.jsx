@@ -173,7 +173,7 @@ function Filter({ getFilters }) {
           </div>
         </div>
 
-        <div className={style.tipo}>
+{/*          <div className={style.tipo}>
           <h3>Tipo</h3>
           <div className={style.checkTipo}>
             {tiposUnicos.map((tipo) => (
@@ -205,7 +205,7 @@ function Filter({ getFilters }) {
               </label>
             ))}
           </div>
-        </div>
+        </div>  */}
 
         <div className={style.precio}>
           <h3>Precio</h3>
