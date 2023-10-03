@@ -1,6 +1,6 @@
 const { auth } = require('express-openid-connect');
 require("dotenv").config();
-const { AUTH0_CLIENT_ID, AUTH0_DOMAIN } = process.env;
+const { AUTH0_CLIENT_ID, AUTH0_DOMAIN, SECRET } = process.env;
 
 const config = {
   authRequired: false,
