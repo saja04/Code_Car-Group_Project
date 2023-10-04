@@ -21,7 +21,7 @@ router.get("/", (req, res) => {
   console.log(req.oidc.isAuthenticated());
   res.send(req.oidc.isAuthenticated() ? "Logged in" : "Logged out");
 });
-app.get('/profile', requiresAuth(), (req, res) => {
+router.get('/profile', requiresAuth(), (req, res) => {
   res.send(JSON.stringify(req.oidc.user));
 });
 // router.get("/auth0Problem", (req, res) => {
