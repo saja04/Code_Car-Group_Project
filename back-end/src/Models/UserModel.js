@@ -20,9 +20,9 @@ module.exports = (sequelize) => {
       type: DataTypes.BLOB,
       allowNull: false,
     },
-    salt : {
+    salt: {
       type: DataTypes.BLOB,
-      allowNull: false
-    }
+      allowNull: false,
+    },
   });
 };

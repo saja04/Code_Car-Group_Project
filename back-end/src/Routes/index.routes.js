@@ -5,6 +5,7 @@ const deleteCarsHandler = require("../Handlers/deleteCarsHandler");
 const getCarsByNameHandler = require("../Handlers/getCarsByNameHandler");
 const getCarsByIdHandler = require("../Handlers/getCarsByIdHandler");
 const passport = require("passport");
+const postUserHandler = require("../Handlers/postUserHandler");
 
 const router = Router();
 
@@ -30,6 +31,14 @@ router.post(
     failureRedirect: "/login/failure",
   })
 );
+
+router.post('/logout', function(req, res, next){
+  req.logout(function(err){
+    if(err) return next(err);
+    res.redirect('/');
+  })
+});
+router.post('/signup', postUserHandler)
 // router.get("/auth0Problem", (req, res) => {
 //   res.json({ msg: "error en autenticacion" });
 // });

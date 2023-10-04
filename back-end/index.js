@@ -12,26 +12,31 @@ const session = require("express-session");
 const { User } = require("./src/db.js");
 const saveUserData = require("./saveUserData.js");
 const crypto = require("crypto");
+require('dotenv').config();
+const { PASSPORT_SECRET } = process.env;
 
 const server = express();
 server.name = "server";
 
-server.use(express.static(path.join(__dirname, 'public')));
+// server.use(express.static(path.join(__dirname, 'public')));
 
 server.use(bodyParser.urlencoded({ extended: true, limit: "50mb" }));
 server.use(bodyParser.json({ limit: "50mb" }));
-server.use(cookieParser("mi ultra secreto xd"));
+server.use(cookieParser());
 server.use(express.urlencoded({ extended: true }));
+
 server.use(
   session({
-    secret: "mi ultra secreto xd",
-    resave: true,
-    saveUninitialized: true,
+    secret: PASSPORT_SECRET,
+    resave: false,
+    saveUninitialized: false,
     cookie : { secure: true }
   })
 );
 
+server.use(passport.authenticate('session'));
 server.use(morgan("dev"));
+
 server.use((req, res, next) => {
   const allowedOrigins = [
     "https://code-car-41a-pf-enac.vercel.app",
@@ -91,7 +96,7 @@ passport.use(
 passport.serializeUser(function (user, done) {
   // console.log(user);
   done(null, {
-    user: user.user_id,
+    id: user.user_id,
     name: user.user_name
   });
 });
