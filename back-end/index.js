@@ -9,6 +9,7 @@ const passport = require("passport");
 const LocalStrategy = require("passport-local");
 const session = require("express-session");
 const { User } = require("./src/db.js");
+const saveUserData = require("./saveUserData.js");
 
 const server = express();
 server.name = "server";
@@ -16,6 +17,15 @@ server.name = "server";
 server.use(bodyParser.urlencoded({ extended: true, limit: "50mb" }));
 server.use(bodyParser.json({ limit: "50mb" }));
 server.use(cookieParser("mi ultra secreto xd"));
+server.use(express.urlencoded({ extended: true }));
+server.use(
+  session({
+    secret: "mi ultra secreto xd",
+    resave: true,
+    saveUninitialized: true,
+  })
+);
+
 server.use(morgan("dev"));
 server.use((req, res, next) => {
   const allowedOrigins = [
@@ -40,20 +50,17 @@ server.use((req, res, next) => {
 });
 
 server.use("/", router);
-server.use(express.urlencoded({ extend: true }));
-server.use(
-  session({
-    secret: "mi ultra secreto xd",
-    resave: true,
-    saveUninitialized: true,
-  })
-);
+
+server.use(passport.initialize());
+server.use(passport.session());
 
 passport.use(
   new LocalStrategy(
     (verify = async (mail, password, done) => {
-      if (mail === "jamil@mail.com" && password === "123") {
-        return done(null, { id: 1, name: "jamil" });
+      const findedUser = await User.findOne({where: {user_email: mail, user_password: password}});
+      if (findedUser) {
+        console.log(findedUser.dataValues);
+        return done(null, findedUser.dataValues);
       }
       return done(null, false);
     })
@@ -61,11 +68,12 @@ passport.use(
 );
 
 passport.serializeUser(function (user, done) {
-  done(null, user.id);
+  // console.log(user);
+  done(null, user.user_id);
 });
 
 passport.deserializeUser(function (id, done) {
-  done(null, { id: 1, name: "jamil" });
+  done(null, id);
 });
 
 // server.get("/", async (req, res) => {
@@ -75,6 +83,7 @@ passport.deserializeUser(function (id, done) {
 conn.sync({ force: false }).then(async () => {
   console.log("db connected");
   await saveApiData();
+  await saveUserData();
   server.listen(3001, () => {
     console.log("listening on port 3001");
   });
