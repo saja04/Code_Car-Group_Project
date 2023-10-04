@@ -4,8 +4,7 @@ const getCarsHandler = require("../Handlers/getCarsHandler");
 const deleteCarsHandler = require("../Handlers/deleteCarsHandler");
 const getCarsByNameHandler = require("../Handlers/getCarsByNameHandler");
 const getCarsByIdHandler = require("../Handlers/getCarsByIdHandler");
-const { requiresAuth } = require('express-openid-connect');
-const { auth } = require('express-openid-connect');
+const passport = require("passport");
 
 const router = Router();
 
@@ -17,13 +16,20 @@ router.get("/carsName/", getCarsByNameHandler);
 router.get("/cars/:id", getCarsByIdHandler);
 
 //ROUTES AUTH0
-router.get("/", (req, res) => {
-  console.log(req.oidc.isAuthenticated());
-  res.send(req.oidc.isAuthenticated() ? "Logged in" : "Logged out");
+router.get("/login/succesful", (req, res) => {
+  res.send("iniciaste sesion correctamente");
 });
-router.get('/profile', requiresAuth(), (req, res) => {
-  res.send(JSON.stringify(req.oidc.user));
+router.get("/login/failure", (req, res) => {
+  res.send("login fallido!");
 });
+
+router.post(
+  "/login",
+  passport.authenticate("local", {
+    successRedirect: "/login/succesful",
+    failureRedirect: "/login/failure",
+  })
+);
 // router.get("/auth0Problem", (req, res) => {
 //   res.json({ msg: "error en autenticacion" });
 // });
