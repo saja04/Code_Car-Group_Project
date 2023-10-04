@@ -15,6 +15,8 @@ const crypto = require("crypto");
 const server = express();
 server.name = "server";
 
+server.use(express.static(path.join(__dirname, 'public')));
+
 server.use(bodyParser.urlencoded({ extended: true, limit: "50mb" }));
 server.use(bodyParser.json({ limit: "50mb" }));
 server.use(cookieParser("mi ultra secreto xd"));
@@ -24,6 +26,7 @@ server.use(
     secret: "mi ultra secreto xd",
     resave: true,
     saveUninitialized: true,
+    cookie : { secure: true }
   })
 );
 
@@ -48,7 +51,7 @@ server.use((req, res, next) => {
 });
 
 server.use("/", router);
-
+server.use(passport.authenticate('session'));
 server.use(passport.initialize());
 server.use(passport.session());
 
@@ -56,7 +59,7 @@ passport.use(
   new LocalStrategy(
     (verify = async (mail, password, done) => {
       const findedUser = await User.findOne({
-        where: { user_email: mail, user_password: password },
+        where: { user_email: mail},
       });
       if (!findedUser) {
         return done(null, false, {
@@ -66,14 +69,14 @@ passport.use(
 
       crypto.pbkdf2(
         password,
-        User.salt,
+        findedUser.dataValues.salt,
         500,
         32,
         "sha256",
         function (err, hashedPassword) {
           if (err) return done(err);
-          if (!crypto.timingSafeEqual(user.hashed_password, hashedPassword)) {
-            return DelayNode(null, false, {
+          if (!crypto.timingSafeEqual(findedUser.dataValues.hashed_password, hashedPassword)) {
+            return done(null, false, {
               message: "Usuario y contraseña incorrectos",
             });
           }
@@ -86,12 +89,17 @@ passport.use(
 
 passport.serializeUser(function (user, done) {
   // console.log(user);
-  done(null, user.user_id);
+  done(null, {
+    user: user.user_id,
+    name: user.user_name
+  });
 });
 
-passport.deserializeUser(function (id, done) {
-  done(null, id);
+passport.deserializeUser(function (user, done) {
+  done(null, user);
 });
+
+
 
 // server.get("/", async (req, res) => {
 //   res.status(200).send("server running");

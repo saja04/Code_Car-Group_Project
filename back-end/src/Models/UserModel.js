@@ -17,11 +17,11 @@ module.exports = (sequelize) => {
       unique: true,
     },
     hashed_password: {
-      type: DataTypes.STRING,
+      type: DataTypes.BLOB,
       allowNull: false,
     },
     salt : {
-      type: DataTypes.STRING,
+      type: DataTypes.BLOB,
       allowNull: false
     }
   });

@@ -3,7 +3,7 @@ const crypto = require("crypto");
 
 const saveUserData = async () => {
   try {
-    const salt = crypto.randomBytes(16).toString("hex");
+    const salt = crypto.randomBytes(16);
 
     const resetUsers = await User.destroy({
       where: {},
