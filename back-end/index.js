@@ -5,7 +5,7 @@ const morgan = require("morgan");
 const router = require("./src/Routes/index.routes.js");
 const { conn } = require("./src/db.js");
 const saveApiData = require("./saveApiData");
-const { auth } = require('express-openid-connect');
+const { auth } = require("express-openid-connect");
 require("dotenv").config();
 const { AUTH0_CLIENT_ID, SECRET } = process.env;
 
@@ -26,7 +26,10 @@ server.use(bodyParser.json({ limit: "50mb" }));
 server.use(cookieParser());
 server.use(morgan("dev"));
 server.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "http://localhost:5173"); // CAMBIAR CUANDO SE DEPLOYEE CON EL DOMINIO AL QUE CORRESPONDA
+  res.header(
+    "Access-Control-Allow-Origin",
+    "https://code-car-41a-pf-enac.vercel.app/"
+  ); // CAMBIAR CUANDO SE DEPLOYEE CON EL DOMINIO AL QUE CORRESPONDA
   res.header("Access-Control-Allow-Credentials", "true");
   res.header(
     "Access-Control-Allow-Headers",
@@ -37,7 +40,7 @@ server.use((req, res, next) => {
 });
 
 server.use("/", router);
-server.use(auth(config))
+server.use(auth(config));
 
 // server.get("/", async (req, res) => {
 //   res.status(200).send("server running");
