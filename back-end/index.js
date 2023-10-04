@@ -20,8 +20,7 @@ server.use(morgan("dev"));
 server.use((req, res, next) => {
   res.header(
     "Access-Control-Allow-Origin",
-    "https://code-car-41a-pf-enac.vercel.app",
-    "http://localhost:5173"
+    "https://code-car-41a-pf-enac.vercel.app, http://localhost:5173"
   ); // CAMBIAR CUANDO SE DEPLOYEE CON EL DOMINIO AL QUE CORRESPONDA
   res.header("Access-Control-Allow-Credentials", "true");
   res.header(
