@@ -4,7 +4,8 @@ const { DataTypes } = require("sequelize");
 module.exports = (sequelize) => {
   sequelize.define("Admin", {
     admin_id: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4,
       primaryKey: true,
       autoIncrement: true,
     },
