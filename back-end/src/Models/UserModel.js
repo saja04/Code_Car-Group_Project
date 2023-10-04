@@ -16,10 +16,13 @@ module.exports = (sequelize) => {
       allowNull: false,
       unique: true,
     },
-    user_password: {
+    hashed_password: {
       type: DataTypes.STRING,
       allowNull: false,
-      unique: true,
     },
+    salt : {
+      type: DataTypes.STRING,
+      allowNull: false
+    }
   });
 };

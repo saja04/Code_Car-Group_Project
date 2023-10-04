@@ -10,6 +10,7 @@ const LocalStrategy = require("passport-local");
 const session = require("express-session");
 const { User } = require("./src/db.js");
 const saveUserData = require("./saveUserData.js");
+const crypto = require("crypto");
 
 const server = express();
 server.name = "server";
@@ -32,13 +33,10 @@ server.use((req, res, next) => {
     "https://code-car-41a-pf-enac.vercel.app",
     "http://localhost:5173",
   ];
-  
+
   const origin = req.headers.origin;
-  if(allowedOrigins.includes(origin)){
-    res.header(
-      "Access-Control-Allow-Origin",
-      origin
-    );
+  if (allowedOrigins.includes(origin)) {
+    res.header("Access-Control-Allow-Origin", origin);
   }
   res.header("Access-Control-Allow-Credentials", "true");
   res.header(
@@ -57,12 +55,31 @@ server.use(passport.session());
 passport.use(
   new LocalStrategy(
     (verify = async (mail, password, done) => {
-      const findedUser = await User.findOne({where: {user_email: mail, user_password: password}});
-      if (findedUser) {
-        console.log(findedUser.dataValues);
-        return done(null, findedUser.dataValues);
+      const findedUser = await User.findOne({
+        where: { user_email: mail, user_password: password },
+      });
+      if (!findedUser) {
+        return done(null, false, {
+          message: "Usuario y contraseña incorrectos",
+        });
       }
-      return done(null, false);
+
+      crypto.pbkdf2(
+        password,
+        User.salt,
+        500,
+        32,
+        "sha256",
+        function (err, hashedPassword) {
+          if (err) return done(err);
+          if (!crypto.timingSafeEqual(user.hashed_password, hashedPassword)) {
+            return DelayNode(null, false, {
+              message: "Usuario y contraseña incorrectos",
+            });
+          }
+          return done(null, findedUser.dataValues);
+        }
+      );
     })
   )
 );
@@ -80,7 +97,7 @@ passport.deserializeUser(function (id, done) {
 //   res.status(200).send("server running");
 // });
 
-conn.sync({ force: false }).then(async () => {
+conn.sync({ force: true }).then(async () => {
   console.log("db connected");
   await saveApiData();
   await saveUserData();

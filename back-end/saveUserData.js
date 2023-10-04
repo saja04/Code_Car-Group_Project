@@ -1,7 +1,10 @@
 const { User } = require("./src/db");
+const crypto = require("crypto");
 
 const saveUserData = async () => {
   try {
+    const salt = crypto.randomBytes(16).toString("hex");
+
     const resetUsers = await User.destroy({
       where: {},
     });
@@ -9,7 +12,8 @@ const saveUserData = async () => {
       where: {
         user_name: "jamil",
         user_email: "jamil@mail.com",
-        user_password: "1234",
+        hashed_password: "1234",
+        salt: salt
       },
     });
     if (createUser) {
