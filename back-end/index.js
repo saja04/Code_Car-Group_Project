@@ -6,7 +6,17 @@ const router = require("./src/Routes/index.routes.js");
 const { conn } = require("./src/db.js");
 const saveApiData = require("./saveApiData");
 const { auth } = require('express-openid-connect');
-const authConfig = require('./src/Auth0/auth.js')
+require("dotenv").config();
+const { AUTH0_CLIENT_ID, SECRET } = process.env;
+
+const config = {
+  authRequired: false,
+  auth0Logout: true,
+  secret: SECRET,
+  baseURL: "https://codecar.onrender.com",
+  clientID: AUTH0_CLIENT_ID,
+  issuerBaseURL: "https://dev-fl1dkagbtwtxnd7y.us.auth0.com",
+};
 
 const server = express();
 server.name = "server";
@@ -27,7 +37,7 @@ server.use((req, res, next) => {
 });
 
 server.use("/", router);
-server.use(auth(authConfig))
+server.use(auth(config))
 
 // server.get("/", async (req, res) => {
 //   res.status(200).send("server running");
