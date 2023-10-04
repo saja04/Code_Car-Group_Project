@@ -80,7 +80,7 @@ passport.deserializeUser(function (id, done) {
 //   res.status(200).send("server running");
 // });
 
-conn.sync({ force: false }).then(async () => {
+conn.sync({ force: true }).then(async () => {
   console.log("db connected");
   await saveApiData();
   await saveUserData();
