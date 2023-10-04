@@ -4,6 +4,7 @@ const getCarsHandler = require("../Handlers/getCarsHandler");
 const deleteCarsHandler = require("../Handlers/deleteCarsHandler");
 const getCarsByNameHandler = require("../Handlers/getCarsByNameHandler");
 const getCarsByIdHandler = require("../Handlers/getCarsByIdHandler");
+const { requiresAuth } = require('express-openid-connect');
 const { auth } = require('express-openid-connect');
 
 const router = Router();
@@ -19,6 +20,9 @@ router.get("/cars/:id", getCarsByIdHandler);
 router.get("/", (req, res) => {
   console.log(req.oidc.isAuthenticated());
   res.send(req.oidc.isAuthenticated() ? "Logged in" : "Logged out");
+});
+app.get('/profile', requiresAuth(), (req, res) => {
+  res.send(JSON.stringify(req.oidc.user));
 });
 // router.get("/auth0Problem", (req, res) => {
 //   res.json({ msg: "error en autenticacion" });
