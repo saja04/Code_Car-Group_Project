@@ -5,6 +5,7 @@ module.exports = (sequelize) => {
     user_address_id: {
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV4,
+      primaryKey: true,
     },
     street: {
       type: DataTypes.STRING,
