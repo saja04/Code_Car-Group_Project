@@ -5,6 +5,8 @@ const saveUserData = async () => {
   try {
     const salt = crypto.randomBytes(16);
 
+    const hashedPassword = crypto.pbkdf2('1234', salt, 350, 32, 'sha256')
+
     const resetUsers = await User.destroy({
       where: {},
     });
@@ -12,7 +14,7 @@ const saveUserData = async () => {
       where: {
         user_name: "jamil",
         user_email: "jamil@mail.com",
-        hashed_password: "1234",
+        hashed_password: hashedPassword,
         salt: salt
       },
     });
