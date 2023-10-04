@@ -29,9 +29,9 @@ server.use((req, res, next) => {
 server.use("/", router);
 server.use(auth(authConfig))
 
-server.get("/", async (req, res) => {
-  res.status(200).send("server running");
-});
+// server.get("/", async (req, res) => {
+//   res.status(200).send("server running");
+// });
 
 conn.sync({ force: false }).then(async () => {
   console.log("db connected");

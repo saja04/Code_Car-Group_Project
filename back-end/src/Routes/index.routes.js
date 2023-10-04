@@ -17,13 +17,14 @@ router.get("/cars/:id", getCarsByIdHandler);
 
 //ROUTES AUTH0
 router.get("/", (req, res) => {
+  console.log(req.oidc);
   res.send(req.oidc.isAuthenticated() ? "Logged in" : "Logged out");
 });
-router.get("/auth0Problem", (req, res) => {
-  res.json({ msg: "error en autenticacion" });
-});
-router.get("/auth0", authHandler);
-router.post("/auth0/login", authHandler);
+// router.get("/auth0Problem", (req, res) => {
+//   res.json({ msg: "error en autenticacion" });
+// });
+// router.get("/auth0", authHandler);
+// router.post("/auth0/login", authHandler);
 
 //ROUTES USER
 
