@@ -26,7 +26,7 @@ server.use(bodyParser.json({ limit: "50mb" }));
 server.use(cookieParser());
 server.use(morgan("dev"));
 server.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "https://code-car-41a-pf-enac.vercel.app/:1"); // CAMBIAR CUANDO SE DEPLOYEE CON EL DOMINIO AL QUE CORRESPONDA
+  res.header("Access-Control-Allow-Origin", "https://code-car-41a-pf-enac.vercel.app"); // CAMBIAR CUANDO SE DEPLOYEE CON EL DOMINIO AL QUE CORRESPONDA
   res.header("Access-Control-Allow-Credentials", "true");
   res.header(
     "Access-Control-Allow-Headers",
