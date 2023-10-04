@@ -13,9 +13,9 @@ const saveUserData = async () => {
       },
     });
     if (createUser) {
-      console.log("usuario cargado correctamente");
+      return console.log("usuario cargado correctamente");
     }
-    return response;
+    return createUser;
   } catch (error) {
     console.log(error);
   }
