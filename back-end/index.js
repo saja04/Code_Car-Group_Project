@@ -5,28 +5,24 @@ const morgan = require("morgan");
 const router = require("./src/Routes/index.routes.js");
 const { conn } = require("./src/db.js");
 const saveApiData = require("./saveApiData");
-const { auth } = require('express-openid-connect');
-require("dotenv").config();
-const { AUTH0_CLIENT_ID, SECRET } = process.env;
-
-const config = {
-  authRequired: false,
-  auth0Logout: true,
-  secret: SECRET,
-  baseURL: "https://codecar.onrender.com",
-  clientID: AUTH0_CLIENT_ID,
-  issuerBaseURL: "https://dev-fl1dkagbtwtxnd7y.us.auth0.com",
-};
+const passport = require("passport");
+const LocalStrategy = require("passport-local");
+const session = require("express-session");
+const { User } = require("./src/db.js");
 
 const server = express();
 server.name = "server";
 
 server.use(bodyParser.urlencoded({ extended: true, limit: "50mb" }));
 server.use(bodyParser.json({ limit: "50mb" }));
-server.use(cookieParser());
+server.use(cookieParser("mi ultra secreto xd"));
 server.use(morgan("dev"));
 server.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "https://code-car-41a-pf-enac.vercel.app"); // CAMBIAR CUANDO SE DEPLOYEE CON EL DOMINIO AL QUE CORRESPONDA
+  res.header(
+    "Access-Control-Allow-Origin",
+    "https://code-car-41a-pf-enac.vercel.app",
+    "http://localhost:5173"
+  ); // CAMBIAR CUANDO SE DEPLOYEE CON EL DOMINIO AL QUE CORRESPONDA
   res.header("Access-Control-Allow-Credentials", "true");
   res.header(
     "Access-Control-Allow-Headers",
@@ -37,7 +33,33 @@ server.use((req, res, next) => {
 });
 
 server.use("/", router);
-server.use(auth(config))
+server.use(express.urlencoded({ extend: true }));
+server.use(
+  session({
+    secret: "mi ultra secreto xd",
+    resave: true,
+    saveUninitialized: true,
+  })
+);
+
+passport.use(
+  new LocalStrategy(
+    (verify = async (mail, password, done) => {
+      if (mail === "jamil@mail.com" && password === "123") {
+        return done(null, { id: 1, name: "jamil" });
+      }
+      return done(null, false);
+    })
+  )
+);
+
+passport.serializeUser(function (user, done) {
+  done(null, user.id);
+});
+
+passport.deserializeUser(function (id, done) {
+  done(null, { id: 1, name: "jamil" });
+});
 
 // server.get("/", async (req, res) => {
 //   res.status(200).send("server running");
