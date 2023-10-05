@@ -4,13 +4,9 @@ const getCarsHandler = require("../Handlers/getCarsHandler");
 const deleteCarsHandler = require("../Handlers/deleteCarsHandler");
 const getCarsByNameHandler = require("../Handlers/getCarsByNameHandler");
 const getCarsByIdHandler = require("../Handlers/getCarsByIdHandler");
-<<<<<<< HEAD
 const getAllUsersHandler = require("../Handlers/getAllUsersHandler")
-=======
-const passport = require("passport");
-const postUserHandler = require("../Handlers/postUserHandler");
-const express = require('express')
->>>>>>> 4450417c42ab6c8702697308be11fa3494d6592f
+const postUserHandler = require("../Handlers/postUserHandler")
+const passport = require("passport")
 
 const router = Router();
 
