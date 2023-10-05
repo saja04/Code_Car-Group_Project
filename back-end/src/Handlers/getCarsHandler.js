@@ -4,6 +4,7 @@ const getCarsHandler = async (req, res) => {
   try {
     const response = await getCars(req);
     return res.status(201).json(response);
+    
   } catch (error) {
     console.error(error);
     res.status(401).json({
