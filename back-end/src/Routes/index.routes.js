@@ -56,6 +56,11 @@ router.get("/", checkAuthenticated, (req, res) => {
   res.json({msg: 'el usuairo está logeado'})
 });
 
+router.post('/user/status', (req, res) => {
+  if(req.isAuthenticated()) return res.json({msg: 'usuario lolgeado'});
+  else return res.json({msg: 'usuario deslogeado'})
+})
+
 //ROUTES ADMIN
 
 module.exports = router;
