@@ -14,6 +14,6 @@ module.exports = (sequelize) => {
     order_date: {
       type: DataTypes.DATE,
       allowNull: false,
-    },
+    }
   });
 };
