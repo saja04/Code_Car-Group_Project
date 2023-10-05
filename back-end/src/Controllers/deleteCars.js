@@ -1,16 +1,27 @@
-const { Car } = require("../db");
+// controllers/deleteCarController.js
+const { Car } = require('../models');
 
-const deleteCar = async (carId) => {
-  
-  const car = await Car.findByPk(carId);
+// Controlador para el borrado lógico de un auto
+const deleteCar = async (req, res) => {
+  const { carId } = req.params;
 
-  if (car) {
-    await car.destroy();
-    return {message: `eliminaste el coche con id ${carId} exitosamente!`}
-  } else {
-    return {message: `el coche con id ${carId} no se encuentra o no puede ser borrado, verifica el id`}
+  try {
+    const car = await Car.findByPk(carId);
+
+    // Verifica si el auto existe
+    if (!car) {
+      return res.status(404).json({ message: 'Auto no encontrado' });
+    }
+
+    // Actualiza el estado de borrado lógico
+    car.deleted = true;
+    await car.save();
+
+    return res.status(200).json({ message: 'Auto borrado con éxito' });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ message: 'Error en el servidor' });
   }
 };
 
 module.exports = deleteCar;
-
