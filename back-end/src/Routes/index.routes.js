@@ -4,9 +4,6 @@ const getCarsHandler = require("../Handlers/getCarsHandler");
 const deleteCarsHandler = require("../Handlers/deleteCarsHandler");
 const getCarsByNameHandler = require("../Handlers/getCarsByNameHandler");
 const getCarsByIdHandler = require("../Handlers/getCarsByIdHandler");
-const getAllUsersHandler = require("../Handlers/getAllUsersHandler");
-const postUserHandler = require("../Handlers/postUserHandler");
-const passport = require("passport");
 const getAllUsersHandler = require("../Handlers/getAllUsersHandler")
 const postUserHandler = require("../Handlers/postUserHandler")
 const buyCarHandler = require("../Handlers/buyCarHandler")
@@ -18,16 +15,16 @@ const checkAuthenticated = async (req, res, next) => {
     if(req.isAuthenticated()){
       return next()
     }
-    res.json({msg: 'usuario no logeado, por favor log in o sign in'})
+    res.status(499).json({msg: 'usuario no logeado, por favor log in o sign in'})
 };
 
 //ROUTES CARS
-router.post("/carsPost", postCarsHandler);
+router.post("/carsPost", checkAuthenticated, postCarsHandler);
 router.post("/cars", getCarsHandler);
 router.post("/users", getAllUsersHandler);
 router.post("/users", getAllUsersHandler)
-router.post("/pedido/", buyCarHandler)
-router.get("/carsDelete/:id", deleteCarsHandler);
+router.post("/pedido/", checkAuthenticated, buyCarHandler)
+router.get("/carsDelete/:id", checkAuthenticated, deleteCarsHandler);
 router.get("/carsName/", getCarsByNameHandler);
 router.get("/cars/:id", getCarsByIdHandler);
 
