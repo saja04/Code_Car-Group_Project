@@ -50,7 +50,11 @@ module.exports = (sequelize) => {
     car_imagen: {
       type: DataTypes.STRING(20000),
       allowNull:false
-    }
+    },
+    state: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false, // Por defecto, un registro no está borrado
+    },
   },
   { timestamps: false }
   );
