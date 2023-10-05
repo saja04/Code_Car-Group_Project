@@ -5,6 +5,10 @@ export const GET_FILTERS = "GET_FILTERS";
 export const GET_CAR_BY_ID = "GET_CAR_BY_ID";
 export const DELETE_CAR = "DELETE_CAR";
 export const GET_CAR_BY_NAME = "GET_CAR_BY_NAME"
+export const REGISTER_USER = "REGISTER_USER"
+export const REGISTER_USER_FAILURE = "REGISTER_USER_FAILURE"
+export const LOGIN_USER = "LOGIN_USER";
+export const LOGIN_USER_FAILURE = "LOGIN_USER_FAILURE";
 
 export const getCars = (divisa) => {
   return async (dispatch) => {
@@ -73,3 +77,49 @@ export const getCarByName = (modelo) => {
 
   }
 }
+
+export const registerUser = (name, email, password) => async (dispatch) => {
+  try {
+
+    const response = await axios.post(
+      (`https://codecar.onrender.com/signup`),
+      { name, email, password }
+    );
+    
+
+    dispatch({
+      type: "REGISTER_USER",
+      payload: response.data.user,
+    });
+  } catch (error) {
+    dispatch({
+      type: "REGISTER_FAILURE",
+      payload: error,
+    });
+  }
+};
+
+export const loginUser = (username, password) => async (dispatch) => {
+  try {
+    const response = await axios.post(
+      "https://codecar.onrender.com/login/password",
+      {
+        username: username,
+        password: password
+      }
+    );
+    console.log(response.data);
+    dispatch({
+      type: LOGIN_USER,
+      payload: response.data.user,
+    });
+  } catch (error) {
+    
+    console.error("Error en la solicitud:", error);
+    dispatch({
+      type: LOGIN_USER_FAILURE,
+      payload: "Error en la solicitud", 
+    });
+  }
+};
+
