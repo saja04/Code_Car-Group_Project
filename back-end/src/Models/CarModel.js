@@ -51,7 +51,7 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING(20000),
       allowNull:false
     },
-    state: {
+    deleted: {
       type: DataTypes.BOOLEAN,
       defaultValue: false, // Por defecto, un registro no está borrado
     },
