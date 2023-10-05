@@ -103,7 +103,10 @@ export const loginUser = (username, password) => async (dispatch) => {
   try {
     const response = await axios.post(
       "https://codecar.onrender.com/login/password",
-      { username, password }
+      {
+        username: username,
+        password: password
+      }
     );
     console.log(response.data);
     dispatch({
@@ -119,3 +122,4 @@ export const loginUser = (username, password) => async (dispatch) => {
     });
   }
 };
+

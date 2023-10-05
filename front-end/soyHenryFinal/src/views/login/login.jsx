@@ -14,6 +14,7 @@ function Login() {
   const loginError = useSelector((state) => state.loginError);
 
   const handleLogin = (e) => {
+    console.log(username, password)
     e.preventDefault();
 
     dispatch(loginUser(username, password));
@@ -50,7 +51,7 @@ function Login() {
             Register
           </Link>
         </div>
-        {loginError && <p className={style.error}>{loginError}</p>}
+        {loginError && <p className={style.error}>Error al entrar.</p>}
         <Google />
       </form>
     </div>

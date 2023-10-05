@@ -13,6 +13,10 @@ function Home() {
       try {
         const response = await axios.post("https://codecar.onrender.com/cars");
         setVehicles(response.data);
+
+        const response2 = await axios.post("https://codecar.onrender.com/userStatus");
+        console.log(response2.data);
+
       } catch (error) {
         console.error("Error fetching data:", error);
       }
