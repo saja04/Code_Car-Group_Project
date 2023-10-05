@@ -4,6 +4,7 @@ import { GET_FILTERS } from "./actions";
 const initialState = {
   allCars: [],
   singleCar: null,
+  divisa: "car_precio_usd" //trae precio en ars
 };
 
 const rootReducer = (state = initialState, action) => {

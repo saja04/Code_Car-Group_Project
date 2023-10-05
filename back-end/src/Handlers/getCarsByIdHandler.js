@@ -3,7 +3,7 @@ const getCarsById = require("../Controllers/getCarsById");
 const getCarsByIdHandler = async (req, res) => {
   try {
     const { id } = req.params;
-    const idParse = parseInt(id);
+    const idParse = id;
     console.log(idParse);
     if (isNaN(idParse)) {
       return res.status(436).json({ msg: "ingresa un numero!" });
