@@ -1,5 +1,5 @@
 // controllers/deleteCarController.js
-const { Car } = require('../models');
+const { Car } = require('../db');
 
 // Controlador para el borrado lógico de un auto
 const deleteCar = async (req, res) => {
