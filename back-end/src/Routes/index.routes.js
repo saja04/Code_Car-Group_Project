@@ -4,15 +4,16 @@ const getCarsHandler = require("../Handlers/getCarsHandler");
 const deleteCarsHandler = require("../Handlers/deleteCarsHandler");
 const getCarsByNameHandler = require("../Handlers/getCarsByNameHandler");
 const getCarsByIdHandler = require("../Handlers/getCarsByIdHandler");
-const passport = require("passport");
-const postUserHandler = require("../Handlers/postUserHandler");
-const express = require('express')
+const getAllUsersHandler = require("../Handlers/getAllUsersHandler")
+const postUserHandler = require("../Handlers/postUserHandler")
+const passport = require("passport")
 
 const router = Router();
 
 //ROUTES CARS
 router.post("/carsPost", postCarsHandler);
 router.post("/cars", getCarsHandler);
+router.post("/users", getAllUsersHandler)
 router.get("/carsDelete/:id", deleteCarsHandler);
 router.get("/carsName/", getCarsByNameHandler);
 router.get("/cars/:id", getCarsByIdHandler);
