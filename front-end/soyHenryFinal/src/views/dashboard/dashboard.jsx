@@ -5,7 +5,7 @@ import styles from "./dashboard.module.css";
 function Dashboard() {
   return (
     <div className={styles.dashboardContainer}>
-      <h2 className={styles.dashboardTitle}>Mi Panel de Control</h2>
+      <h2 className={styles.dashboardTitle}>Panel de Control</h2>
       <div className={styles.buttonContainer}>
         <Link to="/post" className={styles.link}>
           <button className={`${styles.customButton} ${styles.primary}`}>Crear Nuevo Automóvil</button> 

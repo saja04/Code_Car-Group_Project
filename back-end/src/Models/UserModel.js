@@ -3,9 +3,9 @@ const { DataTypes } = require("sequelize");
 module.exports = (sequelize) => {
   sequelize.define("User", {
     user_id: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4,
       primaryKey: true,
-      autoIncrement: true,
     },
     user_name: {
       type: DataTypes.STRING,
@@ -14,9 +14,14 @@ module.exports = (sequelize) => {
     user_email: {
       type: DataTypes.STRING,
       allowNull: false,
+      unique: true,
     },
-    user_password: {
-      type: DataTypes.STRING,
+    hashed_password: {
+      type: DataTypes.BLOB,
+      allowNull: false,
+    },
+    salt: {
+      type: DataTypes.BLOB,
       allowNull: false,
     },
   });

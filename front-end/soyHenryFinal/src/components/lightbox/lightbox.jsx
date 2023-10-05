@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./Lightbox.module.css";
+import styles from "./lightbox.module.css";
 function Lightbox({ imageUrl, onClose }) {
   return (
     <div
