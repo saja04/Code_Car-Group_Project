@@ -7,6 +7,10 @@ const getCarsByIdHandler = require("../Handlers/getCarsByIdHandler");
 const getAllUsersHandler = require("../Handlers/getAllUsersHandler");
 const postUserHandler = require("../Handlers/postUserHandler");
 const passport = require("passport");
+const getAllUsersHandler = require("../Handlers/getAllUsersHandler")
+const postUserHandler = require("../Handlers/postUserHandler")
+const buyCarHandler = require("../Handlers/buyCarHandler")
+const passport = require("passport")
 
 const router = Router();
 
@@ -21,6 +25,8 @@ const checkAuthenticated = async (req, res, next) => {
 router.post("/carsPost", postCarsHandler);
 router.post("/cars", getCarsHandler);
 router.post("/users", getAllUsersHandler);
+router.post("/users", getAllUsersHandler)
+router.post("/pedido/", buyCarHandler)
 router.get("/carsDelete/:id", deleteCarsHandler);
 router.get("/carsName/", getCarsByNameHandler);
 router.get("/cars/:id", getCarsByIdHandler);

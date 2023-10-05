@@ -5,33 +5,35 @@ import { Link } from "react-router-dom";
 function CarCard({ vehicle, showPricesInUSD }) {
   return (
     <div className={carCardStyles.conteiner}>
-      <div className={carCardStyles.carCard}>
-        <h2>
-          {vehicle.marca} {vehicle.modelo}
-        </h2>
-        <img
-          src={vehicle.car_imagen}
-          alt={`${vehicle.car_marca} ${vehicle.car_modelo}`}
-        />
-        <p>
-          {" "}
-          {vehicle.car_marca} {vehicle.car_modelo}
-        </p>
-        <p>Color: {vehicle.car_color}</p>
-        <p>Año: {vehicle.car_año}</p>
-        <p>{vehicle.car_condicion}</p>
-        <p>
-          {showPricesInUSD
-            ? `USD$${vehicle.car_precio_usd}`
-            : `ARS$${vehicle.car_precio_ars}`}
-        </p>{" "}
-        <div>
-          <button type="submit">Agregar al carrito</button>
-          <Link to={`/detail/${vehicle.car_id}`}>
-            <button>Detalle</button>
-          </Link>
+      <Link to={`/detail/${vehicle.car_id}`} className={carCardStyles.links}>
+        <div className={carCardStyles.carCard}>
+          <img
+            src={vehicle.car_imagen}
+            alt={`${vehicle.car_marca} ${vehicle.car_modelo}`}
+          />
+          <div className={carCardStyles.info}>
+            <h2 className={carCardStyles.title}>
+              {vehicle.car_marca} {vehicle.car_modelo}
+            </h2>
+            <div>
+              <p>
+                | {vehicle.car_kilometraje} km | {vehicle.car_tipo_de_motor}
+              </p>
+            </div>
+            <div className={carCardStyles.contPrice}>
+              <p className={carCardStyles.price}>Precio </p>
+              <p className={carCardStyles.arsUsd}>
+                {showPricesInUSD
+                  ? `USD$${vehicle.car_precio_usd}`
+                  : `ARS$${vehicle.car_precio_ars}`}
+              </p>
+            </div>
+            {/*         <div>
+          <Link to={`/detail/${vehicle.car_id}`}></Link>
+        </div> */}
+          </div>
         </div>
-      </div>
+      </Link>
     </div>
   );
 }
