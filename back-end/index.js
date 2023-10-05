@@ -1,4 +1,4 @@
-const path = require('path');
+const path = require("path");
 const express = require("express");
 const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
@@ -12,7 +12,7 @@ const session = require("express-session");
 const { User } = require("./src/db.js");
 const saveUserData = require("./saveUserData.js");
 const crypto = require("crypto");
-require('dotenv').config();
+require("dotenv").config();
 const { PASSPORT_SECRET } = process.env;
 
 const server = express();
@@ -30,11 +30,11 @@ server.use(
     secret: PASSPORT_SECRET,
     resave: false,
     saveUninitialized: false,
-    cookie : { secure: true }
+    // cookie: { secure: true },
   })
 );
 
-server.use(passport.authenticate('session'));
+server.use(passport.authenticate("session"));
 server.use(morgan("dev"));
 
 server.use((req, res, next) => {
@@ -57,7 +57,7 @@ server.use((req, res, next) => {
 });
 
 server.use("/", router);
-server.use(passport.authenticate('session'));
+// server.use(passport.authenticate("session"));
 server.use(passport.initialize());
 server.use(passport.session());
 
@@ -65,7 +65,7 @@ passport.use(
   new LocalStrategy(
     (verify = async (mail, password, done) => {
       const findedUser = await User.findOne({
-        where: { user_email: mail},
+        where: { user_email: mail },
       });
       if (!findedUser) {
         return done(null, false, {
@@ -81,7 +81,12 @@ passport.use(
         "sha256",
         function (err, hashedPassword) {
           if (err) return done(err);
-          if (!crypto.timingSafeEqual(findedUser.dataValues.hashed_password, hashedPassword)) {
+          if (
+            !crypto.timingSafeEqual(
+              findedUser.dataValues.hashed_password,
+              hashedPassword
+            )
+          ) {
             return done(null, false, {
               message: "Usuario y contraseña incorrectos",
             });
@@ -95,17 +100,12 @@ passport.use(
 
 passport.serializeUser(function (user, done) {
   // console.log(user);
-  done(null, {
-    id: user.user_id,
-    name: user.user_name
-  });
+  return done(null, { id: user.user_id });
 });
 
-passport.deserializeUser(function (user, done) {
-  done(null, user);
+passport.deserializeUser(function (id, done) {
+  return done(null, id);
 });
-
-
 
 // server.get("/", async (req, res) => {
 //   res.status(200).send("server running");

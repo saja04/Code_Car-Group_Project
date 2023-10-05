@@ -15,5 +15,10 @@ module.exports = (sequelize) => {
       type: DataTypes.DATE,
       allowNull: false,
     },
+    car_pedido_id: {
+      type: DataTypes.UUID,
+      allowNull: false
+    },
+    
   });
 };

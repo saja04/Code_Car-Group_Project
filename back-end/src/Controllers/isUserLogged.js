@@ -1,0 +1,5 @@
+
+
+const isUserLogged = async(checkAuthenticated) => {
+
+}

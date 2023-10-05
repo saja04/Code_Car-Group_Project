@@ -10,7 +10,7 @@ export const REGISTER_USER_FAILURE = "REGISTER_USER_FAILURE"
 export const LOGIN_USER = "LOGIN_USER";
 export const LOGIN_USER_FAILURE = "LOGIN_USER_FAILURE";
 
-export const getCars = () => {
+export const getCars = (divisa) => {
   return async (dispatch) => {
     const response = await axios.post("https://codecar.onrender.com/cars", {'order': {'value':'car_marca','sequence': 'ASC'}});
     console.log(response.data);
@@ -46,7 +46,7 @@ export const getCarById = (id) => {
 
     return dispatch({
       type: GET_CAR_BY_ID,
-      payload: data.car,
+      payload: data,
     });
   };
 };

@@ -5,6 +5,7 @@ import { REGISTER_USER, REGISTER_USER_FAILURE, LOGIN_USER, LOGIN_USER_FAILURE } 
 const initialState = {
   allCars: [],
   singleCar: null,
+  divisa: "car_precio_usd", //trae precio en ars
   user: null,
   registrationError: null,
 };
@@ -22,6 +23,7 @@ const rootReducer = (state = initialState, action) => {
           allCars: action.payload,
         };
         case GET_CAR_BY_ID:
+          console.log(action.payload);
           return{
             ...state,
             singleCar: action.payload,
