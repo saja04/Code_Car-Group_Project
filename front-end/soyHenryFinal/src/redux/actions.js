@@ -6,7 +6,7 @@ export const GET_CAR_BY_ID = "GET_CAR_BY_ID";
 export const DELETE_CAR = "DELETE_CAR";
 export const GET_CAR_BY_NAME = "GET_CAR_BY_NAME"
 
-export const getCars = () => {
+export const getCars = (divisa) => {
   return async (dispatch) => {
     const response = await axios.post("https://codecar.onrender.com/cars", {'order': {'value':'car_marca','sequence': 'ASC'}});
     console.log(response.data);

@@ -7,7 +7,9 @@ const getCarsByName = async (input) => {
 
   const formattedInput = input.charAt(0).toUpperCase() + input.slice(1).toLowerCase();
 
-  const allCars = await Car.findAll();
+  const allCars = await Car.findAll({
+    where: { deleted: false }, // Agregar la condición para autos no borrados
+  });
 
   const results = allCars.map((car) => {
     const marca = car.dataValues.car_marca;
@@ -30,4 +32,4 @@ const getCarsByName = async (input) => {
   return { msg: "Autos encontrados", cars: results };
 };
 
-module.exports = getCarsByName;
+module.exports = getCarsByName;
