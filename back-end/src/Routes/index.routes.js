@@ -52,12 +52,12 @@ router.post("/logout", function (req, res, next) {
 });
 router.post("/signup", postUserHandler);
 
-router.get("/", checkAuthenticated, (req, res) => {
-  res.json({msg: 'el usuairo está logeado'})
-});
+// router.get("/", checkAuthenticated, (req, res) => {
+//   res.json({msg: 'el usuairo está logeado'})
+// });
 
-router.post('/user/status', (req, res) => {
-  if(req.isAuthenticated()) return res.json({msg: 'usuario lolgeado'});
+router.post('/userStatus', (req, res) => {
+  if(req.isAuthenticated()) return res.json({msg: 'usuario logeado'});
   else return res.json({msg: 'usuario deslogeado'})
 })
 
