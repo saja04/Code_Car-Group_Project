@@ -57,15 +57,7 @@ server.use(morgan("dev"));
 // });
 
 server.use((req, res, next) => {
-  const allowedOrigins = [
-    "https://code-car-41a-pf-enac.vercel.app",
-    "http://localhost:5173",
-  ];
-
-  const origin = req.headers.origin;
-  if (allowedOrigins.includes(origin)) {
-    res.header("Access-Control-Allow-Origin", origin);
-  }
+  res.header("Access-Control-Allow-Origin", "*"); // Esto permite solicitudes desde cualquier origen
   res.header("Access-Control-Allow-Credentials", "true");
   res.header(
     "Access-Control-Allow-Headers",
@@ -74,7 +66,6 @@ server.use((req, res, next) => {
   res.header("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE");
   next();
 });
-
 
 server.use("/", router);
 // server.use(passport.authenticate("session"));
