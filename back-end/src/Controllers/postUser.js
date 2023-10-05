@@ -15,8 +15,7 @@ const postUser = async(name, email, password) => {
             salt: salt
         }
     });
-    console.log(newUser.User);
-    return newUser.dataValues;
+    return newUser[0].dataValues;
 }
 
 module.exports = postUser;

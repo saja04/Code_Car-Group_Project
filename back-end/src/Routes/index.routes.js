@@ -6,6 +6,7 @@ const getCarsByNameHandler = require("../Handlers/getCarsByNameHandler");
 const getCarsByIdHandler = require("../Handlers/getCarsByIdHandler");
 const passport = require("passport");
 const postUserHandler = require("../Handlers/postUserHandler");
+const express = require('express')
 
 const router = Router();
 
@@ -16,16 +17,18 @@ router.get("/carsDelete/:id", deleteCarsHandler);
 router.get("/carsName/", getCarsByNameHandler);
 router.get("/cars/:id", getCarsByIdHandler);
 
-//ROUTES AUTH0
+
+
+//ROUTES USER
 router.get("/login/succesful", (req, res) => {
-  res.send("iniciaste sesion correctamente");
+  res.json({msg: "iniciaste sesion correctamente"});
 });
 router.get("/login/failure", (req, res) => {
-  res.send("login fallido!");
+  res.json({msg: "login fallido!"});
 });
 
 router.post(
-  "/login",
+  "/login/password",
   passport.authenticate("local", {
     successRedirect: "/login/succesful",
     failureRedirect: "/login/failure",
@@ -39,13 +42,14 @@ router.post('/logout', function(req, res, next){
   })
 });
 router.post('/signup', postUserHandler)
-// router.get("/auth0Problem", (req, res) => {
-//   res.json({ msg: "error en autenticacion" });
-// });
-// router.get("/auth0", authHandler);
-// router.post("/auth0/login", authHandler);
 
-//ROUTES USER
+router.get('/', async(req, res, next) => {
+  if(req.isAuthenticated()) return next();
+  res.redirect('/login/password')
+}, (req, res) => {
+  res.json({msg: 'user loged in', })
+})
+
 
 //ROUTES ADMIN
 
