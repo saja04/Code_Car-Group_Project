@@ -29,10 +29,10 @@ router.get("/carsName/", getCarsByNameHandler);
 router.get("/cars/:id", getCarsByIdHandler);
 
 //ROUTES USER
-router.post("/login/succesful", (req, res) => {
+router.get("/login/succesful", (req, res) => {
   res.json({ msg: "iniciaste sesion correctamente" });
 });
-router.post("/login/failure", (req, res) => {
+router.get("/login/failure", (req, res) => {
   res.json({ msg: "login fallido!" });
 });
 
