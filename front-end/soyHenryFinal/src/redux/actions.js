@@ -42,7 +42,7 @@ export const getCarById = (id) => {
 
     return dispatch({
       type: GET_CAR_BY_ID,
-      payload: data.car,
+      payload: data,
     });
   };
 };

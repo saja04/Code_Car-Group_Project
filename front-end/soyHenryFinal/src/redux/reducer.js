@@ -20,6 +20,7 @@ const rootReducer = (state = initialState, action) => {
           allCars: action.payload,
         };
         case GET_CAR_BY_ID:
+          console.log(action.payload);
           return{
             ...state,
             singleCar: action.payload,

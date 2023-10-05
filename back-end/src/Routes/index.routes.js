@@ -19,7 +19,6 @@ router.get("/carsName/", getCarsByNameHandler);
 router.get("/cars/:id", getCarsByIdHandler);
 
 
-
 //ROUTES USER
 router.post("/login/succesful", (req, res) => {
   res.json({msg: "iniciaste sesion correctamente"});
@@ -39,7 +38,7 @@ router.post(
 router.post('/logout', function(req, res, next){
   req.logout(function(err){
     if(err) return next(err);
-    res.redirect('/');
+    res.status(201).json({msg: 'logout succesful'});
   })
 });
 router.post('/signup', postUserHandler)
@@ -53,5 +52,9 @@ router.get('/', async(req, res, next) => {
 
 
 //ROUTES ADMIN
+
+
+
+
 
 module.exports = router;
