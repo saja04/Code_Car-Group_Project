@@ -4,13 +4,10 @@ const getCarsByIdHandler = async (req, res) => {
   try {
     const { id } = req.params;
     const idParse = id;
-    console.log(idParse);
-    if (isNaN(idParse)) {
-      return res.status(436).json({ msg: "ingresa un numero!" });
-    } else {
-      const response = await getCarsById(idParse);
-      res.status(236).json(response);
-    }
+
+    const response = await getCarsById(idParse);
+    res.status(236).json(response);
+    
   } catch (error) {
     return res
       .status(437)

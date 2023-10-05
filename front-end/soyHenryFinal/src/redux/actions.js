@@ -8,7 +8,7 @@ export const GET_CAR_BY_NAME = "GET_CAR_BY_NAME"
 
 export const getCars = (divisa) => {
   return async (dispatch) => {
-    const response = await axios.post("https://codecar.onrender.com/cars", {'order': {'value':'car_marca','sequence': 'ASC'}, divisa});
+    const response = await axios.post("https://codecar.onrender.com/cars", {'order': {'value':'car_marca','sequence': 'ASC'}});
     console.log(response.data);
     const data = response.data;
 
