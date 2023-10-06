@@ -13,8 +13,6 @@ const { User } = require("../db");
 const router = Router();
 
 const checkAuthenticated = async (req, res, next) => {
-  console.log(req.session);
-  console.log(req.user);
   if (req.isAuthenticated()) {
     return next();
   }
@@ -34,16 +32,15 @@ router.get("/carsName/", getCarsByNameHandler);
 router.get("/cars/:id", getCarsByIdHandler);
 
 //ROUTES USER
-router.get("/login/succesful", (req, res) => {
-  res.json({ msg: "iniciaste sesion correctamente" });
-});
-router.get("/login/failure", (req, res) => {
-  res.json({ msg: "login fallido!" });
-});
+// router.get("/login/succesful", (req, res) => {
+//   res.json({ msg: "iniciaste sesion correctamente" });
+// });
+// router.get("/login/failure", (req, res) => {
+//   res.json({ msg: "login fallido!" });
+// });
 
 router.post("/login", (req, res, next) => {
   passport.authenticate("local", async (err, user) => {
-
     if (err) return res.status(401).json(err);
 
     req.logIn(user, (err) => {
@@ -57,10 +54,9 @@ router.post("/login", (req, res, next) => {
 });
 
 router.post("/logout", function (req, res, next) {
-  req.logout(function (err) {
-    if (err) return next(err);
-    return res.status(201).json({ msg: "logout succesful" });
-  });
+  req.logout();
+  req.session = null;
+  return res.status(205).json({msg: 'deslogeado correctamente'})
 });
 router.post("/signup", postUserHandler);
 

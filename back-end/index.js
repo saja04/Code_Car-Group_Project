@@ -72,10 +72,8 @@ passport.use(
   new LocalStrategy(
     { passReqToCallback: true },
     async (req, username, password, done) => {
-      console.log("local strategy verify cb");
-
       const user = await User.findOne({ where: { user_email: username } });
-      if (!user) return done('Mail no registrado');
+      if (!user) return done("Mail no registrado");
 
       crypto.pbkdf2(
         password,
@@ -141,7 +139,16 @@ passport.serializeUser((user, done) => {
 });
 
 passport.deserializeUser(async (id, done) => {
-  return done(null, id);
+  const user = await User.findOne({ where: { user_id: id } });
+  if (user) {
+    return done(null, {
+      id: user.dataValues.user_id,
+      name: user.dataValues.user_name,
+    });
+  } else {
+    return done(new Error("No user con ese id"));
+  
+  }
 });
 
 server.use("/", router);
@@ -153,7 +160,7 @@ server.use("/", router);
 conn.sync({ force: false }).then(async () => {
   console.log("db connected");
   await saveApiData();
-  await saveUserData();
+  // await saveUserData();
   server.listen(3001, () => {
     console.log("listening on port 3001");
   });
