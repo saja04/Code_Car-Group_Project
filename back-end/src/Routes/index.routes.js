@@ -4,28 +4,31 @@ const getCarsHandler = require("../Handlers/getCarsHandler");
 const deleteCarsHandler = require("../Handlers/deleteCarsHandler");
 const getCarsByNameHandler = require("../Handlers/getCarsByNameHandler");
 const getCarsByIdHandler = require("../Handlers/getCarsByIdHandler");
-const getAllUsersHandler = require("../Handlers/getAllUsersHandler")
-const postUserHandler = require("../Handlers/postUserHandler")
-const buyCarHandler = require("../Handlers/buyCarHandler")
-const passport = require("passport")
+const getAllUsersHandler = require("../Handlers/getAllUsersHandler");
+const postUserHandler = require("../Handlers/postUserHandler");
+const buyCarHandler = require("../Handlers/buyCarHandler");
+const passport = require("passport");
+const { User } = require("../db");
 
 const router = Router();
 
 const checkAuthenticated = async (req, res, next) => {
   console.log(req.session);
   console.log(req.user);
-    if(req.isAuthenticated()){
-      return next()
-    }
-    res.status(499).json({msg: 'usuario no logeado, por favor log in o sign in'})
+  if (req.isAuthenticated()) {
+    return next();
+  }
+  res
+    .status(499)
+    .json({ msg: "usuario no logeado, por favor log in o sign in" });
 };
 
 //ROUTES CARS
 router.post("/carsPost", checkAuthenticated, postCarsHandler);
 router.post("/cars", getCarsHandler);
 router.post("/users", getAllUsersHandler);
-router.post("/users", getAllUsersHandler)
-router.post("/pedido/", checkAuthenticated, buyCarHandler)
+router.post("/users", getAllUsersHandler);
+router.post("/pedido/", checkAuthenticated, buyCarHandler);
 router.get("/carsDelete/:id", checkAuthenticated, deleteCarsHandler);
 router.get("/carsName/", getCarsByNameHandler);
 router.get("/cars/:id", getCarsByIdHandler);
@@ -38,13 +41,20 @@ router.get("/login/failure", (req, res) => {
   res.json({ msg: "login fallido!" });
 });
 
-router.post(
-  "/login",
-  passport.authenticate("local", {
-    successRedirect: "/login/succesful",
-    failureRedirect: "/login/failure",
-  })
-);
+router.post("/login", (req, res, next) => {
+  passport.authenticate("local", async (err, user) => {
+
+    if (err) return res.status(401).json(err);
+
+    req.logIn(user, (err) => {
+      if (err) return res.status(402).json(err);
+      return res.json({
+        msg: "logeado correctamente",
+      });
+    });
+    
+  })(req, res, next);
+});
 
 router.post("/logout", function (req, res, next) {
   req.logout(function (err) {
@@ -58,12 +68,14 @@ router.post("/signup", postUserHandler);
 //   res.json({msg: 'el usuairo está logeado'})
 // });
 
-router.post('/userStatus', (req, res) => {
-  if(req.isAuthenticated()) return res.json({msg: 'usuario logeado'});
-  else return res.json({msg: 'usuario deslogeado'})
-})
+router.post("/userStatus", (req, res) => {
+  if (req.isAuthenticated()) return res.json({ msg: "usuario logeado" });
+  else return res.json({ msg: "usuario deslogeado" });
+});
 
-router.get('/checkUser', checkAuthenticated, (req, res) => res.send('check succes'))
+router.get("/checkUser", checkAuthenticated, (req, res) =>
+  res.send("check succes")
+);
 //ROUTES ADMIN
 
 module.exports = router;

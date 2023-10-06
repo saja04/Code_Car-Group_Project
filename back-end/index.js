@@ -7,16 +7,24 @@ const router = require("./src/Routes/index.routes.js");
 const { conn } = require("./src/db.js");
 const saveApiData = require("./saveApiData");
 const passport = require("passport");
-const LocalStrategy = require("passport-local");
-const session = require("express-session");
+const LocalStrategy = require("passport-local").Strategy;
 const { User } = require("./src/db.js");
 const saveUserData = require("./saveUserData.js");
 const crypto = require("crypto");
 require("dotenv").config();
-const { PASSPORT_SECRET } = process.env;
+const { PASSPORT_SECRET, COOKIE_NEW, COOKIE_OLD } = process.env;
+const cookieSession = require("cookie-session");
 
 const server = express();
 server.name = "server";
+
+server.use(
+  cookieSession({
+    name: "session",
+    keys: [COOKIE_NEW], // Cambia esto por una clave segura
+    maxAge: 24 * 60 * 60 * 1000, // Duración de la sesión en milisegundos (1 día en este ejemplo)
+  })
+);
 
 // server.use(express.static(path.join(__dirname, 'public')));
 
@@ -24,18 +32,6 @@ server.use(bodyParser.urlencoded({ extended: true, limit: "50mb" }));
 server.use(bodyParser.json({ limit: "50mb" }));
 server.use(cookieParser());
 
-server.use(
-  session({
-    secret: PASSPORT_SECRET,
-    resave: false,
-    saveUninitialized: true,
-    cookie: {
-      maxAge: 1000 * 60 * 60 * 24, //1 día
-    },
-  })
-);
-
-server.use(passport.authenticate("session"));
 server.use(morgan("dev"));
 
 // server.use((req, res, next) => {
@@ -68,26 +64,22 @@ server.use((req, res, next) => {
   next();
 });
 
-server.use("/", router);
-// server.use(passport.authenticate("session"));
 server.use(passport.initialize());
 server.use(passport.session());
 
 passport.use(
+  "local",
   new LocalStrategy(
-    (async (mail, password, done) => {
-      const findedUser = await User.findOne({
-        where: { user_email: mail },
-      });
-      if (!findedUser) {
-        return done(null, false, {
-          message: "Usuario y contraseña incorrectos",
-        });
-      }
+    { passReqToCallback: true },
+    async (req, username, password, done) => {
+      console.log("local strategy verify cb");
+
+      const user = await User.findOne({ where: { user_email: username } });
+      if (!user) return done('Mail no registrado');
 
       crypto.pbkdf2(
         password,
-        findedUser.dataValues.salt,
+        user.dataValues.salt,
         350,
         32,
         "sha256",
@@ -95,34 +87,64 @@ passport.use(
           if (err) return done(err);
           if (
             !crypto.timingSafeEqual(
-              findedUser.dataValues.hashed_password,
+              user.dataValues.hashed_password,
               hashedPassword
             )
           ) {
-            return done(null, false, {
-              message: "Usuario y contraseña incorrectos",
-            });
+            return done("Usuario y contraseña incorrectos");
           }
-          return done(null, findedUser.dataValues);
+
+          return done(null, user.dataValues);
         }
       );
-    })
+    }
   )
 );
 
+// passport.use(
+//   new LocalStrategy(async (mail, password, done) => {
+//     const findedUser = await User.findOne({
+//       where: { user_email: mail },
+//     });
+//     if (!findedUser) {
+//       return done(null, false, {
+//         message: "Usuario y contraseña incorrectos",
+//       });
+//     }
+
+//     crypto.pbkdf2(
+//       password,
+//       findedUser.dataValues.salt,
+//       350,
+//       32,
+//       "sha256",
+//       function (err, hashedPassword) {
+//         if (err) return done(err);
+//         if (
+//           !crypto.timingSafeEqual(
+//             findedUser.dataValues.hashed_password,
+//             hashedPassword
+//           )
+//         ) {
+//           return done(null, false, {
+//             message: "Usuario y contraseña incorrectos",
+//           });
+//         }
+//         return done(null, findedUser.dataValues);
+//       }
+//     );
+//   })
+// );
+
 passport.serializeUser((user, done) => {
-  // console.log(user);
   return done(null, user.user_id);
 });
 
-passport.deserializeUser(async(id, done) => {
-  console.log(id);
-  await User.findOne({ where: { user_id: id } })
-    .then((user) => {
-      return done(null, user);
-    })
-    .catch((err) => done(err));
+passport.deserializeUser(async (id, done) => {
+  return done(null, id);
 });
+
+server.use("/", router);
 
 // server.get("/", async (req, res) => {
 //   res.status(200).send("server running");
