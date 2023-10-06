@@ -102,7 +102,7 @@ export const registerUser = (name, email, password) => async (dispatch) => {
 export const loginUser = (username, password) => async (dispatch) => {
   try {
     const response = await axios.post(
-      "https://codecar.onrender.com/login/password",
+      "https://codecar.onrender.com/login",
       {
         username: username,
         password: password
