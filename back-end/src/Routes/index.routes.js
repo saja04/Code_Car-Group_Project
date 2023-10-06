@@ -12,6 +12,8 @@ const passport = require("passport")
 const router = Router();
 
 const checkAuthenticated = async (req, res, next) => {
+  console.log(req.session);
+  console.log(req.user);
     if(req.isAuthenticated()){
       return next()
     }
@@ -37,7 +39,7 @@ router.get("/login/failure", (req, res) => {
 });
 
 router.post(
-  "/login/password",
+  "/login",
   passport.authenticate("local", {
     successRedirect: "/login/succesful",
     failureRedirect: "/login/failure",
@@ -61,6 +63,7 @@ router.post('/userStatus', (req, res) => {
   else return res.json({msg: 'usuario deslogeado'})
 })
 
+router.get('/checkUser', checkAuthenticated, (req, res) => res.send('check succes'))
 //ROUTES ADMIN
 
 module.exports = router;
