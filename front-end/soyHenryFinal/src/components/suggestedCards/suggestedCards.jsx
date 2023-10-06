@@ -21,6 +21,7 @@ function SuggestedCards({ vehicles, showPricesInUSD }) {
       <h2 className={suggestedCardsStyles.title}>Sugerencias</h2>
       <Carousel
         showArrows={true}
+        showThumbs={false}
         showStatus={false}
         showIndicators={false}
         infiniteLoop={false}
