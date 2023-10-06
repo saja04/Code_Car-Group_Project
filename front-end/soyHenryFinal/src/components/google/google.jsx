@@ -1,9 +1,9 @@
 import React from "react";
-import style from "./google.module.css"; // Asegúrate de importar el archivo CSS
+import style from "./google.module.css"; 
 import google from "../../img/google.png";
 
 function Google() {
-  return ( // Agrega el retorno de JSX aquí
+  return ( 
     <button className={style.googleButton} type="button">
       Continuar con Google
       <img
