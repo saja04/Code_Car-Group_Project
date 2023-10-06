@@ -23,14 +23,15 @@ server.name = "server";
 server.use(bodyParser.urlencoded({ extended: true, limit: "50mb" }));
 server.use(bodyParser.json({ limit: "50mb" }));
 server.use(cookieParser());
-server.use(express.urlencoded({ extended: true }));
 
 server.use(
   session({
     secret: PASSPORT_SECRET,
     resave: false,
-    saveUninitialized: false,
-    // cookie: { secure: true },
+    saveUninitialized: true,
+    cookie: {
+      maxAge: 1000 * 60 * 60 * 24, //1 día
+    },
   })
 );
 
@@ -74,7 +75,7 @@ server.use(passport.session());
 
 passport.use(
   new LocalStrategy(
-    (verify = async (mail, password, done) => {
+    (async (mail, password, done) => {
       const findedUser = await User.findOne({
         where: { user_email: mail },
       });
@@ -109,20 +110,25 @@ passport.use(
   )
 );
 
-passport.serializeUser(function (user, done) {
+passport.serializeUser((user, done) => {
   // console.log(user);
-  return done(null, { id: user.user_id });
+  return done(null, user.user_id);
 });
 
-passport.deserializeUser(function (id, done) {
-  return done(null, id);
+passport.deserializeUser(async(id, done) => {
+  console.log(id);
+  await User.findOne({ where: { user_id: id } })
+    .then((user) => {
+      return done(null, user);
+    })
+    .catch((err) => done(err));
 });
 
 // server.get("/", async (req, res) => {
 //   res.status(200).send("server running");
 // });
 
-conn.sync({ force: true }).then(async () => {
+conn.sync({ force: false }).then(async () => {
   console.log("db connected");
   await saveApiData();
   await saveUserData();
