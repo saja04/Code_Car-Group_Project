@@ -31,7 +31,11 @@
 .buttonLogin {
   border: none;
   cursor: pointer;
-  background-color: #e9eae2;
+/*   background-color: #e9eae2; */
+ background-color:white; 
+}
+.buttonLogin:hover {
+opacity: 0.8;
 }
 
 .register {
