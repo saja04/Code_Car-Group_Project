@@ -135,10 +135,12 @@ passport.use(
 // );
 
 passport.serializeUser((user, done) => {
+  console.log(user);
   return done(null, user.user_id);
 });
 
 passport.deserializeUser(async (id, done) => {
+  console.log(id);
   const user = await User.findOne({ where: { user_id: id } });
   if (user) {
     return done(null, {
@@ -146,8 +148,7 @@ passport.deserializeUser(async (id, done) => {
       name: user.dataValues.user_name,
     });
   } else {
-    return done(new Error("No user con ese id"));
-  
+    return done("No user con ese id");
   }
 });
 

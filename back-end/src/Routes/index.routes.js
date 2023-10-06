@@ -25,7 +25,6 @@ const checkAuthenticated = async (req, res, next) => {
 router.post("/carsPost", checkAuthenticated, postCarsHandler);
 router.post("/cars", getCarsHandler);
 router.post("/users", getAllUsersHandler);
-router.post("/users", getAllUsersHandler);
 router.post("/pedido/", checkAuthenticated, buyCarHandler);
 router.get("/carsDelete/:id", checkAuthenticated, deleteCarsHandler);
 router.get("/carsName/", getCarsByNameHandler);
@@ -41,8 +40,7 @@ router.get("/cars/:id", getCarsByIdHandler);
 
 router.post("/login", (req, res, next) => {
   passport.authenticate("local", async (err, user) => {
-    if (err) return res.status(401).json(err);
-
+    // if (err) return res.status(401).json(err);
     req.logIn(user, (err) => {
       if (err) return res.status(402).json(err);
       return res.json({
@@ -64,10 +62,10 @@ router.post("/signup", postUserHandler);
 //   res.json({msg: 'el usuairo está logeado'})
 // });
 
-router.post("/userStatus", (req, res) => {
-  if (req.isAuthenticated()) return res.json({ msg: "usuario logeado" });
-  else return res.json({ msg: "usuario deslogeado" });
-});
+// router.post("/userStatus", (req, res) => {
+//   if (req.isAuthenticated()) return res.json({ msg: "usuario logeado" });
+//   else return res.json({ msg: "usuario deslogeado" });
+// });
 
 router.get("/checkUser", checkAuthenticated, (req, res) =>
   res.send("check succes")
