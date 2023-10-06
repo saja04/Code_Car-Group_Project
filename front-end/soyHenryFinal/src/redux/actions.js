@@ -91,6 +91,7 @@ export const registerUser = (name, email, password) => async (dispatch) => {
       type: "REGISTER_USER",
       payload: response.data.user,
     });
+    alert("¡Se ha registrado exitosamente!");
   } catch (error) {
     dispatch({
       type: "REGISTER_FAILURE",
@@ -113,6 +114,7 @@ export const loginUser = (username, password) => async (dispatch) => {
       type: LOGIN_USER,
       payload: response.data.user,
     });
+    alert("¡Se ha logeado exitosamente!");
   } catch (error) {
     
     console.error("Error en la solicitud:", error);
