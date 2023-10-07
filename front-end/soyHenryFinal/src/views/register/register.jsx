@@ -1,11 +1,12 @@
 import style from "./register.module.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { registerUser } from "../../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
 import Google from "../../components/google/google";
 
 function Register() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const registerError = useSelector((state) => state.registrationError);
 
   const handleRegister = async (e) => {
@@ -15,7 +16,7 @@ function Register() {
     const email = document.getElementById("email").value;
     const password = document.getElementById("contraseña").value;
 
-    dispatch(registerUser(name, email, password));
+    dispatch(registerUser(name, email, password, navigate));
 
   };
 

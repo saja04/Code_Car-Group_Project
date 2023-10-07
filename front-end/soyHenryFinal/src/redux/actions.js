@@ -1,5 +1,6 @@
 import axios from "axios";
 
+
 export const GET_CARS = "GET_CARS";
 export const GET_FILTERS = "GET_FILTERS";
 export const GET_CAR_BY_ID = "GET_CAR_BY_ID";
@@ -78,7 +79,7 @@ export const getCarByName = (modelo) => {
   }
 }
 
-export const registerUser = (name, email, password) => async (dispatch) => {
+export const registerUser = (name, email, password, navigate) => async (dispatch) => {
   try {
 
     const response = await axios.post(
@@ -92,6 +93,7 @@ export const registerUser = (name, email, password) => async (dispatch) => {
       payload: response.data.user,
     });
     alert("¡Se ha registrado exitosamente!");
+    navigate("/login");
   } catch (error) {
     dispatch({
       type: "REGISTER_FAILURE",
@@ -100,7 +102,7 @@ export const registerUser = (name, email, password) => async (dispatch) => {
   }
 };
 
-export const loginUser = (username, password) => async (dispatch) => {
+export const loginUser = (username, password, navigate) => async (dispatch) => {
   try {
     const response = await axios.post(
       "https://codecar.onrender.com/login",
@@ -115,6 +117,7 @@ export const loginUser = (username, password) => async (dispatch) => {
       payload: response.data.user,
     });
     alert("¡Se ha logeado exitosamente!");
+    navigate("/");
   } catch (error) {
     
     console.error("Error en la solicitud:", error);

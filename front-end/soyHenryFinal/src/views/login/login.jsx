@@ -1,5 +1,5 @@
 import style from "./login.module.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Google from "../../components/google/google";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -11,13 +11,14 @@ function Login() {
   const [password, setPassword] = useState("");
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const loginError = useSelector((state) => state.loginError);
 
   const handleLogin = (e) => {
     console.log(username, password)
     e.preventDefault();
 
-    dispatch(loginUser(username, password));
+    dispatch(loginUser(username, password, navigate));
   };
   return (
     <div className={style.container}>
