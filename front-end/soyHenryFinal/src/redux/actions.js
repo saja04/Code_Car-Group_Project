@@ -95,10 +95,20 @@ export const registerUser = (name, email, password, navigate) => async (dispatch
     alert("¡Se ha registrado exitosamente!");
     navigate("/login");
   } catch (error) {
-    dispatch({
-      type: "REGISTER_FAILURE",
-      payload: error,
-    });
+    if (error.response && error.response.status === 401) {
+
+      dispatch({
+        type: "REGISTER_FAILURE",
+        payload: "El correo electrónico ya está en uso. Por favor, elige otro correo electrónico.",
+      });
+      alert("El correo electrónico ya está en uso. Por favor, elige otro correo electrónico.");
+    } else {
+      dispatch({
+        type: "REGISTER_FAILURE",
+        payload: "Error al registrar.",
+      });
+      alert("Error al registrar. Por favor, inténtalo de nuevo más tarde.");
+    }
   }
 };
 
@@ -120,11 +130,11 @@ export const loginUser = (username, password, navigate) => async (dispatch) => {
     navigate("/");
   } catch (error) {
     
-    console.error("Error en la solicitud:", error);
     dispatch({
       type: LOGIN_USER_FAILURE,
       payload: "Error en la solicitud", 
     });
+    alert("El email o contraseña es incorrecto.");
   }
 };
 

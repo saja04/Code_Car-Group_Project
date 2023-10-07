@@ -14,8 +14,13 @@ function Login() {
   const navigate = useNavigate();
   const loginError = useSelector((state) => state.loginError);
 
+  const [showPassword, setShowPassword] = useState(false); 
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+
   const handleLogin = (e) => {
-    console.log(username, password)
     e.preventDefault();
 
     dispatch(loginUser(username, password, navigate));
@@ -37,13 +42,20 @@ function Login() {
         </div>
         <label className={style.loginContent}>
           Contraseña:
+          <div> 
           <input
-            type="password"
+            type={showPassword ? "text" : "password"}
             id="contraseña"
             value={password}
             required
             onChange={(e) => setPassword(e.target.value)}
-          />
+          /> <label
+          className={style.togglePasswordButton}
+          onClick={togglePasswordVisibility}
+        >
+          👁️
+        </label>
+        </div>
         </label>
         <div className={style.buttons}>
           <button className={style.buttonLogin} type="submit">
@@ -54,7 +66,7 @@ function Login() {
             Register
           </Link>
         </div>
-        {loginError && <p className={style.error}>Error al entrar.</p>}
+       
         <Google />
       </form>
     </div>
