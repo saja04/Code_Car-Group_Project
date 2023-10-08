@@ -13,6 +13,7 @@ dist-ssr
 .env
 *.local
 demo.js
+id_rsa_priv.pem
 
 # Editor directories and files
 .vscode/*

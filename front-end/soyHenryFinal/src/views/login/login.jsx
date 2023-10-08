@@ -3,18 +3,19 @@ import { Link } from "react-router-dom";
 import Google from "../../components/google/google";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { loginUser } from "../../redux/actions"; 
+import { loginUser } from "../../redux/actions";
 
-
-function Login() {
+async function Login() {
   const [username, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+
 
   const dispatch = useDispatch();
   const loginError = useSelector((state) => state.loginError);
 
   const handleLogin = (e) => {
-    console.log(username, password)
+    console.log(username, password);
     e.preventDefault();
 
     dispatch(loginUser(username, password));
