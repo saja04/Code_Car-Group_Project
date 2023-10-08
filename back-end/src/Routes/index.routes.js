@@ -57,7 +57,6 @@ const userVerification = async (req, res, next) => {
 const checkJwt = auth({
   audience: "https://codecar.onrender.com",
   issuerBaseURL: "https://dev-mp4haipy0yoq4dta.us.auth0.com/",
-  tokenSigningAlg: "RS256",
 });
 
 router.get("/checking1", (req, res) => {
