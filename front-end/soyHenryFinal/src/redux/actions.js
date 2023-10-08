@@ -63,6 +63,21 @@ export const deleteCar = (id) => {
   }
 };
 
+export const deleteCar = (id) => async (dispatch) => {
+  try {
+    const response = await axios.put(`https://codecar.onrender.com/carsDelete/${id}`);
+    const data = response.data;
+
+    dispatch({
+      type: DELETE_CAR,
+      payload: data,
+    });
+  } catch (error) {
+    // Manejo de errores si es necesario
+    console.error("Error al alternar el estado de eliminación del automóvil:", error);
+  }
+};
+
 export const getCarByName = (modelo) => {
   return async(dispatch) => {
     const response = await axios(`https://codecar.onrender.com/carsName/?modelo=${modelo}`);
