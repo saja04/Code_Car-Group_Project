@@ -66,7 +66,23 @@ const rootReducer = (state = initialState, action) => {
         user: action.payload,
         loginError: null,
       };
+    case DELETE_CAR:
+      // Encuentra el automóvil correspondiente en el estado actual
+        const updatedAllCars = state.allCars.map((car) => {
+        if (car.id === action.payload.id) {
+          // Alterna el valor de 'deleted'
+          return {
+            ...car,
+            deleted: !car.deleted,
+          };
+        }
+        return car;
+      });
 
+      return {
+        ...state,
+        allCars: updatedAllCars,
+      };
     case LOGIN_USER_FAILURE:
       return {
         ...state,
