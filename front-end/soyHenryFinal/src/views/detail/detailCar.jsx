@@ -1,22 +1,33 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
+// import { useSelector, useDispatch } from "react-redux";
 import carDetailPageStyles from "./detailCar.module.css";
 import Lightbox from "../../components/lightbox/lightbox";
 import PriceToggle from "../../components/priceToggle/priceToggle";
-import { getCarById } from "../../redux/actions";
+// import { getCarById } from "../../redux/actions";
+import axios from "axios";
+// import { use } from "../../../../../back-end/src/Routes/index.routes";
 
 function CarDetailPage() {
   const { id } = useParams();
-  const dispatch = useDispatch();
-  const singleCar = useSelector((state) => state.singleCar);
+  // const dispatch = useDispatch();
+  // const singleCar = useSelector((state) => state.singleCar);
+  const [singleCar, setSingleCar] = useState(null)
   const [isLightboxOpen, setIsLightboxOpen] = useState(false);
   const [lightboxImageUrl, setLightboxImageUrl] = useState("");
   const [showPricesInUSD, setShowPricesInUSD] = useState(true);
 
+  const getById = async (id) => {
+    const response = await axios(`https://codecar.onrender.com/cars/${id}`);
+    const data = response.data;
+    console.log(data);
+    return setSingleCar(data)
+  };
+
   useEffect(() => {
-    dispatch(getCarById(id));
-  }, [dispatch, id]);
+    getById(id)
+    console.log(singleCar);
+  }, []);
 
   const openLightbox = (imageUrl) => {
     setLightboxImageUrl(imageUrl);

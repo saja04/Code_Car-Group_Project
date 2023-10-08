@@ -2,10 +2,8 @@ const getCarsById = require("../Controllers/getCarsById");
 
 const getCarsByIdHandler = async (req, res) => {
   try {
-    const { id } = req.params;
-    const idParse = id;
 
-    const response = await getCarsById(idParse);
+    const response = await getCarsById(req);
     res.status(236).json(response);
     
   } catch (error) {

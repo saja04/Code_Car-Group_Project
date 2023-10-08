@@ -4,59 +4,40 @@ const getCarsHandler = require("../Handlers/getCarsHandler");
 const deleteCarsHandler = require("../Handlers/deleteCarsHandler");
 const getCarsByNameHandler = require("../Handlers/getCarsByNameHandler");
 const getCarsByIdHandler = require("../Handlers/getCarsByIdHandler");
-const getAllUsersHandler = require("../Handlers/getAllUsersHandler")
-const postUserHandler = require("../Handlers/postUserHandler")
-const buyCarHandler = require("../Handlers/buyCarHandler")
-const passport = require("passport")
-
+const getAllUsersHandler = require("../Handlers/getAllUsersHandler");
+const buyCarHandler = require("../Handlers/buyCarHandler");
 const router = Router();
+require("dotenv").config();
+const {checkJwt, userVerification, checkScopes} = require('../Authentication/auth0')
+
+
 
 //ROUTES CARS
 router.post("/carsPost", postCarsHandler);
 router.post("/cars", getCarsHandler);
-router.post("/users", getAllUsersHandler)
-router.post("/pedido/", buyCarHandler)
+router.post("/users", getAllUsersHandler);
+router.post("/pedido/", buyCarHandler);
 router.get("/carsDelete/:id", deleteCarsHandler);
 router.get("/carsName/", getCarsByNameHandler);
 router.get("/cars/:id", getCarsByIdHandler);
 
-
 //ROUTES USER
-router.post("/login/succesful", (req, res) => {
-  res.json({msg: "iniciaste sesion correctamente"});
+
+router.get("/checking1", (req, res) => {
+  return res.json({
+    msg: "este es un mensaje no protejido, cualquiera puede acceder",
+  });
 });
-router.post("/login/failure", (req, res) => {
-  res.json({msg: "login fallido!"});
+router.get("/protected", checkJwt, userVerification, async (req, res) => {
+  return res.json({
+    msg: "este mensaje esta protegido y solo autenticados pueden verlo",
+  });
 });
-
-router.post(
-  "/login/password",
-  passport.authenticate("local", {
-    successRedirect: "/login/succesful",
-    failureRedirect: "/login/failure",
-  })
-);
-
-router.post('/logout', function(req, res, next){
-  req.logout(function(err){
-    if(err) return next(err);
-    res.status(201).json({msg: 'logout succesful'});
-  })
+router.get("/proteced/role", checkJwt, checkScopes, (req, res) => {
+  return res.json({
+    msg: "this route haves authentication AND role management",
+  });
 });
-router.post('/signup', postUserHandler)
-
-router.get('/', async(req, res, next) => {
-  if(req.isAuthenticated()) return next();
-  res.redirect('/login/password')
-}, (req, res) => {
-  res.json({msg: 'user loged in', })
-})
-
-
 //ROUTES ADMIN
-
-
-
-
 
 module.exports = router;

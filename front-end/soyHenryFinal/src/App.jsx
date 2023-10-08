@@ -17,6 +17,7 @@ import Dashboard from "./views/dashboard/dashboard";
 import Delete from "./views/delete/delete";
 import Register from "./views/register/register";
 import Login from "./views/login/login";
+import LogInAuth0 from "./views/auth0-login/auth0login";
 
 function MainApp() {
   return (
@@ -24,6 +25,7 @@ function MainApp() {
       <div className="App">
         <NavBar />
         <Routes>
+          <Route path="/auth0/login" element={<LogInAuth0 />} />
           <Route path="/" element={<Home />} />
           <Route path="/tienda" element={<Shop />} />
           <Route path="/contacto" element={<Contact />} />

@@ -18,6 +18,7 @@ module.exports = (sequelize) => {
     car_pedido_id: {
       type: DataTypes.UUID,
       allowNull: false
-    }
+    },
+    
   });
 };

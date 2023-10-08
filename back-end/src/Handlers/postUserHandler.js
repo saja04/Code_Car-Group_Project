@@ -20,7 +20,7 @@ const postUserHandler = async (req, res, next) => {
         id: response.user_id,
         username: name,
       };
-      return res.json({msg: 'user created succesfully', user})
+      return res.status(202).json({msg: 'user created succesfully', user})
     }
     return;
   } catch (error) {

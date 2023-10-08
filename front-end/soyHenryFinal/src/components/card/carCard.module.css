@@ -1,20 +1,7 @@
 .conteiner {
-  border: 1px solid;
   padding: 10px;
   margin: 10px;
-  border-radius: 5px;
   width: 320px;
-}
-
-.carCard {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.conteiner h2 {
-  font-size: 1.5rem;
-  margin-bottom: 10px;
 }
 
 .conteiner img {
@@ -27,15 +14,45 @@
   font-size: 1rem;
 }
 
-.conteiner button {
-  background-color: #007bff;
-  color: white;
-  border: none;
-  margin: 0px 4px;
-  padding: 5px 10px;
-  cursor: pointer;
+.carCard {
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
 }
 
-.conteiner button:hover {
-  background-color: #0056b3;
+.info {
+  color: gray;
+  margin-left: 20px;
+}
+
+.title {
+  color: black;
+}
+
+.contPrice {
+  display: flex;
+  align-items: center;
+}
+
+.contPrice .price {
+  color: gray;
+  margin-right: 4px;
+  font-size: 12px;
+}
+
+.contPrice .arsUsd {
+  font-size: 20px;
+  font-weight: 600;
+  color: blue;
+}
+
+.links {
+  text-decoration: none;
+}
+
+.carCard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease;
 }

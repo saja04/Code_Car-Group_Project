@@ -16,13 +16,10 @@ module.exports = (sequelize) => {
       allowNull: false,
       unique: true,
     },
-    hashed_password: {
-      type: DataTypes.BLOB,
-      allowNull: false,
-    },
-    salt: {
-      type: DataTypes.BLOB,
-      allowNull: false,
+    user_admin: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
+      allowNull: true
     },
   });
 };
