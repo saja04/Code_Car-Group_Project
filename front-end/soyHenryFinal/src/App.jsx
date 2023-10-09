@@ -37,7 +37,7 @@ function MainApp() {
           <Route
             path="/dashboard"
             element={
-              isAuthenticated && user && user.isAdmin ? (
+              isAuthenticated && user && user.email === 'elgilazo9123@gmail.com' ? (
                 <Dashboard />
               ) : (
                 <Navigate to="/" />

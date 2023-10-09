@@ -52,7 +52,6 @@ const LogInAuth0 = () => {
           {isAuthenticated ? (
             <div>
               <button onClick={logout}>Log out</button>
-
               <p>{JSON.stringify(user, null, 2)}</p>
             </div>
           ) : null}
