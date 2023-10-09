@@ -1,9 +1,9 @@
-const Review = require("../Models/Review");
-const reviewSchema = require("../Models/Review");
-const usersSchema = require("../Models/Users");
-const Users = require("../Models/Users");
-const Cars = require("../Models/Cars");
-const carsSchema = require("../Models/Cars");
+const Review = require("../db.js");
+const reviewSchema = require("../db.js");
+const usersSchema = require("../db.js");
+const Users = require("../db.js");
+const Cars = require("../db.js");
+const carsSchema = require("../db.js");
 
 const postReview = async (req, res) => {
   const reviewR = reviewSchema(req.body);
