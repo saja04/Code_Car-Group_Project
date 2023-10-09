@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-// import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import carDetailPageStyles from "./detailCar.module.css";
 import Lightbox from "../../components/lightbox/lightbox";
 import PriceToggle from "../../components/priceToggle/priceToggle";
-// import { getCarById } from "../../redux/actions";
+
 import axios from "axios";
-// import { use } from "../../../../../back-end/src/Routes/index.routes";
+
 
 function CarDetailPage() {
   const { id } = useParams();
@@ -17,8 +17,11 @@ function CarDetailPage() {
   const [lightboxImageUrl, setLightboxImageUrl] = useState("");
   const [showPricesInUSD, setShowPricesInUSD] = useState(true);
 
+
+  const divisa = localStorage.getItem('divisa');
+
   const getById = async (id) => {
-    const response = await axios(`https://codecar.onrender.com/cars/${id}`);
+    const response = await axios.post(`http://localhost:3001/carsId/`, {"id": id,"divisa": divisa});
     const data = response.data;
     console.log(data);
     return setSingleCar(data)
@@ -26,8 +29,7 @@ function CarDetailPage() {
 
   useEffect(() => {
     getById(id)
-    console.log(singleCar);
-  }, []);
+  }, [divisa]);
 
   const openLightbox = (imageUrl) => {
     setLightboxImageUrl(imageUrl);
@@ -58,10 +60,10 @@ function CarDetailPage() {
           />
         </div>
         <div className={carDetailPageStyles.detailsContainer}>
-          <PriceToggle
+          {/* <PriceToggle
             showPricesInUSD={showPricesInUSD}
             onToggle={togglePrices}
-          />
+          /> */}
           <p>
             {singleCar.car_marca} {singleCar.car_modelo}
           </p>
@@ -70,7 +72,7 @@ function CarDetailPage() {
           <p>Motor: {singleCar.car_tipo_de_motor}</p>
           <p>{singleCar.car_condicion}</p>
           <p>
-            {showPricesInUSD
+            {divisa === "car_precio_ars"
               ? `USD$${singleCar.car_precio_usd}`
               : `ARS$${singleCar.car_precio_ars}`}
           </p>

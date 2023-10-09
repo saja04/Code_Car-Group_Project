@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import vehicles from "../../../utils/utils.json";
 import style from "./filter.module.css";
 import { getFilters } from "../../redux/actions";
@@ -21,6 +22,8 @@ function Filter({ getFilters }) {
     ...new Set(vehicles.vehicles.map((vehicle) => vehicle.condicion)),
   ];
 
+  const divisa = localStorage.getItem('divisa');
+
   const [marcasSeleccionadas, setMarcasSeleccionadas] = useState([]);
   const [añosSeleccionados, setAñosSeleccionados] = useState([]);
   const [tiposSeleccionados, setTiposSeleccionados] = useState([]);
@@ -32,12 +35,11 @@ function Filter({ getFilters }) {
     await setMarcasSeleccionadas(value);
 
     if (añosSeleccionados[0]) {
-      console.log(value);
-      console.log(añosSeleccionados);
       await getFilters({
         filter: { car_marca: value, car_año: añosSeleccionados },
+        precio: divisa
       });
-    } else await getFilters({ filter: { car_marca: value } });
+    } else await getFilters({ filter: { car_marca: value }, precio: divisa });
   };
 
   const handleAñoChange = async (event) => {
@@ -47,32 +49,32 @@ function Filter({ getFilters }) {
     console.log(marcasSeleccionadas);
     if (marcasSeleccionadas[0]) {
       await getFilters({
-        filter: { car_marca: marcasSeleccionadas, car_año: value },
+        filter: { car_marca: marcasSeleccionadas, car_año: value }, precio: divisa
       });
-    } else await getFilters({ filter: { car_año: value } });
+    } else await getFilters({ filter: { car_año: value }, precio: divisa });
   };
 
-  const handleTipoChange = (event) => {
-    const { value } = event.target;
-    if (tiposSeleccionados.includes(value)) {
-      setTiposSeleccionados(
-        tiposSeleccionados.filter((tipo) => tipo !== value)
-      );
-    } else {
-      setTiposSeleccionados([...tiposSeleccionados, value]);
-    }
-  };
+  // const handleTipoChange = (event) => {
+  //   const { value } = event.target;
+  //   if (tiposSeleccionados.includes(value)) {
+  //     setTiposSeleccionados(
+  //       tiposSeleccionados.filter((tipo) => tipo !== value)
+  //     );
+  //   } else {
+  //     setTiposSeleccionados([...tiposSeleccionados, value]);
+  //   }
+  // };
 
-  const handleCondicionChange = (event) => {
-    const { value } = event.target;
-    if (condicionSeleccionados.includes(value)) {
-      setCondicionSeleccionados(
-        condicionSeleccionados.filter((tipo) => tipo !== value)
-      );
-    } else {
-      setCondicionSeleccionados([...condicionSeleccionados, value]);
-    }
-  };
+  // const handleCondicionChange = (event) => {
+  //   const { value } = event.target;
+  //   if (condicionSeleccionados.includes(value)) {
+  //     setCondicionSeleccionados(
+  //       condicionSeleccionados.filter((tipo) => tipo !== value)
+  //     );
+  //   } else {
+  //     setCondicionSeleccionados([...condicionSeleccionados, value]);
+  //   }
+  // };
 
   const handlePrecioChange = async (event) => {
     const { value } = event.target;
@@ -83,9 +85,10 @@ function Filter({ getFilters }) {
         await getFilters({
           filter: {
             car_año: añosSeleccionados,
-            car_marca: marcasSeleccionadas,
+            car_marca: marcasSeleccionadas
           },
-          order: { value: "car_precio_usd", sequence: "DESC" },
+          order: { value: "car_precio_usd", sequence: "DESC" }, 
+          precio: divisa 
         });
       } else if (value === "menor") {
         await getFilters({
@@ -94,6 +97,7 @@ function Filter({ getFilters }) {
             car_marca: marcasSeleccionadas,
           },
           order: { value: "car_precio_usd", sequence: "ASC" },
+           precio: divisa 
         });
       }
     } else if (marcasSeleccionadas[0]) {
@@ -101,11 +105,13 @@ function Filter({ getFilters }) {
         await getFilters({
           filter: { car_marca: marcasSeleccionadas },
           order: { value: "car_precio_usd", sequence: "DESC" },
+          precio: divisa 
         });
       } else if (value === "menor") {
         await getFilters({
           filter: { car_marca: marcasSeleccionadas },
           order: { value: "car_precio_usd", sequence: "ASC" },
+          precio: divisa 
         });
       }
     } else if (añosSeleccionados[0]) {
@@ -113,29 +119,44 @@ function Filter({ getFilters }) {
         await getFilters({
           filter: { car_año: añosSeleccionados },
           order: { value: "car_precio_usd", sequence: "DESC" },
+          precio: divisa
         });
       } else if (value === "menor") {
         await getFilters({
           filter: { car_año: añosSeleccionados },
           order: { value: "car_precio_usd", sequence: "ASC" },
+          precio: divisa 
         });
       }
     } else {
       if (value === "mayor") {
         await getFilters({
           order: { value: "car_precio_usd", sequence: "DESC" },
+          precio: divisa 
         });
       } else if (value === "menor") {
         await getFilters({
           order: { value: "car_precio_usd", sequence: "ASC" },
+          precio: divisa 
         });
       }
     }
   };
 
+  const resetHandler = () => {
+    setMarcasSeleccionadas([]);
+    setAñosSeleccionados([]);
+    setCondicionSeleccionados([]);
+    setFiltroPrecio(null);
+    return getFilters({"precio": divisa})
+
+
+  }
+
   return (
     <div className={style.container}>
       <h2>Filtros</h2>
+      <button onClick={resetHandler}>RESET</button>
       <form>
         <div className={style.marcas}>
           <h3>Marcas</h3>

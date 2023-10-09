@@ -1,15 +1,10 @@
 import {
+  CHANGE_CURRENCY,
   DELETE_CAR,
   GET_CARS,
   GET_CAR_BY_ID,
   GET_CAR_BY_NAME,
-} from "./actions";
-import { GET_FILTERS } from "./actions";
-import {
-  REGISTER_USER,
-  REGISTER_USER_FAILURE,
-  LOGIN_USER,
-  LOGIN_USER_FAILURE,
+  GET_FILTERS,
 } from "./actions";
 
 const initialState = {
@@ -48,6 +43,11 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         allCars: action.payload,
+      };
+    case CHANGE_CURRENCY:
+      return {
+        ...state,
+        divisa: action.payload,
       };
 
     default:

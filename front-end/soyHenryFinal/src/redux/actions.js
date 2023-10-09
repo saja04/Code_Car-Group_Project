@@ -10,10 +10,11 @@ export const REGISTER_USER = "REGISTER_USER"
 export const REGISTER_USER_FAILURE = "REGISTER_USER_FAILURE"
 export const LOGIN_USER = "LOGIN_USER";
 export const LOGIN_USER_FAILURE = "LOGIN_USER_FAILURE";
+export const CHANGE_CURRENCY = "CHANGE_CURRENCY"
 
 export const getCars = (divisa) => {
   return async (dispatch) => {
-    const response = await axios.post("https://codecar.onrender.com/cars", {'order': {'value':'car_marca','sequence': 'ASC'}});
+    const response = await axios.post("https://codecar.onrender.com/cars", {'order': {'value':'car_marca','sequence': 'ASC'}, "precio": divisa});
     console.log(response.data);
     const data = response.data;
 
@@ -79,3 +80,11 @@ export const getCarByName = (modelo) => {
   }
 }
 
+export const changeCurrency = (divisa) => {
+  return async(dispatch) => {
+    return dispatch({
+      type: CHANGE_CURRENCY,
+      payload: divisa
+    })
+  }
+}
