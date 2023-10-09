@@ -9,6 +9,8 @@
   height: 110px;
   gap: 10px;
   text-decoration: none;
+  width: 96%;
+  margin: auto;
 }
 
 .logo {
@@ -32,5 +34,5 @@
 .linksContent {
   display: flex;
   gap: 30px;
-  width: 30%;
+  width: 34%;
 }

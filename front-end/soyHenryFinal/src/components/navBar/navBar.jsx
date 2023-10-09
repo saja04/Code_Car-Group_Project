@@ -9,10 +9,9 @@ import DashboardButton from "../dashboardButton/dahsboardButton";
 import LoginLinks from "../loginLinks/loginLinks";
 import { changeCurrency } from "../../redux/actions";
 
-
 function NavBar() {
   const dispatch = useDispatch();
-  const divisa = useSelector(state => state.divisa);
+  const divisa = useSelector((state) => state.divisa);
 
   // useEffect(() => {
   //   dispatch(changeCurrency());
@@ -36,9 +35,7 @@ function NavBar() {
         Nosotros
       </Link> */}
         </div>
-        <div className={style.searchBar}>
-          <SearchBar />
-        </div>
+        <SearchBar />
         <PriceToggle
           divisa={divisa}
           changeCurrency={changeCurrency}
@@ -46,7 +43,6 @@ function NavBar() {
         />
         <DashboardButton />
         <LoginLinks />
-        
       </div>
     </div>
   );

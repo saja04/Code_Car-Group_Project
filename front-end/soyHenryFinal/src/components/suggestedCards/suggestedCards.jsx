@@ -24,9 +24,9 @@ function SuggestedCards({ vehicles, showPricesInUSD }) {
         showThumbs={false}
         showStatus={false}
         showIndicators={false}
-        infiniteLoop={false}
+        infiniteLoop={true}
         centerMode={true}
-        centerSlidePercentage={33.33}
+        centerSlidePercentage={33}
         useKeyboardArrows={true}
       >
         {vehiclesToShow.map((vehicle) => (
