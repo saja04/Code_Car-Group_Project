@@ -21,7 +21,7 @@ function CarDetailPage() {
   const divisa = localStorage.getItem('divisa');
 
   const getById = async (id) => {
-    const response = await axios.post(`http://localhost:3001/carsId/`, {"id": id,"divisa": divisa});
+    const response = await axios.post(`https://codecar.onrender.com/carsId/`, {"id": id,"divisa": divisa});
     const data = response.data;
     console.log(data);
     return setSingleCar(data)
