@@ -12,7 +12,7 @@ function CarDetailPage() {
   const { id } = useParams();
   // const dispatch = useDispatch();
   // const singleCar = useSelector((state) => state.singleCar);
-  const [singleCar, setSingleCar] = useState(null)
+  const [singleCar, setSingleCar] = useState(null);
   const [isLightboxOpen, setIsLightboxOpen] = useState(false);
   const [lightboxImageUrl, setLightboxImageUrl] = useState("");
   const [showPricesInUSD, setShowPricesInUSD] = useState(true);
@@ -21,11 +21,11 @@ function CarDetailPage() {
     const response = await axios(`https://codecar.onrender.com/cars/${id}`);
     const data = response.data;
     console.log(data);
-    return setSingleCar(data)
+    return setSingleCar(data);
   };
 
   useEffect(() => {
-    getById(id)
+    getById(id);
     console.log(singleCar);
   }, []);
 
@@ -74,10 +74,7 @@ function CarDetailPage() {
               ? `USD$${singleCar.car_precio_usd}`
               : `ARS$${singleCar.car_precio_ars}`}
           </p>
-          <button className={carDetailPageStyles.addToCart}>
-            Agregar al Carrito
-          </button>
-          <button className={carDetailPageStyles.buyNow}>Comprar Ahora</button>
+          <button className={carDetailPageStyles.buyNow}>Comprar</button>
         </div>
       </div>
       {isLightboxOpen && (

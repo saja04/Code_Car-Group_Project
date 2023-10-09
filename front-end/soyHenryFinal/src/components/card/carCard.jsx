@@ -28,9 +28,6 @@ function CarCard({ vehicle, showPricesInUSD }) {
                   : `ARS$${vehicle.car_precio_ars}`}
               </p>
             </div>
-            {/*         <div>
-          <Link to={`/detail/${vehicle.car_id}`}></Link>
-        </div> */}
           </div>
         </div>
       </Link>
