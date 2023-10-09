@@ -2,7 +2,7 @@ import React from "react";
 import carCardStyles from "./carCard.module.css";
 import { Link } from "react-router-dom";
 
-function CarCard({ vehicle, showPricesInUSD }) {
+function CarCard({ vehicle }) {
   return (
     <div className={carCardStyles.conteiner}>
       <Link to={`/detail/${vehicle.car_id}`} className={carCardStyles.links}>
@@ -23,14 +23,11 @@ function CarCard({ vehicle, showPricesInUSD }) {
             <div className={carCardStyles.contPrice}>
               <p className={carCardStyles.price}>Precio </p>
               <p className={carCardStyles.arsUsd}>
-                {showPricesInUSD
+                {vehicle.car_precio_usd
                   ? `USD$${vehicle.car_precio_usd}`
                   : `ARS$${vehicle.car_precio_ars}`}
               </p>
             </div>
-            {/*         <div>
-          <Link to={`/detail/${vehicle.car_id}`}></Link>
-        </div> */}
           </div>
         </div>
       </Link>

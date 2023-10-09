@@ -19,7 +19,7 @@ router.post("/users", getAllUsersHandler);
 router.post("/pedido/", buyCarHandler);
 router.get("/carsDelete/:id", deleteCarsHandler);
 router.get("/carsName/", getCarsByNameHandler);
-router.get("/cars/:id", getCarsByIdHandler);
+router.post("/carsId/", getCarsByIdHandler);
 
 //ROUTES USER
 

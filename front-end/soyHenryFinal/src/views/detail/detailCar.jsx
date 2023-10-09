@@ -1,33 +1,36 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-// import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import carDetailPageStyles from "./detailCar.module.css";
 import Lightbox from "../../components/lightbox/lightbox";
 import PriceToggle from "../../components/priceToggle/priceToggle";
-// import { getCarById } from "../../redux/actions";
+
 import axios from "axios";
-// import { use } from "../../../../../back-end/src/Routes/index.routes";
 
 function CarDetailPage() {
   const { id } = useParams();
   // const dispatch = useDispatch();
   // const singleCar = useSelector((state) => state.singleCar);
-  const [singleCar, setSingleCar] = useState(null)
+  const [singleCar, setSingleCar] = useState(null);
   const [isLightboxOpen, setIsLightboxOpen] = useState(false);
   const [lightboxImageUrl, setLightboxImageUrl] = useState("");
   const [showPricesInUSD, setShowPricesInUSD] = useState(true);
 
+  const divisa = localStorage.getItem("divisa");
+
   const getById = async (id) => {
-    const response = await axios(`https://codecar.onrender.com/cars/${id}`);
+    const response = await axios.post(`https://codecar.onrender.com/carsId/`, {
+      id: id,
+      divisa: divisa,
+    });
     const data = response.data;
     console.log(data);
-    return setSingleCar(data)
+    return setSingleCar(data);
   };
 
   useEffect(() => {
-    getById(id)
-    console.log(singleCar);
-  }, []);
+    getById(id);
+  }, [divisa]);
 
   const openLightbox = (imageUrl) => {
     setLightboxImageUrl(imageUrl);
@@ -58,10 +61,10 @@ function CarDetailPage() {
           />
         </div>
         <div className={carDetailPageStyles.detailsContainer}>
-          <PriceToggle
+          {/* <PriceToggle
             showPricesInUSD={showPricesInUSD}
             onToggle={togglePrices}
-          />
+          /> */}
           <p>
             {singleCar.car_marca} {singleCar.car_modelo}
           </p>
@@ -70,14 +73,11 @@ function CarDetailPage() {
           <p>Motor: {singleCar.car_tipo_de_motor}</p>
           <p>{singleCar.car_condicion}</p>
           <p>
-            {showPricesInUSD
+            {divisa === "car_precio_ars"
               ? `USD$${singleCar.car_precio_usd}`
               : `ARS$${singleCar.car_precio_ars}`}
           </p>
-          <button className={carDetailPageStyles.addToCart}>
-            Agregar al Carrito
-          </button>
-          <button className={carDetailPageStyles.buyNow}>Comprar Ahora</button>
+          <button className={carDetailPageStyles.buyNow}>Comprar</button>
         </div>
       </div>
       {isLightboxOpen && (

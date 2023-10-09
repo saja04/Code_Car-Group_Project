@@ -36,12 +36,18 @@ const LogInAuth0 = () => {
       <ul>
         <li>
           <button onClick={loginWithRedirect}>Log in with redirect</button>
+
+
           <button onClick={getNoAuthenticated}>
             Traer datos sin autenticacion
           </button>
+
+
           <button onClick={callProtectedApi}>
             Traer datos con autenticacion
           </button>
+
+          
           <button onClick={callProtectedApi}>get acces token</button>
           {isAuthenticated ? (
             <div>

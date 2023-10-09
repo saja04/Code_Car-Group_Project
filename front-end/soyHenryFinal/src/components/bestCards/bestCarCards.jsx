@@ -30,7 +30,7 @@ function BestCarCards({ vehicles }) {
           />
         ))}
       </div>
-      <PriceToggle showPricesInUSD={showPricesInUSD} onToggle={togglePrices} />
+      {/* <PriceToggle showPricesInUSD={showPricesInUSD} onToggle={togglePrices} /> */}
     </div>
   );
 }
