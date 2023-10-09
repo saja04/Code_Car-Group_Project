@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import carStyles from "./postNewCar.module.css";
 import axios from "axios";
+import { Cloudinary } from "@cloudinary/url-gen";
 
 function PostNewCar() {
   const [formData, setFormData] = useState({
@@ -16,6 +17,48 @@ function PostNewCar() {
     condicion: "Usado",
     imagen: "",
   });
+
+  const cld = new Cloudinary({ cloud: { cloudName: 'dvspmk6zl' } });
+
+  const handleFileInputChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+
+      uploadImageToCloudinary(file);
+    }
+  };
+
+  const uploadImageToCloudinary = async (file) => {
+    try {
+      const formData = new FormData();
+      formData.append("file", file);
+
+      formData.append("upload_preset", "ml_default");
+
+      const response = await fetch(
+        `https://api.cloudinary.com/v1_1/levjlf5v/image/upload`,
+        {
+          method: "POST",
+          body: formData,
+        }
+      );
+
+      if (response.ok) {
+        const data = await response.json();
+        const imageUrl = data.secure_url;
+        setFormData({
+          ...formData,
+          imagen: imageUrl,
+        });
+      } else {
+        console.error("Error al cargar la imagen a Cloudinary");
+      }
+    } catch (error) {
+      console.error("Error al cargar la imagen:", error);
+    }
+  };
+
+
 
   const [errors, setErrors] = useState({
     precio_usd: "",
@@ -35,7 +78,7 @@ function PostNewCar() {
     "Marrón",
   ];
 
-  
+
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -83,7 +126,7 @@ function PostNewCar() {
 
       window.location.reload();
 
-    }catch (error) {
+    } catch (error) {
       console.error("Error al agregar el vehículo:", error);
       alert("Hubo un error al agregar el vehículo. Por favor, inténtalo de nuevo.");
     }
@@ -91,20 +134,20 @@ function PostNewCar() {
 
   return (
     <div className={carStyles.postNewCarContainer}>
-    <h2 className={carStyles.postNewCarH2}>Agregar un Nuevo Vehículo</h2>
-    <form onSubmit={handleSubmit}>
-      <div className={carStyles.postNewCarFormGroup}>
-        <label className={carStyles.postNewCarLabel} htmlFor="marca">
-          Marca:
-        </label>
-        <select
-          id="marca"
-          name="marca"
-          className={carStyles.postNewCarSelect}
-          value={formData.marca}
-          onChange={handleInputChange}
-          required
-        >
+      <h2 className={carStyles.postNewCarH2}>Agregar un Nuevo Vehículo</h2>
+      <form onSubmit={handleSubmit}>
+        <div className={carStyles.postNewCarFormGroup}>
+          <label className={carStyles.postNewCarLabel} htmlFor="marca">
+            Marca:
+          </label>
+          <select
+            id="marca"
+            name="marca"
+            className={carStyles.postNewCarSelect}
+            value={formData.marca}
+            onChange={handleInputChange}
+            required
+          >
             <option value="Chevrolet">Chevrolet</option>
             <option value="Ford">Ford</option>
             <option value="Volkswagen">Volkswagen</option>
@@ -276,14 +319,14 @@ function PostNewCar() {
             URL de la Imagen:
           </label>
           <input
-            type="text"
+            type="file"
             id="imagen"
             name="imagen"
             className={carStyles.postNewCarInput}
-            value={formData.imagen}
-            onChange={handleInputChange}
-            required
+            onChange={handleFileInputChange}
+            accept="image/*"
           />
+
         </div>
         <div className={carStyles.postNewCarFormGroup}>
           <button type="submit" className={carStyles.postNewCarButton}>

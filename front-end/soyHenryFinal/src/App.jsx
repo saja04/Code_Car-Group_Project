@@ -34,16 +34,7 @@ function MainApp() {
           <Route path="/nosotros" element={<About />} />
           <Route path="/detail/:id" element={<CarDetailPage />} />
           <Route path="/post" element={<PostNewCar />} />
-          <Route
-            path="/dashboard"
-            element={
-              isAuthenticated && user && user.isAdmin ? (
-                <Dashboard />
-              ) : (
-                <Navigate to="/" />
-              )
-            }
-          />
+          <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/delete" element={<Delete />} />
         </Routes>
         <Footer />
