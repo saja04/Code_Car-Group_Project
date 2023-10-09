@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import carDetailPageStyles from "./detailCar.module.css";
 import Lightbox from "../../components/lightbox/lightbox";
 import PriceToggle from "../../components/priceToggle/priceToggle";
+import { useAuth0 } from "@auth0/auth0-react";
 
 import axios from "axios";
 
@@ -15,6 +16,12 @@ function CarDetailPage() {
   const [isLightboxOpen, setIsLightboxOpen] = useState(false);
   const [lightboxImageUrl, setLightboxImageUrl] = useState("");
   const [showPricesInUSD, setShowPricesInUSD] = useState(true);
+
+  const {
+    loginWithRedirect,
+    isAuthenticated,
+    
+} = useAuth0();
 
   const divisa = localStorage.getItem("divisa");
 
@@ -41,12 +48,14 @@ function CarDetailPage() {
     setIsLightboxOpen(false);
   };
 
-  const togglePrices = () => {
-    setShowPricesInUSD(!showPricesInUSD);
-  };
-
   if (!singleCar) {
     return <div>Cargando...</div>;
+  }
+
+  const handleBuy = () => {
+    if(!isAuthenticated){
+      return loginWithRedirect()
+    } else return alert('simulacion de compra, estas logeado')
   }
 
   return (
@@ -77,7 +86,7 @@ function CarDetailPage() {
               ? `USD$${singleCar.car_precio_usd}`
               : `ARS$${singleCar.car_precio_ars}`}
           </p>
-          <button className={carDetailPageStyles.buyNow}>Comprar</button>
+          <button className={carDetailPageStyles.buyNow} onClick={handleBuy}>Comprar</button>
         </div>
       </div>
       {isLightboxOpen && (

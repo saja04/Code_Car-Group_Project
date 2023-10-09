@@ -15,7 +15,6 @@ export const CHANGE_CURRENCY = "CHANGE_CURRENCY"
 export const getCars = (divisa) => {
   return async (dispatch) => {
     const response = await axios.post("https://codecar.onrender.com/cars", {'order': {'value':'car_marca','sequence': 'ASC'}, "precio": divisa});
-    console.log(response.data);
     const data = response.data;
 
     return dispatch({
@@ -64,16 +63,17 @@ export const deleteCar = (id) => {
   }
 };
 
-export const getCarByName = (modelo) => {
+export const getCarByName = (input) => {
   return async(dispatch) => {
-    const response = await axios(`https://codecar.onrender.com/carsName/?modelo=${modelo}`);
-    const data = response.data
+    const response = await axios(`https://codecar.onrender.com/carsName/?input=${input}`);
+    const data = response.data.cars
+    console.log(data.cars);
     if(data.error) return alert('auto no encontrado! intenta cambiar la busqueda')
     else
 
     return dispatch({
       type: GET_CAR_BY_NAME,
-      payload: data.car,
+      payload: data,
     })
 
 

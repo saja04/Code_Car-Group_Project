@@ -34,7 +34,16 @@ function MainApp() {
           <Route path="/nosotros" element={<About />} />
           <Route path="/detail/:id" element={<CarDetailPage />} />
           <Route path="/post" element={<PostNewCar />} />
-          <Route path="/dashboard" element={<Dashboard />} />
+          <Route
+            path="/dashboard"
+            element={
+              isAuthenticated && user && user.email === 'elgilazo9123@gmail.com' ? (
+                <Dashboard />
+              ) : (
+                <Navigate to="/" />
+              )
+            }
+          />
           <Route path="/delete" element={<Delete />} />
         </Routes>
         <Footer />

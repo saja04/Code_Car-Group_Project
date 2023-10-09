@@ -1,6 +1,7 @@
 const getCarsByName = require('../Controllers/getCarsByName')
 const getCarsByNameHandler = async (req, res) => {
   try {
+    console.log(req.query.input);
     const { input } = req.query;
     const result = await getCarsByName(input);
 
