@@ -4,66 +4,40 @@ const getCarsHandler = require("../Handlers/getCarsHandler");
 const deleteCarsHandler = require("../Handlers/deleteCarsHandler");
 const getCarsByNameHandler = require("../Handlers/getCarsByNameHandler");
 const getCarsByIdHandler = require("../Handlers/getCarsByIdHandler");
-const getAllUsersHandler = require("../Handlers/getAllUsersHandler")
-const postUserHandler = require("../Handlers/postUserHandler")
-const buyCarHandler = require("../Handlers/buyCarHandler")
-const passport = require("passport")
-
+const getAllUsersHandler = require("../Handlers/getAllUsersHandler");
+const buyCarHandler = require("../Handlers/buyCarHandler");
 const router = Router();
+require("dotenv").config();
+const {checkJwt, userVerification, checkScopes} = require('../Authentication/auth0')
 
-const checkAuthenticated = async (req, res, next) => {
-  console.log(req.session);
-  console.log(req.user);
-    if(req.isAuthenticated()){
-      return next()
-    }
-    res.status(499).json({msg: 'usuario no logeado, por favor log in o sign in'})
-};
+
 
 //ROUTES CARS
-router.post("/carsPost", checkAuthenticated, postCarsHandler);
+router.post("/carsPost", postCarsHandler);
 router.post("/cars", getCarsHandler);
 router.post("/users", getAllUsersHandler);
-router.post("/users", getAllUsersHandler)
-router.post("/pedido/", checkAuthenticated, buyCarHandler)
-router.get("/carsDelete/:id", checkAuthenticated, deleteCarsHandler);
+router.post("/pedido/", buyCarHandler);
+router.get("/carsDelete/:id", deleteCarsHandler);
 router.get("/carsName/", getCarsByNameHandler);
-router.get("/cars/:id", getCarsByIdHandler);
+router.post("/carsId/", getCarsByIdHandler);
 
 //ROUTES USER
-router.get("/login/succesful", (req, res) => {
-  res.json({ msg: "iniciaste sesion correctamente" });
-});
-router.get("/login/failure", (req, res) => {
-  res.json({ msg: "login fallido!" });
-});
 
-router.post(
-  "/login",
-  passport.authenticate("local", {
-    successRedirect: "/login/succesful",
-    failureRedirect: "/login/failure",
-  })
-);
-
-router.post("/logout", function (req, res, next) {
-  req.logout(function (err) {
-    if (err) return next(err);
-    return res.status(201).json({ msg: "logout succesful" });
+router.get("/checking1", (req, res) => {
+  return res.json({
+    msg: "este es un mensaje no protejido, cualquiera puede acceder",
   });
 });
-router.post("/signup", postUserHandler);
-
-// router.get("/", checkAuthenticated, (req, res) => {
-//   res.json({msg: 'el usuairo está logeado'})
-// });
-
-router.post('/userStatus', (req, res) => {
-  if(req.isAuthenticated()) return res.json({msg: 'usuario logeado'});
-  else return res.json({msg: 'usuario deslogeado'})
-})
-
-router.get('/checkUser', checkAuthenticated, (req, res) => res.send('check succes'))
+router.get("/protected", checkJwt, userVerification, async (req, res) => {
+  return res.json({
+    msg: "este mensaje esta protegido y solo autenticados pueden verlo",
+  });
+});
+router.get("/proteced/role", checkJwt, checkScopes, (req, res) => {
+  return res.json({
+    msg: "this route haves authentication AND role management",
+  });
+});
 //ROUTES ADMIN
 
 module.exports = router;

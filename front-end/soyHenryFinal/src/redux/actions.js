@@ -1,5 +1,6 @@
 import axios from "axios";
 
+
 export const GET_CARS = "GET_CARS";
 export const GET_FILTERS = "GET_FILTERS";
 export const GET_CAR_BY_ID = "GET_CAR_BY_ID";
@@ -9,10 +10,11 @@ export const REGISTER_USER = "REGISTER_USER"
 export const REGISTER_USER_FAILURE = "REGISTER_USER_FAILURE"
 export const LOGIN_USER = "LOGIN_USER";
 export const LOGIN_USER_FAILURE = "LOGIN_USER_FAILURE";
+export const CHANGE_CURRENCY = "CHANGE_CURRENCY"
 
 export const getCars = (divisa) => {
   return async (dispatch) => {
-    const response = await axios.post("https://codecar.onrender.com/cars", {'order': {'value':'car_marca','sequence': 'ASC'}});
+    const response = await axios.post("https://codecar.onrender.com/cars", {'order': {'value':'car_marca','sequence': 'ASC'}, "precio": divisa});
     console.log(response.data);
     const data = response.data;
 
@@ -78,50 +80,11 @@ export const getCarByName = (modelo) => {
   }
 }
 
-export const registerUser = (name, email, password) => async (dispatch) => {
-  try {
-
-    const response = await axios.post(
-      (`https://codecar.onrender.com/signup`),
-      { name, email, password }
-    );
-    
-
-    dispatch({
-      type: "REGISTER_USER",
-      payload: response.data.user,
-    });
-    alert("¡Se ha registrado exitosamente!");
-  } catch (error) {
-    dispatch({
-      type: "REGISTER_FAILURE",
-      payload: error,
-    });
+export const changeCurrency = (divisa) => {
+  return async(dispatch) => {
+    return dispatch({
+      type: CHANGE_CURRENCY,
+      payload: divisa
+    })
   }
-};
-
-export const loginUser = (username, password) => async (dispatch) => {
-  try {
-    const response = await axios.post(
-      "https://codecar.onrender.com/login",
-      {
-        username: username,
-        password: password
-      }
-    );
-    console.log(response.data);
-    dispatch({
-      type: LOGIN_USER,
-      payload: response.data.user,
-    });
-    alert("¡Se ha logeado exitosamente!");
-  } catch (error) {
-    
-    console.error("Error en la solicitud:", error);
-    dispatch({
-      type: LOGIN_USER_FAILURE,
-      payload: "Error en la solicitud", 
-    });
-  }
-};
-
+}

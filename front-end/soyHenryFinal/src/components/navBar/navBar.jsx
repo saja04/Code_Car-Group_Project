@@ -1,19 +1,23 @@
 import { Link } from "react-router-dom";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import PriceToggle from "../../components/priceToggle/priceToggle";
-
 import style from "./navBar.module.css";
 import logo from "../../img/logo.png";
 import SearchBar from "../searchBar/searchBar";
 import DashboardButton from "../dashboardButton/dahsboardButton";
 import LoginLinks from "../loginLinks/loginLinks";
+import { changeCurrency } from "../../redux/actions";
+
 
 function NavBar() {
-  const [showPricesInUSD, setShowPricesInUSD] = useState(true);
+  const dispatch = useDispatch();
+  const divisa = useSelector(state => state.divisa);
 
-  const togglePrices = () => {
-    setShowPricesInUSD(!showPricesInUSD);
-  };
+  // useEffect(() => {
+  //   dispatch(changeCurrency());
+  // }, [dispatch]);
+
   return (
     <div className={style.container}>
       <div className={style.content}>
@@ -36,11 +40,13 @@ function NavBar() {
           <SearchBar />
         </div>
         <PriceToggle
-          showPricesInUSD={showPricesInUSD}
-          onToggle={togglePrices}
+          divisa={divisa}
+          changeCurrency={changeCurrency}
+          dispatch={dispatch}
         />
         <DashboardButton />
         <LoginLinks />
+        
       </div>
     </div>
   );
