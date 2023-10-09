@@ -49,29 +49,6 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         allCars: action.payload,
       };
-    case REGISTER_USER:
-      return {
-        ...state,
-        user: action.payload,
-        registrationError: null,
-      };
-    case REGISTER_USER_FAILURE:
-      return {
-        ...state,
-        registrationError: action.payload,
-      };
-    case LOGIN_USER:
-      return {
-        ...state,
-        user: action.payload,
-        loginError: null,
-      };
-
-    case LOGIN_USER_FAILURE:
-      return {
-        ...state,
-        loginError: action.payload,
-      };
 
     default:
       return state;

@@ -1,12 +1,18 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useAuth0 } from "@auth0/auth0-react"; 
 
 function DashboardButton() {
-  return (
+  const { isAuthenticated, user } = useAuth0();
+
+  const isAdmin = isAuthenticated && user && user.isAdmin;
+
+  return isAdmin ? (
     <Link to="/dashboard" className="settings-button">
       ⚙️
     </Link>
-  );
+  ) : null;
 }
 
 export default DashboardButton;
+
