@@ -14,11 +14,6 @@ function SearchBar() {
   };
 
 
-
-  // useEffect(() => {
-    
-  // }, [allCars]);
-
   const handleChange = (event) => {
     setSearchTerm(event.target.value);
   };

@@ -35,8 +35,8 @@ function Home() {
     <div className={style.container}>
       <Banner />
       <BestCarCards vehicles={vehicles} />
-      <SuggestedCards vehicles={vehicles} />
       <Questions />
+      <SuggestedCards vehicles={vehicles} />
     </div>
   );
 }

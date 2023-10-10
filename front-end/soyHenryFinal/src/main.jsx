@@ -3,6 +3,7 @@ import ReactDOM from "react-dom/client";
 import App from "./App.jsx";
 import "./index.css";
 import { Auth0Provider } from "@auth0/auth0-react";
+const {DOMAIN, CLIENT_ID, AUDIENCE, SCOPE}
 
 import store from "./redux/store";
 import { Provider } from "react-redux";
@@ -10,14 +11,14 @@ import { Provider } from "react-redux";
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <Auth0Provider
-      domain="dev-mp4haipy0yoq4dta.us.auth0.com"
-      clientId="EvCLt03uedOBBF4K7MrLGmxxh7sCDNNj"
+      domain= {DOMAIN}
+      clientId={CLIENT_ID}
       authorizationParams={{
         redirect_uri: window.location.origin,
-        audience:'https://codecar.onrender.com'
+        audience: AUDIENCE
       }}
-      audience='https://codecar.onrender.com'
-      scope='openid email profile'
+      audience={AUDIENCE}
+      scope={SCOPE}
     >
       <Provider store={store}>
         <App />
