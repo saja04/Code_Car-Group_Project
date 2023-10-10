@@ -1,16 +1,22 @@
-const { getAllUsers } = require("../Controllers/getAlllUsers");
+const axios = require('axios')
 
-const getAllUsersHandler = async (req, res) => {
-  try {
-    const response = await getAllUsers();
-    if (response.length === 0) {
-      res.status(404).json({ message: "No se encontraron usuarios" });
-    } else {
-      res.status(200).json(response);
+const getAllUsersHandler = async(req, res) => {
+
+    try {
+
+        let config = {
+            method: 'get',
+            maxBodyLength: Infinity,
+            url: 'https://dev-mp4haipy0yoq4dta.us.auth0.com/api/v2/users',
+            headers: { 
+              'Accept': 'application/json'
+            }
+          };
+        const response = await axios.request(config)
+        res.json(response.data)
+    } catch (error) {
+        res.send(error.message)
     }
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-};
 
-module.exports = getAllUsersHandler;
+}
+module.exports = getAllUsersHandler

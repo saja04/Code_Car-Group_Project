@@ -12,14 +12,14 @@ const LogInAuth0 = () => {
   } = useAuth0();
 
   const getNoAuthenticated = async () => {
-    const response = await axios.get("http://localhost:3001/checking1");
+    const response = await axios.get("https://codecar.onrender.com/checking1");
     return console.log(response.data);
   };
   const callProtectedApi = async () => {
     try {
       const token = await getAccessTokenSilently();
       console.log(token);
-      const response = await axios.get('http://localhost:3001/protected',{
+      const response = await axios.get('https://codecar.onrender.com/protected',{
       headers: {
         authorization: `Bearer ${token}`,
       }}
