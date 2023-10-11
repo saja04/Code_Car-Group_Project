@@ -22,6 +22,7 @@ const userVerification = async (req, res, next) => {
             user_admin: true,
           },
         });
+        console.log('admin principal añadido');
       };
 
       const searchInDb = await User.findOne({
@@ -30,7 +31,7 @@ const userVerification = async (req, res, next) => {
 
       if (searchInDb) {
          console.log("usuario ya logeado", searchInDb.dataValues.user_email);
-         next();
+        return next();
       }
       if (!searchInDb) {
         const createInDb = await User.create({
@@ -39,9 +40,9 @@ const userVerification = async (req, res, next) => {
           user_image: userInfo.data.picture
         });
         console.log("nuevo usuario creado", );
-        next();
+        return next();
       }
-      next();
+      return next();
     } catch (error) {
       res.send(error.message);
     }

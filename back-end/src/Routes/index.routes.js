@@ -11,7 +11,9 @@ const updateUserHandler = require('../Handlers/updateUserHandler')
 const router = Router();
 require("dotenv").config();
 const userCheck = require('../Authentication/userCheckController')
-const {checkJwt} = require('../Authentication/auth0')
+const {checkJwt} = require('../Authentication/auth0');
+const getUserInfo = require("../Authentication/getUserInfo");
+const updateUserInfo = require("../Authentication/updateUserInfo");
 
 
 
@@ -26,23 +28,15 @@ router.post("/carsId/", getCarsByIdHandler);
 
 //ROUTES USER
 
-router.get("/checking1", checkJwt, (req, res) => {
-  return res.json({
-    msg: "este es un mensaje no protejido, cualquiera puede acceder",
-  });
-});
 router.get("/userCheck", checkJwt, userCheck, async (req, res) => {
   return res.json({
     msg: "este mensaje esta protegido y solo autenticados pueden verlo",
   });
 });
-router.get("/proteced/role", checkJwt, (req, res) => {
-  return res.json({
-    msg: "this route haves authentication AND role management",
-  });
-});
+router.get('/user/info', checkJwt, userCheck, getUserInfo)
 
-router.get('/updateUser', checkJwt, updateUserHandler)
+// router.get('/updateUser', checkJwt, updateUserHandler)
+router.get('/updateUser/', checkJwt, userCheck, updateUserInfo)
 //ROUTES ADMIN
 
 module.exports = router;
