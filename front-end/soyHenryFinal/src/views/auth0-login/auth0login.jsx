@@ -13,7 +13,7 @@ const LogInAuth0 = () => {
 
   const getNoAuthenticated = async () => {
     const token = await getAccessTokenSilently();
-    const response = await axios.get("http://localhost:3001/checking1",{
+    const response = await axios.get("http://localhost:3001/userCheck",{
       headers: {
         authorization: `Bearer ${token}`,
       }});
@@ -43,7 +43,7 @@ const LogInAuth0 = () => {
 
 
           <button onClick={getNoAuthenticated}>
-            Traer datos sin autenticacion
+            Traer datos con verificacion y crea el usuario
           </button>
 
 
@@ -52,7 +52,7 @@ const LogInAuth0 = () => {
           </button>
 
           
-          <button onClick={callProtectedApi}>get acces token</button>
+          {/* <button onClick={callProtectedApi}>get acces token</button> */}
           {isAuthenticated ? (
             <div>
               <button onClick={logout}>Log out</button>

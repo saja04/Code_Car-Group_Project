@@ -36,7 +36,7 @@ server.use("/", router);
 
 
 
-conn.sync({ force: false }).then(async () => {
+conn.sync({ force: true }).then(async () => {
   console.log("db connected");
   await saveApiData();
   await resetUsers();

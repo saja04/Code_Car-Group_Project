@@ -16,6 +16,12 @@ module.exports = (sequelize) => {
       allowNull: false,
       unique: true,
     },
+    user_address: {
+      type: DataTypes.STRING,
+    },
+    user_phone: {
+      type: DataTypes.INTEGER
+    },
     user_admin: {
       type: DataTypes.BOOLEAN,
       defaultValue: false,

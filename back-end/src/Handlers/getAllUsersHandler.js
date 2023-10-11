@@ -1,9 +1,11 @@
 const axios = require('axios')
+const { auth, requiredScopes } = require("express-oauth2-jwt-bearer");
 
 const getAllUsersHandler = async(req, res) => {
 
     try {
-
+        const scopes = requiredScopes('read:users')
+        console.log(scopes);
         let config = {
             method: 'get',
             maxBodyLength: Infinity,
