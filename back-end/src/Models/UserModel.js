@@ -22,6 +22,9 @@ module.exports = (sequelize) => {
     user_phone: {
       type: DataTypes.INTEGER
     },
+    user_image: {
+      type: DataTypes.STRING(20000)
+    },
     user_admin: {
       type: DataTypes.BOOLEAN,
       defaultValue: false,
