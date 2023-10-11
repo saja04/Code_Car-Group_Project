@@ -12,14 +12,18 @@ const LogInAuth0 = () => {
   } = useAuth0();
 
   const getNoAuthenticated = async () => {
-    const response = await axios.get("http://localhost:3001/checking1");
+    const token = await getAccessTokenSilently();
+    const response = await axios.get("http://localhost:3001/checking1",{
+      headers: {
+        authorization: `Bearer ${token}`,
+      }});
     return console.log(response.data);
   };
   const callProtectedApi = async () => {
     try {
       const token = await getAccessTokenSilently();
       console.log(token);
-      const response = await axios.get('http://localhost:3001/protected',{
+      const response = await axios.get('http://localhost:3001/updateUser',{
       headers: {
         authorization: `Bearer ${token}`,
       }}

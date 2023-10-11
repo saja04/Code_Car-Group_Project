@@ -6,6 +6,8 @@ const getCarsByNameHandler = require("../Handlers/getCarsByNameHandler");
 const getCarsByIdHandler = require("../Handlers/getCarsByIdHandler");
 const getAllUsersHandler = require("../Handlers/getAllUsersHandler");
 const buyCarHandler = require("../Handlers/buyCarHandler");
+const updateUserHandler = require('../Handlers/updateUserHandler')
+
 const router = Router();
 require("dotenv").config();
 const {checkJwt, userVerification, checkScopes} = require('../Authentication/auth0')
@@ -38,6 +40,8 @@ router.get("/proteced/role", checkJwt, checkScopes, (req, res) => {
     msg: "this route haves authentication AND role management",
   });
 });
+
+router.post('/updateUser', updateUserHandler)
 //ROUTES ADMIN
 
 module.exports = router;
