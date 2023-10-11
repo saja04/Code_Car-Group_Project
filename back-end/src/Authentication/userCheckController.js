@@ -12,12 +12,12 @@ const userVerification = async (req, res, next) => {
           authorization: `Bearer ${accesToken}`,
         },
       });
-  
+      const splittedName = userInfo.data.email.split('@')
       if (userInfo.data.email === ADMIN_EMAIL) {
         const createInDb = await User.findOrCreate({    //asigna el usuario con el email de admin como admin
           where: {
             user_email: userInfo.data.email,
-            user_name: userInfo.data.name,
+            user_name: splittedName[0],
             user_image: userInfo.data.picture,
             user_admin: true,
           },
@@ -36,7 +36,7 @@ const userVerification = async (req, res, next) => {
       if (!searchInDb) {
         const createInDb = await User.create({
           user_email: userInfo.data.email,
-          user_name: userInfo.data.name,
+          user_name: splittedName[0],
           user_image: userInfo.data.picture
         });
         console.log("nuevo usuario creado", );

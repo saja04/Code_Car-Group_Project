@@ -10,12 +10,10 @@ const getUserInfo = async (req, res) => {
         authorization: `Bearer ${accesToken}`,
       },
     });
-    console.log(userInfo);
 
     const userInDb = await User.findOne({
       where: { user_email: userInfo.data.email },
     });
-    console.log(userInDb);
     res.json(userInDb);
 
 

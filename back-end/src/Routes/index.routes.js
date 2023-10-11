@@ -14,6 +14,7 @@ const userCheck = require('../Authentication/userCheckController')
 const {checkJwt} = require('../Authentication/auth0');
 const getUserInfo = require("../Authentication/getUserInfo");
 const updateUserInfo = require("../Authentication/updateUserInfo");
+const banUser = require("../Authentication/banUser");
 
 
 
@@ -33,9 +34,10 @@ router.get("/userCheck", checkJwt, userCheck, async (req, res) => {
     msg: "este mensaje esta protegido y solo autenticados pueden verlo",
   });
 });
-router.get('/user/info', checkJwt, userCheck, getUserInfo)
+router.get('/userInfo', checkJwt, userCheck, getUserInfo)
 
-// router.get('/updateUser', checkJwt, updateUserHandler)
+router.get('/adminUser/', checkJwt, userCheck, banUser)
+
 router.get('/updateUser/', checkJwt, userCheck, updateUserInfo)
 //ROUTES ADMIN
 
