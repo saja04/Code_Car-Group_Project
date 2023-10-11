@@ -10,7 +10,8 @@ const updateUserHandler = require('../Handlers/updateUserHandler')
 
 const router = Router();
 require("dotenv").config();
-const {checkJwt, userVerification} = require('../Authentication/auth0')
+const userCheck = require('../Authentication/userCheckController')
+const {checkJwt} = require('../Authentication/auth0')
 
 
 
@@ -30,7 +31,7 @@ router.get("/checking1", checkJwt, (req, res) => {
     msg: "este es un mensaje no protejido, cualquiera puede acceder",
   });
 });
-router.get("/userCheck", checkJwt, userVerification, async (req, res) => {
+router.get("/userCheck", checkJwt, userCheck, async (req, res) => {
   return res.json({
     msg: "este mensaje esta protegido y solo autenticados pueden verlo",
   });
