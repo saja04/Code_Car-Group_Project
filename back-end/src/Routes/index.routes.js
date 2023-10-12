@@ -28,7 +28,7 @@ router.post("/pedido/", buyCarHandler);
 router.get("/carsDelete/:id", deleteCarsHandler);
 router.get("/carsName/", getCarsByNameHandler);
 router.post("/carsId/", getCarsByIdHandler);
-router.post("/create-order", createOrder);
+router.post("/create-order/", createOrder);
 router.post("/webhook", receiveWebhook);
 router.get("/sucess", (req, res) => res.send("Success!"));
 router.get("/pending", (req, res) => res.send("Pending..."));
