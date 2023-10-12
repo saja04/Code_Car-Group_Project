@@ -6,13 +6,19 @@ const getCarsByNameHandler = require("../Handlers/getCarsByNameHandler");
 const getCarsByIdHandler = require("../Handlers/getCarsByIdHandler");
 const getAllUsersHandler = require("../Handlers/getAllUsersHandler");
 const buyCarHandler = require("../Handlers/buyCarHandler");
-const updateUserHandler = require('../Handlers/updateUserHandler')
+
+const userCheck = require("../Authentication/userCheckController");
+const getUserInfo = require("../Authentication/getUserInfo");
+const banUser = require("../Authentication/banUser");
+const updateUserInfo = require('../Authentication/updateUserInfo')
 
 const router = Router();
 require("dotenv").config();
-const {checkJwt, userVerification, checkScopes} = require('../Authentication/auth0')
-const {createOrder, receiveWebhook} = require("../Mercado Pago/controllers/SDK")
-
+const { checkJwt } = require("../Authentication/auth0");
+const {
+  createOrder,
+  receiveWebhook,
+} = require("../Mercado Pago/controllers/SDK");
 
 //ROUTES CARS
 router.post("/carsPost", postCarsHandler);
@@ -25,7 +31,7 @@ router.post("/carsId/", getCarsByIdHandler);
 router.post("/create-order", createOrder);
 router.post("/webhook", receiveWebhook);
 router.get("/sucess", (req, res) => res.send("Success!"));
-router.get("/pending", (req, res) => res.send("Pending..."))
+router.get("/pending", (req, res) => res.send("Pending..."));
 
 //ROUTES USER
 
@@ -35,11 +41,11 @@ router.get("/userCheck", checkJwt, userCheck, async (req, res) => {
   });
 });
 
-router.get('/userInfo', checkJwt, userCheck, getUserInfo)
+router.get("/userInfo", checkJwt, userCheck, getUserInfo);
 
-router.get('/adminUser/', checkJwt, userCheck, banUser)
+router.get("/adminUser/", checkJwt, userCheck, banUser);
 
-router.get('/updateUser/', checkJwt, userCheck, updateUserInfo)
+router.get("/updateUser/", checkJwt, userCheck, updateUserInfo);
 //ROUTES ADMIN
 
 module.exports = router;
