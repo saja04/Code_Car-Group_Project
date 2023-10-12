@@ -34,6 +34,7 @@ router.get("/userCheck", checkJwt, userCheck, async (req, res) => {
     msg: "este mensaje esta protegido y solo autenticados pueden verlo",
   });
 });
+
 router.get('/userInfo', checkJwt, userCheck, getUserInfo)
 
 router.get('/adminUser/', checkJwt, userCheck, banUser)
