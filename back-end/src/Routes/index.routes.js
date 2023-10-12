@@ -6,17 +6,19 @@ const getCarsByNameHandler = require("../Handlers/getCarsByNameHandler");
 const getCarsByIdHandler = require("../Handlers/getCarsByIdHandler");
 const getAllUsersHandler = require("../Handlers/getAllUsersHandler");
 const buyCarHandler = require("../Handlers/buyCarHandler");
-const updateUserHandler = require('../Handlers/updateUserHandler')
+
+const userCheck = require("../Authentication/userCheckController");
+const getUserInfo = require("../Authentication/getUserInfo");
+const banUser = require("../Authentication/banUser");
+const updateUserInfo = require('../Authentication/updateUserInfo')
 
 const router = Router();
 require("dotenv").config();
-const userCheck = require('../Authentication/userCheckController')
-const {checkJwt} = require('../Authentication/auth0');
-const getUserInfo = require("../Authentication/getUserInfo");
-const updateUserInfo = require("../Authentication/updateUserInfo");
-const banUser = require("../Authentication/banUser");
-
-
+const { checkJwt } = require("../Authentication/auth0");
+const {
+  createOrder,
+  receiveWebhook,
+} = require("../Mercado Pago/controllers/SDK");
 
 //ROUTES CARS
 router.post("/carsPost", postCarsHandler);
@@ -26,6 +28,10 @@ router.post("/pedido/", buyCarHandler);
 router.get("/carsDelete/:id", deleteCarsHandler);
 router.get("/carsName/", getCarsByNameHandler);
 router.post("/carsId/", getCarsByIdHandler);
+router.post("/create-order", createOrder);
+router.post("/webhook", receiveWebhook);
+router.get("/sucess", (req, res) => res.send("Success!"));
+router.get("/pending", (req, res) => res.send("Pending..."));
 
 //ROUTES USER
 
@@ -34,11 +40,12 @@ router.get("/userCheck", checkJwt, userCheck, async (req, res) => {
     msg: "este mensaje esta protegido y solo autenticados pueden verlo",
   });
 });
-router.get('/userInfo', checkJwt, userCheck, getUserInfo)
 
-router.get('/adminUser/', checkJwt, userCheck, banUser)
+router.get("/userInfo", checkJwt, userCheck, getUserInfo);
 
-router.get('/updateUser/', checkJwt, userCheck, updateUserInfo)
+router.get("/adminUser/", checkJwt, userCheck, banUser);
+
+router.get("/updateUser/", checkJwt, userCheck, updateUserInfo);
 //ROUTES ADMIN
 
 module.exports = router;

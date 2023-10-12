@@ -1,15 +1,21 @@
 const { Car } = require("../db");
 
-const getCarsByName = async (input) => {
+const getCarsByName = async (req) => {
+
+  const {input, precio} = req.body
+
+  const query = { where: { car_id: id, deleted: false } };
+
+  if (precio) query.attributes = { exclude: [precio] };
+
+
   if (!input) {
     return { error: "Falta el término de búsqueda" };
   }
 
   const formattedInput = input.charAt(0).toUpperCase() + input.slice(1).toLowerCase();
 
-  const allCars = await Car.findAll({
-    where: { deleted: false }, // Agregar la condición para autos no borrados
-  });
+  const allCars = await Car.findOne(query);
 
   const results = allCars.map((car) => {
     const marca = car.dataValues.car_marca;
