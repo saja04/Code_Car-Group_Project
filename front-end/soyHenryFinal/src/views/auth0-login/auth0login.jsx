@@ -12,20 +12,24 @@ const LogInAuth0 = () => {
   } = useAuth0();
 
   const getNoAuthenticated = async () => {
-    const response = await axios.get("http://localhost:3001/checking1");
+    const token = await getAccessTokenSilently();
+    const response = await axios.get("http://localhost:3001/updateUser/?phone=2966692490", {
+      headers: {
+        authorization: `Bearer ${token}`,
+      }
+    });
     return console.log(response.data);
   };
   const callProtectedApi = async () => {
     try {
       const token = await getAccessTokenSilently();
       console.log(token);
-      const response = await axios.get('http://localhost:3001/protected',{
-      headers: {
-        authorization: `Bearer ${token}`,
-      }}
-      )
-        console.log(response.data);
-      
+      const response = await axios.get("http://localhost:3001/user/info", {
+        headers: {
+          authorization: `Bearer ${token}`,
+        },
+      });
+      console.log(response.data);
     } catch (error) {
       console.log(error);
     }
@@ -37,22 +41,16 @@ const LogInAuth0 = () => {
         <li>
           <button onClick={loginWithRedirect}>Log in with redirect</button>
 
-
           <button onClick={getNoAuthenticated}>
-            Traer datos sin autenticacion
+            Traer datos con verificacion y crea el usuario
           </button>
 
+          <button onClick={callProtectedApi}>Traer datos del usuario</button>
 
-          <button onClick={callProtectedApi}>
-            Traer datos con autenticacion
-          </button>
-
-          
-          <button onClick={callProtectedApi}>get acces token</button>
+          {/* <button onClick={callProtectedApi}>get acces token</button> */}
           {isAuthenticated ? (
             <div>
               <button onClick={logout}>Log out</button>
-
               <p>{JSON.stringify(user, null, 2)}</p>
             </div>
           ) : null}

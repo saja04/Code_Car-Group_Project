@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { getCarByName } from "../../redux/actions";
 import style from "./searchBar.module.css";
@@ -10,8 +10,9 @@ function SearchBar() {
   const handleKeyPress = (event) => {
     if (event.key === "Enter") {
       dispatch(getCarByName(searchTerm));
-    }
+    } else null
   };
+
 
   const handleChange = (event) => {
     setSearchTerm(event.target.value);

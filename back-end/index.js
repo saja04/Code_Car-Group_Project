@@ -36,10 +36,9 @@ server.use("/", router);
 
 
 
-conn.sync({ force: true }).then(async () => {
+conn.sync({ force: false }).then(async () => {
   console.log("db connected");
   await saveApiData();
-  await resetUsers();
   server.listen(3001, () => {
     console.log("listening on port 3001");
   });

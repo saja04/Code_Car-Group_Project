@@ -1,12 +1,12 @@
 .conteiner {
   padding: 10px;
   margin: 10px;
-  width: 320px;
+  width: 400px;
 }
 
 .conteiner img {
-  height: 220px;
-  width: 310px;
+  height: 400px;
+  width: 400px;
 }
 
 .conteiner p {
@@ -31,6 +31,7 @@
 }
 
 .contPrice {
+  margin-top: 16px;
   display: flex;
   align-items: center;
 }

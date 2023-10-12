@@ -16,6 +16,20 @@ module.exports = (sequelize) => {
       allowNull: false,
       unique: true,
     },
+    user_address: {
+      type: DataTypes.STRING,
+    },
+    user_phone: {
+      type: DataTypes.STRING
+    },
+    user_image: {
+      type: DataTypes.STRING(20000)
+    },
+    user_ban: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
+      allowNull: true
+    },
     user_admin: {
       type: DataTypes.BOOLEAN,
       defaultValue: false,

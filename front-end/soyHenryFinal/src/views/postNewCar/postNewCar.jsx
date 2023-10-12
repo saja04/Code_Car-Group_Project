@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import carStyles from "./postNewCar.module.css";
 import axios from "axios";
+
 
 function PostNewCar() {
   const [formData, setFormData] = useState({
@@ -16,6 +17,37 @@ function PostNewCar() {
     condicion: "Usado",
     imagen: "",
   });
+
+  const [imageUploaded, setImageUploaded] = useState(false);
+
+  useEffect(() => {
+    var myWidget = window.cloudinary.createUploadWidget(
+      {
+        cloudName: 'dvspmk6zl',
+        uploadPreset: 'p6jbbnlt',
+        maxFiles: 1,
+        accept: 'image/*'
+      },
+      (error, result) => {
+        if (!error && result && result.event === 'success') {
+          console.log('¡Listo! Aquí tienes la información de la imagen: ', result.info);
+    
+          const imageUrl = result.info.secure_url;
+          setFormData({
+            ...formData,
+            imagen: imageUrl, 
+          });
+    
+          setImageUploaded(true);
+        }
+      }
+    );
+    
+
+    document.getElementById('upload_widget').addEventListener('click', function () {
+      myWidget.open();
+    }, false);
+  }, []);
 
   const [errors, setErrors] = useState({
     precio_usd: "",
@@ -35,7 +67,7 @@ function PostNewCar() {
     "Marrón",
   ];
 
-  
+
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -62,6 +94,11 @@ function PostNewCar() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!imageUploaded) {
+      
+      alert("Por favor, sube una imagen antes de enviar el formulario.");
+      return;
+    }
 
     try {
       const carData = {
@@ -83,7 +120,7 @@ function PostNewCar() {
 
       window.location.reload();
 
-    }catch (error) {
+    } catch (error) {
       console.error("Error al agregar el vehículo:", error);
       alert("Hubo un error al agregar el vehículo. Por favor, inténtalo de nuevo.");
     }
@@ -91,20 +128,31 @@ function PostNewCar() {
 
   return (
     <div className={carStyles.postNewCarContainer}>
-    <h2 className={carStyles.postNewCarH2}>Agregar un Nuevo Vehículo</h2>
-    <form onSubmit={handleSubmit}>
-      <div className={carStyles.postNewCarFormGroup}>
-        <label className={carStyles.postNewCarLabel} htmlFor="marca">
-          Marca:
-        </label>
-        <select
-          id="marca"
-          name="marca"
-          className={carStyles.postNewCarSelect}
-          value={formData.marca}
-          onChange={handleInputChange}
-          required
-        >
+      <h2 className={carStyles.postNewCarH2}>Agregar un Nuevo Vehículo</h2>
+
+      <form onSubmit={handleSubmit}>
+        <div className={carStyles.postNewCarFormGroup}>
+
+        <div className={carStyles.postNewCarFormGroup}>
+          <label className={carStyles.postNewCarLabel} htmlFor="imagen">
+           Subir imagen:
+          </label>
+          <label id="upload_widget" className="cloudinary-button">Upload files</label>
+          <script src="https://upload-widget.cloudinary.com/global/all.js" type="text/javascript" />
+
+        </div>
+        
+          <label className={carStyles.postNewCarLabel} htmlFor="marca">
+            Marca:
+          </label>
+          <select
+            id="marca"
+            name="marca"
+            className={carStyles.postNewCarSelect}
+            value={formData.marca}
+            onChange={handleInputChange}
+            required
+          >
             <option value="Chevrolet">Chevrolet</option>
             <option value="Ford">Ford</option>
             <option value="Volkswagen">Volkswagen</option>
@@ -271,26 +319,17 @@ function PostNewCar() {
             <option value="0km">0km</option>
           </select>
         </div>
-        <div className={carStyles.postNewCarFormGroup}>
-          <label className={carStyles.postNewCarLabel} htmlFor="imagen">
-            URL de la Imagen:
-          </label>
-          <input
-            type="text"
-            id="imagen"
-            name="imagen"
-            className={carStyles.postNewCarInput}
-            value={formData.imagen}
-            onChange={handleInputChange}
-            required
-          />
-        </div>
+
+
+
+
         <div className={carStyles.postNewCarFormGroup}>
           <button type="submit" className={carStyles.postNewCarButton}>
             Agregar Vehículo
           </button>
         </div>
       </form>
+
     </div>
   );
 }

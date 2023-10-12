@@ -5,7 +5,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 function DashboardButton() {
   const { isAuthenticated, user } = useAuth0();
 
-  const isAdmin = isAuthenticated && user && user.isAdmin;
+  const isAdmin = isAuthenticated && user && user.email === 'elgilazo9123@gmail.com';
 
   return isAdmin ? (
     <Link to="/dashboard" className="settings-button">
