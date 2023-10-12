@@ -11,7 +11,7 @@ const updateUserHandler = require('../Handlers/updateUserHandler')
 const router = Router();
 require("dotenv").config();
 const {checkJwt, userVerification, checkScopes} = require('../Authentication/auth0')
-const {createOrder, receiveWebhook} = require("../Mercado Pagp/controllers/SDK")
+const {createOrder, receiveWebhook} = require("../Mercado Pago/controllers/SDK")
 
 
 //ROUTES CARS
