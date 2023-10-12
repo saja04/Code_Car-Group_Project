@@ -10,12 +10,8 @@ const updateUserHandler = require('../Handlers/updateUserHandler')
 
 const router = Router();
 require("dotenv").config();
-const userCheck = require('../Authentication/userCheckController')
-const {checkJwt} = require('../Authentication/auth0');
-const getUserInfo = require("../Authentication/getUserInfo");
-const updateUserInfo = require("../Authentication/updateUserInfo");
-const banUser = require("../Authentication/banUser");
-
+const {checkJwt, userVerification, checkScopes} = require('../Authentication/auth0')
+const {createOrder, receiveWebhook} = require("../Mercado Pago/controllers/SDK")
 
 
 //ROUTES CARS
@@ -26,6 +22,10 @@ router.post("/pedido/", buyCarHandler);
 router.get("/carsDelete/:id", deleteCarsHandler);
 router.get("/carsName/", getCarsByNameHandler);
 router.post("/carsId/", getCarsByIdHandler);
+router.post("/create-order", createOrder);
+router.post("/webhook", receiveWebhook);
+router.get("/sucess", (req, res) => res.send("Success!"));
+router.get("/pending", (req, res) => res.send("Pending..."))
 
 //ROUTES USER
 
