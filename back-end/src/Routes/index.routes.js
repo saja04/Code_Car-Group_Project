@@ -9,7 +9,7 @@ const buyCarHandler = require("../Handlers/buyCarHandler");
 const router = Router();
 require("dotenv").config();
 const {checkJwt, userVerification, checkScopes} = require('../Authentication/auth0')
-
+const {createOrder, receiveWebhook} = require("../Mercado Pagp/controllers/SDK")
 
 
 //ROUTES CARS
@@ -20,6 +20,10 @@ router.post("/pedido/", buyCarHandler);
 router.get("/carsDelete/:id", deleteCarsHandler);
 router.get("/carsName/", getCarsByNameHandler);
 router.post("/carsId/", getCarsByIdHandler);
+router.post("/create-order", createOrder);
+router.post("/webhook", receiveWebhook);
+router.get("/sucess", (req, res) => res.send("Success!"));
+router.get("/pending", (req, res) => res.send("Pending..."))
 
 //ROUTES USER
 
