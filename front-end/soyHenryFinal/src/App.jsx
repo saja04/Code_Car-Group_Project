@@ -17,6 +17,7 @@ import PostNewCar from "./views/postNewCar/postNewCar";
 import Dashboard from "./views/dashboard/dashboard";
 import Delete from "./views/delete/delete";
 import LogInAuth0 from "./views/auth0-login/auth0login";
+import User from "./views/user/user";
 
 function MainApp() {
   
@@ -45,6 +46,7 @@ function MainApp() {
             }
           />
           <Route path="/delete" element={<Delete />} />
+          <Route path="/user/" element={<User />} />
         </Routes>
         <Footer />
       </div>
