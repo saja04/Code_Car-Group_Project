@@ -1,10 +1,12 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 import style from "./loginLinks.module.css";
+import PopUp from "../popUp/popUp";
 
 function LoginLinks() {
   const { loginWithRedirect, isAuthenticated, logout, user } = useAuth0();
+  const [isPopUpOpen, setIsPopUpOpen] = useState(false);
 
   const gettingAuth = async () => {
     const isAuthenticatedFlow = isAuthenticated;
@@ -12,9 +14,19 @@ function LoginLinks() {
       return true;
     } else return false;
   };
+
   useEffect(() => {
     gettingAuth();
   }, []);
+
+  const togglePopUp = () => {
+   
+    setIsPopUpOpen(!isPopUpOpen);
+  };
+
+  const closePopUp = () => {
+    setIsPopUpOpen(false);
+  };
 
   return (
     <div>
@@ -35,15 +47,16 @@ function LoginLinks() {
         </div>
       ) : (
         <div className={style.login}>
-          <NavLink to="/user">
+          <span onClick={togglePopUp}>
             {" "}
             <img className={style.user} src={user.picture} alt={user.name} />
-          </NavLink>
+          </span>
           <NavLink className={style.links} onClick={logout}>
             Cerrar sesión
           </NavLink>
         </div>
       )}
+      {isPopUpOpen && <PopUp user={user} onClose={closePopUp} />}
     </div>
   );
 }
