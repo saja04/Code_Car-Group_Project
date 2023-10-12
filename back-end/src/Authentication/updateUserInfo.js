@@ -22,9 +22,20 @@ const updateUserInfo = async (req, res) => {
       console.log(phoneToNumber);
       userInDb.user_phone = phoneToNumber;
       await userInDb.save();
-      console.log("usuario actualizado exitosamente");
     }
-
+    if(name){
+        userInDb.user_name = name;
+        await userInDb.save()
+    }
+    if(address){
+        userInDb.user_address = address;
+        await userInDb.save();
+    }
+    if(image){
+        userInDb.user_image = image;
+        await userInDb.save()
+    }
+    console.log(`usuario ${userInDb.dataValues.user_email} actualizado`);
     res.json(userInDb);
   } catch (error) {
     console.log(error);

@@ -30,6 +30,11 @@ module.exports = (sequelize) => {
       defaultValue: false,
       allowNull: true
     },
+    user_moderator: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
+      allowNull: true
+    },
     user_admin: {
       type: DataTypes.BOOLEAN,
       defaultValue: false,

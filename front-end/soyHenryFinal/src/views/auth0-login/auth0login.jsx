@@ -24,7 +24,7 @@ const LogInAuth0 = () => {
     try {
       const token = await getAccessTokenSilently();
       console.log(token);
-      const response = await axios.get("http://localhost:3001/user/info", {
+      const response = await axios.get("http://localhost:3001/userInfo", {
         headers: {
           authorization: `Bearer ${token}`,
         },
