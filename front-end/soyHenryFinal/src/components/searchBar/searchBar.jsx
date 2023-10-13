@@ -7,7 +7,6 @@ function SearchBar() {
   const divisa = localStorage.getItem('divisa');
   const dispatch = useDispatch();
   const [searchTerm, setSearchTerm] = useState("");
-  console.log(divisa);
 
   const handleKeyPress = (event) => {
     if (event.key === "Enter") {
