@@ -1,7 +1,8 @@
 import React from "react";
 import styles from "./dashboard.module.css";
 import DashAside from "../../components/dashBoardComponents/dashAside/dashAside";
-import BoardAutosAdmin from "../../components/dashBoardComponents/boardAutosAdmin/boardAutosAdmin";
+/* import BoardAutosAdmin from "../../components/dashBoardComponents/dashBoardAutos/boardAutosAdmin/boardAutosAdmin";
+ */ import BoardUsersAdmin from "../../components/dashBoardComponents/dashBoardUsers//BoardUsersAdmin/boardUsersAdmin";
 
 function Dashboard() {
   return (
@@ -10,7 +11,9 @@ function Dashboard() {
         <DashAside />
       </div>
       <div className={styles.board}>
-        <BoardAutosAdmin />
+        {/*         <BoardAutosAdmin />
+         */}{" "}
+        <BoardUsersAdmin />{" "}
       </div>
       {/*       <h2 className={styles.dashboardTitle}>Panel de Control</h2>
       <div className={styles.buttonContainer}>

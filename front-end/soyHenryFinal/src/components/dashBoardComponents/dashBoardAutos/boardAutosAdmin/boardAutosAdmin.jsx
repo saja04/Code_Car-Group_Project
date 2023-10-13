@@ -2,7 +2,7 @@ import style from "./boardAutosAdmin.module.css";
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import DashCardsCar from "../dashCardsCars/dashCardsCars";
-import { getCars } from "../../../redux/actions";
+import { getCars } from "../../../../redux/actions";
 
 function BoardAutosAdmin() {
   const dispatch = useDispatch();
