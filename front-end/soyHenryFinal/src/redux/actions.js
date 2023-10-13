@@ -65,7 +65,7 @@ export const deleteCar = (id) => {
 
 export const getCarByName = (input, divisa) => {
   return async(dispatch) => {
-    const response = await axios(`http://localhost:3001/carsName/?input=${input}&divisa=${divisa}`);
+    const response = await axios(`https://codecar.onrender.com/carsName/?input=${input}&divisa=${divisa}`);
     const data = response.data.cars
     console.log(data.cars);
     if(data.error) return alert('auto no encontrado! intenta cambiar la busqueda')
