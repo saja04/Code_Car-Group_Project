@@ -13,7 +13,7 @@ const userCheck = require("../Authentication/userCheckController");
 const getUserInfo = require("../Authentication/getUserInfo");
 const banUser = require("../Authentication/banUser");
 const updateUserInfo = require('../Authentication/updateUserInfo')
-const allReviewsHandler = require("../Handlers/ReviewHandler")
+const allReviewsHandler = require("../Handlers/allReviewsHandler")
 
 const router = Router();
 require("dotenv").config();
@@ -36,7 +36,7 @@ router.post("/webhook", receiveWebhook);
 router.get("/sucess", (req, res) => res.send("Success!"));
 router.get("/pending", (req, res) => res.send("Pending..."));
 router.post("/review", ReviewHandler)
-router.get("/allreviews", allReviewsHandler)
+router.get("/allreview", allReviewsHandler)
 
 router.get('/userOrders/', getAllOrders);
 

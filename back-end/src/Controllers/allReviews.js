@@ -1,10 +1,8 @@
 const {ReviewModel} = require('../db');
 
 const allReviews = async () => {
-  return await ReviewModel.findAll({
-  });
+  return await ReviewModel.findAll();
 };
 
-module.exports = {
-  allReviews,
-};
+module.exports =
+  allReviews

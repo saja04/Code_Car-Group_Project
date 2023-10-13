@@ -1,7 +1,7 @@
 
-const { Review } = require('../Controllers/Review'); 
+const Review  = require('../Controllers/Review'); 
 
-const ReviewHandler = async(req, res) => {
+const AllReviewHandler = async(req, res) => {
   try {
     const newComment = await Review(req);
     res.json({ message: 'Comentario creado con éxito', comment: newComment });
@@ -10,5 +10,5 @@ const ReviewHandler = async(req, res) => {
   }
 }
 
-module.exports =  ReviewHandler ;
+module.exports =  AllReviewHandler ;
 
