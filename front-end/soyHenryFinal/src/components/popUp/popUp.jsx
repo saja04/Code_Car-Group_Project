@@ -19,8 +19,6 @@ function PopUp({ onClose }) {
           photo: user.picture,
         }
       );
-      console.log("holaa", response.data);
-
       return setUserData(response.data);
     } catch (error) {
       console.log(error);
