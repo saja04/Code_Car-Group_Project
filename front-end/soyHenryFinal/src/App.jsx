@@ -20,7 +20,6 @@ import LogInAuth0 from "./views/auth0-login/auth0login";
 import User from "./views/user/user";
 
 function MainApp() {
-  
   const { isAuthenticated, user } = useAuth0();
 
   return (
@@ -38,7 +37,9 @@ function MainApp() {
           <Route
             path="/dashboard"
             element={
-              isAuthenticated && user && user.email === 'elgilazo9123@gmail.com' ? (
+              isAuthenticated &&
+              user &&
+              user.email === "manuelgarciasarza@gmail.com" ? (
                 <Dashboard />
               ) : (
                 <Navigate to="/" />

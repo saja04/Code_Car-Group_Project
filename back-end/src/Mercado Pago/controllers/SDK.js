@@ -6,21 +6,26 @@
  const mercadopago = require ('mercadopago');
  const {HOST} = require("../config")
 
+
  const createOrder= async (req, res) => {
+ const { name, price } = req.query
  mercadopago.configure({
    access_token: ACCESS_TOKEN_MP
  });
+
+ const priceNum = parseInt(price)
 
  const result = await mercadopago.preferences.create({
    "items": [
 	 {
 	   currency_id: "ARG",
-	   title: "PRUEBA",
+	   title: name,
 	   quantity: 1,
-	   unit_price: 100
+	   unit_price: priceNum
 	 }
    ],
    back_urls: {
+		// ** CAMBIAR CUANDO SE MANDE A PRODUCCION A URL DEL SERVIDOR ** //
 		success:  `${HOST}/success`,
 		pending: `${HOST}/pending`,
 		failure: `${HOST}/failure`,

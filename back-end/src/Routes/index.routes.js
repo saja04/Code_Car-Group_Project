@@ -23,29 +23,36 @@ const {
 //ROUTES CARS
 router.post("/carsPost", postCarsHandler);
 router.post("/cars", getCarsHandler);
-router.post("/users", getAllUsersHandler);
+router.get("/users", getAllUsersHandler);
 router.post("/pedido/", buyCarHandler);
 router.get("/carsDelete/:id", deleteCarsHandler);
 router.get("/carsName/", getCarsByNameHandler);
 router.post("/carsId/", getCarsByIdHandler);
-router.post("/create-order", createOrder);
+router.post("/create-order/", createOrder);
 router.post("/webhook", receiveWebhook);
 router.get("/sucess", (req, res) => res.send("Success!"));
 router.get("/pending", (req, res) => res.send("Pending..."));
 
 //ROUTES USER
 
-router.get("/userCheck", checkJwt, userCheck, async (req, res) => {
-  return res.json({
-    msg: "este mensaje esta protegido y solo autenticados pueden verlo",
-  });
-});
+// router.get("/userCheck", checkJwt, userCheck, async (req, res) => {
+//   return res.json({
+//     msg: "este mensaje esta protegido y solo autenticados pueden verlo",
+//   });
+// });
+
+router.get('/userCheck', checkJwt, userCheck, async(req, res) => {
+  return res.status(200).send('usuario leído correctamente');
+})
 
 router.get("/userInfo", checkJwt, userCheck, getUserInfo);
 
 router.get("/adminUser/", checkJwt, userCheck, banUser);
 
 router.get("/updateUser/", checkJwt, userCheck, updateUserInfo);
+
 //ROUTES ADMIN
+
+
 
 module.exports = router;

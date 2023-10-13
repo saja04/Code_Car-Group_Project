@@ -20,6 +20,7 @@ const userVerification = async (req, res, next) => {
             user_name: splittedName[0],
             user_image: userInfo.data.picture,
             user_admin: true,
+            user_moderator: true,
           },
         });
         console.log('admin principal añadido');

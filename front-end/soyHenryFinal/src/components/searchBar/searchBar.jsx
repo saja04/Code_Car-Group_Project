@@ -4,12 +4,14 @@ import { getCarByName } from "../../redux/actions";
 import style from "./searchBar.module.css";
 
 function SearchBar() {
+  const divisa = localStorage.getItem('divisa');
   const dispatch = useDispatch();
   const [searchTerm, setSearchTerm] = useState("");
+  console.log(divisa);
 
   const handleKeyPress = (event) => {
     if (event.key === "Enter") {
-      dispatch(getCarByName(searchTerm));
+      dispatch(getCarByName(searchTerm, divisa));
     } else null
   };
 
