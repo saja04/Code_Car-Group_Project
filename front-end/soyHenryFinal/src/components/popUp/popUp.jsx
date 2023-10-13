@@ -57,18 +57,7 @@ function PopUp({ onClose }) {
     return (
       <div className={style.popup}>
         <div className={style.popupContent}>
-          <h3 className={style.name}>manuelgarciasarza</h3>
-          <NavLink
-            to="/user"
-            className={style.links}
-            onClick={handleGoToUserProfile}
-          >
-            Mi perfil
-          </NavLink>
-          <NavLink className={style.links}>Mis Pedidos</NavLink>
-          <p className={style.links} onClick={logout}>
-            Cerrar sesión
-          </p>
+          <p>Cargando...</p>
         </div>
       </div>
     );
