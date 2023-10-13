@@ -4,7 +4,7 @@ const { URL_INFO } = process.env;
 
 const getUserInfo = async (req, res) => {
   try {
-    const accesToken = req.auth.token;
+    const accesToken = await req.auth.token;
     const userInfo = await axios.get(URL_INFO, {
       headers: {
         authorization: `Bearer ${accesToken}`,
