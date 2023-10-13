@@ -35,17 +35,24 @@ router.get("/pending", (req, res) => res.send("Pending..."));
 
 //ROUTES USER
 
-router.get("/userCheck", checkJwt, userCheck, async (req, res) => {
-  return res.json({
-    msg: "este mensaje esta protegido y solo autenticados pueden verlo",
-  });
-});
+// router.get("/userCheck", checkJwt, userCheck, async (req, res) => {
+//   return res.json({
+//     msg: "este mensaje esta protegido y solo autenticados pueden verlo",
+//   });
+// });
+
+router.get('/userCheck', checkJwt, userCheck, async(req, res) => {
+  return res.status(200).send('usuario leído correctamente');
+})
 
 router.get("/userInfo", checkJwt, userCheck, getUserInfo);
 
 router.get("/adminUser/", checkJwt, userCheck, banUser);
 
 router.get("/updateUser/", checkJwt, userCheck, updateUserInfo);
+
 //ROUTES ADMIN
+
+
 
 module.exports = router;

@@ -2,7 +2,7 @@ const { Car } = require("../db");
 
 const getCarsByName = async (req) => {
 
-  const {input, precio} = req.body
+  const {input, precio} = req.query
 
   const query = { where: { car_id: id, deleted: false } };
 
