@@ -6,6 +6,7 @@ const getCarsByNameHandler = require("../Handlers/getCarsByNameHandler");
 const getCarsByIdHandler = require("../Handlers/getCarsByIdHandler");
 const getAllUsersHandler = require("../Handlers/getAllUsersHandler");
 const buyCarHandler = require("../Handlers/buyCarHandler");
+const getAllOrders = require('../Controllers/compras/getAllOrders')
 
 const userCheck = require("../Authentication/userCheckController");
 const getUserInfo = require("../Authentication/getUserInfo");
@@ -33,19 +34,15 @@ router.post("/webhook", receiveWebhook);
 router.get("/sucess", (req, res) => res.send("Success!"));
 router.get("/pending", (req, res) => res.send("Pending..."));
 
-//ROUTES USER
+router.get('/userOrders/', getAllOrders);
 
-// router.get("/userCheck", checkJwt, userCheck, async (req, res) => {
-//   return res.json({
-//     msg: "este mensaje esta protegido y solo autenticados pueden verlo",
-//   });
-// });
+//ROUTES USER
 
 router.post('/userCheck', userCheck, async(req, res) => {
   return res.status(200).send('usuario leído correctamente');
-})
+});
 
-router.get("/userInfo", userCheck, getUserInfo);
+router.post("/userInfo", userCheck, getUserInfo);
 
 router.get("/adminUser/", userCheck, banUser);
 

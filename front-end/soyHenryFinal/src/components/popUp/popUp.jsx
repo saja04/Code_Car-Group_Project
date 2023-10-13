@@ -5,7 +5,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { NavLink, useNavigate } from "react-router-dom";
 
 function PopUp({ onClose }) {
-  const { logout, getAccessTokenSilently } = useAuth0();
+  const { logout, getAccessTokenSilently, user, } = useAuth0();
   const navigate = useNavigate();
 
   const [userData, setUserData] = useState(null);
@@ -13,12 +13,11 @@ function PopUp({ onClose }) {
   const getNoAuthenticated = async () => {
     try {
       const token = await getAccessTokenSilently();
-      const response = await axios.get(
-        "https://codecar.onrender.com/userInfo",
+      const response = await axios.post(
+        "http://localhost:3001/userInfo",
         {
-          headers: {
-            authorization: `Bearer ${token}`,
-          },
+          email: user.email,
+          photo: user.picture
         }
       );
       console.log("holaa", response.data);
