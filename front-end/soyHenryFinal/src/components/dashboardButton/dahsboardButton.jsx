@@ -1,11 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { useAuth0 } from "@auth0/auth0-react"; 
+import { useAuth0 } from "@auth0/auth0-react";
 
 function DashboardButton() {
   const { isAuthenticated, user } = useAuth0();
 
-  const isAdmin = isAuthenticated && user && user.email === 'elgilazo9123@gmail.com';
+  const isAdmin =
+    isAuthenticated && user && user.email === "manuelgarciasarza@gmail.com";
 
   return isAdmin ? (
     <Link to="/dashboard" className="settings-button">
@@ -15,4 +16,3 @@ function DashboardButton() {
 }
 
 export default DashboardButton;
-
