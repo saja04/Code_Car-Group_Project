@@ -41,15 +41,15 @@ router.get("/pending", (req, res) => res.send("Pending..."));
 //   });
 // });
 
-router.get('/userCheck', checkJwt, userCheck, async(req, res) => {
+router.post('/userCheck', userCheck, async(req, res) => {
   return res.status(200).send('usuario leído correctamente');
 })
 
-router.get("/userInfo", checkJwt, userCheck, getUserInfo);
+router.get("/userInfo", userCheck, getUserInfo);
 
-router.get("/adminUser/", checkJwt, userCheck, banUser);
+router.get("/adminUser/", userCheck, banUser);
 
-router.get("/updateUser/", checkJwt, userCheck, updateUserInfo);
+router.get("/updateUser/", userCheck, updateUserInfo);
 
 //ROUTES ADMIN
 
