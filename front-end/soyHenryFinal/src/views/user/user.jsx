@@ -12,20 +12,14 @@ function User() {
   const [userData, setUserData] = useState(null);
 
   const {
-    loginWithRedirect,
-    logout,
     user,
-    isAuthenticated,
-    getAccessTokenSilently,
   } = useAuth0();
 
   const getNoAuthenticated = async () => {
     try {
-      const token = await getAccessTokenSilently();
-      const response = await axios.get("https://codecar.onrender.com/userInfo", {
-        headers: {
-          authorization: `Bearer ${token}`,
-        }
+      const response = await axios.post("https://codecar.onrender.com/userInfo", {
+        email: user.email,
+        photo: user.picture
       });
       console.log(response.data);
       return setUserData(response.data);
