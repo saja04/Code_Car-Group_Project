@@ -1,16 +1,14 @@
 import axios from "axios";
+import { useAuth0 } from "@auth0/auth0-react";
 
 export const GET_CARS = "GET_CARS";
 export const GET_FILTERS = "GET_FILTERS";
 export const GET_CAR_BY_ID = "GET_CAR_BY_ID";
 export const DELETE_CAR = "DELETE_CAR";
 export const GET_CAR_BY_NAME = "GET_CAR_BY_NAME";
-export const REGISTER_USER = "REGISTER_USER";
-export const REGISTER_USER_FAILURE = "REGISTER_USER_FAILURE";
-export const LOGIN_USER = "LOGIN_USER";
-export const LOGIN_USER_FAILURE = "LOGIN_USER_FAILURE";
 export const CHANGE_CURRENCY = "CHANGE_CURRENCY";
 export const GET_USERS = "GET_USERS";
+export const GET_USER_INFO = "GET_USER_INFO";
 
 export const getCars = (divisa) => {
   return async (dispatch) => {
@@ -100,6 +98,25 @@ export const getUsers = () => {
     const data = response.data;
     return dispatch({
       type: GET_USERS,
+      payload: data,
+    });
+  };
+};
+
+export const getUserInfo = () => {
+  return async (dispatch) => {
+    const { getAccessTokenSilently } = useAuth0();
+    const token = await getAccessTokenSilently();
+    console.log(token);
+    const response = await axios.get("https://codecar.onrender.com/userInfo", {
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
+    });
+    const data = response.data;
+    console.log(data);
+    return dispatch({
+      type: GET_USER_INFO,
       payload: data,
     });
   };
