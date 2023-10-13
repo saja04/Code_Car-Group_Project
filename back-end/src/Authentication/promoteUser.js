@@ -18,7 +18,7 @@ const promoteUser = async (req, res) => {
     });
     userInDb.user_moderator = moderator;
     await userInDb.save();
-    return 
+    return res.status(200).send()
   } else return res.status(400).send("you are not admin!");
 };
 
