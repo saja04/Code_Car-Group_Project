@@ -42,7 +42,7 @@ let capsEntries = entries.map((entry) => [
 ]);
 sequelize.models = Object.fromEntries(capsEntries);
 
-const { Admin, Car, CarCategory, User, UserAddress, UserFavs, UserOrder } =
+const { Admin, Car, CarCategory, User, UserAddress, UserFavs, UserOrder, ReviewModel } =
   sequelize.models;
 
 User.hasMany(UserAddress, { foreignKey: "user_id" });
@@ -51,6 +51,7 @@ UserFavs.belongsTo(Car, { foreignKey: "car_id" }); // Relación con Car
 UserOrder.belongsTo(User, { foreignKey: "user_id" }); // Relación con User
 UserOrder.belongsTo(Car, { foreignKey: "car_id" }); // Relación con Car
 UserOrder.belongsTo(UserAddress, { foreignKey: "user_address_id" }); // Relación con UserAddress
+
 
 module.exports = {
   ...sequelize.models,
