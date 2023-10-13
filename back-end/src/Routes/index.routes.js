@@ -22,8 +22,8 @@ const {
 
 //ROUTES CARS
 router.post("/carsPost", postCarsHandler);
-router.get("/cars", getCarsHandler);
-router.post("/users", getAllUsersHandler);
+router.post("/cars", getCarsHandler);
+router.get("/users", getAllUsersHandler);
 router.post("/pedido/", buyCarHandler);
 router.get("/carsDelete/:id", deleteCarsHandler);
 router.get("/carsName/", getCarsByNameHandler);
