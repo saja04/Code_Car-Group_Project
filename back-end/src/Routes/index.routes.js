@@ -6,12 +6,9 @@ const getCarsByNameHandler = require("../Handlers/getCarsByNameHandler");
 const getCarsByIdHandler = require("../Handlers/getCarsByIdHandler");
 const getAllUsersHandler = require("../Handlers/getAllUsersHandler");
 const buyCarHandler = require("../Handlers/buyCarHandler");
-<<<<<<< HEAD
 const ReviewHandler = require("../Handlers/ReviewHandler")
-=======
 const getAllOrders = require('../Controllers/compras/getAllOrders')
 
->>>>>>> 99df4be4c730914c6434aed8a652706d6073088a
 const userCheck = require("../Authentication/userCheckController");
 const getUserInfo = require("../Authentication/getUserInfo");
 const banUser = require("../Authentication/banUser");
