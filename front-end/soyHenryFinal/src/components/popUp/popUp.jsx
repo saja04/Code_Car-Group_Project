@@ -12,9 +12,8 @@ function PopUp({ onClose }) {
 
   const getNoAuthenticated = async () => {
     try {
-      const token = await getAccessTokenSilently();
       const response = await axios.post(
-        "https://codecar.onrender.com/userLogin",
+        "https://codecar.onrender.com/userInfo",
         {
           email: user.email,
           photo: user.picture,
