@@ -2,11 +2,11 @@ const { Car } = require("../db");
 
 const getCarsByName = async (req) => {
 
-  const {input, precio} = req.body
+  const {input, divisa} = req.query
 
-  const query = { where: { car_id: id, deleted: false } };
+  const query = { where: { deleted: false } };
 
-  if (precio) query.attributes = { exclude: [precio] };
+  if (divisa) query.attributes = { exclude: [divisa] };
 
 
   if (!input) {
@@ -15,7 +15,7 @@ const getCarsByName = async (req) => {
 
   const formattedInput = input.charAt(0).toUpperCase() + input.slice(1).toLowerCase();
 
-  const allCars = await Car.findOne(query);
+  const allCars = await Car.findAll(query);
 
   const results = allCars.map((car) => {
     const marca = car.dataValues.car_marca;
