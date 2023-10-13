@@ -1,0 +1,54 @@
+.postNewCarContainer {
+  max-width: 500px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #cfcfcf;
+  border-radius: 5px;
+  border: gray 1px solid;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.postNewCarH2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.postNewCarFormGroup {
+  margin-bottom: 15px;
+}
+
+.postNewCarLabel {
+  font-weight: bold;
+  display: block;
+  margin-bottom: 5px;
+  color: #555;
+}
+
+.postNewCarSelect,
+.postNewCarInput {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 16px;
+  box-sizing: border-box;
+}
+
+.postNewCarButton {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.postNewCarButton:hover {
+  background-color: #0056b3;
+}
+
+.error {
+  color: red;
+}

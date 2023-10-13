@@ -6,7 +6,12 @@ const getCarsByNameHandler = require("../Handlers/getCarsByNameHandler");
 const getCarsByIdHandler = require("../Handlers/getCarsByIdHandler");
 const getAllUsersHandler = require("../Handlers/getAllUsersHandler");
 const buyCarHandler = require("../Handlers/buyCarHandler");
+<<<<<<< HEAD
 const ReviewHandler = require("../Handlers/ReviewHandler")
+=======
+const getAllOrders = require('../Controllers/compras/getAllOrders')
+
+>>>>>>> 99df4be4c730914c6434aed8a652706d6073088a
 const userCheck = require("../Authentication/userCheckController");
 const getUserInfo = require("../Authentication/getUserInfo");
 const banUser = require("../Authentication/banUser");
@@ -24,7 +29,7 @@ const {
 //ROUTES CARS
 router.post("/carsPost", postCarsHandler);
 router.post("/cars", getCarsHandler);
-router.post("/users", getAllUsersHandler);
+router.get("/users", getAllUsersHandler);
 router.post("/pedido/", buyCarHandler);
 router.get("/carsDelete/:id", deleteCarsHandler);
 router.get("/carsName/", getCarsByNameHandler);
@@ -36,19 +41,22 @@ router.get("/pending", (req, res) => res.send("Pending..."));
 router.post("/review", ReviewHandler)
 router.get("/allreviews", allReviewsHandler)
 
+router.get('/userOrders/', getAllOrders);
+
 //ROUTES USER
 
-router.get("/userCheck", checkJwt, userCheck, async (req, res) => {
-  return res.json({
-    msg: "este mensaje esta protegido y solo autenticados pueden verlo",
-  });
+router.post('/userCheck', userCheck, async(req, res) => {
+  return res.status(200).send('usuario leído correctamente');
 });
 
-router.get("/userInfo", checkJwt, userCheck, getUserInfo);
+router.post("/userInfo", userCheck, getUserInfo);
 
-router.get("/adminUser/", checkJwt, userCheck, banUser);
+router.get("/adminUser/", userCheck, banUser);
 
-router.get("/updateUser/", checkJwt, userCheck, updateUserInfo);
+router.get("/updateUser/", userCheck, updateUserInfo);
+
 //ROUTES ADMIN
+
+
 
 module.exports = router;

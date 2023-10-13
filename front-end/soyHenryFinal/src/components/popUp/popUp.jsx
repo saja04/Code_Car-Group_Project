@@ -1,39 +1,67 @@
-import React from 'react';
-import style from './popUp.module.css';
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import style from "./popUp.module.css";
 import { useAuth0 } from "@auth0/auth0-react";
-import { NavLink } from "react-router-dom";
-import { useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate } from "react-router-dom";
 
-function PopUp({ onClose, user }) {
-  const { user: auth0User, logout } = useAuth0(); 
+function PopUp({ onClose }) {
+  const { logout, getAccessTokenSilently, user } = useAuth0();
   const navigate = useNavigate();
+
+  const [userData, setUserData] = useState(null);
+
+  const getNoAuthenticated = async () => {
+    try {
+      const response = await axios.post(
+        "https://codecar.onrender.com/userInfo",
+        {
+          email: user.email,
+          photo: user.picture,
+        }
+      );
+      return setUserData(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getNoAuthenticated();
+  }, []);
 
   const handleGoToUserProfile = () => {
     const profileURL = `/user/`;
 
     navigate(profileURL);
   };
-
-  return (
-    <div className={style.popup}>
-      <div className={style.popupContent}>
-        <div className={style.profileInfo}>
-          <p>{user.email}</p>
-          <button onClick={handleGoToUserProfile}>Mi perfil</button>
-        </div>
-        <div className={style.userActions}>
-          <h2>Mis Pedidos</h2>
-          <NavLink className={style.links} onClick={logout}>
-            Cerrar sesión
+  if (userData) {
+    return (
+      <div className={style.popup}>
+        <div className={style.popupContent}>
+          <h3 className={style.name}>{userData.user_name} </h3>
+          <NavLink
+            to="/user"
+            className={style.links}
+            onClick={handleGoToUserProfile}
+          >
+            Mi perfil
           </NavLink>
-         
+          <NavLink className={style.links}>Mis Pedidos</NavLink>
+          <p className={style.links} onClick={logout}>
+            Cerrar sesión
+          </p>
         </div>
       </div>
-    </div>
-  );
+    );
+  } else {
+    return (
+      <div className={style.popup}>
+        <div className={style.popupContent}>
+          <p>Cargando...</p>
+        </div>
+      </div>
+    );
+  }
 }
 
 export default PopUp;
-
-
-

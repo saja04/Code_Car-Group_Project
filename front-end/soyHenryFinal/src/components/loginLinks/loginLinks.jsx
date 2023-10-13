@@ -20,7 +20,6 @@ function LoginLinks() {
   }, []);
 
   const togglePopUp = () => {
-   
     setIsPopUpOpen(!isPopUpOpen);
   };
 
@@ -39,7 +38,9 @@ function LoginLinks() {
           <NavLink
             className={style.links}
             onClick={() => {
-              loginWithRedirect({authorizationParams:{ screen_hint: "signup" }});
+              loginWithRedirect({
+                authorizationParams: { screen_hint: "signup" },
+              });
             }}
           >
             Registrarse
@@ -51,9 +52,6 @@ function LoginLinks() {
             {" "}
             <img className={style.user} src={user.picture} alt={user.name} />
           </span>
-          <NavLink className={style.links} onClick={logout}>
-            Cerrar sesión
-          </NavLink>
         </div>
       )}
       {isPopUpOpen && <PopUp user={user} onClose={closePopUp} />}
