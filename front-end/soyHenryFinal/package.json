@@ -16,6 +16,7 @@
     "@mercadopago/sdk-react": "^0.0.15",
     "@reduxjs/toolkit": "^1.9.6",
     "@strapi/provider-upload-cloudinary": "^4.14.3",
+    "antd": "^5.10.0",
     "axios": "^1.5.1",
     "cloudinary": "^1.41.0",
     "cloudinary-core": "^2.13.0",

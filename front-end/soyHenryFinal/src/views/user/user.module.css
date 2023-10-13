@@ -1,0 +1,23 @@
+.userContainer {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    height: 50vh; 
+    background-color: #f0f0f0; 
+    padding: 135px;
+  }
+
+.userCard {
+    width: 800px; 
+
+  }
+  
+  .imageCard{
+    width: 150px; 
+    height: 150px;
+  }
+
+  .cargando{
+    color:black;
+    
+  }
