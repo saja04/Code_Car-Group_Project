@@ -31,7 +31,7 @@ function CarDetailPage() {
       divisa: divisa,
     });
     const data = response.data;
-    console.log(data);
+   
     return setSingleCar(data);
   };
 
@@ -52,11 +52,35 @@ function CarDetailPage() {
     return <div>Cargando...</div>;
   }
 
-  const handleBuy = () => {
-    if(!isAuthenticated){
-      return loginWithRedirect()
-    } else return alert('simulacion de compra, estas logeado')
-  }
+  const handleBuy = async () => {
+    if (!isAuthenticated) {
+      alert("Debes estar logeado para comprar un coche, avivate")
+      loginWithRedirect();
+    } else {
+      try {
+        const carName = `${singleCar.car_marca} ${singleCar.car_modelo}`;
+        const carPrice = singleCar.car_precio_ars;
+  
+        console.log('Información del automóvil:', carName, carPrice);
+  
+        const response = await axios.post(`https://codecar.onrender.com/create-order/?name=${carName}&price=1`);
+  
+        console.log(response.data);
+        if (response.data && response.data.paymentLink) {
+          
+          console.log('Enlace de pago:', response.data.paymentLink);
+          window.location.href = response.data.paymentLink;
+        } else {
+          console.error('No se recibió un enlace de pago válido.');
+        }
+      } catch (error) {
+        console.error('Error al crear la orden de MercadoPago:', error);
+      }
+    }
+  };
+  
+  
+  
 
   return (
     <div className={carDetailPageStyles.container}>
