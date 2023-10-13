@@ -13,7 +13,6 @@ import Shop from "./views/shop/shop";
 import Contact from "./views/contact/contact";
 import About from "./views/about/about";
 import CarDetailPage from "./views/detail/detailCar";
-import PostNewCar from "./views/postNewCar/postNewCar";
 import Dashboard from "./views/dashboard/dashboard";
 import Delete from "./views/delete/delete";
 import LogInAuth0 from "./views/auth0-login/auth0login";
@@ -33,7 +32,6 @@ function MainApp() {
           <Route path="/contacto" element={<Contact />} />
           <Route path="/nosotros" element={<About />} />
           <Route path="/detail/:id" element={<CarDetailPage />} />
-          <Route path="/post" element={<PostNewCar />} />
           <Route
             path="/dashboard"
             element={

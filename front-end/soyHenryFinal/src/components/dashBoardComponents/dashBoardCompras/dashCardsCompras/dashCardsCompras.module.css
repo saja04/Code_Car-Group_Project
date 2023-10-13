@@ -1,0 +1,26 @@
+.container {
+  border: solid 1px grey;
+  padding: 6px;
+  margin: 8px;
+  border-radius: 10px;
+  background-color: #e2e2e2;
+}
+
+.info {
+  display: flex;
+  width: 100%;
+}
+
+.title {
+  width: 25%;
+  font-size: 12px;
+}
+
+.kmContent {
+  width: 20%;
+  display: flex;
+}
+
+.km {
+  width: 50%;
+}
