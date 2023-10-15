@@ -59,7 +59,7 @@ function PopUp({ onClose }) {
     return (
       <div className={style.popup}>
         <div className={style.popupContent}>
-          <h3 className={style.name}>manuelgarciasarza</h3>
+          <h3 className={style.name}>Cargando...</h3>
           <NavLink
             to="/user"
             className={style.links}
