@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import carStyles from "./postNewCar.module.css";
 import axios from "axios";
 
-
 function PostNewCar() {
   const [formData, setFormData] = useState({
     marca: "Chevrolet",
@@ -23,30 +22,36 @@ function PostNewCar() {
   useEffect(() => {
     var myWidget = window.cloudinary.createUploadWidget(
       {
-        cloudName: 'dvspmk6zl',
-        uploadPreset: 'p6jbbnlt',
+        cloudName: "dvspmk6zl",
+        uploadPreset: "p6jbbnlt",
         maxFiles: 1,
-        accept: 'image/*'
+        accept: "image/*",
       },
       (error, result) => {
-        if (!error && result && result.event === 'success') {
-          console.log('¡Listo! Aquí tienes la información de la imagen: ', result.info);
-    
+        if (!error && result && result.event === "success") {
+          console.log(
+            "¡Listo! Aquí tienes la información de la imagen: ",
+            result.info
+          );
+
           const imageUrl = result.info.secure_url;
           setFormData({
             ...formData,
-            imagen: imageUrl, 
+            imagen: imageUrl,
           });
-    
+
           setImageUploaded(true);
         }
       }
     );
-    
 
-    document.getElementById('upload_widget').addEventListener('click', function () {
-      myWidget.open();
-    }, false);
+    document.getElementById("upload_widget").addEventListener(
+      "click",
+      function () {
+        myWidget.open();
+      },
+      false
+    );
   }, []);
 
   const [errors, setErrors] = useState({
@@ -66,8 +71,6 @@ function PostNewCar() {
     "Gris",
     "Marrón",
   ];
-
-
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -95,7 +98,6 @@ function PostNewCar() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!imageUploaded) {
-      
       alert("Por favor, sube una imagen antes de enviar el formulario.");
       return;
     }
@@ -119,10 +121,11 @@ function PostNewCar() {
       alert("¡Se ha creado un vehículo exitosamente!");
 
       window.location.reload();
-
     } catch (error) {
       console.error("Error al agregar el vehículo:", error);
-      alert("Hubo un error al agregar el vehículo. Por favor, inténtalo de nuevo.");
+      alert(
+        "Hubo un error al agregar el vehículo. Por favor, inténtalo de nuevo."
+      );
     }
   };
 
@@ -132,16 +135,19 @@ function PostNewCar() {
 
       <form onSubmit={handleSubmit}>
         <div className={carStyles.postNewCarFormGroup}>
+          <div className={carStyles.postNewCarFormGroup}>
+            <label className={carStyles.postNewCarLabel} htmlFor="imagen">
+              Subir imagen:
+            </label>
+            <label id="upload_widget" className="cloudinary-button">
+              Subir Imagen
+            </label>
+            <script
+              src="https://upload-widget.cloudinary.com/global/all.js"
+              type="text/javascript"
+            />
+          </div>
 
-        <div className={carStyles.postNewCarFormGroup}>
-          <label className={carStyles.postNewCarLabel} htmlFor="imagen">
-           Subir imagen:
-          </label>
-          <label id="upload_widget" className="cloudinary-button">Upload files</label>
-          <script src="https://upload-widget.cloudinary.com/global/all.js" type="text/javascript" />
-
-        </div>
-        
           <label className={carStyles.postNewCarLabel} htmlFor="marca">
             Marca:
           </label>
@@ -320,16 +326,12 @@ function PostNewCar() {
           </select>
         </div>
 
-
-
-
         <div className={carStyles.postNewCarFormGroup}>
           <button type="submit" className={carStyles.postNewCarButton}>
             Agregar Vehículo
           </button>
         </div>
       </form>
-
     </div>
   );
 }
