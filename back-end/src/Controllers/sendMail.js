@@ -6,7 +6,7 @@ try {
   
   await transporter.sendMail({
     from: '"COMPRA REALIZADA" <carugatimateo@gmail.com>',
-    to: UserModel.user_name,
+    to: UserModel.user_email,
     subject: "La compra de su vehiculo fue realizada con exito.",
     text: "lorem ipsum",
     html: `
