@@ -17,6 +17,7 @@ function PostNewCar() {
     kilometraje: "",
     condicion: "Usado",
     imagen: "",
+    stock: ""
   });
 
 
@@ -42,7 +43,7 @@ function PostNewCar() {
   const handleInputChange = (e) => {
     const { name, value } = e.target;
 
-    if (["precio_usd", "precio_ars", "kilometraje"].includes(name)) {
+    if (["precio_usd", "precio_ars", "kilometraje", "stock"].includes(name)) {
       if (!/^\d*$/.test(value)) {
         setErrors({
           ...errors,
@@ -62,7 +63,7 @@ function PostNewCar() {
     });
   };
 
-  const maxFileSize = 50 * 1024 * 1024; 
+  const maxFileSize = 50 * 1024 * 1024;
 
   const handleFileUpload = (e) => {
     const file = e.target.files[0];
@@ -70,7 +71,7 @@ function PostNewCar() {
       alert("El archivo es demasiado grande. El tamaño máximo permitido es 50 MB.");
       return;
     }
-  
+
     Resizer.imageFileResizer(file, 100, 100, "JPEG", 100, 0, (uri) => {
       setFormData({
         ...formData,
@@ -100,6 +101,7 @@ function PostNewCar() {
         car_kilometraje: formData.kilometraje,
         car_condicion: formData.condicion,
         car_imagen: formData.imagen,
+        stock: formData.stock
       };
 
       await axios.post("https://codecar.onrender.com/carsPost", carData);
@@ -109,7 +111,7 @@ function PostNewCar() {
 
     } catch (error) {
       console.error("Error al agregar el vehículo:", error);
-      
+
     }
   };
 
@@ -130,9 +132,9 @@ function PostNewCar() {
             }} />
           </div>
 
-          {formData.imagen && ( 
+          {formData.imagen && (
             <div className={carStyles.postNewCarImage}>
-              <img src={formData.imagen} alt="Vehículo" style={{ maxWidth: '70px', maxHeight:"70px" }}/>
+              <img src={formData.imagen} alt="Vehículo" style={{ maxWidth: '70px', maxHeight: "70px" }} />
             </div>
           )}
 
@@ -312,6 +314,27 @@ function PostNewCar() {
             <option value="Usado">Usado</option>
             <option value="0km">0km</option>
           </select>
+        </div>
+
+        <div className={carStyles.postNewCarFormGroup}>
+
+          <label className={carStyles.postNewCarLabel} htmlFor="stock">
+            Stock:
+          </label>
+          <input
+            type="text"
+            id="stock"
+            name="stock"
+            className={carStyles.postNewCarInput}
+            value={formData.stock}
+            onChange={handleInputChange}
+            required
+          />
+
+          {errors.stock && (
+            <div className={carStyles.error}>{errors.stock}</div>
+          )}
+
         </div>
 
         <div className={carStyles.postNewCarFormGroup}>
