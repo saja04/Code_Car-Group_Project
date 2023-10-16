@@ -52,35 +52,12 @@ function CarDetailPage() {
   if (!singleCar) {
     return <div>Cargando...</div>;
   }
+  
+// CarDetailPage.js
+const handleRedirect = () => {
+  navigate("/detailBuy", { state: { carDetails: singleCar, carPrice: singleCar.car_precio_ars } });
+};
 
-  const handleBuy = async () => {
-    if (!isAuthenticated) {
-      alert("Debes estar logeado para comprar un coche, avivate")
-      loginWithRedirect();
-    } else {
-      try {
-        const carName = `${singleCar.car_marca} ${singleCar.car_modelo}`;
-        const carPrice = singleCar.car_precio_ars;
-  
-        console.log('Información del automóvil:', carName, carPrice);
-  
-        const response = await axios.post(`https://codecar.onrender.com/create-order/?name=${carName}&price=1`);
-
-        console.log(response.data);
-  
-        if (response.data) {
-        
-         window.location.href = response.data;
-        } else {
-          console.error('No se recibió un enlace de pago válido.');
-        }
-      } catch (error) {
-        console.error('Error al crear la orden de MercadoPago:', error);
-      }
-    }
-  };
-  
-  
   
 
   return (
@@ -111,7 +88,7 @@ function CarDetailPage() {
               ? `USD$${singleCar.car_precio_usd}`
               : `ARS$${singleCar.car_precio_ars}`}
           </p>
-          <button className={carDetailPageStyles.buyNow} onClick={handleBuy}>Comprar</button>
+          <button className={carDetailPageStyles.buyNow} onClick={handleRedirect}>Comprar</button>
         </div>
       </div>
       {isLightboxOpen && (
