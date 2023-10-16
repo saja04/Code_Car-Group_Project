@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import carStyles from "./postNewCar.module.css";
 import axios from "axios";
+import { uploadFile } from "../../../../utils/firebase";
 
 function PostNewCar() {
   const [formData, setFormData] = useState({
@@ -17,42 +18,7 @@ function PostNewCar() {
     imagen: "",
   });
 
-  const [imageUploaded, setImageUploaded] = useState(false);
 
-  useEffect(() => {
-    var myWidget = window.cloudinary.createUploadWidget(
-      {
-        cloudName: "dvspmk6zl",
-        uploadPreset: "p6jbbnlt",
-        maxFiles: 1,
-        accept: "image/*",
-      },
-      (error, result) => {
-        if (!error && result && result.event === "success") {
-          console.log(
-            "¡Listo! Aquí tienes la información de la imagen: ",
-            result.info
-          );
-
-          const imageUrl = result.info.secure_url;
-          setFormData({
-            ...formData,
-            imagen: imageUrl,
-          });
-
-          setImageUploaded(true);
-        }
-      }
-    );
-
-    document.getElementById("upload_widget").addEventListener(
-      "click",
-      function () {
-        myWidget.open();
-      },
-      false
-    );
-  }, []);
 
   const [errors, setErrors] = useState({
     precio_usd: "",
@@ -95,13 +61,41 @@ function PostNewCar() {
     });
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (!imageUploaded) {
-      alert("Por favor, sube una imagen antes de enviar el formulario.");
+  const maxFileSize = 50 * 1024 * 1024; // 50 MB
+
+  const handleFileUpload = (e) => {
+    const file = e.target.files[0];
+    if (file.size > maxFileSize) {
+      alert("El archivo es demasiado grande. El tamaño máximo permitido es 50 MB.");
       return;
     }
 
+    // Continuar con la carga del archivo.
+  };
+
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!formData.imagen) {
+      alert("Por favor, sube una imagen antes de enviar el formulario.");
+      return;
+    }
+    const carData = {
+      marca: formData.marca,
+      modelo: formData.modelo,
+      año: formData.año,
+      color: formData.color,
+      tipo_de_motor: formData.tipo_de_motor,
+      tipo_de_auto: formData.tipo_de_auto,
+      precio_usd: formData.precio_usd,
+      precio_ars: formData.precio_ars,
+      kilometraje: formData.kilometraje,
+      condicion: formData.condicion,
+      imagen: formData.imagen,
+    };
+  
+    // Muestra los datos en la consola para fines de depuración
+    console.log("Datos del formulario:", carData);
     try {
       const carData = {
         car_marca: formData.marca,
@@ -121,11 +115,10 @@ function PostNewCar() {
       alert("¡Se ha creado un vehículo exitosamente!");
 
       window.location.reload();
+
     } catch (error) {
       console.error("Error al agregar el vehículo:", error);
-      alert(
-        "Hubo un error al agregar el vehículo. Por favor, inténtalo de nuevo."
-      );
+      
     }
   };
 
@@ -134,19 +127,23 @@ function PostNewCar() {
       <h2 className={carStyles.postNewCarH2}>Agregar un Nuevo Vehículo</h2>
 
       <form onSubmit={handleSubmit}>
+
+
         <div className={carStyles.postNewCarFormGroup}>
+
+
           <div className={carStyles.postNewCarFormGroup}>
-            <label className={carStyles.postNewCarLabel} htmlFor="imagen">
-              Subir imagen:
-            </label>
-            <label id="upload_widget" className="cloudinary-button">
-              Subir Imagen
-            </label>
-            <script
-              src="https://upload-widget.cloudinary.com/global/all.js"
-              type="text/javascript"
-            />
+            <input type="file" name="" id="" onChange={(e) => {
+              handleFileUpload(e);
+              uploadFile(e.target.files[0], setFormData);
+            }} />
           </div>
+
+          {formData.imagen && ( // Muestra la imagen si hay una URL en formData.imagen
+            <div className={carStyles.postNewCarImage}>
+              <img src={formData.imagen} alt="Vehículo" />
+            </div>
+          )}
 
           <label className={carStyles.postNewCarLabel} htmlFor="marca">
             Marca:
