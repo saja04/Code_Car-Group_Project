@@ -9,11 +9,12 @@ const { Meta } = Card;
 
 function User() {
   const { id } = useParams();
-  const [userData, setUserData] = useState(null);
   
   const { user } = useAuth0();
 
-  const getNoAuthenticated = async (user) => {
+  const [userData, setUserData] = useState(null);
+
+  const getNoAuthenticated = async () => {
     try {
       console.log(user);
       const response = await axios.post(
@@ -31,7 +32,7 @@ function User() {
 
   useEffect(() => {
     getNoAuthenticated();
-  }, []);
+  }, [user]);
 
   const [isEditing, setIsEditing] = useState(false);
   const [newUserData, setNewUserData] = useState();
@@ -43,6 +44,7 @@ function User() {
 
   const saveChanges = async () => {
     try {
+      console.log(newUserData);
       const url = `https://codecar.onrender.com/updateUser/`;
 
       await axios.post(url, newUserData);
@@ -78,7 +80,7 @@ function User() {
                         onChange={(e) =>
                           setNewUserData({
                             ...newUserData,
-                            user_name: e.target.value,
+                            name: e.target.value,
                           })
                         }
                       />
@@ -91,7 +93,7 @@ function User() {
                         onChange={(e) =>
                           setNewUserData({
                             ...newUserData,
-                            user_address: e.target.value,
+                            address: e.target.value,
                           })
                         }
                       />
@@ -102,7 +104,7 @@ function User() {
                         onChange={(e) =>
                           setNewUserData({
                             ...newUserData,
-                            user_phone: parseInt(e.target.value),
+                            phone: parseInt(e.target.value),
                           })
                         }
                       />
