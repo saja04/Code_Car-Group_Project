@@ -3,11 +3,15 @@
   margin: 10px;
   width: 400px;
 }
+.cardImg{
+  width: auto;
+  height: auto;
+}
 
-.conteiner img {
+/* .conteiner img {
   height: 400px;
   width: 400px;
-}
+} */
 
 .conteiner p {
   margin: 2px 0;

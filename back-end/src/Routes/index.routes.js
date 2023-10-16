@@ -39,7 +39,6 @@ const createOrderHandler = require("../Handlers/Compras/createOrderHandler");
 //ROUTES CARS
 router.post("/carsPost", postCarsHandler);
 router.post("/cars", getCarsHandler);
-router.get("/users", getAllUsersHandler);
 router.post("/pedido/", buyCarHandler);
 router.get("/carsDelete/:id", deleteCarsHandler);
 router.get("/carsName/", getCarsByNameHandler);
@@ -53,15 +52,13 @@ router.get("/allreview", allReviewsHandler)
 
 //ROUTES USER
 
-router.post('/userCheck', userCheck, async(req, res) => {
-  return res.status(200).send('usuario leído correctamente');
-});
+router.get("/users", getAllUsersHandler);
 
 router.post("/userInfo", userCheck, getUserInfo);
 
 router.post("/banUser", adminCheck, adminUser);
 
-router.get("/updateUser/", userCheck, updateUserInfo);
+router.post("/updateUser/", updateUserInfo);
 
 //ROUTES ADMIN
 
