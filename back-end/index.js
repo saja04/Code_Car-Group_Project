@@ -13,8 +13,8 @@ const server = express();
 server.name = "server";
 
 
-server.use(bodyParser.urlencoded({ extended: true, limit: "50mb" }));
-server.use(bodyParser.json({ limit: "50mb" }));
+server.use(express.urlencoded({ extended: true, limit: "50mb" }));
+server.use(express.json({ limit: "50mb" }));
 server.use(cookieParser());
 server.use(morgan("dev"));
 
@@ -36,7 +36,7 @@ server.use("/", router);
 
 
 
-conn.sync({ force: true }).then(async () => {
+conn.sync({ force: false }).then(async () => {
   console.log("db connected");
   await saveApiData();
   server.listen(3001, () => {
