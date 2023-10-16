@@ -24,7 +24,6 @@ function User() {
         photo: user.picture,
         user_id: user.sub
       });
-      console.log(response.data);
       return setUserData(response.data);
 
     } catch (error) {
