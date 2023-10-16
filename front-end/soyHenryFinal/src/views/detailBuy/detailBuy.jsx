@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import style from "./detailBuy.module.css";
 import { useAuth0 } from "@auth0/auth0-react";
 import axios from "axios";
-import { useLocation } from "react-router-dom";
+import { useLocation, NavLink } from "react-router-dom";
 
 function DetailBuy() {
   const [userData, setUserData] = useState(null);
@@ -29,7 +29,7 @@ function DetailBuy() {
 
   useEffect(() => {
     getNoAuthenticated();
-  }, []);
+  }, [user]);
 
   const buy = async () => {
     if (!isAuthenticated) {
@@ -53,14 +53,15 @@ function DetailBuy() {
           const response = await axios.post(
             "https://codecar.onrender.com/createOrderCar",
             {
-              userId: user.sub,
+              userId: userData.user_id,
               carId: carDetails.car_id,
               medioDePago: medioDePago,
             }
           );
 
-          if (response.data && response.data.success) {
+          if (response.data) {
             console.log("Orden creada con éxito");
+            alert('AUTO COMPRADO!')
           } else {
             console.error("Error al crear la orden de compra.");
           }
@@ -107,6 +108,7 @@ function DetailBuy() {
             <p>Email: {userData.user_email}</p>
             <p>Dirección: {userData.user_address}</p>
             <p>Telefono: {userData.user_phone}</p>
+            <NavLink to='/user'>Editar Informacion</NavLink>
           </>
         ) : (
           <p>Cargando información del usuario...</p>
