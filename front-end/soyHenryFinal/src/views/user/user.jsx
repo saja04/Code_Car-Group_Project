@@ -21,7 +21,6 @@ function User() {
         email: user.email,
         photo: user.picture
       });
-      console.log(response.data);
       return setUserData(response.data);
 
     } catch (error) {
