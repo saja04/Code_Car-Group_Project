@@ -56,13 +56,13 @@ router.get("/users", getAllUsersHandler);
 
 router.post("/userInfo", userCheck, getUserInfo);
 
-router.post("/banUser", adminCheck, adminUser);
+router.post("/banUser", adminUser);
 
 router.post("/updateUser/", updateUserInfo);
 
 //ROUTES ADMIN
 
-router.post('/allOrders', adminCheck, getAllOrders);
+router.post('/allOrders', getAllOrders);
 router.post('/userOrder', getUserOrderHandler);
 router.post('/createOrderCar', createOrderHandler);
 
