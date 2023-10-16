@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import carStyles from "./postNewCar.module.css";
 import axios from "axios";
 import { uploadFile } from "../../../../utils/firebase";
+import Resizer from "react-image-file-resizer";
 
 function PostNewCar() {
   const [formData, setFormData] = useState({
@@ -61,7 +62,7 @@ function PostNewCar() {
     });
   };
 
-  const maxFileSize = 50 * 1024 * 1024; // 50 MB
+  const maxFileSize = 50 * 1024 * 1024; 
 
   const handleFileUpload = (e) => {
     const file = e.target.files[0];
@@ -69,8 +70,13 @@ function PostNewCar() {
       alert("El archivo es demasiado grande. El tamaño máximo permitido es 50 MB.");
       return;
     }
-
-    // Continuar con la carga del archivo.
+  
+    Resizer.imageFileResizer(file, 100, 100, "JPEG", 100, 0, (uri) => {
+      setFormData({
+        ...formData,
+        imagen: uri,
+      });
+    });
   };
 
 
@@ -80,22 +86,7 @@ function PostNewCar() {
       alert("Por favor, sube una imagen antes de enviar el formulario.");
       return;
     }
-    const carData = {
-      marca: formData.marca,
-      modelo: formData.modelo,
-      año: formData.año,
-      color: formData.color,
-      tipo_de_motor: formData.tipo_de_motor,
-      tipo_de_auto: formData.tipo_de_auto,
-      precio_usd: formData.precio_usd,
-      precio_ars: formData.precio_ars,
-      kilometraje: formData.kilometraje,
-      condicion: formData.condicion,
-      imagen: formData.imagen,
-    };
-  
-    // Muestra los datos en la consola para fines de depuración
-    console.log("Datos del formulario:", carData);
+
     try {
       const carData = {
         car_marca: formData.marca,
@@ -139,9 +130,9 @@ function PostNewCar() {
             }} />
           </div>
 
-          {formData.imagen && ( // Muestra la imagen si hay una URL en formData.imagen
+          {formData.imagen && ( 
             <div className={carStyles.postNewCarImage}>
-              <img src={formData.imagen} alt="Vehículo" />
+              <img src={formData.imagen} alt="Vehículo" style={{ maxWidth: '70px', maxHeight:"70px" }}/>
             </div>
           )}
 
