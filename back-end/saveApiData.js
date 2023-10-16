@@ -4,6 +4,7 @@ const api = require("./API");
 
 const saveApiData = async () => {
   try {
+
     const search = api.map(async (car) => {
       let carInDB = await Car.findOrCreate({
         where: {
@@ -18,6 +19,7 @@ const saveApiData = async () => {
           car_kilometraje: car.kilometraje,
           car_condicion: car.condicion,
           car_imagen: car.imagen,
+          stock: car.stock
         },
       });
     });

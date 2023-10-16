@@ -5,12 +5,16 @@ import {
   GET_CAR_BY_ID,
   GET_CAR_BY_NAME,
   GET_FILTERS,
+  GET_USERS,
+  GET_USER_INFO,
 } from "./actions";
 
 const initialState = {
   allCars: [],
+  allUsers: [],
+  userInfo: null,
   singleCar: null,
-  divisa: "car_precio_usd", //trae precio en ars
+  divisa: "car_precio_usd",
   user: null,
   registrationError: null,
 };
@@ -50,6 +54,17 @@ const rootReducer = (state = initialState, action) => {
         divisa: action.payload,
       };
 
+    case GET_USERS:
+      return {
+        ...state,
+        allUsers: action.payload,
+      };
+    case GET_USER_INFO:
+      console.log(action.payload);
+      return {
+        ...state,
+        userInfo: action.payload,
+      };
     default:
       return state;
   }

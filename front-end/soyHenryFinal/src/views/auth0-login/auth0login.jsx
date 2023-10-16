@@ -12,11 +12,9 @@ const LogInAuth0 = () => {
   } = useAuth0();
 
   const getNoAuthenticated = async () => {
-    const token = await getAccessTokenSilently();
-    const response = await axios.get("http://localhost:3001/updateUser/?phone=2966692490", {
-      headers: {
-        authorization: `Bearer ${token}`,
-      }
+    const response = await axios.post("http://localhost:3001/userCheck", {
+      email: user.email,
+      photo: user.picture
     });
     return console.log(response.data);
   };
@@ -24,7 +22,7 @@ const LogInAuth0 = () => {
     try {
       const token = await getAccessTokenSilently();
       console.log(token);
-      const response = await axios.get("http://localhost:3001/user/info", {
+      const response = await axios.get("http://localhost:3001/userInfo", {
         headers: {
           authorization: `Bearer ${token}`,
         },

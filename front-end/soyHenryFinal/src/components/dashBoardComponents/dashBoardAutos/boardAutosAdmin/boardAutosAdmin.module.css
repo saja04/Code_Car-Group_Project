@@ -1,0 +1,22 @@
+.container {
+  margin-top: 60px;
+  margin-bottom: 60px;
+  background-color: #cfcfcf;
+  border-radius: 5px;
+  border: gray 1px solid;
+}
+
+.title {
+  display: flex;
+  width: 100%;
+  padding: 6px;
+  margin: 8px;
+}
+
+.titleInfo {
+  width: 15%;
+}
+
+.titleKm {
+  width: 20%;
+}

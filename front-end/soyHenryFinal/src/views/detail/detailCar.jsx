@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import carDetailPageStyles from "./detailCar.module.css";
 import Lightbox from "../../components/lightbox/lightbox";
@@ -16,6 +16,7 @@ function CarDetailPage() {
   const [isLightboxOpen, setIsLightboxOpen] = useState(false);
   const [lightboxImageUrl, setLightboxImageUrl] = useState("");
   const [showPricesInUSD, setShowPricesInUSD] = useState(true);
+  const navigate = useNavigate();
 
   const {
     loginWithRedirect,
@@ -31,7 +32,7 @@ function CarDetailPage() {
       divisa: divisa,
     });
     const data = response.data;
-    console.log(data);
+   
     return setSingleCar(data);
   };
 
@@ -52,11 +53,35 @@ function CarDetailPage() {
     return <div>Cargando...</div>;
   }
 
-  const handleBuy = () => {
-    if(!isAuthenticated){
-      return loginWithRedirect()
-    } else return alert('simulacion de compra, estas logeado')
-  }
+  const handleBuy = async () => {
+    if (!isAuthenticated) {
+      alert("Debes estar logeado para comprar un coche, avivate")
+      loginWithRedirect();
+    } else {
+      try {
+        const carName = `${singleCar.car_marca} ${singleCar.car_modelo}`;
+        const carPrice = singleCar.car_precio_ars;
+  
+        console.log('Información del automóvil:', carName, carPrice);
+  
+        const response = await axios.post(`https://codecar.onrender.com/create-order/?name=${carName}&price=1`);
+
+        console.log(response.data);
+  
+        if (response.data) {
+        
+         window.location.href = response.data;
+        } else {
+          console.error('No se recibió un enlace de pago válido.');
+        }
+      } catch (error) {
+        console.error('Error al crear la orden de MercadoPago:', error);
+      }
+    }
+  };
+  
+  
+  
 
   return (
     <div className={carDetailPageStyles.container}>

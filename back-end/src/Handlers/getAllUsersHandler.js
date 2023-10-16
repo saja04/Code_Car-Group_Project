@@ -1,21 +1,13 @@
-const axios = require('axios')
-const { auth, requiredScopes } = require("express-oauth2-jwt-bearer");
+const axios = require('axios');
+const getAllUsers = require('../Controllers/getAllUsers')
 
 const getAllUsersHandler = async(req, res) => {
 
     try {
-        const scopes = requiredScopes('read:users')
-        console.log(scopes);
-        let config = {
-            method: 'get',
-            maxBodyLength: Infinity,
-            url: 'https://dev-mp4haipy0yoq4dta.us.auth0.com/api/v2/users',
-            headers: { 
-              'Accept': 'application/json'
-            }
-          };
-        const response = await axios.request(config)
-        res.json(response.data)
+        const response = await getAllUsers();
+        console.log(response);
+        res.status(200).json(response)
+
     } catch (error) {
         res.send(error.message)
     }

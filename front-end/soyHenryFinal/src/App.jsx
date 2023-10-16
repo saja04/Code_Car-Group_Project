@@ -13,13 +13,12 @@ import Shop from "./views/shop/shop";
 import Contact from "./views/contact/contact";
 import About from "./views/about/about";
 import CarDetailPage from "./views/detail/detailCar";
-import PostNewCar from "./views/postNewCar/postNewCar";
 import Dashboard from "./views/dashboard/dashboard";
 import Delete from "./views/delete/delete";
 import LogInAuth0 from "./views/auth0-login/auth0login";
+import User from "./views/user/user";
 
 function MainApp() {
-  
   const { isAuthenticated, user } = useAuth0();
 
   return (
@@ -33,11 +32,12 @@ function MainApp() {
           <Route path="/contacto" element={<Contact />} />
           <Route path="/nosotros" element={<About />} />
           <Route path="/detail/:id" element={<CarDetailPage />} />
-          <Route path="/post" element={<PostNewCar />} />
           <Route
             path="/dashboard"
             element={
-              isAuthenticated && user && user.email === 'elgilazo9123@gmail.com' ? (
+              isAuthenticated &&
+              user &&
+              user.email === "manuelgarciasarza@gmail.com" ? (
                 <Dashboard />
               ) : (
                 <Navigate to="/" />
@@ -45,6 +45,7 @@ function MainApp() {
             }
           />
           <Route path="/delete" element={<Delete />} />
+          <Route path="/user/" element={<User />} />
         </Routes>
         <Footer />
       </div>
