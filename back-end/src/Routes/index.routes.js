@@ -4,24 +4,37 @@ const getCarsHandler = require("../Handlers/getCarsHandler");
 const deleteCarsHandler = require("../Handlers/deleteCarsHandler");
 const getCarsByNameHandler = require("../Handlers/getCarsByNameHandler");
 const getCarsByIdHandler = require("../Handlers/getCarsByIdHandler");
-const getAllUsersHandler = require("../Handlers/getAllUsersHandler");
 const buyCarHandler = require("../Handlers/buyCarHandler");
 const ReviewHandler = require("../Handlers/ReviewHandler")
+
+
 const getAllOrders = require('../Controllers/compras/getAllOrders')
+const getUserOrderHandler = require('../Handlers/Compras/getUserOrderHandler')
+
 
 const userCheck = require("../Authentication/userCheckController");
+const adminCheck = require('../Authentication/adminCheck')
+const moderatorCheck = require('../Authentication/moderatorCheck')
+const getAllUsersHandler = require("../Handlers/getAllUsersHandler");
 const getUserInfo = require("../Authentication/getUserInfo");
-const banUser = require("../Authentication/banUser");
+const adminUser = require("../Authentication/adminUser");
 const updateUserInfo = require('../Authentication/updateUserInfo')
+
+
+
+
 const allReviewsHandler = require("../Handlers/allReviewsHandler")
+
+
 
 const router = Router();
 require("dotenv").config();
-const { checkJwt } = require("../Authentication/auth0");
+
 const {
   createOrder,
   receiveWebhook,
 } = require("../Mercado Pago/controllers/SDK");
+const createOrderHandler = require("../Handlers/Compras/createOrderHandler");
 
 //ROUTES CARS
 router.post("/carsPost", postCarsHandler);
@@ -38,8 +51,6 @@ router.get("/pending", (req, res) => res.send("Pending..."));
 router.post("/review", ReviewHandler)
 router.get("/allreview", allReviewsHandler)
 
-router.get('/userOrders/', getAllOrders);
-
 //ROUTES USER
 
 router.post('/userCheck', userCheck, async(req, res) => {
@@ -48,11 +59,16 @@ router.post('/userCheck', userCheck, async(req, res) => {
 
 router.post("/userInfo", userCheck, getUserInfo);
 
-router.get("/adminUser/", userCheck, banUser);
+router.post("/banUser", adminCheck, adminUser);
 
 router.get("/updateUser/", userCheck, updateUserInfo);
 
 //ROUTES ADMIN
+
+router.post('/allOrders', adminCheck, getAllOrders);
+router.post('/userOrder', getUserOrderHandler);
+router.post('/createOrderCar', createOrderHandler);
+
 
 
 

@@ -12,13 +12,21 @@ module.exports = (sequelize) => {
       allowNull: false,
     },
     order_date: {
-      type: DataTypes.DATE,
+      type: DataTypes.STRING,
       allowNull: false,
     },
-    car_pedido_id: {
-      type: DataTypes.UUID,
+    car_order: {
+      type: DataTypes.STRING,
       allowNull: false
     },
+    user_order: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    medio_de_pago: {
+      type: DataTypes.STRING,
+      allowNull: false
+    }
     
   });
 };
