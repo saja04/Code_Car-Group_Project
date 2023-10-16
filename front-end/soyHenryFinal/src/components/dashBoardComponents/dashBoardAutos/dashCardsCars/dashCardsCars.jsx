@@ -16,6 +16,7 @@ function DashCardsCar({ vehicle }) {
             ? `USD$${vehicle.car_precio_usd}`
             : `ARS$${vehicle.car_precio_ars}`}
         </h3>
+        <h3 className={carCardStyles.title}>{vehicle.stock}</h3>
       </div>
     </div>
   );

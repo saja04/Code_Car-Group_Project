@@ -17,7 +17,10 @@ function PostNewCar() {
     kilometraje: "",
     condicion: "Usado",
     imagen: "",
+    stock: ""
   });
+
+
 
   const [errors, setErrors] = useState({
     precio_usd: "",
@@ -40,7 +43,7 @@ function PostNewCar() {
   const handleInputChange = (e) => {
     const { name, value } = e.target;
 
-    if (["precio_usd", "precio_ars", "kilometraje"].includes(name)) {
+    if (["precio_usd", "precio_ars", "kilometraje", "stock"].includes(name)) {
       if (!/^\d*$/.test(value)) {
         setErrors({
           ...errors,
@@ -65,9 +68,7 @@ function PostNewCar() {
   const handleFileUpload = (e) => {
     const file = e.target.files[0];
     if (file.size > maxFileSize) {
-      alert(
-        "El archivo es demasiado grande. El tamaño máximo permitido es 50 MB."
-      );
+      alert("El archivo es demasiado grande. El tamaño máximo permitido es 50 MB.");
       return;
     }
 
@@ -78,6 +79,7 @@ function PostNewCar() {
       });
     });
   };
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -99,15 +101,17 @@ function PostNewCar() {
         car_kilometraje: formData.kilometraje,
         car_condicion: formData.condicion,
         car_imagen: formData.imagen,
+        stock: formData.stock
       };
-      console.log(carData);
 
       await axios.post("https://codecar.onrender.com/carsPost", carData);
       alert("¡Se ha creado un vehículo exitosamente!");
 
       window.location.reload();
+
     } catch (error) {
       console.error("Error al agregar el vehículo:", error);
+
     }
   };
 
@@ -116,26 +120,21 @@ function PostNewCar() {
       <h2 className={carStyles.postNewCarH2}>Agregar un Nuevo Vehículo</h2>
 
       <form onSubmit={handleSubmit}>
+
+
         <div className={carStyles.postNewCarFormGroup}>
+
+
           <div className={carStyles.postNewCarFormGroup}>
-            <input
-              type="file"
-              name=""
-              id=""
-              onChange={(e) => {
-                handleFileUpload(e);
-                uploadFile(e.target.files[0], setFormData);
-              }}
-            />
+            <input type="file" name="" id="" onChange={(e) => {
+              handleFileUpload(e);
+              uploadFile(e.target.files[0], setFormData);
+            }} />
           </div>
 
           {formData.imagen && (
             <div className={carStyles.postNewCarImage}>
-              <img
-                src={formData.imagen}
-                alt="Vehículo"
-                style={{ maxWidth: "70px", maxHeight: "70px" }}
-              />
+              <img src={formData.imagen} alt="Vehículo" style={{ maxWidth: '70px', maxHeight: "70px" }} />
             </div>
           )}
 
@@ -315,6 +314,27 @@ function PostNewCar() {
             <option value="Usado">Usado</option>
             <option value="0km">0km</option>
           </select>
+        </div>
+
+        <div className={carStyles.postNewCarFormGroup}>
+
+          <label className={carStyles.postNewCarLabel} htmlFor="stock">
+            Stock:
+          </label>
+          <input
+            type="text"
+            id="stock"
+            name="stock"
+            className={carStyles.postNewCarInput}
+            value={formData.stock}
+            onChange={handleInputChange}
+            required
+          />
+
+          {errors.stock && (
+            <div className={carStyles.error}>{errors.stock}</div>
+          )}
+
         </div>
 
         <div className={carStyles.postNewCarFormGroup}>
