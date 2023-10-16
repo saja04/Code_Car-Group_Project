@@ -19,8 +19,6 @@ function PostNewCar() {
     imagen: "",
   });
 
-
-
   const [errors, setErrors] = useState({
     precio_usd: "",
     precio_ars: "",
@@ -62,15 +60,17 @@ function PostNewCar() {
     });
   };
 
-  const maxFileSize = 50 * 1024 * 1024; 
+  const maxFileSize = 50 * 1024 * 1024;
 
   const handleFileUpload = (e) => {
     const file = e.target.files[0];
     if (file.size > maxFileSize) {
-      alert("El archivo es demasiado grande. El tamaño máximo permitido es 50 MB.");
+      alert(
+        "El archivo es demasiado grande. El tamaño máximo permitido es 50 MB."
+      );
       return;
     }
-  
+
     Resizer.imageFileResizer(file, 100, 100, "JPEG", 100, 0, (uri) => {
       setFormData({
         ...formData,
@@ -78,7 +78,6 @@ function PostNewCar() {
       });
     });
   };
-
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -101,15 +100,14 @@ function PostNewCar() {
         car_condicion: formData.condicion,
         car_imagen: formData.imagen,
       };
+      console.log(carData);
 
       await axios.post("https://codecar.onrender.com/carsPost", carData);
       alert("¡Se ha creado un vehículo exitosamente!");
 
       window.location.reload();
-
     } catch (error) {
       console.error("Error al agregar el vehículo:", error);
-      
     }
   };
 
@@ -118,21 +116,26 @@ function PostNewCar() {
       <h2 className={carStyles.postNewCarH2}>Agregar un Nuevo Vehículo</h2>
 
       <form onSubmit={handleSubmit}>
-
-
         <div className={carStyles.postNewCarFormGroup}>
-
-
           <div className={carStyles.postNewCarFormGroup}>
-            <input type="file" name="" id="" onChange={(e) => {
-              handleFileUpload(e);
-              uploadFile(e.target.files[0], setFormData);
-            }} />
+            <input
+              type="file"
+              name=""
+              id=""
+              onChange={(e) => {
+                handleFileUpload(e);
+                uploadFile(e.target.files[0], setFormData);
+              }}
+            />
           </div>
 
-          {formData.imagen && ( 
+          {formData.imagen && (
             <div className={carStyles.postNewCarImage}>
-              <img src={formData.imagen} alt="Vehículo" style={{ maxWidth: '70px', maxHeight:"70px" }}/>
+              <img
+                src={formData.imagen}
+                alt="Vehículo"
+                style={{ maxWidth: "70px", maxHeight: "70px" }}
+              />
             </div>
           )}
 
