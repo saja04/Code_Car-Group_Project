@@ -9,14 +9,11 @@ const ReviewHandler = require("../Handlers/ReviewHandler")
 
 
 const getAllOrders = require('../Controllers/compras/getAllOrders')
-<<<<<<< HEAD
 const addStockHandler = require("../Handlers/addStockHandler.js")
 const deleteStockHandler = require("../Handlers/deleteStockHandler.js")
-=======
 const getUserOrderHandler = require('../Handlers/Compras/getUserOrderHandler')
 
 
->>>>>>> 837d45ae120730ac3b0064cb568dfd64f683f89e
 const userCheck = require("../Authentication/userCheckController");
 const adminCheck = require('../Authentication/adminCheck')
 const moderatorCheck = require('../Authentication/moderatorCheck')
@@ -66,17 +63,14 @@ router.post("/banUser", adminUser);
 router.post("/updateUser/", updateUserInfo);
 
 //ROUTES ADMIN
-<<<<<<< HEAD
 router.post("/addStock", addStockHandler)
 router.post("/deleteStock", deleteStockHandler)
-=======
 
 router.post('/allOrders', getAllOrders);
 router.post('/userOrder', getUserOrderHandler);
 router.post('/createOrderCar', createOrderHandler);
 
 
->>>>>>> 837d45ae120730ac3b0064cb568dfd64f683f89e
 
 
 module.exports = router;
