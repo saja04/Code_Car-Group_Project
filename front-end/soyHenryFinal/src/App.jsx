@@ -10,7 +10,6 @@ import Footer from "./components/footer/footer";
 // views
 import Home from "./views/home/home.jsx";
 import Shop from "./views/shop/shop";
-import Contact from "./views/contact/contact";
 import About from "./views/about/about";
 import CarDetailPage from "./views/detail/detailCar";
 import Dashboard from "./views/dashboard/dashboard";
@@ -31,7 +30,6 @@ function MainApp() {
           <Route path="/auth0/login" element={<LogInAuth0 />} />
           <Route path="/" element={<Home />} />
           <Route path="/tienda" element={<Shop />} />
-          <Route path="/contacto" element={<Contact />} />
           <Route path="/nosotros" element={<About />} />
           <Route path="/detail/:id" element={<CarDetailPage />} />
           <Route
@@ -48,8 +46,8 @@ function MainApp() {
           />
           <Route path="/delete" element={<Delete />} />
           <Route path="/user/" element={<User />} />
-          <Route path="/detailBuy" element={< DetailBuy/>} />
-          <Route path="/userOrder" element={< UserOrder/>} />
+          <Route path="/detailBuy" element={<DetailBuy />} />
+          <Route path="/userOrder" element={<UserOrder />} />
         </Routes>
         <Footer />
       </div>
