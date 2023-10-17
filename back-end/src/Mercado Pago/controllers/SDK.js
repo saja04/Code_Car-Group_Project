@@ -23,7 +23,7 @@
 				title: name,
 				quantity: 1,
 				unit_price: priceNum,
-				metadata: {
+				description: {
 					userId,
 					carId,
 				}
