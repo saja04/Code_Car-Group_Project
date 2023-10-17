@@ -18,8 +18,8 @@ function Banner() {
       centerSlidePercentage={100}
       useKeyboardArrows={true}
     >
-      <img className={style.img} src={bannerChevrolet} alt="" />
       <img className={style.img} src={bannerToyota} alt="" />
+      <img className={style.img} src={bannerChevrolet} alt="" />
       <img className={style.img} src={bannerFord} alt="" />
     </Carousel>
   );

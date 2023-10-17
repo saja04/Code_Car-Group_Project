@@ -1,17 +1,12 @@
 .conteiner {
   padding: 10px;
-  margin: 10px;
-  width: 400px;
+  margin: 0px;
+  width: 300px;
 }
-.cardImg{
-  width: auto;
-  height: auto;
+.cardImg {
+  width: 300px;
+  height: 200px;
 }
-
-/* .conteiner img {
-  height: 400px;
-  width: 400px;
-} */
 
 .conteiner p {
   margin: 2px 0;

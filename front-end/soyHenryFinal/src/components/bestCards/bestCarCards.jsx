@@ -2,10 +2,8 @@ import React, { useState, useEffect } from "react";
 import CarCard from "../card/carCard";
 import { shuffleArray } from "../../../utils/utils";
 import carCardStyles from "./bestCarCards.module.css";
-import PriceToggle from "../priceToggle/priceToggle";
 
 function BestCarCards({ vehicles }) {
-  const [showPricesInUSD, setShowPricesInUSD] = useState(true);
   const [shuffledVehicles, setShuffledVehicles] = useState([]);
 
   useEffect(() => {
@@ -14,23 +12,16 @@ function BestCarCards({ vehicles }) {
     }
   }, [vehicles]);
 
-  const togglePrices = () => {
-    setShowPricesInUSD(!showPricesInUSD);
-  };
-
   return (
     <div className={carCardStyles.carCards}>
-      <h2 className={carCardStyles.title}>Nuestros mejores Vehículos</h2>
+      <div className={carCardStyles.titleBk}>
+        <h2 className={carCardStyles.title}>Nuestros mejores Vehículos</h2>
+      </div>
       <div className={carCardStyles.bestVehicles}>
         {shuffledVehicles.slice(0, 4).map((vehicle) => (
-          <CarCard
-            key={vehicle.id}
-            vehicle={vehicle}
-            showPricesInUSD={showPricesInUSD}
-          />
+          <CarCard key={vehicle.id} vehicle={vehicle} />
         ))}
       </div>
-      {/* <PriceToggle showPricesInUSD={showPricesInUSD} onToggle={togglePrices} /> */}
     </div>
   );
 }

@@ -4,8 +4,9 @@
 }
 
 .container input {
-  width: 160px;
+  width: 300px;
   height: 40px;
   border-radius: 10px;
   border-style: solid;
+  padding-left: 12px;
 }

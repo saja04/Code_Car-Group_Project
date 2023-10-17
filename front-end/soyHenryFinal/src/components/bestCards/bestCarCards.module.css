@@ -1,11 +1,19 @@
 .bestVehicles {
   display: flex;
-  flex-wrap: wrap;
   justify-content: space-between;
-  margin: 12px;
+}
+
+.titleBk {
+  background-color: #000000;
+  height: 70px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 30px 0;
 }
 
 .title {
   margin: 12px;
+  color: #ffffff;
   text-align: center;
 }

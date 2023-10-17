@@ -41,8 +41,10 @@ function NavBar() {
           changeCurrency={changeCurrency}
           dispatch={dispatch}
         />
-        <DashboardButton />
-        <LoginLinks />
+        <DashboardButton />{" "}
+        <div className={style.user}>
+          <LoginLinks />
+        </div>
       </div>
     </div>
   );

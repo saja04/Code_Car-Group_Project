@@ -6,21 +6,19 @@ import Resizer from "react-image-file-resizer";
 
 function PostNewCar() {
   const [formData, setFormData] = useState({
-    marca: "Chevrolet",
+    marca: "",
     modelo: "",
     año: "",
-    color: "Blanco",
-    tipo_de_motor: "Nafta",
-    tipo_de_auto: "Sedán",
+    color: "",
+    tipo_de_motor: "",
+    tipo_de_auto: "",
     precio_usd: "",
     precio_ars: "",
     kilometraje: "",
-    condicion: "Usado",
+    condicion: "",
     imagen: "",
-    stock: ""
+    stock: "",
   });
-
-
 
   const [errors, setErrors] = useState({
     precio_usd: "",
@@ -68,7 +66,9 @@ function PostNewCar() {
   const handleFileUpload = (e) => {
     const file = e.target.files[0];
     if (file.size > maxFileSize) {
-      alert("El archivo es demasiado grande. El tamaño máximo permitido es 50 MB.");
+      alert(
+        "El archivo es demasiado grande. El tamaño máximo permitido es 50 MB."
+      );
       return;
     }
 
@@ -79,7 +79,6 @@ function PostNewCar() {
       });
     });
   };
-
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -101,17 +100,15 @@ function PostNewCar() {
         car_kilometraje: formData.kilometraje,
         car_condicion: formData.condicion,
         car_imagen: formData.imagen,
-        stock: formData.stock
+        stock: formData.stock,
       };
 
       await axios.post("https://codecar.onrender.com/carsPost", carData);
       alert("¡Se ha creado un vehículo exitosamente!");
 
       window.location.reload();
-
     } catch (error) {
       console.error("Error al agregar el vehículo:", error);
-
     }
   };
 
@@ -120,21 +117,26 @@ function PostNewCar() {
       <h2 className={carStyles.postNewCarH2}>Agregar un Nuevo Vehículo</h2>
 
       <form onSubmit={handleSubmit}>
-
-
         <div className={carStyles.postNewCarFormGroup}>
-
-
           <div className={carStyles.postNewCarFormGroup}>
-            <input type="file" name="" id="" onChange={(e) => {
-              handleFileUpload(e);
-              uploadFile(e.target.files[0], setFormData);
-            }} />
+            <input
+              type="file"
+              name=""
+              id=""
+              onChange={(e) => {
+                handleFileUpload(e);
+                uploadFile(e.target.files[0], setFormData);
+              }}
+            />
           </div>
 
           {formData.imagen && (
             <div className={carStyles.postNewCarImage}>
-              <img src={formData.imagen} alt="Vehículo" style={{ maxWidth: '70px', maxHeight: "70px" }} />
+              <img
+                src={formData.imagen}
+                alt="Vehículo"
+                style={{ maxWidth: "70px", maxHeight: "70px" }}
+              />
             </div>
           )}
 
@@ -149,6 +151,7 @@ function PostNewCar() {
             onChange={handleInputChange}
             required
           >
+            <option value="" disabled selected></option>
             <option value="Chevrolet">Chevrolet</option>
             <option value="Ford">Ford</option>
             <option value="Volkswagen">Volkswagen</option>
@@ -183,6 +186,8 @@ function PostNewCar() {
             onChange={handleInputChange}
             required
           >
+            {" "}
+            <option value="" disabled selected></option>
             <option value="2019">2019</option>
             <option value="2020">2020</option>
             <option value="2021">2021</option>
@@ -202,9 +207,7 @@ function PostNewCar() {
             onChange={handleInputChange}
             required
           >
-            <option value="" disabled>
-              Selecciona un color
-            </option>
+            <option value="" disabled selected></option>
 
             {coloresBasicos.map((color) => (
               <option key={color} value={color}>
@@ -226,6 +229,8 @@ function PostNewCar() {
             onChange={handleInputChange}
             required
           >
+            {" "}
+            <option value="" disabled selected></option>
             <option value="Nafta">Nafta</option>
             <option value="Diesel">Diesel</option>
           </select>
@@ -242,6 +247,8 @@ function PostNewCar() {
             onChange={handleInputChange}
             required
           >
+            {" "}
+            <option value="" disabled selected></option>
             <option value="Sedán">Sedán</option>
             <option value="SUV">SUV</option>
             <option value="Hatchback">Hatchback</option>
@@ -311,13 +318,14 @@ function PostNewCar() {
             onChange={handleInputChange}
             required
           >
+            {" "}
+            <option value="" disabled selected></option>
             <option value="Usado">Usado</option>
             <option value="0km">0km</option>
           </select>
         </div>
 
         <div className={carStyles.postNewCarFormGroup}>
-
           <label className={carStyles.postNewCarLabel} htmlFor="stock">
             Stock:
           </label>
@@ -334,10 +342,9 @@ function PostNewCar() {
           {errors.stock && (
             <div className={carStyles.error}>{errors.stock}</div>
           )}
-
         </div>
 
-        <div className={carStyles.postNewCarFormGroup}>
+        <div className={carStyles.postNewCarButtonDiv}>
           <button type="submit" className={carStyles.postNewCarButton}>
             Agregar Vehículo
           </button>

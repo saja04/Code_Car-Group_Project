@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-  import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getCars } from "../../redux/actions";
 
 import style from "./shop.module.css";
@@ -9,8 +9,8 @@ import CarCards from "../../components/cards/carCards";
 
 function Shop() {
   const dispatch = useDispatch();
-  const allCars = useSelector(state => state.allCars);
-  const divisa = localStorage.getItem('divisa');
+  const allCars = useSelector((state) => state.allCars);
+  const divisa = localStorage.getItem("divisa");
 
   const [vehicles, setVehicles] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
@@ -27,13 +27,8 @@ function Shop() {
     setCurrentPage(pageNumber);
   };
 
-  // useEffect(() => {
-  //   dispatch(getCars());
-  // }, [dispatch]);
-
   useEffect(() => {
     setVehicles(allCars);
-    // dispatch(getCars(divisa));
   }, [allCars]);
 
   useEffect(() => {
