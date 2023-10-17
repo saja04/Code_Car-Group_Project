@@ -81,7 +81,13 @@ function DetailBuy() {
           );
 
           const response = await axios.post(
-            `https://codecar.onrender.com/create-order/?name=${carName}&price=1`
+            `https://codecar.onrender.com/create-order`,
+            {
+              name: carName,
+              price: carPrice,
+              userId: userData.user_id,
+              carId: carDetails.car_id,
+            }
           );
 
           console.log(response.data);
