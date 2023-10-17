@@ -48,7 +48,7 @@ function PopUp({ onClose }) {
           >
             Mi perfil
           </NavLink>
-          <NavLink className={style.links}>Mis Pedidos</NavLink>
+          <NavLink to="/userOrder" className={style.links}>Mis Pedidos</NavLink>
           <p className={style.links} onClick={logout}>
             Cerrar sesión
           </p>
@@ -67,7 +67,7 @@ function PopUp({ onClose }) {
           >
             Mi perfil
           </NavLink>
-          <NavLink className={style.links}>Mis Pedidos</NavLink>
+          <NavLink   to="/userOrder" className={style.links}>Mis Pedidos</NavLink>
           <p className={style.links} onClick={logout}>
             Cerrar sesión
           </p>
