@@ -1,3 +1,5 @@
+const { Car } = require('../db');
+
 const deleteStock = async (carId, cantidad) => {
 	const car = await Car.findByPk(carId);
   
@@ -18,7 +20,7 @@ const deleteStock = async (carId, cantidad) => {
 	}
   
 	await car.save();
-	return true;
+	return car;
   };
   
   module.exports = deleteStock;

@@ -1,4 +1,4 @@
-const  addStock  = require('../Controllers/carStock');
+const  addStock  = require('../Controllers/addStock');
 
  const addStockHandler = async(req, res) =>{
   const { carId, cantidad } = req.body;

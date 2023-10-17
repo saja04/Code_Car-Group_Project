@@ -10,9 +10,10 @@ const deleteStockHandler = async(req, res) =>{
 	  } else if (resultado === false) {
 		res.status(400).json({ mensaje: 'No hay suficiente stock para eliminar.' });
 	  } else {
-		res.status(200).json({ mensaje: `${cantidad} unidades de ${car.car_marca} ${car.car_modelo} eliminadas del stock.` });
+		res.status(200).json({ mensaje: `${cantidad} unidades de ${resultado.car_marca} ${resultado.car_modelo} eliminadas del stock.` });
 	  }
 	} catch (error) {
+		console.log(error);
 	  res.status(500).json({ mensaje: 'Error al eliminar stock.' });
 	}
 }

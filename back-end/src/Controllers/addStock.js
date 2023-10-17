@@ -5,6 +5,7 @@ const { Car } = require('../db');
   if (!car) {
     return null; 
   }
+  console.log(car);
 
   car.stock += cantidad;
   await car.save();
