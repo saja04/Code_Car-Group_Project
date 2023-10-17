@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import carStyles from "./postNewCar.module.css";
 import axios from "axios";
+import { uploadFile } from "../../../../utils/firebase";
+import Resizer from "react-image-file-resizer";
 
 function PostNewCar() {
   const [formData, setFormData] = useState({
@@ -15,44 +17,10 @@ function PostNewCar() {
     kilometraje: "",
     condicion: "Usado",
     imagen: "",
+    stock: ""
   });
 
-  const [imageUploaded, setImageUploaded] = useState(false);
 
-  useEffect(() => {
-    var myWidget = window.cloudinary.createUploadWidget(
-      {
-        cloudName: "dvspmk6zl",
-        uploadPreset: "p6jbbnlt",
-        maxFiles: 1,
-        accept: "image/*",
-      },
-      (error, result) => {
-        if (!error && result && result.event === "success") {
-          console.log(
-            "¡Listo! Aquí tienes la información de la imagen: ",
-            result.info
-          );
-
-          const imageUrl = result.info.secure_url;
-          setFormData({
-            ...formData,
-            imagen: imageUrl,
-          });
-
-          setImageUploaded(true);
-        }
-      }
-    );
-
-    document.getElementById("upload_widget").addEventListener(
-      "click",
-      function () {
-        myWidget.open();
-      },
-      false
-    );
-  }, []);
 
   const [errors, setErrors] = useState({
     precio_usd: "",
@@ -75,7 +43,7 @@ function PostNewCar() {
   const handleInputChange = (e) => {
     const { name, value } = e.target;
 
-    if (["precio_usd", "precio_ars", "kilometraje"].includes(name)) {
+    if (["precio_usd", "precio_ars", "kilometraje", "stock"].includes(name)) {
       if (!/^\d*$/.test(value)) {
         setErrors({
           ...errors,
@@ -95,9 +63,27 @@ function PostNewCar() {
     });
   };
 
+  const maxFileSize = 50 * 1024 * 1024;
+
+  const handleFileUpload = (e) => {
+    const file = e.target.files[0];
+    if (file.size > maxFileSize) {
+      alert("El archivo es demasiado grande. El tamaño máximo permitido es 50 MB.");
+      return;
+    }
+
+    Resizer.imageFileResizer(file, 100, 100, "JPEG", 100, 0, (uri) => {
+      setFormData({
+        ...formData,
+        imagen: uri,
+      });
+    });
+  };
+
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!imageUploaded) {
+    if (!formData.imagen) {
       alert("Por favor, sube una imagen antes de enviar el formulario.");
       return;
     }
@@ -115,17 +101,17 @@ function PostNewCar() {
         car_kilometraje: formData.kilometraje,
         car_condicion: formData.condicion,
         car_imagen: formData.imagen,
+        stock: formData.stock
       };
 
       await axios.post("https://codecar.onrender.com/carsPost", carData);
       alert("¡Se ha creado un vehículo exitosamente!");
 
       window.location.reload();
+
     } catch (error) {
       console.error("Error al agregar el vehículo:", error);
-      alert(
-        "Hubo un error al agregar el vehículo. Por favor, inténtalo de nuevo."
-      );
+
     }
   };
 
@@ -134,19 +120,23 @@ function PostNewCar() {
       <h2 className={carStyles.postNewCarH2}>Agregar un Nuevo Vehículo</h2>
 
       <form onSubmit={handleSubmit}>
+
+
         <div className={carStyles.postNewCarFormGroup}>
+
+
           <div className={carStyles.postNewCarFormGroup}>
-            <label className={carStyles.postNewCarLabel} htmlFor="imagen">
-              Subir imagen:
-            </label>
-            <label id="upload_widget" className="cloudinary-button">
-              Subir Imagen
-            </label>
-            <script
-              src="https://upload-widget.cloudinary.com/global/all.js"
-              type="text/javascript"
-            />
+            <input type="file" name="" id="" onChange={(e) => {
+              handleFileUpload(e);
+              uploadFile(e.target.files[0], setFormData);
+            }} />
           </div>
+
+          {formData.imagen && (
+            <div className={carStyles.postNewCarImage}>
+              <img src={formData.imagen} alt="Vehículo" style={{ maxWidth: '70px', maxHeight: "70px" }} />
+            </div>
+          )}
 
           <label className={carStyles.postNewCarLabel} htmlFor="marca">
             Marca:
@@ -324,6 +314,27 @@ function PostNewCar() {
             <option value="Usado">Usado</option>
             <option value="0km">0km</option>
           </select>
+        </div>
+
+        <div className={carStyles.postNewCarFormGroup}>
+
+          <label className={carStyles.postNewCarLabel} htmlFor="stock">
+            Stock:
+          </label>
+          <input
+            type="text"
+            id="stock"
+            name="stock"
+            className={carStyles.postNewCarInput}
+            value={formData.stock}
+            onChange={handleInputChange}
+            required
+          />
+
+          {errors.stock && (
+            <div className={carStyles.error}>{errors.stock}</div>
+          )}
+
         </div>
 
         <div className={carStyles.postNewCarFormGroup}>

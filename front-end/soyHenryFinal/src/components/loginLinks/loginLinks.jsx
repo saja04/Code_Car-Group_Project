@@ -17,7 +17,7 @@ function LoginLinks() {
 
   useEffect(() => {
     gettingAuth();
-  }, []);
+  }, [user]);
 
   const togglePopUp = () => {
     setIsPopUpOpen(!isPopUpOpen);

@@ -17,6 +17,8 @@ import Dashboard from "./views/dashboard/dashboard";
 import Delete from "./views/delete/delete";
 import LogInAuth0 from "./views/auth0-login/auth0login";
 import User from "./views/user/user";
+import DetailBuy from "./views/detailBuy/detailBuy";
+import UserOrder from "./views/userOrders/userOrders";
 
 function MainApp() {
   const { isAuthenticated, user } = useAuth0();
@@ -46,6 +48,8 @@ function MainApp() {
           />
           <Route path="/delete" element={<Delete />} />
           <Route path="/user/" element={<User />} />
+          <Route path="/detailBuy" element={< DetailBuy/>} />
+          <Route path="/userOrder" element={< UserOrder/>} />
         </Routes>
         <Footer />
       </div>

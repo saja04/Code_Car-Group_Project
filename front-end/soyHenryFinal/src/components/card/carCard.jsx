@@ -8,6 +8,7 @@ function CarCard({ vehicle }) {
       <Link to={`/detail/${vehicle.car_id}`} className={carCardStyles.links}>
         <div className={carCardStyles.carCard}>
           <img
+            className={carCardStyles.cardImg}
             src={vehicle.car_imagen}
             alt={`${vehicle.car_marca} ${vehicle.car_modelo}`}
           />

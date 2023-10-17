@@ -1,0 +1,13 @@
+.detail-buy-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 20px; 
+  }
+  
+  .user-details,
+  .car-details,
+  .purchase-details {
+    padding: 20px;
+    border: 1px solid #ccc;
+  }
+  

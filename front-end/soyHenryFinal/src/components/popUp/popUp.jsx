@@ -19,6 +19,8 @@ function PopUp({ onClose }) {
           photo: user.picture,
         }
       );
+      console.log("holaa", response.data);
+
       return setUserData(response.data);
     } catch (error) {
       console.log(error);
@@ -46,7 +48,7 @@ function PopUp({ onClose }) {
           >
             Mi perfil
           </NavLink>
-          <NavLink className={style.links}>Mis Pedidos</NavLink>
+          <NavLink to="/userOrder" className={style.links}>Mis Pedidos</NavLink>
           <p className={style.links} onClick={logout}>
             Cerrar sesión
           </p>
@@ -57,7 +59,18 @@ function PopUp({ onClose }) {
     return (
       <div className={style.popup}>
         <div className={style.popupContent}>
-          <p>Cargando...</p>
+          <h3 className={style.name}>Cargando...</h3>
+          <NavLink
+            to="/user"
+            className={style.links}
+            onClick={handleGoToUserProfile}
+          >
+            Mi perfil
+          </NavLink>
+          <NavLink   to="/userOrder" className={style.links}>Mis Pedidos</NavLink>
+          <p className={style.links} onClick={logout}>
+            Cerrar sesión
+          </p>
         </div>
       </div>
     );
