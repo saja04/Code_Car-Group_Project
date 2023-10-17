@@ -4,7 +4,6 @@ const {UserOrder} = require('../../db')
 
 const createOrder = async(data) => {
     const fecha = new Date()
-    console.log(fecha.toString());
     const {userId, carId, medioDePago} = data
 
     if(medioDePago === 'efectivo'){
@@ -15,6 +14,7 @@ const createOrder = async(data) => {
             user_order: userId,
             medio_de_pago: medioDePago
         })
+        console.log(createInDb);
         return createInDb
     }
     else{
