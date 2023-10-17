@@ -23,10 +23,8 @@
 				title: name,
 				quantity: 1,
 				unit_price: priceNum,
-				description: {
-					userId,
-					carId,
-				}
+				description: userId, carId,
+				
 			  }
 			],
 			back_urls: {
