@@ -61,7 +61,7 @@ function DetailBuy() {
 
           if (response.data) {
             console.log("Orden creada con éxito");
-            alert('AUTO COMPRADO!')
+            alert("AUTO COMPRADO!");
           } else {
             console.error("Error al crear la orden de compra.");
           }
@@ -81,7 +81,13 @@ function DetailBuy() {
           );
 
           const response = await axios.post(
-            `https://codecar.onrender.com/create-order/?name=${carName}&price=1`
+            `https://codecar.onrender.com/create-order`,
+            {
+              name: carName,
+              price: carPrice,
+              userId: userData.user_id,
+              carId: carDetails.car_id,
+            }
           );
 
           console.log(response.data);
@@ -108,7 +114,7 @@ function DetailBuy() {
             <p>Email: {userData.user_email}</p>
             <p>Dirección: {userData.user_address}</p>
             <p>Telefono: {userData.user_phone}</p>
-            <NavLink to='/user'>Editar Informacion</NavLink>
+            <NavLink to="/user">Editar Informacion</NavLink>
           </>
         ) : (
           <p>Cargando información del usuario...</p>
