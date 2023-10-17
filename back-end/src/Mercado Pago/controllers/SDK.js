@@ -40,16 +40,16 @@
 }
 
  const receiveWebhook = async (req, res) => {
+	const payment = req.query;
 	try {
-	  const payment = req.query;
 	  if (payment.type === "payment") {
 		const data = await mercadopago.payment.findById(payment["data.id"]);
 		console.log(data);
 	  }
-	  res.sendStatus(204).send('pago aprobado');
+	  
 	} catch (error) {
 		console.log(error);
-	  return res.status(401).json(error);
+	//   return res.status(401).json(error);
 	}
 };
 
