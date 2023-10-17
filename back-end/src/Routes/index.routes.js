@@ -8,7 +8,8 @@ const getAllUsersHandler = require("../Handlers/getAllUsersHandler");
 const buyCarHandler = require("../Handlers/buyCarHandler");
 const ReviewHandler = require("../Handlers/ReviewHandler")
 const getAllOrders = require('../Controllers/compras/getAllOrders')
-
+const addStockHandler = require("../Handlers/addStockHandler.js")
+const deleteStockHandler = require("../Handlers/deleteStockHandler.js")
 const userCheck = require("../Authentication/userCheckController");
 const getUserInfo = require("../Authentication/getUserInfo");
 const banUser = require("../Authentication/banUser");
@@ -53,7 +54,8 @@ router.get("/adminUser/", userCheck, banUser);
 router.get("/updateUser/", userCheck, updateUserInfo);
 
 //ROUTES ADMIN
-
+router.post("/addStock", addStockHandler)
+router.post("/deleteStock", deleteStockHandler)
 
 
 module.exports = router;
