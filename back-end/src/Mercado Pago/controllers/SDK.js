@@ -36,6 +36,7 @@
 		 }
 			 
 		  )
+		  console.log(result);
 		 res.json(result.body.init_point)
 
 	} catch (error) {
