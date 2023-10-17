@@ -47,7 +47,7 @@ router.get("/carsName/", getCarsByNameHandler);
 router.post("/carsId/", getCarsByIdHandler);
 router.post("/create-order/", createOrder);
 router.post("/webhook", receiveWebhook);
-router.get("/sucess", (req, res) => res.send("Success!"));
+router.get("/success", (req, res) => res.send("Success!"));
 router.get("/pending", (req, res) => res.send("Pending..."));
 router.post("/review", ReviewHandler)
 router.get("/allreview", allReviewsHandler)
