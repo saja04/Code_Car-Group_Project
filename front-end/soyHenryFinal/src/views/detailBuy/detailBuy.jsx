@@ -61,7 +61,7 @@ function DetailBuy() {
 
           if (response.data) {
             console.log("Orden creada con éxito");
-            alert('AUTO COMPRADO!')
+            alert("AUTO COMPRADO!");
           } else {
             console.error("Error al crear la orden de compra.");
           }
@@ -100,42 +100,91 @@ function DetailBuy() {
 
   return (
     <div className={style["detail-buy-container"]}>
-      <div className={style["user-details"]}>
-        <h2>Datos del Usuario</h2>
-        {userData ? (
-          <>
-            <p>Nombre: {userData.user_name}</p>
-            <p>Email: {userData.user_email}</p>
-            <p>Dirección: {userData.user_address}</p>
-            <p>Telefono: {userData.user_phone}</p>
-            <NavLink to='/user'>Editar Informacion</NavLink>
-          </>
-        ) : (
-          <p>Cargando información del usuario...</p>
-        )}
-      </div>
-      <div className={style["car-details"]}>
-        <h2>Datos del Automóvil</h2>
-        {carDetails && (
-          <>
-            <p>
-              {carDetails.car_marca} {carDetails.car_modelo}
-            </p>
-            <p>Cantidad: 1 unidad</p>
-            <p>Condición: {carDetails.car_condicion}</p>
-            <h2>Precio: {carDetails.car_precio_ars} ARS</h2>
-          </>
-        )}
+      <div className={style.containerInfo}>
+        <div className={style["user-details"]}>
+          <h2 className={style.title}>Datos del Comprador</h2>
+          {userData ? (
+            <>
+              <p>
+                <b>Nombre:</b> {userData.user_name}
+              </p>
+              <p>
+                <b>Email:</b> {userData.user_email}
+              </p>
+              <p>
+                <b>Dirección:</b> {userData.user_address}
+              </p>
+              <p>
+                <b>Telefono:</b> {userData.user_phone}
+              </p>
+              <NavLink to="/user" className={style.link}>
+                Editar Informacion
+              </NavLink>
+            </>
+          ) : (
+            <p>Cargando información del usuario...</p>
+          )}
+        </div>
+
+        <div className={style["car-details"]}>
+          <h2 className={style.title}>Datos del Automóvil</h2>
+          {carDetails && (
+            <>
+              <p>
+                <b>Marca:</b> {carDetails.car_marca}
+              </p>
+              <p>
+                <b>Modelo:</b> {carDetails.car_modelo}
+              </p>
+              <p>
+                <b>Color:</b> {carDetails.car_color}
+              </p>
+              <p>
+                <b>Condición:</b> {carDetails.car_condicion}{" "}
+                {carDetails.car_kilometraje} KM
+              </p>
+              <div className={style.price}>
+                <p>
+                  <b>Precio: </b>
+                </p>
+                <h2>{carDetails.car_precio_ars} ARS</h2>
+              </div>
+            </>
+          )}
+        </div>
       </div>
 
-      <div className={style["purchase-details"]}>
-        <h2>Detalles de la Compra</h2>
-        <label>Medio de Pago:</label>
-        <select id="medioDePago" defaultValue="efectivo">
-          <option value="efectivo">Efectivo</option>
-          <option value="mercadopago">MercadoPago</option>
-        </select>
-        <button onClick={buy}>Comprar</button>
+      <div className={style.detallePago}>
+        <div className={style["purchase-details"]}>
+          <h2 className={style.title}>Detalles de la Compra</h2>
+          {userData ? (
+            <p>
+              <b>Usuario:</b> {userData.user_email}
+            </p>
+          ) : null}
+
+          <p>
+            <b>Auto:</b> {carDetails.car_marca} {carDetails.car_modelo}
+          </p>
+          <p>
+            <b>Condición:</b> {carDetails.car_condicion}
+          </p>
+          <div className={style.metodo}>
+            <p>
+              <b>Medio de Pago:</b>
+            </p>
+            <select id="medioDePago" defaultValue="efectivo">
+              <option value="efectivo">Efectivo</option>
+              <option value="mercadopago">MercadoPago</option>
+            </select>
+          </div>
+          <div className={style.compra}>
+            <h2>{carDetails.car_precio_ars} ARS</h2>
+            <button className={style.buyNow} onClick={buy}>
+              Comprar
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   );
