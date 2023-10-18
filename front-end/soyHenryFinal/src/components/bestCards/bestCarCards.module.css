@@ -17,3 +17,13 @@
   color: #ffffff;
   text-align: center;
 }
+
+@media (min-width: 1600px) {
+  .titleBk {
+    height: 100px;
+  }
+
+  .title {
+    font-size: 36px;
+  }
+}

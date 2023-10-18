@@ -100,19 +100,13 @@
   background-color: #1e7e34;
 }
 
-@media (max-width: 768px) {
-  .flexContainer {
-    flex-direction: column;
-    align-items: center;
+@media (min-width: 1600px) {
+  .container {
+    height: 60vh;
   }
 
   .image {
-    margin-left: 0;
-  }
-
-  .addToCart,
-  .buyNow {
-    margin-right: 0;
-    width: 100%;
+    height: 550px;
+    width: 750px;
   }
 }
