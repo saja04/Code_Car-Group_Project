@@ -45,14 +45,14 @@ function Shop() {
 
   useEffect(() => {
     if (searchPerformed) {
-      resetPagination(); 
+      resetPagination();
     }
   }, [searchPerformed]);
 
-  useEffect(()=>{
+  useEffect(() => {
     setVehicles(searchCar);
     setCurrentPage(1);
-  }, [searchCar]) 
+  }, [searchCar]);
 
   return (
     <div className={style.container}>
@@ -60,8 +60,10 @@ function Shop() {
         <div className={style.filters}>
           <Filter resetPagination={resetPagination} />
         </div>
-        <div className={style.cards}>
-          <CarCards vehicles={paginatedVehicles} />
+        <div className={style.shopInfo}>
+          <div className={style.cards}>
+            <CarCards vehicles={paginatedVehicles} />
+          </div>
           <div className={style.pagination}>
             <Pagination
               vehiclesPerPage={vehiclesPerPage}

@@ -31,12 +31,6 @@ function Footer() {
           <Link className={style.links} to="/tienda">
             Tienda
           </Link>
-          <Link className={style.links} to="/contacto">
-            Contacto
-          </Link>
-          <Link className={style.links} to="/nosotros">
-            Nosotros
-          </Link>
         </div>
       </div>
     </div>

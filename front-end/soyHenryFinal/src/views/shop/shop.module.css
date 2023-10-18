@@ -1,7 +1,6 @@
 .container {
   display: flex;
   flex-direction: column;
-  margin-top: 50px;
   background-color: #ffffff;
 }
 
@@ -13,10 +12,20 @@
 .filters {
   width: 16%;
   margin: auto;
-  margin-top: 20px;
+  margin-top: 40px;
   border: solid gray 1px;
 }
 
-.cards {
+.shopInfo {
   width: 82%;
+  margin-top: 30px;
+}
+
+@media (max-width: 1024px) {
+  .filters {
+    width: 14%;
+  }
+  .shopInfo {
+    width: 86%;
+  }
 }
