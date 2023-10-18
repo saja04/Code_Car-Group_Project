@@ -15,7 +15,6 @@ const createOrder = async (req, res) => {
     });
 
     const priceNum = parseInt(price);
-    console.log(priceNum);
 
     const result = await mercadopago.preferences.create({
       items: [
@@ -35,6 +34,7 @@ const createOrder = async (req, res) => {
       },
       notification_url: "https://codecar.onrender.com/webhook",
     });
+	console.log(result);
     if (result) {
       const createInDb = await UserOrder.create({
         order_status: "aPagar",
