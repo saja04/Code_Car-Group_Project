@@ -34,7 +34,5 @@ module.exports = (sequelize) => {
     user_email: {
       type: DataTypes.STRING
     },
-
-    
   });
 };

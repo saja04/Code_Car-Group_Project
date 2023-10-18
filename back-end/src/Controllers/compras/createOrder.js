@@ -4,7 +4,6 @@ const createOrder = async (data) => {
   const fecha = new Date();
   const { name, price, userId, carId, carModelo, carMarca, userEmail } = data;
 
-  if (medioDePago === "efectivo") {
     const createInDb = await UserOrder.create({
       order_status: "aPagar",
       order_date: fecha.toString(),
@@ -23,6 +22,5 @@ const createOrder = async (data) => {
       searchInDb.save();
     }
     return createInDb;
-  }
 };
 module.exports = createOrder;
