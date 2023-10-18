@@ -29,9 +29,9 @@ const createOrder = async (req, res) => {
         },
       ],
       back_urls: {
-        success: `https://codecar.onrender.com/success`,
-        pending: `https://codecar.onrender.com/pending`,
-        failure: `https://codecar.onrender.com/failure`,
+        success: `https://code-car-41a-pf-7u9q.vercel.app/userOrder`,
+        pending: `https://code-car-41a-pf-7u9q.vercel.app/userOrder`,
+        failure: `https://code-car-41a-pf-7u9q.vercel.app/userOrder`,
       },
       notification_url: "https://codecar.onrender.com/webhook",
     });
@@ -56,7 +56,7 @@ const receiveWebhook = async (req, res) => {
   try {
     if (payment.type === "payment") {
       const data = await mercadopago.payment.findById(payment["data.id"]);
-      console.log(data);
+      console.log(data.body.id);
 	  const searchInDb = await UserOrder.findOne({where: {mp_id: data.body.id}})
 	  searchInDb.order_status = 'listoARetirar'
 	  await searchInDb.save()
