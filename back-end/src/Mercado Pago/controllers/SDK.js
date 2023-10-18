@@ -7,7 +7,7 @@ const mercadopago = require("mercadopago");
 const { UserOrder, Car } = require("../../db");
 
 const createOrder = async (req, res) => {
-  const { name, price, userId, carId } = req.body;
+  const { name, price, userId, carId, carModelo, carMarca, userEmail } = req.body;
   const fecha = new Date();
   try {
     mercadopago.configure({
@@ -40,6 +40,10 @@ const createOrder = async (req, res) => {
         car_order: carId,
         user_order: userId,
         medio_de_pago: "mp",
+        car_modelo: carModelo,
+        car_marca: carMarca,
+        car_precio_ars: price,
+        user_email: userEmail
       });
 
       const carById = await Car.findByPk(carId);

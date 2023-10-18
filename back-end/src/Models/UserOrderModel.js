@@ -22,6 +22,19 @@ module.exports = (sequelize) => {
     medio_de_pago: {
       type: DataTypes.STRING,
     },
+    car_modelo: {
+      type: DataTypes.STRING
+    },
+    car_marca: {
+      type: DataTypes.STRING,
+    },
+    car_precio_ars: {
+      type: DataTypes.STRING
+    },
+    user_email: {
+      type: DataTypes.STRING
+    },
+
     
   });
 };

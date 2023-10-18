@@ -55,7 +55,10 @@ function DetailBuy() {
             {
               userId: userData.user_id,
               carId: carDetails.car_id,
-              medioDePago: medioDePago,
+              price: carDetails.car_precio_ars || carDetails.car_precio_usd,
+              carModelo: carDetails.car_modelo,
+              carMarca: carDetails.car_marca,
+              userEmail: userData.user_email
             }
           );
 
@@ -87,6 +90,9 @@ function DetailBuy() {
               price: 1,
               userId: userData.user_id,
               carId: carDetails.car_id,
+              carModelo: carDetails.car_modelo,
+              carMarca: carDetails.car_marca,
+              userEmail: userData.user_email
             }
           );
 
