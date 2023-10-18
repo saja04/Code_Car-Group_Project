@@ -60,8 +60,6 @@ const receiveWebhook = async (req, res) => {
     if (payment.type === "payment") {
       const data = await mercadopago.payment.findById(payment["data.id"]);
       console.log(data.body.additional_info.items[0].description);
-      console.log(data.body.additional_info.items[0]);
-	    console.log(data.body.additional_info.items['description']);
       if (
         data.body.additional_info.items[0].description
       ) {
@@ -70,6 +68,8 @@ const receiveWebhook = async (req, res) => {
         });
         searchInDb.order_status = "listoARetirar";
         await searchInDb.save();
+        console.log('estado de la compra guardado');
+        console.log(searchInDb);
       }
     }
   } catch (error) {
