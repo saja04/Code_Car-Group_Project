@@ -12,7 +12,8 @@ const getCars = async (req) => {
   if (order) {
     query.order = [[sequelize.literal(order.value), order.sequence]];
   }
-  if (precio) query.attributes = { exclude: [precio], deleted: true };
+  if (filter) query.where = filter;
+  if (precio) query.attributes = { exclude: [precio], deleted: false };
 
   return await Car.findAll(query);
 };
