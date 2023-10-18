@@ -6,7 +6,6 @@ const {UserOrder} = require('../../db')
 const getOrdersUser = async(id) => {
 try {
     const findInDb = await UserOrder.findAll({where: {user_order: id}})
-    console.log(findInDb);
     if(findInDb){
         return findInDb
     }
