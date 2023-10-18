@@ -29,3 +29,14 @@
   color: #ffffff;
   text-align: center;
 }
+
+@media (min-width: 1600px) {
+  .titleBk {
+    height: 100px;
+  }
+
+  .title {
+    text-align: start;
+    font-size: 36px;
+  }
+}

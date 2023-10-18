@@ -10,3 +10,9 @@
   border-style: solid;
   padding-left: 12px;
 }
+
+@media (min-width: 1600px) {
+  .container input {
+    width: 400px;
+  }
+}

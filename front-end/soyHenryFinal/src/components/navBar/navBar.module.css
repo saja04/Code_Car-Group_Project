@@ -42,3 +42,15 @@
   justify-content: center;
   width: 13%;
 }
+
+@media (min-width: 1600px) {
+  .content {
+    width: 88%;
+  }
+
+  .user {
+    width: 20%;
+    margin-right: 20px;
+    justify-content: flex-end;
+  }
+}

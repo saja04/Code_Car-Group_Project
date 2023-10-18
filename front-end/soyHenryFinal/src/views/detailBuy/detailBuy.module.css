@@ -80,3 +80,13 @@
   text-decoration: none;
   color: blue;
 }
+
+@media (min-width: 1600px) {
+  .detail-buy-container {
+    height: 60vh;
+  }
+
+  .containerInfo {
+    width: 60%;
+  }
+}
