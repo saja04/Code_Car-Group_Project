@@ -4,7 +4,7 @@
 
 const { ACCESS_TOKEN_MP, HOST } = process.env;
 const mercadopago = require("mercadopago");
-const { UserOrder } = require("../../db");
+const { UserOrder, Car } = require("../../db");
 
 const createOrder = async (req, res) => {
   const { name, price, userId, carId } = req.body;
@@ -41,6 +41,12 @@ const createOrder = async (req, res) => {
         user_order: userId,
         medio_de_pago: "mp",
       });
+
+      const carById = await Car.findByIdPk(carId);
+      if(carById){
+        carById.deleted = true;
+        carById.save()
+      }
     }
     res.json(result.body.init_point);
   } catch (error) {
@@ -53,15 +59,15 @@ const receiveWebhook = async (req, res) => {
   try {
     if (payment.type === "payment") {
       const data = await mercadopago.payment.findById(payment["data.id"]);
-      console.log(data.body.additional_info.items.description);
-      console.log(data.body.additional_info.items);
+      console.log(data.body.additional_info.items[0].description);
+      console.log(data.body.additional_info[0].items);
 	  console.log(data.body);
       if (
         data.body.additional_info.items.description ||
         data.body.additional_info.items.description
       ) {
         const searchInDb = await UserOrder.findOne({
-          where: { car_order: data.body.additional_info.items.description },
+          where: { car_order: data.body.additional_info.items[0].description },
         });
         searchInDb.order_status = "listoARetirar";
         await searchInDb.save();
