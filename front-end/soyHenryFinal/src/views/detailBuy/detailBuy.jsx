@@ -84,7 +84,7 @@ function DetailBuy() {
             `https://codecar.onrender.com/create-order`,
             {
               name: carName,
-              price: carPrice,
+              price: 1,
               userId: userData.user_id,
               carId: carDetails.car_id,
             }

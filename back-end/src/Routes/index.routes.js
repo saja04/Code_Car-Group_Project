@@ -37,12 +37,14 @@ const {
   receiveWebhook,
 } = require("../Mercado Pago/controllers/SDK");
 const createOrderHandler = require("../Handlers/Compras/createOrderHandler");
+const getUserById = require("../Authentication/getUserById");
+const getCarsAdmin = require("../Controllers/getAllCarsAdmin");
 
 //ROUTES CARS
 router.post("/carsPost", postCarsHandler);
 router.post("/cars", getCarsHandler);
 router.post("/pedido/", buyCarHandler);
-router.get("/carsDelete/:id", deleteCarsHandler);
+router.post("/carsDelete", deleteCarsHandler);
 router.get("/carsName/", getCarsByNameHandler);
 router.post("/carsId/", getCarsByIdHandler);
 router.post("/create-order/", createOrder);
@@ -58,11 +60,14 @@ router.get("/users", getAllUsersHandler);
 
 router.post("/userInfo", userCheck, getUserInfo);
 
+router.post('/userById', getUserById)
+
 router.post("/banUser", adminUser);
 
 router.post("/updateUser/", updateUserInfo);
 
 //ROUTES ADMIN
+router.get('/carsAdmin', getCarsAdmin)
 router.post("/addStock", addStockHandler)
 router.post("/deleteStock", deleteStockHandler)
 
