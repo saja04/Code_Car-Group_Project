@@ -2,7 +2,7 @@
 const { Car } = require('../db');
 
 // Controlador para el borrado lógico de un auto
-const deleteCar = async (id) => {
+const deleteCar = async (id, deleted) => {
 
   try {
     const car = await Car.findByPk(id);
@@ -13,7 +13,7 @@ const deleteCar = async (id) => {
     }
 
     // Alternar el estado de borrado lógico
-    car.deleted = !car.deleted;
+    car.deleted = deleted;
     await car.save();
 
     const message = car.deleted ? 'Auto marcado como borrado' : 'Auto restaurado';
