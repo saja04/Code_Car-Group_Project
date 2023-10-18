@@ -77,3 +77,23 @@
     text-align: start;
   }
 }
+
+@media (max-width: 1024px) {
+  .conteiner {
+    width: 230px;
+  }
+  .cardImg {
+    width: 230px;
+    height: 140px;
+  }
+
+  .title {
+    font-size: 22px;
+    text-align: start;
+  }
+
+  .conteiner p {
+    font-size: 14px;
+    text-align: start;
+  }
+}

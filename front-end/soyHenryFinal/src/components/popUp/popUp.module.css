@@ -36,3 +36,11 @@
   transition: transform 0.3s linear;
   transform: translateY(-2px);
 }
+
+@media (max-width: 1024px) {
+  .popupContent {
+    left: 20%;
+    transform: translateX(-70%);
+    z-index: 1000;
+  }
+}

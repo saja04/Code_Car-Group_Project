@@ -110,3 +110,14 @@
     width: 750px;
   }
 }
+
+@media (max-width: 1024px) {
+  .image {
+    height: 400px;
+    width: 550px;
+  }
+
+  .image:hover {
+    transform: scale(1);
+  }
+}
