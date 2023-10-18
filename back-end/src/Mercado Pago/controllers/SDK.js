@@ -23,7 +23,7 @@ const createOrder = async (req, res) => {
           title: name,
           quantity: 1,
           unit_price: priceNum,
-          description: carId
+          description: carId,
         },
       ],
       back_urls: {
@@ -33,14 +33,13 @@ const createOrder = async (req, res) => {
       },
       notification_url: "https://codecar.onrender.com/webhook",
     });
-	console.log(result);
     if (result) {
       const createInDb = await UserOrder.create({
         order_status: "aPagar",
         order_date: fecha.toString(),
         car_order: carId,
         user_order: userId,
-        medio_de_pago: 'mp',
+        medio_de_pago: "mp",
       });
     }
     res.json(result.body.init_point);
@@ -54,10 +53,18 @@ const receiveWebhook = async (req, res) => {
   try {
     if (payment.type === "payment") {
       const data = await mercadopago.payment.findById(payment["data.id"]);
-	  console.log(data);
-	  const searchInDb = await UserOrder.findOne({where: {car_order: data.body.additional_info.items.description}})
-	  searchInDb.order_status = 'listoARetirar'
-	  await searchInDb.save()
+      console.log(data.body.additional_info.items.description);
+      console.log(response.body.additional_info.items.description);
+      if (
+        data.body.additional_info.items.description ||
+        response.body.additional_info.items.description
+      ) {
+        const searchInDb = await UserOrder.findOne({
+          where: { car_order: data.body.additional_info.items.description },
+        });
+        searchInDb.order_status = "listoARetirar";
+        await searchInDb.save();
+      }
     }
   } catch (error) {
     console.log(error);
