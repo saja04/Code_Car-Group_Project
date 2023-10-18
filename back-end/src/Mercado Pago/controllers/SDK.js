@@ -48,6 +48,7 @@ const createOrder = async (req, res) => {
         carById.save()
       }
     }
+    console.log(result.body.init_point);
     res.json(result.body.init_point);
   } catch (error) {
     res.send(error);
