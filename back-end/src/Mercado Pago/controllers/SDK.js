@@ -23,8 +23,7 @@ const createOrder = async (req, res) => {
           title: name,
           quantity: 1,
           unit_price: priceNum,
-          description: userId,
-          carId,
+          description: carId
         },
       ],
       back_urls: {
@@ -42,7 +41,6 @@ const createOrder = async (req, res) => {
         car_order: carId,
         user_order: userId,
         medio_de_pago: 'mp',
-		mp_id: result.body.id
       });
     }
     res.json(result.body.init_point);
@@ -53,12 +51,11 @@ const createOrder = async (req, res) => {
 
 const receiveWebhook = async (req, res) => {
   const payment = req.query;
-//   console.log(req.body);
   try {
     if (payment.type === "payment") {
       const data = await mercadopago.payment.findById(payment["data.id"]);
-	  console.log(data);
-	  const searchInDb = await UserOrder.findOne({where: {mp_id: data.body.id}})
+	  console.log(data.description);
+	  const searchInDb = await UserOrder.findOne({where: {car_order: data.description}})
 	  searchInDb.order_status = 'listoARetirar'
 	  await searchInDb.save()
     }

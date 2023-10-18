@@ -22,9 +22,6 @@ module.exports = (sequelize) => {
     medio_de_pago: {
       type: DataTypes.STRING,
     },
-    mp_id: {
-      type: DataTypes.STRING,
-    }
     
   });
 };
