@@ -42,7 +42,7 @@ const createOrder = async (req, res) => {
         medio_de_pago: "mp",
       });
 
-      const carById = await Car.findByIdPk(carId);
+      const carById = await Car.findByPk(carId);
       if(carById){
         carById.deleted = true;
         carById.save()
