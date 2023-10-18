@@ -11,9 +11,12 @@ function Shop() {
   const dispatch = useDispatch();
   const allCars = useSelector((state) => state.allCars);
   const divisa = localStorage.getItem("divisa");
+  const searchCar = useSelector((state) => state.searchCar);
 
   const [vehicles, setVehicles] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
+  const [searchPerformed, setSearchPerformed] = useState(false);
+
   const vehiclesPerPage = 6;
 
   const paginatedVehicles = Array.isArray(vehicles)
@@ -27,19 +30,35 @@ function Shop() {
     setCurrentPage(pageNumber);
   };
 
+  const resetPagination = () => {
+    setCurrentPage(1);
+  };
+
   useEffect(() => {
     setVehicles(allCars);
+    setCurrentPage(1);
   }, [allCars]);
 
   useEffect(() => {
     dispatch(getCars(divisa));
   }, [dispatch]);
 
+  useEffect(() => {
+    if (searchPerformed) {
+      resetPagination(); 
+    }
+  }, [searchPerformed]);
+
+  useEffect(()=>{
+    setVehicles(searchCar);
+    setCurrentPage(1);
+  }, [searchCar]) 
+
   return (
     <div className={style.container}>
       <div className={style.content}>
         <div className={style.filters}>
-          <Filter />
+          <Filter resetPagination={resetPagination} />
         </div>
         <div className={style.cards}>
           <CarCards vehicles={paginatedVehicles} />
@@ -47,6 +66,7 @@ function Shop() {
             <Pagination
               vehiclesPerPage={vehiclesPerPage}
               totalVehicles={Array.isArray(vehicles) ? vehicles.length : 0}
+              currentPage={currentPage}
               paginate={paginate}
             />
           </div>

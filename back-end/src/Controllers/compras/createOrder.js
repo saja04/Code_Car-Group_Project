@@ -15,6 +15,7 @@ const createOrder = async(data) => {
             medio_de_pago: medioDePago
         })
         console.log(createInDb);
+        const searchInDb = await carId.findByPk(carId)
         return createInDb
     }
     else{
