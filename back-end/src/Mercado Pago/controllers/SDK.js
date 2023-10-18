@@ -54,8 +54,7 @@ const receiveWebhook = async (req, res) => {
   try {
     if (payment.type === "payment") {
       const data = await mercadopago.payment.findById(payment["data.id"]);
-	  console.log(data.body.additional_info.items);
-	  const searchInDb = await UserOrder.findOne({where: {car_order: data.description}})
+	  const searchInDb = await UserOrder.findOne({where: {car_order: data.body.additional_info.items.description}})
 	  searchInDb.order_status = 'listoARetirar'
 	  await searchInDb.save()
     }
