@@ -76,13 +76,6 @@ function DetailBuy() {
           const carName = `${carDetails.car_marca} ${carDetails.car_modelo}`;
           const carPrice = carDetails.car_precio_ars;
 
-          console.log(
-            "Información del automóvil:",
-            carName,
-            carPrice,
-            medioDePago
-          );
-
           const response = await axios.post(
             `https://codecar.onrender.com/create-order`,
             {

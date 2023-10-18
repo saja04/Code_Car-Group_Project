@@ -31,9 +31,12 @@ function UserOrder() {
         orders.map((order) => (
           <Card key={order.user_order_id} className={styles["order-card"]}>
             <p>ID de Pedido: {order.user_order_id}</p>
+            <p>Modelo: {order.car_modelo}</p>
+            <p>Marca: {order.car_marca}</p>
+            <p>Precio: {order.car_precio_ars}</p>
             <p>Fecha de Pedido: {formatFecha(order.order_date)}.</p>
-            <p>Estado del Pedido: {order.order_status === "listoRetirar" ? "A pagar" : order.order_status}</p>
-            <p>Medio de Pago: {order.medio_de_pago === "efectivo" ? "Efectivo" : order.order_status}</p>
+            <p>Estado del Pedido: {order.order_status === "listoARetirar" ? "A retirar": order.order_status === 'aPagar' ? "A pagar" : 'completada'}</p>
+            <p>Medio de Pago: {order.medio_de_pago === "efectivo" ? "Efectivo" : "Mercado Pago"}</p>
           </Card>
         ))
       ) : (
