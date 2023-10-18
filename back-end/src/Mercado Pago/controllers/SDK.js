@@ -47,6 +47,7 @@ const createOrder = async (req, res) => {
         carById.deleted = true;
         carById.save()
       }
+      console.log('car borrado');
     }
     res.json(result.body.init_point);
   } catch (error) {
