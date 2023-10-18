@@ -2,11 +2,10 @@
 const { Car } = require('../db');
 
 // Controlador para el borrado lógico de un auto
-const deleteCar = async (req, res) => {
-  const { car_id } = req.params;
+const deleteCar = async (id) => {
 
   try {
-    const car = await Car.findByPk(car_id);
+    const car = await Car.findByPk(id);
 
     // Verifica si el auto existe
     if (!car) {

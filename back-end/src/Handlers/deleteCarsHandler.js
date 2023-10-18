@@ -2,15 +2,14 @@ const deleteCar = require("../Controllers/deleteCars");
 
 const deleteCarsHandler = async (req, res) => {
   try {
-    const {id} = req.params;
-    const idParse = parseInt(id)
+    const {id} = req.body;
     if (isNaN(idParse)) {
       res.status(406).json({
         msg: "inserta un numero como parametro, checkea la direccion url",
       });
     }
     if (!isNaN(idParse)) {
-      const response = await deleteCar(idParse);
+      const response = await deleteCar(id);
       return res.status(205).json(response);
     } else return;
   } catch (error) {

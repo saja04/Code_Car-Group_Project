@@ -42,7 +42,7 @@ const createOrderHandler = require("../Handlers/Compras/createOrderHandler");
 router.post("/carsPost", postCarsHandler);
 router.post("/cars", getCarsHandler);
 router.post("/pedido/", buyCarHandler);
-router.get("/carsDelete/:id", deleteCarsHandler);
+router.post("/carsDelete", deleteCarsHandler);
 router.get("/carsName/", getCarsByNameHandler);
 router.post("/carsId/", getCarsByIdHandler);
 router.post("/create-order/", createOrder);
