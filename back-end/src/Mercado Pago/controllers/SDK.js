@@ -35,7 +35,6 @@ const createOrder = async (req, res) => {
       },
       notification_url: "https://codecar.onrender.com/webhook",
     });
-	console.log(result);
     if (result) {
       const createInDb = await UserOrder.create({
         order_status: "aPagar",
@@ -54,10 +53,11 @@ const createOrder = async (req, res) => {
 
 const receiveWebhook = async (req, res) => {
   const payment = req.query;
+  console.log(req.body);
   try {
     if (payment.type === "payment") {
       const data = await mercadopago.payment.findById(payment["data.id"]);
-	  console.log(data);
+	//   console.log(data);
 	  const searchInDb = await UserOrder.findOne({where: {mp_id: data.body.id}})
 	  searchInDb.order_status = 'listoARetirar'
 	  await searchInDb.save()
