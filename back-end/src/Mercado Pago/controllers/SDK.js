@@ -48,7 +48,6 @@ const createOrder = async (req, res) => {
         carById.save()
       }
     }
-    console.log(result.body.init_point);
     res.json(result.body.init_point);
   } catch (error) {
     res.send(error);
@@ -64,8 +63,7 @@ const receiveWebhook = async (req, res) => {
       console.log(data.body.additional_info.items[0]);
 	    console.log(data.body.additional_info.items['description']);
       if (
-        data.body.additional_info.items.description ||
-        data.body.additional_info.items.description
+        data.body.additional_info.items[0].description
       ) {
         const searchInDb = await UserOrder.findOne({
           where: { car_order: data.body.additional_info.items[0].description },
