@@ -2,7 +2,7 @@ const { UserOrder, Car } = require("../../db");
 
 const createOrder = async (data) => {
   const fecha = new Date();
-  const { name, price, userId, carId, carModelo, carMarca, userEmail } = data;
+  const { price, userId, carId, carModelo, carMarca, userEmail } = data;
 
     const createInDb = await UserOrder.create({
       order_status: "aPagar",
