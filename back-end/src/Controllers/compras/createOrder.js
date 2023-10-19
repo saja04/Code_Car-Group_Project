@@ -26,7 +26,7 @@ const createOrder = async (data) => {
 
       from: '"COMPRA REALIZADA" <codecarinfo123@gmail.com>',
       to: userEmail,
-      subject: `La compra de su vehiculo ${carMarca} ${car_modelo} fue realizada con exito.`,
+      subject: `La compra de su vehiculo ${carMarca} ${carModelo} fue realizada con exito.`,
       text: "lorem ipsum",
       html: `
       <b>Muchas gracias por la compra en nuestra concesionaria, disfrute su nuevo vehiculo.</b>
