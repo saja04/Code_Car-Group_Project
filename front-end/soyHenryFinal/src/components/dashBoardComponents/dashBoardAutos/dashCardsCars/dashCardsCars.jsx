@@ -5,9 +5,9 @@ import carCardStyles from "./dashCardscar.module.css";
 function DashCardsCar({ vehicle }) {
   const [isDeleted, setIsDeleted] = useState(vehicle.deleted);
 
-  const handleToggleDeleted = () => {
+  const handleToggleDeleted = async () => {
     setIsDeleted(!isDeleted);
-    axios.post("https://codecar.onrender.com/carsDelete", {
+    await axios.post("https://codecar.onrender.com/carsDelete", {
       id: vehicle.car_id,
       deleted: !isDeleted,
     });
