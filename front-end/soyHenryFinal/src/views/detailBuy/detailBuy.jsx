@@ -71,7 +71,7 @@ function DetailBuy() {
 
           if (response.data) {
             console.log("Orden creada con éxito");
-            alert("AUTO COMPRADO!");
+            window.location.href = 'https://code-car-41a-pf-7u9q.vercel.app/userOrder'
           } else {
             console.error("Error al crear la orden de compra.");
           }

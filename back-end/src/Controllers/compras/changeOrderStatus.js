@@ -4,6 +4,7 @@ const changeOrderStatus = async (req, res) => {
     const {orderId, status} = req.body
   try {
     const searchInDb = await UserOrder.findByPk(orderId);
+    console.log(searchInDb);
 
     if(status === 'completa'){
         searchInDb.order_status = 'Completa'
