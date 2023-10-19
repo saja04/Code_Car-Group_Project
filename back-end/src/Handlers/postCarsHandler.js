@@ -25,7 +25,7 @@ const postCarsHandler = async (req, res) => {
     !car_precio_ars ||
     !car_kilometraje ||
     !car_condicion ||
-    !car_imagen ||
+    !car_imagen 
     ){
       return res.status(412).json({msg: 'por favor, completa todos los campos requeridos, verifica los nombres de las propiedades'})
     }

@@ -3,7 +3,6 @@ import axios from "axios";
 import style from "./dashCardsCompras.module.css";
 
 function DashCardsCompras(order) {
-  console.log(order);
   const [selectedStatus, setSelectedStatus] = useState("");
 
   const handleStatusChange = (event) => {
