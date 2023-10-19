@@ -29,6 +29,7 @@ function DetailBuy() {
 
   useEffect(() => {
     getNoAuthenticated();
+
   }, [user]);
 
   const buy = async () => {
