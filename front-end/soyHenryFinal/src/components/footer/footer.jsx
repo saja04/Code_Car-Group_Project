@@ -7,7 +7,7 @@ function Footer() {
       <div className={style.cont}>
         <div className={style.contContent}>
           <h3>CONTACTO</h3>
-          <p>info@carCode.com.ar</p>
+          <p>codecarinfo123@gmail.com</p>
           <p>+54 9 11-22435213</p>
         </div>
       </div>

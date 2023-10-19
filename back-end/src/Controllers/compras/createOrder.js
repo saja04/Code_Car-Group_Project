@@ -1,4 +1,5 @@
 const { UserOrder, Car } = require("../../db");
+const transporter = require('../../../nodeMailer');
 
 const createOrder = async (data) => {
   const fecha = new Date();
@@ -21,6 +22,18 @@ const createOrder = async (data) => {
       searchInDb.deleted = true;
       searchInDb.save();
     }
+
+    await transporter.sendMail({
+      from: '"COMPRA REALIZADA" <codecarinfo123@gmail.com>',
+      to: userEmail,
+      subject: `La compra de su vehiculo ${carMarca} ${carModelo} fue realizada con exito.`,
+      text: "lorem ipsum",
+      html: `
+      <b>Muchas gracias por la compra en nuestra concesionaria, disfrute su nuevo vehiculo.</b>
+      <b>Para volver a nuestra página, haga click en el siguiente link: </b>
+      <a href="https://code-car-41a-pf-7u9q.vercel.app/userOrder"> REGRESAR </a>
+      `,
+    })
     return createInDb;
 };
 module.exports = createOrder;

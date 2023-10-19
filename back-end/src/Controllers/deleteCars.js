@@ -18,7 +18,7 @@ const deleteCar = async (id, deleted) => {
 
     const message = car.deleted ? 'Auto marcado como borrado' : 'Auto restaurado';
 
-    return res.status(200).json({ message });
+    return message;
   } catch (error) {
     console.error(error);
     return res.status(500).json({ message: 'Error en el servidor' });
