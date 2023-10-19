@@ -39,6 +39,7 @@ const {
 const createOrderHandler = require("../Handlers/Compras/createOrderHandler");
 const getUserById = require("../Authentication/getUserById");
 const getCarsAdmin = require("../Controllers/getAllCarsAdmin");
+const changeOrderStatus = require("../Controllers/compras/changeOrderStatus");
 
 //ROUTES CARS
 router.post("/carsPost", postCarsHandler);
@@ -74,6 +75,7 @@ router.post("/deleteStock", deleteStockHandler)
 router.post('/allOrders', getAllOrders);
 router.post('/userOrder', getUserOrderHandler);
 router.post('/createOrderCar', createOrderHandler);
+router.post('/editOrder', changeOrderStatus)
 
 
 
