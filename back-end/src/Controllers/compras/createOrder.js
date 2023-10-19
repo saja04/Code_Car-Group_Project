@@ -31,7 +31,7 @@ const createOrder = async (data) => {
       html: `
       <b>Muchas gracias por la compra en nuestra concesionaria, disfrute su nuevo vehiculo.</b>
       <b>Para volver a nuestra página, haga click en el siguiente link: </b>
-      <a href=""> REGRESAR </a>
+      <a href="https://code-car-41a-pf-7u9q.vercel.app/userOrder"> REGRESAR </a>
       `,
     })
     return createInDb;
