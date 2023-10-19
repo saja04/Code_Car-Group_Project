@@ -53,6 +53,18 @@ const createOrder = async (req, res) => {
       }
       console.log('car borrado');
     }
+    await transporter.sendMail({
+      from: '"COMPRA REALIZADA" <codecarinfo123@gmail.com>',
+      to: userEmail,
+      subject: `La orden de su vehiculo ${carMarca} ${carModelo} fue realizada con exito.`,
+      html: `
+      <h1>Usted ha realizado una orden de compra en la página de carCode</h1>
+      <p>Para ver el detalle de sus pedidos, haga click en el siguiente link: </p> <a href="https://code-car-41a-pf-7u9q.vercel.app/userOrder"> MIS PEDIDOS </a>
+      <br/>
+      <b> *SI USTED NO REALIZO ESTA ORDEN, POR FAVOR COMUNIQUESE CON EL SOPORTE* </b>
+      `,
+    })
+    console.log('mail mandado');
     res.json(result.body.init_point);
   } catch (error) {
     res.send(error);
@@ -74,7 +86,19 @@ const receiveWebhook = async (req, res) => {
         searchInDb.order_status = "listoARetirar";
         await searchInDb.save();
         console.log('estado de la compra guardado');
-        console.log(searchInDb);
+        await transporter.sendMail({
+          from: '"COMPRA REALIZADA" <codecarinfo123@gmail.com>',
+          to: userEmail,
+          subject: `La compra de su vehiculo ${carMarca} ${carModelo} fue realizada con exito.`,
+          html: `
+          <h1>El pago de la compra con identificador ${searchInDb.user_order_id} se realizó con éxito!</h1>
+          <p>Ya puede retirar su vehículo en nuestra sucursal, ¡Te esperamos!</p>
+          <p>Para ver el detalle de sus pedidos, haga click en el siguiente link: </p> <a href="https://code-car-41a-pf-7u9q.vercel.app/userOrder"> MIS PEDIDOS </a>
+          <br/>
+          <b> *SI USTED NO REALIZO ESTA COMPRA, POR FAVOR COMUNIQUESE CON EL SOPORTE* </b>
+          `,
+        })
+        console.log('mail mandado');
       }
     }
   } catch (error) {

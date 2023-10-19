@@ -27,11 +27,9 @@ const createOrder = async (data) => {
       from: '"COMPRA REALIZADA" <codecarinfo123@gmail.com>',
       to: userEmail,
       subject: `La compra de su vehiculo ${carMarca} ${carModelo} fue realizada con exito.`,
-      text: "lorem ipsum",
       html: `
       <h1>Muchas gracias por la compra en nuestra concesionaria, disfrute su nuevo vehiculo.</h1>
-      <p>Para ver el detalle de sus pedidos, haga click en el siguiente link: </p>
-      <a href="https://code-car-41a-pf-7u9q.vercel.app/userOrder"> REGRESAR </a>
+      <p>Para ver el detalle de sus pedidos, haga click en el siguiente link: </p> <a href="https://code-car-41a-pf-7u9q.vercel.app/userOrder"> MIS PEDIDOS </a>
       <br/>
       <b> *SI USTED NO REALIZO ESTA COMPRA, POR FAVOR COMUNIQUESE CON EL SOPORTE* </b>
       `,
