@@ -64,6 +64,7 @@ const createOrder = async (req, res) => {
       <b> *SI USTED NO REALIZO ESTA ORDEN, POR FAVOR COMUNIQUESE CON EL SOPORTE* </b>
       `,
     })
+    console.log(result);
     console.log('mail mandado');
     res.json(result.body.init_point);
   } catch (error) {
