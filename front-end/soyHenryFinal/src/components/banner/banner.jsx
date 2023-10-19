@@ -1,6 +1,6 @@
-import bannerToyota from "../../img/bannerToyota.jpg";
-import bannerFord from "../../img/bannerFord.png";
-import bannerChevrolet from "../../img/bannerChevrolet.jpg";
+import bannerToyota from "../../img/BANNER1.png";
+import bannerFord from "../../img/BANNER11.jpg";
+import bannerChevrolet from "../../img/BANNER2.jpg";
 import style from "./banner.module.css";
 
 import { Carousel } from "react-responsive-carousel";
