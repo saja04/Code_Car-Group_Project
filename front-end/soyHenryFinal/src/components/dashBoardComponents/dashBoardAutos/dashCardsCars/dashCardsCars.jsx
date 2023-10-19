@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import carCardStyles from "./dashCardscard.module.css";
+import carCardStyles from "./dashCardsCar.module.css";
 
 function DashCardsCar({ vehicle }) {
   const [isDeleted, setIsDeleted] = useState(vehicle.deleted);
