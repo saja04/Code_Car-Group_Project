@@ -9,7 +9,7 @@ const { Meta } = Card;
 
 function User() {
   const { id } = useParams();
-  
+
   const { user } = useAuth0();
 
   const [userData, setUserData] = useState(null);
@@ -35,7 +35,8 @@ function User() {
   }, [user]);
 
   const [isEditing, setIsEditing] = useState(false);
-  const [newUserData, setNewUserData] = useState();
+  const [newUserData, setNewUserData] = useState({});
+
 
   const startEditing = () => {
     setIsEditing(true);
@@ -51,10 +52,12 @@ function User() {
 
       setIsEditing(false);
       getNoAuthenticated();
+      setNewUserData({});
     } catch (error) {
       console.error("Error al actualizar la información del usuario", error);
     }
   };
+
 
   return (
     <div className={styles.userContainer}>
@@ -73,10 +76,13 @@ function User() {
                 <div>
                   {isEditing ? (
                     <>
+
                       <input
                         type="text"
                         placeholder="Nombre"
-                        value={newUserData.user_name || userData.user_name}
+                        required
+                        value={newUserData.name !== undefined ? newUserData.name : userData.user_name}
+
                         onChange={(e) =>
                           setNewUserData({
                             ...newUserData,
@@ -87,9 +93,8 @@ function User() {
                       <input
                         type="text"
                         placeholder="Dirección"
-                        value={
-                          newUserData.user_address || userData.user_address
-                        }
+                        required
+                        value={newUserData.address !== undefined ? newUserData.address : userData.user_address}
                         onChange={(e) =>
                           setNewUserData({
                             ...newUserData,
@@ -100,15 +105,18 @@ function User() {
                       <input
                         type="number"
                         placeholder="Teléfono"
-                        value={newUserData.user_phone || userData.user_phone}
+                        required
+                        value={newUserData.phone !== undefined ? newUserData.phone : userData.user_phone}
                         onChange={(e) =>
                           setNewUserData({
                             ...newUserData,
-                            phone: parseInt(e.target.value),
+                            phone: e.target.value,
                           })
                         }
                       />
+
                     </>
+
                   ) : (
                     <>
                       <p>Nombre: {userData.user_name}</p>
