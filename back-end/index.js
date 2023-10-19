@@ -36,7 +36,7 @@ server.use("/", router);
 
 
 
-conn.sync({ force: true }).then(async () => {
+conn.sync({ force: false }).then(async () => {
   await saveApiData()
   console.log("db connected");
   server.listen(3001, () => {

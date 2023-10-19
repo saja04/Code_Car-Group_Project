@@ -35,7 +35,7 @@ function UserOrder() {
             <p>Marca: {order.car_marca}</p>
             <p>Precio: {order.car_precio_ars}</p>
             <p>Fecha de Pedido: {formatFecha(order.order_date)}.</p>
-            <p>Estado del Pedido: {order.order_status === "listoARetirar" ? "A retirar": order.order_status === 'aPagar' ? "A pagar" : 'completada'}</p>
+            <p>Estado del Pedido: {order.order_status}</p>
             <p>Medio de Pago: {order.medio_de_pago === "efectivo" ? "Efectivo" : "Mercado Pago"}</p>
           </Card>
         ))
