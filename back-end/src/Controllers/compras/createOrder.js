@@ -31,7 +31,6 @@ const createOrder = async (data) => {
       subject: `La compra de su orden ${carMarca} ${carModelo} fue realizada con exito.`,
       html: `
       <h1>Su orden por el vehículo solicitado fue aprobada, puede pagar y retirar el coche en nuestra sucursal</h1>
-      <p>Para ver el detalle de sus pedidos, haga click en el siguiente link: </p><a href="https://code-car-41a-pf-7u9q.vercel.app/userOrder"> MIS PEDIDOS </a>
       <br/>
       <b> *SI USTED NO REALIZO ESTA COMPRA, POR FAVOR COMUNIQUESE CON EL SOPORTE* </b>
       `,

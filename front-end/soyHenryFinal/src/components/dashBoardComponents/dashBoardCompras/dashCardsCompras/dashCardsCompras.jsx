@@ -22,6 +22,10 @@ function DashCardsCompras(order) {
     }
   };
 
+  useEffect(() => {
+    
+  })
+
   return (
     <div className={style.container}>
       <div className={style.info}>
