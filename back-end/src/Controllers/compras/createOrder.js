@@ -22,8 +22,8 @@ const createOrder = async (data) => {
       searchInDb.deleted = true;
       searchInDb.save();
     }
-    await transporter.sendMail({
 
+    await transporter.sendMail({
       from: '"COMPRA REALIZADA" <codecarinfo123@gmail.com>',
       to: userEmail,
       subject: `La compra de su vehiculo ${carMarca} ${carModelo} fue realizada con exito.`,

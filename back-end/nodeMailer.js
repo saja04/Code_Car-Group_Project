@@ -19,4 +19,4 @@ const transporter = nodemailer.createTransport({
     console.log('Ready for send emails');
   });
 
-  module.exports = transporter;
+  // module.exports = transporter;
