@@ -1,0 +1,34 @@
+.errorContainer {
+    background-color: #f4f4f4;
+    text-align: center;
+    padding: 50px;
+  }
+  
+  .errorHeading{
+    font-size: 3rem;
+    color: #D91E36; 
+  }
+  
+  .errorMessage {
+    font-size: 1.5rem;
+    color: #EF7674;
+    margin-top: 10px;
+  }
+
+  .errorLink{
+    display: inline-block;
+    padding: 10px 20px;
+    margin-top: 10px;
+    border: 1px solid #000;
+    text-decoration: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #EF7674;
+    transition: background-color 0.3s; 
+    color:black;
+  }
+
+  .errorLink:hover{
+    opacity: 0.85;
+  }
+  

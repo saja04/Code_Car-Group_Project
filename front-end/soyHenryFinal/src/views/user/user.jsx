@@ -4,12 +4,13 @@ import axios from "axios";
 import { useAuth0 } from "@auth0/auth0-react";
 import { Card, Avatar } from "antd";
 import styles from "../user/user.module.css";
+import { useForm, Controller } from "react-hook-form";
 
 const { Meta } = Card;
 
 function User() {
   const { id } = useParams();
-
+  const { control, handleSubmit, setValue } = useForm();
   const { user } = useAuth0();
 
   const [userData, setUserData] = useState(null);
@@ -82,7 +83,6 @@ function User() {
                         placeholder="Nombre"
                         required
                         value={newUserData.name !== undefined ? newUserData.name : userData.user_name}
-
                         onChange={(e) =>
                           setNewUserData({
                             ...newUserData,
@@ -94,6 +94,8 @@ function User() {
                         type="text"
                         placeholder="Dirección"
                         required
+                        pattern="^(?=.*[A-Za-z])(?=.*\d{2,}).+$"
+                        title="Ingrese una dirección válida."
                         value={newUserData.address !== undefined ? newUserData.address : userData.user_address}
                         onChange={(e) =>
                           setNewUserData({
@@ -102,10 +104,12 @@ function User() {
                           })
                         }
                       />
+
                       <input
-                        type="number"
+                        type="tel"
                         placeholder="Teléfono"
                         required
+                        pattern="[0-9]*"
                         value={newUserData.phone !== undefined ? newUserData.phone : userData.user_phone}
                         onChange={(e) =>
                           setNewUserData({
@@ -114,6 +118,7 @@ function User() {
                           })
                         }
                       />
+
 
                     </>
 
