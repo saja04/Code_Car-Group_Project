@@ -34,7 +34,6 @@ const createOrder = async (req, res) => {
       },
       notification_url: "https://codecar.onrender.com/webhook",
     });
-    console.log(result);
     if (result) {
       const createInDb = await UserOrder.create({
         order_status: "aPagar",
@@ -65,12 +64,10 @@ const createOrder = async (req, res) => {
         <b> *SI USTED NO REALIZO ESTA ORDEN, POR FAVOR COMUNIQUESE CON EL SOPORTE* </b>
         `,
       })
-      console.log(result);
       console.log('mail mandado');
     }
     
-   
-    
+    res.json(result.body.init_point);
   } catch (error) {
     res.send(error);
   }
