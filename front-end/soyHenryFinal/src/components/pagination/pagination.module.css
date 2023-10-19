@@ -20,7 +20,7 @@
 }
 
 .pageItemActive {
-  background-color: #007bff;
+  background-color: #007bff !important; /* Usamos !important para dar prioridad */
   color: #fff;
 }
 
