@@ -12,7 +12,8 @@ function BoardAutosAdmin() {
   const [vehicles, setVehicles] = useState([]);
 
   const getCarsAdmin = async() => {
-    const response = axios.get('https://codecar.onrender.com/carsAdmin');
+    const response = await axios.get('https://codecar.onrender.com/carsAdmin');
+    console.log(response.data);
     setVehicles(response.data)
   }
 

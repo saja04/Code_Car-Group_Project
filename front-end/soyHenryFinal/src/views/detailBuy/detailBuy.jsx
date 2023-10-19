@@ -35,7 +35,14 @@ function DetailBuy() {
     if (!isAuthenticated) {
       alert("Debes estar logeado para comprar un coche, avivate");
       loginWithRedirect();
-    } else {
+    } 
+    if(userData.user_ban === true){
+      alert('El usuario con el que querés hacer la compra fue temporalmente desactivado, por favor comunicate con el soporte')
+    }
+    if(!userData.user_address || !userData.user_phone){
+      alert('Por favor, completa todos los datos del perfil para realizar la compra')
+    }
+    else {
       const medioDePago = document.getElementById("medioDePago").value;
 
       if (medioDePago === "efectivo") {
