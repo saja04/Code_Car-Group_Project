@@ -34,7 +34,7 @@ function DetailBuy() {
 
   const buy = async () => {
     if (!isAuthenticated) {
-      alert("Debes estar logeado para comprar un coche, avivate");
+      alert("Debes estar logeado para comprar un coche");
       loginWithRedirect();
     } 
     if(userData.user_ban === true){
