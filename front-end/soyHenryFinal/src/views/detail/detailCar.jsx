@@ -1,28 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
 import carDetailPageStyles from "./detailCar.module.css";
 import Lightbox from "../../components/lightbox/lightbox";
-import PriceToggle from "../../components/priceToggle/priceToggle";
 import { useAuth0 } from "@auth0/auth0-react";
 
 import axios from "axios";
 
 function CarDetailPage() {
   const { id } = useParams();
-  // const dispatch = useDispatch();
-  // const singleCar = useSelector((state) => state.singleCar);
   const [singleCar, setSingleCar] = useState(null);
   const [isLightboxOpen, setIsLightboxOpen] = useState(false);
   const [lightboxImageUrl, setLightboxImageUrl] = useState("");
-  const [showPricesInUSD, setShowPricesInUSD] = useState(true);
   const navigate = useNavigate();
-
-  const {
-    loginWithRedirect,
-    isAuthenticated,
-    
-} = useAuth0();
 
   const divisa = localStorage.getItem("divisa");
 
@@ -32,7 +21,7 @@ function CarDetailPage() {
       divisa: divisa,
     });
     const data = response.data;
-   
+
     return setSingleCar(data);
   };
 
@@ -50,38 +39,19 @@ function CarDetailPage() {
   };
 
   if (!singleCar) {
-    return <div>Cargando...</div>;
+    return (
+      <div className={carDetailPageStyles.containerCargando}>
+        <p>Cargando...</p>
+      </div>
+    );
   }
 
-  const handleBuy = async () => {
-    if (!isAuthenticated) {
-      alert("Debes estar logeado para comprar un coche, avivate")
-      loginWithRedirect();
-    } else {
-      try {
-        const carName = `${singleCar.car_marca} ${singleCar.car_modelo}`;
-        const carPrice = singleCar.car_precio_ars;
-  
-        console.log('Información del automóvil:', carName, carPrice);
-  
-        const response = await axios.post(`https://codecar.onrender.com/create-order/?name=${carName}&price=1`);
-
-        console.log(response.data);
-  
-        if (response.data) {
-        
-         window.location.href = response.data;
-        } else {
-          console.error('No se recibió un enlace de pago válido.');
-        }
-      } catch (error) {
-        console.error('Error al crear la orden de MercadoPago:', error);
-      }
-    }
+  // CarDetailPage.js
+  const handleRedirect = () => {
+    navigate("/detailBuy", {
+      state: { carDetails: singleCar, carPrice: singleCar.car_precio_ars },
+    });
   };
-  
-  
-  
 
   return (
     <div className={carDetailPageStyles.container}>
@@ -95,23 +65,39 @@ function CarDetailPage() {
           />
         </div>
         <div className={carDetailPageStyles.detailsContainer}>
-          {/* <PriceToggle
-            showPricesInUSD={showPricesInUSD}
-            onToggle={togglePrices}
-          /> */}
-          <p>
+          <h1 className={carDetailPageStyles.nombre}>
             {singleCar.car_marca} {singleCar.car_modelo}
-          </p>
-          <p>Color: {singleCar.car_color}</p>
-          <p>Año: {singleCar.car_año}</p>
-          <p>Motor: {singleCar.car_tipo_de_motor}</p>
-          <p>{singleCar.car_condicion}</p>
-          <p>
+          </h1>{" "}
+          <p className={carDetailPageStyles.precio}>Precio</p>
+          <h1 className={carDetailPageStyles.divisa}>
             {divisa === "car_precio_ars"
               ? `USD$${singleCar.car_precio_usd}`
               : `ARS$${singleCar.car_precio_ars}`}
-          </p>
-          <button className={carDetailPageStyles.buyNow} onClick={handleBuy}>Comprar</button>
+          </h1>
+          <div className={carDetailPageStyles.detalles}>
+            <div className={carDetailPageStyles.detallesCont}>
+              <h5>{singleCar.car_color}</h5>
+            </div>
+            <div className={carDetailPageStyles.detallesCont}>
+              <h5>{singleCar.car_año}</h5>{" "}
+            </div>
+            <div className={carDetailPageStyles.detallesCont}>
+              <h5>{singleCar.car_tipo_de_motor}</h5>
+            </div>
+          </div>
+          <div className={carDetailPageStyles.condicion}>
+            <p>{singleCar.car_condicion}</p>
+            <p>|</p>
+            <p>{singleCar.car_kilometraje} KM</p>
+          </div>
+          <div className={carDetailPageStyles.comprar}>
+            <button
+              className={carDetailPageStyles.buyNow}
+              onClick={handleRedirect}
+            >
+              Comprar
+            </button>
+          </div>
         </div>
       </div>
       {isLightboxOpen && (

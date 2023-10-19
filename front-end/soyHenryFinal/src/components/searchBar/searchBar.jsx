@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { getCarByName } from "../../redux/actions";
 import style from "./searchBar.module.css";
 
-function SearchBar() {
+function SearchBar({ onSearch }) {
   const divisa = localStorage.getItem('divisa');
   const dispatch = useDispatch();
   const [searchTerm, setSearchTerm] = useState("");
@@ -11,9 +11,9 @@ function SearchBar() {
   const handleKeyPress = (event) => {
     if (event.key === "Enter") {
       dispatch(getCarByName(searchTerm, divisa));
-    } else null
+      onSearch();
+    }
   };
-
 
   const handleChange = (event) => {
     setSearchTerm(event.target.value);

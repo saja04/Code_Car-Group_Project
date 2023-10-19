@@ -1,6 +1,6 @@
 .container {
   width: 100%;
-  background-color: #1a1a1a;
+  background-color: #000;
 }
 
 .content {
@@ -35,4 +35,22 @@
   display: flex;
   gap: 30px;
   width: 34%;
+}
+
+.user {
+  display: flex;
+  justify-content: center;
+  width: 13%;
+}
+
+@media (min-width: 1600px) {
+  .content {
+    width: 88%;
+  }
+
+  .user {
+    width: 20%;
+    margin-right: 20px;
+    justify-content: flex-end;
+  }
 }

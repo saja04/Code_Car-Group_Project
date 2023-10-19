@@ -8,6 +8,16 @@ const userVerification = async (req, res, next) => {
     const { email, photo } = req.body;
 
     const splittedName = email.split("@");
+
+    const searchInDb = await User.findOne({
+      where: { user_email: email }, //busca si el usuario ya esta creado
+    });
+
+    if (searchInDb) {
+      console.log("usuario ya logeado", searchInDb.dataValues.user_email);
+      return next();
+    }
+
     if (email === ADMIN_EMAIL) {
       const createInDb = await User.findOrCreate({
         //asigna el usuario con el email de admin como admin
@@ -20,17 +30,9 @@ const userVerification = async (req, res, next) => {
         },
       });
       console.log("admin principal añadido");
+      return next()
     }
-
-    const searchInDb = await User.findOne({
-      where: { user_email: email }, //busca si el usuario ya esta creado
-    });
-
-    if (searchInDb) {
-      console.log("usuario ya logeado", searchInDb.dataValues.user_email);
-      return next();
-    }
-    if (!searchInDb) {
+    else if (!searchInDb) {
       const createInDb = await User.create({
         user_email: email,
         user_name: splittedName[0],
@@ -39,7 +41,6 @@ const userVerification = async (req, res, next) => {
       console.log("nuevo usuario creado");
       return next();
     }
-    return next();
   } catch (error) {
     res.send(error.message);
   }

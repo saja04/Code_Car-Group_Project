@@ -1,4 +1,4 @@
-const { DataTypes } = require("sequelize");
+const { DataTypes, DatabaseError } = require("sequelize");
 
 module.exports = (sequelize) => {
   sequelize.define("UserOrder", {
@@ -9,16 +9,30 @@ module.exports = (sequelize) => {
     },
     order_status: {
       type: DataTypes.STRING,
-      allowNull: false,
     },
     order_date: {
-      type: DataTypes.DATE,
-      allowNull: false,
+      type: DataTypes.STRING,
     },
-    car_pedido_id: {
-      type: DataTypes.UUID,
-      allowNull: false
+    car_order: {
+      type: DataTypes.STRING,
     },
-    
+    user_order: {
+      type: DataTypes.STRING,
+    },
+    medio_de_pago: {
+      type: DataTypes.STRING,
+    },
+    car_modelo: {
+      type: DataTypes.STRING
+    },
+    car_marca: {
+      type: DataTypes.STRING,
+    },
+    car_precio_ars: {
+      type: DataTypes.STRING
+    },
+    user_email: {
+      type: DataTypes.STRING
+    },
   });
 };

@@ -18,7 +18,9 @@ function SuggestedCards({ vehicles, showPricesInUSD }) {
 
   return (
     <div className={suggestedCardsStyles.suggestedCards}>
-      <h2 className={suggestedCardsStyles.title}>Sugerencias</h2>
+      <div className={suggestedCardsStyles.titleBk}>
+        <h2 className={suggestedCardsStyles.title}>Sugeridos</h2>
+      </div>
       <Carousel
         showArrows={true}
         showThumbs={false}

@@ -1,12 +1,11 @@
 .conteiner {
   padding: 10px;
-  margin: 10px;
-  width: 400px;
+  margin: 0px;
+  width: 300px;
 }
-
-.conteiner img {
-  height: 400px;
-  width: 400px;
+.cardImg {
+  width: 300px;
+  height: 200px;
 }
 
 .conteiner p {
@@ -27,7 +26,7 @@
 }
 
 .title {
-  color: black;
+  color: #000000;
 }
 
 .contPrice {
@@ -56,4 +55,45 @@
   transform: translateY(-5px);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   transition: transform 0.3s ease;
+}
+
+@media (min-width: 1600px) {
+  .conteiner {
+    width: 400px;
+  }
+
+  .cardImg {
+    width: 400px;
+    height: 300px;
+  }
+
+  .title {
+    font-size: 32px;
+    text-align: start;
+  }
+
+  .conteiner p {
+    font-size: 20px;
+    text-align: start;
+  }
+}
+
+@media (max-width: 1024px) {
+  .conteiner {
+    width: 230px;
+  }
+  .cardImg {
+    width: 230px;
+    height: 140px;
+  }
+
+  .title {
+    font-size: 22px;
+    text-align: start;
+  }
+
+  .conteiner p {
+    font-size: 14px;
+    text-align: start;
+  }
 }

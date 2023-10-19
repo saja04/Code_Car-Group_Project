@@ -5,7 +5,10 @@ import style from "./filter.module.css";
 import { getFilters } from "../../redux/actions";
 import { connect } from "react-redux";
 
-function Filter({ getFilters }) {
+function Filter({ getFilters, resetPagination }) {
+
+  const [currentPage, setCurrentPage] = useState(1);
+
   const marcasUnicas = [
     ...new Set(vehicles.vehicles.map((vehicle) => vehicle.marca)),
   ];
@@ -40,6 +43,8 @@ function Filter({ getFilters }) {
         precio: divisa
       });
     } else await getFilters({ filter: { car_marca: value }, precio: divisa });
+
+    resetPagination();
   };
 
   const handleAñoChange = async (event) => {
@@ -52,6 +57,8 @@ function Filter({ getFilters }) {
         filter: { car_marca: marcasSeleccionadas, car_año: value }, precio: divisa
       });
     } else await getFilters({ filter: { car_año: value }, precio: divisa });
+
+    resetPagination();
   };
 
   // const handleTipoChange = (event) => {
@@ -148,6 +155,7 @@ function Filter({ getFilters }) {
     setAñosSeleccionados([]);
     setCondicionSeleccionados([]);
     setFiltroPrecio(null);
+    resetPagination();
     return getFilters({"precio": divisa})
 
 

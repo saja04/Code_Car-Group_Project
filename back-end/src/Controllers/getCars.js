@@ -4,7 +4,7 @@ const sequelize = require("sequelize");
 const getCars = async (req) => {
   const { filter, order, pagination, precio } = req.body;
   const query = {
-    where: { deleted: false }, // Agregar la condición para autos no borrados
+    where: { deleted: false}
   };
 
   if (pagination) {
@@ -14,7 +14,10 @@ const getCars = async (req) => {
   if (order) {
     query.order = [[sequelize.literal(order.value), order.sequence]];
   }
-  if (filter) query.where = filter;
+  if (filter) {
+    query.where = filter;
+    query.where.deleted = false
+  }
   if (precio) query.attributes = { exclude: [precio] };
 
   return await Car.findAll(query);

@@ -1,26 +1,38 @@
 .container {
+  border-top: solid 1px grey;
+  border-bottom: solid 1px grey;
+  width: 90%;
+
+  margin: auto;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.content {
   width: 60%;
   margin: auto;
+  padding: 30px;
 }
 
 .container h3 {
   text-align: center;
   font-size: 40px;
   margin-bottom: 20px;
-}
-
-.container h4,
-p {
-  text-align: start;
+  color: #000000;
 }
 
 .container h4 {
   font-size: 28px;
   margin-bottom: 20px;
+  text-align: start;
+
+  color: #000000;
 }
 
 .container p {
   font-size: 20px;
   margin-bottom: 20px;
   margin-left: 12px;
+  text-align: start;
+  color: #000000;
 }

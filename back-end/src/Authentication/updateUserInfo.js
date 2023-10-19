@@ -1,20 +1,14 @@
-const axios = require("axios");
+
 const { User } = require("../db");
-const { URL_INFO } = process.env;
+
 
 const updateUserInfo = async (req, res) => {
   try {
-    const { phone, name, address, image } = req.query;
+    const { email, phone, name, address, image } = req.body;
 
-    const accesToken = req.auth.token;
-    const userInfo = await axios.get(URL_INFO, {
-      headers: {
-        authorization: `Bearer ${accesToken}`,
-      },
-    });
 
     const userInDb = await User.findOne({
-      where: { user_email: userInfo.data.email },
+      where: { user_email: email },
     });
 
     if (phone) {

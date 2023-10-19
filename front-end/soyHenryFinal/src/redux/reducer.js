@@ -17,11 +17,14 @@ const initialState = {
   divisa: "car_precio_usd",
   user: null,
   registrationError: null,
+  searchCar: [],
 };
 
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
-    case GET_CARS:
+    case GET_CARS: if(state.searchCar[0] ) return {
+      ...state,
+    };
       return {
         ...state,
         allCars: action.payload,
@@ -46,7 +49,7 @@ const rootReducer = (state = initialState, action) => {
     case GET_CAR_BY_NAME:
       return {
         ...state,
-        allCars: action.payload,
+        searchCar: action.payload,
       };
     case CHANGE_CURRENCY:
       return {

@@ -3,13 +3,10 @@ const { Sequelize } = require("sequelize");
 const fs = require("fs");
 const path = require("path");
 const { DB_URL } = process.env;
-const AdminModel = require("./Models/AdminModel");
-const CarModel = require("./Models/AdminModel");
-const CarCategoryModel = require("./Models/CarCategoryModel");
-const UserModel = require("./Models/UserModel");
-const UserAddressModel = require("./Models/UserAdressModel");
-const UserFavsModel = require("./Models/UserFavsModel");
-const UserOrderModel = require("./Models/UserOrderModel");
+// const CarModel = require("./Models/AdminModel");
+// const UserModel = require("./Models/UserModel");
+// const UserFavsModel = require("./Models/UserFavsModel");
+// const UserOrderModel = require("./Models/UserOrderModel");
 
 const sequelize = new Sequelize(`${DB_URL}`, {
   dialectOptions: {
@@ -42,16 +39,12 @@ let capsEntries = entries.map((entry) => [
 ]);
 sequelize.models = Object.fromEntries(capsEntries);
 
-const { Admin, Car, CarCategory, User, UserAddress, UserFavs, UserOrder, ReviewModel } =
-  sequelize.models;
+const { Car, User, UserFavs, UserOrder, ReviewModel } = sequelize.models;
 
-User.hasMany(UserAddress, { foreignKey: "user_id" });
 UserFavs.belongsTo(User, { foreignKey: "client_id" }); // Relación con User
 UserFavs.belongsTo(Car, { foreignKey: "car_id" }); // Relación con Car
 UserOrder.belongsTo(User, { foreignKey: "user_id" }); // Relación con User
 UserOrder.belongsTo(Car, { foreignKey: "car_id" }); // Relación con Car
-UserOrder.belongsTo(UserAddress, { foreignKey: "user_address_id" }); // Relación con UserAddress
-
 
 module.exports = {
   ...sequelize.models,

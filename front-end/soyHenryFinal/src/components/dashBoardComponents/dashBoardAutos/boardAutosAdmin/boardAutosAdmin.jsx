@@ -3,21 +3,24 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import DashCardsCar from "../dashCardsCars/dashCardsCars";
 import { getCars } from "../../../../redux/actions";
+import axios from 'axios'
 
 function BoardAutosAdmin() {
-  const dispatch = useDispatch();
   const allCars = useSelector((state) => state.allCars);
   const divisa = localStorage.getItem("divisa");
 
   const [vehicles, setVehicles] = useState([]);
 
-  useEffect(() => {
-    dispatch(getCars(divisa));
-  }, [dispatch]);
+  const getCarsAdmin = async() => {
+    const response = await axios.get('https://codecar.onrender.com/carsAdmin');
+    console.log(response.data);
+    setVehicles(response.data)
+  }
 
   useEffect(() => {
-    setVehicles(allCars);
-  }, [allCars]);
+    getCarsAdmin()
+  }, []);
+
 
   return (
     <div className={style.container}>

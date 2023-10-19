@@ -1,7 +1,27 @@
+import { useEffect, useState } from "react";
 import style from "./boardComprasAdmin.module.css";
-/* import DashCardsCrompas from "../dashCardsCompras/dashCardsCompras";
- */
+import axios from "axios";
+import DashCardsCrompas from "../dashCardsCompras/dashCardsCompras";
+ 
 function BoardComprasAdmin() {
+  const [orders, setOrders] = useState([]);
+
+  const getOrders = async () => {
+    try {
+      const response = await axios.post(
+        "https://codecar.onrender.com/allOrders"
+      );
+      console.log(response.data);
+      return setOrders(response.data);
+    } catch (error) {
+      return console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getOrders()
+  }, []);
+
   return (
     <div className={style.container}>
       <div className={style.title}>
@@ -10,9 +30,9 @@ function BoardComprasAdmin() {
         <h2 className={style.titleInfo}>Precio</h2>
         <h2 className={style.titleInfo}>Estado</h2>
       </div>
-      {/*       {users.map((user) => (
-        <DashCardsCrompas user={user} />
-      ))} */}
+      {orders.map((order) => (
+        <DashCardsCrompas order={order} />
+      ))}
     </div>
   );
 }

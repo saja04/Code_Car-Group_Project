@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import PriceToggle from "../../components/priceToggle/priceToggle";
 import style from "./navBar.module.css";
@@ -12,10 +12,15 @@ import { changeCurrency } from "../../redux/actions";
 function NavBar() {
   const dispatch = useDispatch();
   const divisa = useSelector((state) => state.divisa);
+  const [searchPerformed, setSearchPerformed] = useState(false);
 
-  // useEffect(() => {
-  //   dispatch(changeCurrency());
-  // }, [dispatch]);
+  const handleSearch = () => {
+    setSearchPerformed(true);
+  };
+
+  const resetPagination = () => {
+    setCurrentPage(1);
+  };
 
   return (
     <div className={style.container}>
@@ -28,24 +33,21 @@ function NavBar() {
           <Link className={style.links} to="/tienda">
             Tienda
           </Link>
-          <Link className={style.links} to="/contacto">
-            Contacto
-          </Link>
-          {/*       <Link className={style.links} to="/nosotros">
-        Nosotros
-      </Link> */}
         </div>
-        <SearchBar />
+        <SearchBar onSearch={resetPagination} />
         <PriceToggle
           divisa={divisa}
           changeCurrency={changeCurrency}
           dispatch={dispatch}
         />
         <DashboardButton />
-        <LoginLinks />
+        <div className={style.user}>
+          <LoginLinks />
+        </div>
       </div>
     </div>
   );
 }
 
 export default NavBar;
+

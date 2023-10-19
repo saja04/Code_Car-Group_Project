@@ -3,7 +3,7 @@
   width: 100%;
 
   color: whitesmoke;
-  background-color: #1a1a1a;
+  background-color: #000;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr; /* Divide el espacio en 3 columnas iguales */
   justify-content: center;

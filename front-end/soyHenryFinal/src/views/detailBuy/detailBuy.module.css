@@ -1,0 +1,92 @@
+.detail-buy-container {
+  display: flex;
+  width: 100%;
+  background-color: #ffffff;
+  color: #000000;
+}
+
+.user-details,
+.car-details,
+.purchase-details {
+  padding: 20px;
+  border: 2px solid #ccc;
+  border-radius: 10px;
+  width: 400px;
+}
+
+.purchase-details {
+  margin: 30px 0;
+}
+
+.user-details p,
+.car-details p,
+.purchase-details p {
+  margin-bottom: 8px;
+}
+
+.containerInfo {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 30px 0;
+  gap: 20px;
+}
+
+.price {
+  display: flex;
+  align-items: flex-end;
+  gap: 10px;
+}
+
+.title {
+  text-align: center;
+  font-size: 32px;
+  margin-bottom: 20px;
+}
+
+.detallePago {
+  display: flex;
+  align-items: center;
+}
+
+.compra {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 24 px;
+}
+
+.metodo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.buyNow {
+  background-color: #28a745;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.buyNow:hover {
+  background-color: #1e7e34;
+}
+
+.link {
+  text-decoration: none;
+  color: blue;
+}
+
+@media (min-width: 1600px) {
+  .detail-buy-container {
+    height: 60vh;
+  }
+
+  .containerInfo {
+    width: 60%;
+  }
+}

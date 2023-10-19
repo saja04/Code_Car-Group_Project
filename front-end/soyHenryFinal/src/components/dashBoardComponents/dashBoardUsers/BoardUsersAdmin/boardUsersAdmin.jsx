@@ -25,6 +25,7 @@ function BoardUsersAdmin() {
         <h2 className={style.titleInfo}>Email</h2>
         <h2 className={style.titleInfo}>Dirección</h2>
         <h2 className={style.titleInfo}>Teléfono</h2>
+        <h2 className={style.titleInfo}>Editar</h2>
       </div>
       {users.map((user) => (
         <DashCardsUsers user={user} />
