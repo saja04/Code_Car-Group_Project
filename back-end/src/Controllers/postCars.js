@@ -13,7 +13,6 @@ const postCars = async (carData) => {
       car_kilometraje,
       car_condicion,
       car_imagen,
-      stock
     } = carData;
 
     const newCar = await Car.create({
@@ -28,7 +27,6 @@ const postCars = async (carData) => {
       car_kilometraje,
       car_condicion,
       car_imagen,
-      stock
     });
 
     return{

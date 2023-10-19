@@ -2,7 +2,7 @@
 // mercadopago.configurations.setAccessToken('TEST-8027820177433735-101013-d8bd5f51ad6362c4dfb1913c39abdd7d-1275939038');
 // Mercado Pago SDK
 
-const { ACCESS_TOKEN_MP, HOST } = process.env;
+const { ACCESS_TOKEN_MP, NODEMAILER_EMAIL, NODEMAILER_PASSWORD } = process.env;
 const mercadopago = require("mercadopago");
 const { UserOrder, Car } = require("../../db");
 const transporter = require('../../../nodeMailer')
@@ -54,7 +54,7 @@ const createOrder = async (req, res) => {
       }
       console.log('car borrado');
       await transporter.sendMail({
-        from: '"COMPRA REALIZADA" <codecarinfo123@gmail.com>',
+        from: NODEMAILER_EMAIL,
         to: userEmail,
         subject: `La orden de su vehiculo ${carMarca} ${carModelo} fue realizada con exito.`,
         html: `

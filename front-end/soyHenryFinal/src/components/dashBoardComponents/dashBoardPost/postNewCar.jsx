@@ -17,7 +17,6 @@ function PostNewCar() {
     kilometraje: "",
     condicion: "",
     imagen: "",
-    stock: "",
   });
 
   const [errors, setErrors] = useState({
@@ -100,7 +99,6 @@ function PostNewCar() {
         car_kilometraje: formData.kilometraje,
         car_condicion: formData.condicion,
         car_imagen: formData.imagen,
-        stock: formData.stock,
       };
 
       await axios.post("https://codecar.onrender.com/carsPost", carData);
@@ -325,11 +323,11 @@ function PostNewCar() {
           </select>
         </div>
 
-        <div className={carStyles.postNewCarFormGroup}>
-          <label className={carStyles.postNewCarLabel} htmlFor="stock">
+        {/* <div className={carStyles.postNewCarFormGroup}> */}
+          {/* <label className={carStyles.postNewCarLabel} htmlFor="stock">
             Stock:
-          </label>
-          <input
+          </label> */}
+          {/* <input
             type="text"
             id="stock"
             name="stock"
@@ -341,8 +339,8 @@ function PostNewCar() {
 
           {errors.stock && (
             <div className={carStyles.error}>{errors.stock}</div>
-          )}
-        </div>
+          )} */}
+        {/* </div> */}
 
         <div className={carStyles.postNewCarButtonDiv}>
           <button type="submit" className={carStyles.postNewCarButton}>

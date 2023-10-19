@@ -13,7 +13,6 @@ const postCarsHandler = async (req, res) => {
     car_kilometraje,
     car_condicion,
     car_imagen,
-    stock
   } = req.body;
   if(
     !car_modelo ||
@@ -27,7 +26,6 @@ const postCarsHandler = async (req, res) => {
     !car_kilometraje ||
     !car_condicion ||
     !car_imagen ||
-    !stock
     ){
       return res.status(412).json({msg: 'por favor, completa todos los campos requeridos, verifica los nombres de las propiedades'})
     }
@@ -43,7 +41,6 @@ const postCarsHandler = async (req, res) => {
     car_kilometraje,
     car_condicion,
     car_imagen,
-    stock
   };
   try {
     const response = await postCars(carData);
