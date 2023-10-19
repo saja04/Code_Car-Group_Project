@@ -1,6 +1,17 @@
-import carCardStyles from "./dashCardsCar.module.css";
+import React, { useState } from "react";
+import axios from "axios";
 
 function DashCardsCar({ vehicle }) {
+  const [isDeleted, setIsDeleted] = useState(vehicle.deleted);
+
+  const handleToggleDeleted = () => {
+    setIsDeleted(!isDeleted);
+    axios.post("https://codecar.onrender.com/carsDelete", {
+      id: vehicle.car_id,
+      deleted: !isDeleted,
+    });
+  };
+
   return (
     <div className={carCardStyles.container}>
       <div className={carCardStyles.info}>
@@ -16,7 +27,16 @@ function DashCardsCar({ vehicle }) {
             ? `USD$${vehicle.car_precio_ars}`
             : `ARS$${vehicle.car_precio_ars}`}
         </h3>
-        <h3 className={carCardStyles.title}>{vehicle.stock}</h3>
+        <div className={carCardStyles.button}>
+          <h3
+            className={`${carCardStyles.onOffButton} ${
+              isDeleted ? carCardStyles.off : ""
+            }`}
+            onClick={handleToggleDeleted}
+          >
+            {isDeleted ? "Off" : "On"}
+          </h3>
+        </div>
       </div>
     </div>
   );

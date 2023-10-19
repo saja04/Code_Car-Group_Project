@@ -6,7 +6,6 @@ import { getFilters } from "../../redux/actions";
 import { connect } from "react-redux";
 
 function Filter({ getFilters, resetPagination }) {
-
   const [currentPage, setCurrentPage] = useState(1);
 
   const marcasUnicas = [
@@ -25,7 +24,7 @@ function Filter({ getFilters, resetPagination }) {
     ...new Set(vehicles.vehicles.map((vehicle) => vehicle.condicion)),
   ];
 
-  const divisa = localStorage.getItem('divisa');
+  const divisa = localStorage.getItem("divisa");
 
   const [marcasSeleccionadas, setMarcasSeleccionadas] = useState([]);
   const [añosSeleccionados, setAñosSeleccionados] = useState([]);
@@ -40,7 +39,7 @@ function Filter({ getFilters, resetPagination }) {
     if (añosSeleccionados[0]) {
       await getFilters({
         filter: { car_marca: value, car_año: añosSeleccionados },
-        precio: divisa
+        precio: divisa,
       });
     } else await getFilters({ filter: { car_marca: value }, precio: divisa });
 
@@ -54,34 +53,13 @@ function Filter({ getFilters, resetPagination }) {
     console.log(marcasSeleccionadas);
     if (marcasSeleccionadas[0]) {
       await getFilters({
-        filter: { car_marca: marcasSeleccionadas, car_año: value }, precio: divisa
+        filter: { car_marca: marcasSeleccionadas, car_año: value },
+        precio: divisa,
       });
     } else await getFilters({ filter: { car_año: value }, precio: divisa });
 
     resetPagination();
   };
-
-  // const handleTipoChange = (event) => {
-  //   const { value } = event.target;
-  //   if (tiposSeleccionados.includes(value)) {
-  //     setTiposSeleccionados(
-  //       tiposSeleccionados.filter((tipo) => tipo !== value)
-  //     );
-  //   } else {
-  //     setTiposSeleccionados([...tiposSeleccionados, value]);
-  //   }
-  // };
-
-  // const handleCondicionChange = (event) => {
-  //   const { value } = event.target;
-  //   if (condicionSeleccionados.includes(value)) {
-  //     setCondicionSeleccionados(
-  //       condicionSeleccionados.filter((tipo) => tipo !== value)
-  //     );
-  //   } else {
-  //     setCondicionSeleccionados([...condicionSeleccionados, value]);
-  //   }
-  // };
 
   const handlePrecioChange = async (event) => {
     const { value } = event.target;
@@ -92,10 +70,10 @@ function Filter({ getFilters, resetPagination }) {
         await getFilters({
           filter: {
             car_año: añosSeleccionados,
-            car_marca: marcasSeleccionadas
+            car_marca: marcasSeleccionadas,
           },
-          order: { value: "car_precio_usd", sequence: "DESC" }, 
-          precio: divisa 
+          order: { value: "car_precio_usd", sequence: "DESC" },
+          precio: divisa,
         });
       } else if (value === "menor") {
         await getFilters({
@@ -104,7 +82,7 @@ function Filter({ getFilters, resetPagination }) {
             car_marca: marcasSeleccionadas,
           },
           order: { value: "car_precio_usd", sequence: "ASC" },
-           precio: divisa 
+          precio: divisa,
         });
       }
     } else if (marcasSeleccionadas[0]) {
@@ -112,13 +90,13 @@ function Filter({ getFilters, resetPagination }) {
         await getFilters({
           filter: { car_marca: marcasSeleccionadas },
           order: { value: "car_precio_usd", sequence: "DESC" },
-          precio: divisa 
+          precio: divisa,
         });
       } else if (value === "menor") {
         await getFilters({
           filter: { car_marca: marcasSeleccionadas },
           order: { value: "car_precio_usd", sequence: "ASC" },
-          precio: divisa 
+          precio: divisa,
         });
       }
     } else if (añosSeleccionados[0]) {
@@ -126,25 +104,25 @@ function Filter({ getFilters, resetPagination }) {
         await getFilters({
           filter: { car_año: añosSeleccionados },
           order: { value: "car_precio_usd", sequence: "DESC" },
-          precio: divisa
+          precio: divisa,
         });
       } else if (value === "menor") {
         await getFilters({
           filter: { car_año: añosSeleccionados },
           order: { value: "car_precio_usd", sequence: "ASC" },
-          precio: divisa 
+          precio: divisa,
         });
       }
     } else {
       if (value === "mayor") {
         await getFilters({
           order: { value: "car_precio_usd", sequence: "DESC" },
-          precio: divisa 
+          precio: divisa,
         });
       } else if (value === "menor") {
         await getFilters({
           order: { value: "car_precio_usd", sequence: "ASC" },
-          precio: divisa 
+          precio: divisa,
         });
       }
     }
@@ -156,10 +134,8 @@ function Filter({ getFilters, resetPagination }) {
     setCondicionSeleccionados([]);
     setFiltroPrecio(null);
     resetPagination();
-    return getFilters({"precio": divisa})
-
-
-  }
+    return getFilters({ precio: divisa });
+  };
 
   return (
     <div className={style.container}>
@@ -199,40 +175,6 @@ function Filter({ getFilters, resetPagination }) {
             ))}
           </div>
         </div>
-
-        {/* <div className={style.tipo}>
-          <h3>Tipo</h3>
-          <div className={style.checkTipo}>
-            {tiposUnicos.map((tipo) => (
-              <label key={tipo}>
-                <input
-                  type="checkbox"
-                  value={tipo}
-                  checked={tiposSeleccionados.includes(tipo)}
-                  onChange={handleTipoChange}
-                />{" "}
-                {tipo}
-              </label>
-            ))}
-          </div>
-        </div> */}
-
-        {/* <div className={style.condicion}>
-          <h3>Condición</h3>
-          <div className={style.checkCondicion}>
-            {condicionUnicos.map((condicion) => (
-              <label key={condicion}>
-                <input
-                  type="checkbox"
-                  value={condicion}
-                  checked={condicionSeleccionados.includes(condicion)}
-                  onChange={handleCondicionChange}
-                />{" "}
-                {condicion}
-              </label>
-            ))}
-          </div>
-        </div> */}
 
         <div className={style.precio}>
           <h3>Precio</h3>
