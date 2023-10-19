@@ -16,8 +16,8 @@ const createOrder = async (data) => {
       car_precio_ars: price,
       user_email: userEmail,
     });
-    console.log(createInDb);
     const searchInDb = await Car.findByPk(carId);
+
     if (searchInDb) {
       searchInDb.deleted = true;
       searchInDb.save();
@@ -29,11 +29,14 @@ const createOrder = async (data) => {
       subject: `La compra de su vehiculo ${carMarca} ${carModelo} fue realizada con exito.`,
       text: "lorem ipsum",
       html: `
-      <b>Muchas gracias por la compra en nuestra concesionaria, disfrute su nuevo vehiculo.</b>
-      <b>Para volver a nuestra página, haga click en el siguiente link: </b>
+      <h1>Muchas gracias por la compra en nuestra concesionaria, disfrute su nuevo vehiculo.</h1>
+      <p>Para ver el detalle de sus pedidos, haga click en el siguiente link: </p>
       <a href="https://code-car-41a-pf-7u9q.vercel.app/userOrder"> REGRESAR </a>
+      <br/>
+      <b> *SI USTED NO REALIZO ESTA COMPRA, POR FAVOR COMUNIQUESE CON EL SOPORTE* </b>
       `,
     })
+    console.log('mail mandado');
     return createInDb;
 };
 module.exports = createOrder;
