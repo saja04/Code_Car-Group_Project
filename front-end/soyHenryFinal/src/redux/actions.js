@@ -65,23 +65,31 @@ export const deleteCar = (id) => {
     });
   };
 };
-
 export const getCarByName = (input, divisa) => {
   return async (dispatch) => {
-    const response = await axios(
-      `https://codecar.onrender.com/carsName/?input=${input}&divisa=${divisa}`
-    );
-    const data = response.data.cars;
-    console.log(data.cars);
-    if (data.error)
-      return alert("auto no encontrado! intenta cambiar la busqueda");
-    else
-      return dispatch({
-        type: GET_CAR_BY_NAME,
-        payload: data,
-      });
+    try {
+      const response = await axios.get(
+        `https://codecar.onrender.com/carsName/?input=${input}&divisa=${divisa}`
+      );
+      const data = response.data.cars;
+      console.log(data);
+
+      if (data.error) {
+        alert("Auto no encontrado. Intenta cambiar la búsqueda.");
+      } else {
+        return dispatch({
+          type: GET_CAR_BY_NAME,
+          payload: data,
+        });
+      }
+    } catch (error) {
+      alert("Hubo un error al buscar el automóvil. Intenta nuevamente.");
+      console.error(error);
+    }
   };
 };
+
+
 
 export const changeCurrency = (divisa) => {
   return async (dispatch) => {

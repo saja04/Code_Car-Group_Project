@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getCars } from "../../redux/actions";
-
+import { useParams } from "react-router-dom";
 import style from "./shop.module.css";
 import Filter from "../../components/filter/filter";
 import Pagination from "../../components/pagination/pagination";
@@ -12,6 +12,8 @@ function Shop() {
   const allCars = useSelector((state) => state.allCars);
   const divisa = localStorage.getItem("divisa");
   const searchCar = useSelector((state) => state.searchCar);
+  const { searchTerm } = useParams();
+
 
   const [vehicles, setVehicles] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
