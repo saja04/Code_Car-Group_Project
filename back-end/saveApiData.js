@@ -19,7 +19,6 @@ const saveApiData = async () => {
           car_kilometraje: car.kilometraje,
           car_condicion: car.condicion,
           car_imagen: car.imagen,
-          stock: car.stock
         },
       });
     });
