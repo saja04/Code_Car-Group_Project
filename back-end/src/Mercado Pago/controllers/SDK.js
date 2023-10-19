@@ -5,6 +5,7 @@
 const { ACCESS_TOKEN_MP, HOST } = process.env;
 const mercadopago = require("mercadopago");
 const { UserOrder, Car } = require("../../db");
+const transporter = require('../../../nodeMailer')
 
 const createOrder = async (req, res) => {
   const { name, price, userId, carId, carModelo, carMarca, userEmail } = req.body;
