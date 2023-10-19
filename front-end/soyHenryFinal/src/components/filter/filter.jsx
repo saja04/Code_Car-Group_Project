@@ -4,9 +4,12 @@ import vehicles from "../../../utils/utils.json";
 import style from "./filter.module.css";
 import { getFilters } from "../../redux/actions";
 import { connect } from "react-redux";
+import { getCars } from "../../redux/actions";
 
 function Filter({ getFilters, resetPagination }) {
   const [currentPage, setCurrentPage] = useState(1);
+  const dispatch = useDispatch();
+  const divisa = localStorage.getItem("divisa");
 
   const marcasUnicas = [
     ...new Set(vehicles.vehicles.map((vehicle) => vehicle.marca)),
@@ -24,7 +27,6 @@ function Filter({ getFilters, resetPagination }) {
     ...new Set(vehicles.vehicles.map((vehicle) => vehicle.condicion)),
   ];
 
-  const divisa = localStorage.getItem("divisa");
 
   const [marcasSeleccionadas, setMarcasSeleccionadas] = useState([]);
   const [añosSeleccionados, setAñosSeleccionados] = useState([]);
@@ -134,7 +136,7 @@ function Filter({ getFilters, resetPagination }) {
     setCondicionSeleccionados([]);
     setFiltroPrecio(null);
     resetPagination();
-    return getFilters({ precio: divisa });
+    return dispatch(getCars(divisa));
   };
 
   return (
