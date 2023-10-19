@@ -10,15 +10,17 @@ function DashCardsCompras(order) {
     updateOrderStatus(event.target.value);
   };
 
-  const updateOrderStatus = async(newStatus) => {
+  const updateOrderStatus = async (newStatus) => {
     try {
-      const response = await axios.post('https://codecar.onrender.com/editOrder', {id: order.order.user_order_id, status: newStatus})
+      const response = await axios.post(
+        "https://codecar.onrender.com/editOrder",
+        { orderId: order.order.user_order_id, status: newStatus }
+      );
       console.log(response.data);
-
     } catch (error) {
       console.log(error);
     }
-  }
+  };
 
   return (
     <div className={style.container}>
@@ -29,7 +31,8 @@ function DashCardsCompras(order) {
         <h4 className={style.title}>{order.order.user_email} </h4>
         <h4 className={style.title}>{order.order.car_precio_ars} </h4>
         <h4 className={style.title}>{order.order.order_status} </h4>
-        <select  onChange={handleStatusChange}>
+        <select onChange={handleStatusChange}>
+          <option value=""></option>
           <option value="Completa">Completa</option>
           <option value="Cancelada">Cancelada</option>
         </select>

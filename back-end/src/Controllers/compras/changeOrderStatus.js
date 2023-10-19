@@ -6,7 +6,7 @@ const changeOrderStatus = async (req, res) => {
     const searchInDb = await UserOrder.findByPk(orderId);
     console.log(searchInDb);
 
-    if(status === 'completa'){
+    if(status === 'Completa'){
         searchInDb.order_status = 'Completa'
         searchInDb.save()
     }
