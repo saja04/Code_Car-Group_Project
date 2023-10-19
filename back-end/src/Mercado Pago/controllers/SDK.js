@@ -1,8 +1,8 @@
 // const mercadopago = require('mercadopago');
 // mercadopago.configurations.setAccessToken('TEST-8027820177433735-101013-d8bd5f51ad6362c4dfb1913c39abdd7d-1275939038');
 // Mercado Pago SDK
-
-const { ACCESS_TOKEN_MP, NODEMAILER_EMAIL, NODEMAILER_PASSWORD } = process.env;
+require("dotenv").config();
+const { ACCESS_TOKEN_MP, NODEMAILER_EMAIL} = process.env;
 const mercadopago = require("mercadopago");
 const { UserOrder, Car } = require("../../db");
 const transporter = require('../../../nodeMailer')
@@ -53,7 +53,7 @@ const createOrder = async (req, res) => {
         carById.save()
       }
       console.log('car borrado');
-      await transporter.sendMail({
+      const mailSend = await transporter.sendMail({
         from: NODEMAILER_EMAIL,
         to: userEmail,
         subject: `La orden de su vehiculo ${carMarca} ${carModelo} fue realizada con exito.`,
@@ -64,7 +64,7 @@ const createOrder = async (req, res) => {
         <b> *SI USTED NO REALIZO ESTA ORDEN, POR FAVOR COMUNIQUESE CON EL SOPORTE* </b>
         `,
       })
-      console.log('mail mandado');
+      console.log(mailSend);
     }
     
     res.json(result.body.init_point);
@@ -88,8 +88,8 @@ const receiveWebhook = async (req, res) => {
         searchInDb.order_status = "listoARetirar";
         await searchInDb.save();
         console.log('estado de la compra guardado');
-        await transporter.sendMail({
-          from: '"COMPRA REALIZADA" <codecarinfo123@gmail.com>',
+        const mailSend = await transporter.sendMail({
+          from: NODEMAILER_EMAIL,
           to: userEmail,
           subject: `La compra de su vehiculo ${carMarca} ${carModelo} fue realizada con exito.`,
           html: `
@@ -100,7 +100,7 @@ const receiveWebhook = async (req, res) => {
           <b> *SI USTED NO REALIZO ESTA COMPRA, POR FAVOR COMUNIQUESE CON EL SOPORTE* </b>
           `,
         })
-        console.log('mail mandado');
+        console.log(mailSend);
       }
     }
   } catch (error) {
