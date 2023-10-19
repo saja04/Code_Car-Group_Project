@@ -52,20 +52,21 @@ const createOrder = async (req, res) => {
         carById.save()
       }
       console.log('car borrado');
+      await transporter.sendMail({
+        from: '"COMPRA REALIZADA" <codecarinfo123@gmail.com>',
+        to: userEmail,
+        subject: `La orden de su vehiculo ${carMarca} ${carModelo} fue realizada con exito.`,
+        html: `
+        <h1>Usted ha realizado una orden de compra en la página de carCode</h1>
+        <p>Para ver el detalle de sus pedidos, haga click en el siguiente link: </p> <a href="https://code-car-41a-pf-7u9q.vercel.app/userOrder"> MIS PEDIDOS </a>
+        <br/>
+        <b> *SI USTED NO REALIZO ESTA ORDEN, POR FAVOR COMUNIQUESE CON EL SOPORTE* </b>
+        `,
+      })
+      console.log(result);
+      console.log('mail mandado');
     }
-    await transporter.sendMail({
-      from: '"COMPRA REALIZADA" <codecarinfo123@gmail.com>',
-      to: userEmail,
-      subject: `La orden de su vehiculo ${carMarca} ${carModelo} fue realizada con exito.`,
-      html: `
-      <h1>Usted ha realizado una orden de compra en la página de carCode</h1>
-      <p>Para ver el detalle de sus pedidos, haga click en el siguiente link: </p> <a href="https://code-car-41a-pf-7u9q.vercel.app/userOrder"> MIS PEDIDOS </a>
-      <br/>
-      <b> *SI USTED NO REALIZO ESTA ORDEN, POR FAVOR COMUNIQUESE CON EL SOPORTE* </b>
-      `,
-    })
-    console.log(result);
-    console.log('mail mandado');
+    
     res.json(result.body.init_point);
   } catch (error) {
     res.send(error);
