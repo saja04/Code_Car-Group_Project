@@ -24,7 +24,7 @@ You can visit the final product here https://code-car-41a-pf-7u9q.vercel.app/
     - Express for server.
     - NodeMailer for e-mail users notifications.
    
-Disclaimer! This project is currently inactive and haves no intention for the moment of continuing adding features, but if you have a bug to report or find a major problem with the web page/ repository please let us know.
+Disclaimer! This project is currently inactive and haves no intention for the moment of continuing adding features, but if you have a bug to report or find a major problem with the web page/repository please let us know.
 You can report bugs directly in the repository page: [Issues](https://github.com/saja04/codeCar-41a-PF/issues) 
 
 
