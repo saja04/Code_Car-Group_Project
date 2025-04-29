@@ -1,6 +1,5 @@
 # CodeCar
 This repository holds our [Soy Henry](https://www.soyhenry.com/) final group project. The purpose of it is to offer a car dealership client an e-commerce where they can sell cars, implying to have a user system, payments and inventory managment.
-You can visit the final product here https://code-car-41a-pf-7u9q.vercel.app/
 # Who participated in this project?
  * [Federico Saa](https://github.com/saja04) ➡ [LinkedIn Profile](https://www.linkedin.com/in/federico-saa-4ab74b297/) | BACK END & FRONT END CONTRIBUTOR
  * [Manuel Garcia Sarza](https://github.com/manuelgarciasarza) ➡ [LinkedIn Profile](https://www.linkedin.com/in/mgarciasarza/) | FRONT END CONTRIBUTOR
